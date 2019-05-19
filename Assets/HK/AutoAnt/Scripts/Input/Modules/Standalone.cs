@@ -26,20 +26,5 @@ namespace HK.AutoAnt.InputControllers.Modules
         {
             return Broker.Receive<Events.ClickUp>();
         }
-
-        public bool GetClick(int button)
-        {
-            return UnityEngine.Input.GetMouseButton(button);
-        }
-
-        public bool GetClickDown(int button)
-        {
-            return UnityEngine.Input.GetMouseButtonDown(button);
-        }
-
-        public bool GetClickUp(int button)
-        {
-            return UnityEngine.Input.GetMouseButtonUp(button);
-        }
     }
 }

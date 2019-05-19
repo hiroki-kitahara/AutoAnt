@@ -10,12 +10,6 @@ namespace HK.AutoAnt.InputControllers.Modules
     /// </summary>
     public interface IInputModule
     {
-        bool GetClickDown(int button);
-
-        bool GetClickUp(int button);
-
-        bool GetClick(int button);
-
         IMessageBroker Broker { get; }
 
         IObservable<Events.Click> ClickAsObservable();
