@@ -45,7 +45,7 @@ namespace HK.AutoAnt.CellControllers
             this.cellMapper = cellMapper;
             this.cellSpec = cellSpec;
 
-            this.CachedTransform.position = new Vector3(id.x * cellSpec.Interval, 0.0f, id.y * cellSpec.Interval);
+            this.CachedTransform.position = new Vector3(id.x * (cellSpec.Scale.x + cellSpec.Interval), 0.0f, id.y * (cellSpec.Scale.z + cellSpec.Interval));
             this.scalableObject.localScale = cellSpec.Scale;
             this.boxCollider.center = new Vector3(0.0f, cellSpec.Scale.y / 2.0f, 0.0f);
             this.boxCollider.size = cellSpec.Scale;
