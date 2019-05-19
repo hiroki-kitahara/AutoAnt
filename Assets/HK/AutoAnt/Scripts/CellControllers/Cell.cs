@@ -1,4 +1,4 @@
-﻿using HK.AutoAnt.CellControllers.Events;
+﻿using HK.AutoAnt.CellControllers.CellClickEvents;
 using HK.AutoAnt.Constants;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -18,15 +18,18 @@ namespace HK.AutoAnt.CellControllers
 
         public Transform CachedTransform{ get; private set; }
 
+        public bool HasEvent => this.clickEvent != null;
+
         void Awake()
         {
             this.CachedTransform = this.transform;
         }
 
-        public Cell Initialize(Vector2Int id, CellType cellType, CellSpec cellSpec)
+        public Cell Initialize(Vector2Int id, CellType cellType, CellSpec cellSpec, ICellClickEvent clickEvent)
         {
             this.Id = id;
             this.Type = cellType;
+            this.clickEvent = clickEvent;
 
             this.CachedTransform.position = new Vector3(id.x * cellSpec.Interval, 0.0f, id.y * cellSpec.Interval);
             this.CachedTransform.localScale = cellSpec.Scale;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace HK.AutoAnt.CellControllers.Events
+namespace HK.AutoAnt.CellControllers.CellClickEvents
 {
     /// <summary>
     /// <see cref="Cell"/>をクリックした際のイベントのインターフェイス

@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.Constants;
+﻿using HK.AutoAnt.CellControllers.CellClickEvents;
+using HK.AutoAnt.Constants;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -19,9 +20,9 @@ namespace HK.AutoAnt.CellControllers
             this.cellPrefabs = cellPrefabs;
         }
 
-        public Cell Generate(Vector2Int id, CellType cellType, Transform parent)
+        public Cell Generate(Vector2Int id, CellType cellType, Transform parent, ICellClickEvent clickEvent)
         {
-            var cell = Object.Instantiate(this.cellPrefabs.Get(cellType)).Initialize(id, cellType, this.cellSpec);
+            var cell = Object.Instantiate(this.cellPrefabs.Get(cellType)).Initialize(id, cellType, this.cellSpec, clickEvent);
             cell.CachedTransform.SetParent(parent);
 
             return cell;

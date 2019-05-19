@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HK.AutoAnt.CellControllers.CellClickEvents;
 using HK.AutoAnt.Constants;
 using UniRx;
 using UnityEngine;
@@ -19,6 +20,9 @@ namespace HK.AutoAnt.CellControllers
         private CellPrefabs cellPrefabs;
 
         [SerializeField]
+        private CellEventGenerateSpec cellEventGenerateSpec;
+
+        [SerializeField]
         private Transform parent;
 
         [SerializeField]
@@ -26,11 +30,14 @@ namespace HK.AutoAnt.CellControllers
 
         private CellMapper mapper = new CellMapper();
 
-        private CellGenerator generator;
+        private CellGenerator cellGenerator;
+
+        private CellEventGenerator cellEventGenerator;
 
         void Awake()
         {
-            this.generator = new CellGenerator(this.cellSpec, this.cellPrefabs);
+            this.cellGenerator = new CellGenerator(this.cellSpec, this.cellPrefabs);
+            this.cellEventGenerator = new CellEventGenerator(this, this.cellEventGenerateSpec);
 
             var inputModule = InputControllers.Input.Current;
 
@@ -62,14 +69,14 @@ namespace HK.AutoAnt.CellControllers
             {
                 for (var y = -this.initialRange; y <= this.initialRange; y++)
                 {
-                    this.GenerateCell(new Vector2Int(x, y), CellType.Grassland);
+                    this.GenerateCell(new Vector2Int(x, y), CellType.Grassland, null);
                 }
             }
         }
 
-        public void GenerateCell(Vector2Int id, CellType cellType)
+        public void GenerateCell(Vector2Int id, CellType cellType, ICellClickEvent clickEvent)
         {
-            var cell = this.generator.Generate(id, cellType, this.parent);
+            var cell = this.cellGenerator.Generate(id, cellType, this.parent, clickEvent);
             this.mapper.Add(cell);
         }
 
