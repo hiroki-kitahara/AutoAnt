@@ -1,4 +1,4 @@
-﻿using HK.AutoAnt.CellControllers.CellClickEvents;
+﻿using HK.AutoAnt.CellControllers.ClickEvents;
 using HK.AutoAnt.Constants;
 using UnityEngine;
 using UnityEngine.Assertions;

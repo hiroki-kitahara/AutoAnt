@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using HK.AutoAnt.CellControllers.CellClickEvents;
+using HK.AutoAnt.CellControllers.ClickEvents;
 using HK.AutoAnt.Constants;
 using UniRx;
 using UnityEngine;
