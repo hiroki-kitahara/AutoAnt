@@ -11,6 +11,9 @@ namespace HK.AutoAnt.InputControllers
     public sealed class GameInputController : MonoBehaviour
     {
         [SerializeField]
+        private Cameraman cameraman;
+
+        [SerializeField]
         private CellManager cellManager;
 
         void Awake()
@@ -18,10 +21,11 @@ namespace HK.AutoAnt.InputControllers
             var inputModule = InputControllers.Input.Current;
 
             inputModule.ClickDownAsObservable()
-                .Where(x => x.ButtonId == 0)
+                .Where(x => x.Data.ButtonId == 0)
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    var clickableObject = this.cellManager.GetClickableObject();
+                    var ray = _this.cameraman.Camera.ScreenPointToRay(x.Data.Position);
+                    var clickableObject = this.cellManager.GetClickableObject(ray);
                     if (clickableObject != null)
                     {
                         clickableObject.OnClickDown();
@@ -30,10 +34,11 @@ namespace HK.AutoAnt.InputControllers
                 .AddTo(this);
 
             inputModule.ClickUpAsObservable()
-                .Where(x => x.ButtonId == 0)
+                .Where(x => x.Data.ButtonId == 0)
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    var clickableObject = this.cellManager.GetClickableObject();
+                    var ray = _this.cameraman.Camera.ScreenPointToRay(x.Data.Position);
+                    var clickableObject = this.cellManager.GetClickableObject(ray);
                     if (clickableObject != null)
                     {
                         clickableObject.OnClickUp();

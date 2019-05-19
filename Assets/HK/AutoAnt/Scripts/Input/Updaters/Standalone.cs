@@ -37,20 +37,20 @@ namespace HK.AutoAnt.InputControllers.Updaters
             {
                 return;
             }
-            
+
             for (var i = 0; i < ButtonMax; i++)
             {
                 if (UnityEngine.Input.GetMouseButton(i))
                 {
-                    Input.Current.Broker.Publish(Events.Click.Get(i));
+                    Input.Current.Broker.Publish(Events.Click.Get(Events.ClickData.Get(i, UnityEngine.Input.mousePosition)));
                 }
                 if (UnityEngine.Input.GetMouseButtonUp(i))
                 {
-                    Input.Current.Broker.Publish(Events.ClickUp.Get(i));
+                    Input.Current.Broker.Publish(Events.ClickUp.Get(Events.ClickData.Get(i, UnityEngine.Input.mousePosition)));
                 }
                 if (UnityEngine.Input.GetMouseButtonDown(i))
                 {
-                    Input.Current.Broker.Publish(Events.ClickDown.Get(i));
+                    Input.Current.Broker.Publish(Events.ClickDown.Get(Events.ClickData.Get(i, UnityEngine.Input.mousePosition)));
                 }
             }
         }

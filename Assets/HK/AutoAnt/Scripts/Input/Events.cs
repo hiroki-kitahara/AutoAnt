@@ -12,25 +12,25 @@ namespace HK.AutoAnt.InputControllers
         /// <summary>
         /// クリック時のイベント
         /// </summary>
-        public class Click : Message<Click, int>
+        public class Click : Message<Click, ClickData>
         {
-            public int ButtonId { get { return this.param1; } }
+            public ClickData Data { get { return this.param1; } }
         }
 
         /// <summary>
         /// クリックアップ時のイベント
         /// </summary>
-        public class ClickUp : Message<ClickUp, int>
+        public class ClickUp : Message<ClickUp, ClickData>
         {
-            public int ButtonId { get { return this.param1; } }
+            public ClickData Data { get { return this.param1; } }
         }
 
         /// <summary>
         /// クリックダウン時のイベント
         /// </summary>
-        public class ClickDown : Message<ClickDown, int>
+        public class ClickDown : Message<ClickDown, ClickData>
         {
-            public int ButtonId { get { return this.param1; } }
+            public ClickData Data { get { return this.param1; } }
         }
 
         /// <summary>
@@ -39,6 +39,22 @@ namespace HK.AutoAnt.InputControllers
         public class Drag : Message<Drag, Vector3>
         {
             public Vector3 DeltaPosition { get { return this.param1; } }
+        }
+
+        public class ClickData
+        {
+            private static ClickData cache = new ClickData();
+            public static ClickData Get(int buttonId, Vector2 position)
+            {
+                cache.ButtonId = buttonId;
+                cache.Position = position;
+
+                return cache;
+            }
+
+            public int ButtonId { get; private set; }
+
+            public Vector2 Position { get; private set; }
         }
     }
 }

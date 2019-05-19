@@ -51,9 +51,8 @@ namespace HK.AutoAnt.CellControllers
             this.cellMapper.Add(cell);
         }
 
-        public IClickableObject GetClickableObject()
+        public IClickableObject GetClickableObject(Ray ray)
         {
-            var ray = Cameraman.Instance.Camera.ScreenPointToRay(Input.mousePosition, MonoOrStereoscopicEye.Mono);
             var hitInfo = default(RaycastHit);
             if (Physics.Raycast(ray, out hitInfo))
             {
