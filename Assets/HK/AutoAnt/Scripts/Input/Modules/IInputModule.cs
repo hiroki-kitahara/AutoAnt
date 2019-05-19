@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UniRx;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.InputControllers.Modules
@@ -13,5 +15,13 @@ namespace HK.AutoAnt.InputControllers.Modules
         bool GetClickUp(int button);
 
         bool GetClick(int button);
+
+        IMessageBroker Broker { get; }
+
+        IObservable<Events.Click> ClickAsObservable();
+
+        IObservable<Events.ClickUp> ClickUpAsObservable();
+
+        IObservable<Events.ClickDown> ClickDownAsObservable();
     }
 }
