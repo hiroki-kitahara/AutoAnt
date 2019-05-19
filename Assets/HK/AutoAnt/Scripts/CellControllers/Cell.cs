@@ -10,6 +10,12 @@ namespace HK.AutoAnt.CellControllers
     /// </summary>
     public sealed class Cell : MonoBehaviour, IClickableObject
     {
+        [SerializeField]
+        private BoxCollider boxCollider;
+
+        [SerializeField]
+        private Transform scalableObject;
+
         public Vector2Int Id { get; private set; }
 
         public CellType Type { get; private set; }
@@ -32,7 +38,9 @@ namespace HK.AutoAnt.CellControllers
             this.clickEvent = clickEvent;
 
             this.CachedTransform.position = new Vector3(id.x * cellSpec.Interval, 0.0f, id.y * cellSpec.Interval);
-            this.CachedTransform.localScale = cellSpec.Scale;
+            this.scalableObject.localScale = cellSpec.Scale;
+            this.boxCollider.center = new Vector3(0.0f, cellSpec.Scale.y / 2.0f, 0.0f);
+            this.boxCollider.size = cellSpec.Scale;
 
             return this;
         }
