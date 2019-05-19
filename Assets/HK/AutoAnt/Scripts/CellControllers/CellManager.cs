@@ -7,9 +7,9 @@ using static UnityEngine.Camera;
 namespace HK.AutoAnt.CellControllers
 {
     /// <summary>
-    /// フィールドを管理するクラス
+    /// <see cref="Cell"/>を管理するクラス
     /// </summary>
-    public sealed class FieldManager : MonoBehaviour
+    public sealed class CellManager : MonoBehaviour
     {
         [SerializeField]
         private Cell cellPrefab;
