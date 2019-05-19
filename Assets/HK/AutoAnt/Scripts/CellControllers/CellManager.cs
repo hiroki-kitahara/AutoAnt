@@ -19,6 +19,9 @@ namespace HK.AutoAnt.CellControllers
         private CellPrefabs cellPrefabs;
 
         [SerializeField]
+        private Transform parent;
+
+        [SerializeField]
         private int initialRange;
 
         private CellMapper mapper = new CellMapper();
@@ -66,7 +69,7 @@ namespace HK.AutoAnt.CellControllers
 
         public void GenerateCell(Vector2Int id, CellType cellType)
         {
-            var cell = this.generator.Generate(id, cellType);
+            var cell = this.generator.Generate(id, cellType, this.parent);
             this.mapper.Add(cell);
         }
 

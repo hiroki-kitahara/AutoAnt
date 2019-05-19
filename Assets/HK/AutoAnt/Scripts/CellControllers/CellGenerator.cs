@@ -19,9 +19,12 @@ namespace HK.AutoAnt.CellControllers
             this.cellPrefabs = cellPrefabs;
         }
 
-        public Cell Generate(Vector2Int id, CellType cellType)
+        public Cell Generate(Vector2Int id, CellType cellType, Transform parent)
         {
-            return Object.Instantiate(this.cellPrefabs.Get(cellType)).Initialize(id, cellType, this.cellSpec);
+            var cell = Object.Instantiate(this.cellPrefabs.Get(cellType)).Initialize(id, cellType, this.cellSpec);
+            cell.CachedTransform.SetParent(parent);
+
+            return cell;
         }
     }
 }

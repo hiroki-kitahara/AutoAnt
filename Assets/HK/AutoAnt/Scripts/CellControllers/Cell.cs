@@ -16,11 +16,11 @@ namespace HK.AutoAnt.CellControllers
 
         private ICellClickEvent clickEvent = null;
 
-        private Transform cachedTransform;
+        public Transform CachedTransform{ get; private set; }
 
         void Awake()
         {
-            this.cachedTransform = this.transform;
+            this.CachedTransform = this.transform;
         }
 
         public Cell Initialize(Vector2Int id, CellType cellType, CellSpec cellSpec)
@@ -28,8 +28,8 @@ namespace HK.AutoAnt.CellControllers
             this.Id = id;
             this.Type = cellType;
 
-            this.cachedTransform.position = new Vector3(id.x * cellSpec.Interval, 0.0f, id.y * cellSpec.Interval);
-            this.cachedTransform.localScale = cellSpec.Scale;
+            this.CachedTransform.position = new Vector3(id.x * cellSpec.Interval, 0.0f, id.y * cellSpec.Interval);
+            this.CachedTransform.localScale = cellSpec.Scale;
 
             return this;
         }
