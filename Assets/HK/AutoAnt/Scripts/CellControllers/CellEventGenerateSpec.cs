@@ -15,5 +15,12 @@ namespace HK.AutoAnt.CellControllers
         /// 生成間隔
         /// </summary>
         public float GenerateInterval => this.generateInterval;
+
+        [SerializeField]
+        private int generateNumber = 1;
+        /// <summary>
+        /// 一度の処理でイベントを生成する回数
+        /// </summary>
+        public int GenerateNumber => this.generateNumber;
     }
 }

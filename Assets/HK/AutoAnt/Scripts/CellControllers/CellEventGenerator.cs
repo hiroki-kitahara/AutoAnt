@@ -13,15 +13,27 @@ namespace HK.AutoAnt.CellControllers
     {
         private readonly CellManager manager;
 
-        private readonly CellEventGenerateSpec spec;
+        private readonly CellSpec cellSpec;
 
-        public CellEventGenerator(CellManager manager, CellEventGenerateSpec spec)
+        private readonly CellEventGenerateSpec cellEventGenerateSpec;
+
+        private readonly CellMapper cellMapper;
+
+        public CellEventGenerator(CellManager manager, CellSpec cellSpec, CellEventGenerateSpec cellEventGenerateSpec, CellMapper cellMapper)
         {
             this.manager = manager;
-            this.spec = spec;
-            Observable.Interval(TimeSpan.FromSeconds(this.spec.GenerateInterval))
+            this.cellSpec = cellSpec;
+            this.cellEventGenerateSpec = cellEventGenerateSpec;
+            this.cellMapper = cellMapper;
+
+            Observable.Interval(TimeSpan.FromSeconds(this.cellEventGenerateSpec.GenerateInterval))
                 .SubscribeWithState(this, (_, _this) =>
                 {
+                    if(_this.cellMapper.NotHasEventCellIds.Count > 0)
+                    {
+                        var cell = _this.cellMapper.Map[_this.cellMapper.NotHasEventCellIds[0]];
+                        cell.AddEvent(_this.cellSpec.GetUnitSpec(cell.Type).ClickEvents[0]);
+                    }
                 })
                 .AddTo(this.manager);
         }

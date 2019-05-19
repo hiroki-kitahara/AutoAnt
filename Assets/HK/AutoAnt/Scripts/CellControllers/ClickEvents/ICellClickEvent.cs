@@ -8,9 +8,11 @@ namespace HK.AutoAnt.CellControllers.ClickEvents
     /// </summary>
     public interface ICellClickEvent
     {
+        GameObject Prefab { get; }
+        
         /// <summary>
         /// イベントを実行する
         /// </summary>
-        void Do();
+        void Do(Cell owner);
     }
 }

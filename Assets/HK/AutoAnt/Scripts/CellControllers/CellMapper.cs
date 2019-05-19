@@ -13,21 +13,25 @@ namespace HK.AutoAnt.CellControllers
         /// 全ての<see cref="Cell"/>
         /// </summary>
         private readonly List<Cell> cells = new List<Cell>();
+        public IReadOnlyList<Cell> Cells => this.cells;
 
         /// <summary>
         /// <see cref="Cell.Id"/>と紐づくマップ
         /// </summary>
         private readonly Dictionary<Vector2Int, Cell> map = new Dictionary<Vector2Int, Cell>();
+        public IReadOnlyDictionary<Vector2Int, Cell> Map => this.map;
 
         /// <summary>
         /// イベントを持つ<see cref="Cell.Id"/>
         /// </summary>
         private readonly List<Vector2Int> hasEventCellIds = new List<Vector2Int>();
+        public IReadOnlyList<Vector2Int> HasEventCellIds => this.hasEventCellIds;
 
         /// <summary>
         /// イベントが無い<see cref="Cell.Id"/>
         /// </summary>
         private readonly List<Vector2Int> notHasEventCellIds = new List<Vector2Int>();
+        public IReadOnlyList<Vector2Int> NotHasEventCellIds => this.notHasEventCellIds;
 
         public void Add(Cell cell)
         {

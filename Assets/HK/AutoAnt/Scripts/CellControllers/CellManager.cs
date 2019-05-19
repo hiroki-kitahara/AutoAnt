@@ -17,9 +17,6 @@ namespace HK.AutoAnt.CellControllers
         private CellSpec cellSpec;
 
         [SerializeField]
-        private CellPrefabs cellPrefabs;
-
-        [SerializeField]
         private CellEventGenerateSpec cellEventGenerateSpec;
 
         [SerializeField]
@@ -28,7 +25,7 @@ namespace HK.AutoAnt.CellControllers
         [SerializeField]
         private int initialRange;
 
-        private CellMapper mapper = new CellMapper();
+        private CellMapper cellMapper = new CellMapper();
 
         private CellGenerator cellGenerator;
 
@@ -36,8 +33,8 @@ namespace HK.AutoAnt.CellControllers
 
         void Awake()
         {
-            this.cellGenerator = new CellGenerator(this.cellSpec, this.cellPrefabs);
-            this.cellEventGenerator = new CellEventGenerator(this, this.cellEventGenerateSpec);
+            this.cellGenerator = new CellGenerator(this.cellSpec);
+            this.cellEventGenerator = new CellEventGenerator(this, this.cellSpec, this.cellEventGenerateSpec, this.cellMapper);
 
             var inputModule = InputControllers.Input.Current;
 
@@ -76,8 +73,8 @@ namespace HK.AutoAnt.CellControllers
 
         public void GenerateCell(Vector2Int id, CellType cellType, ICellClickEvent clickEvent)
         {
-            var cell = this.cellGenerator.Generate(id, cellType, this.parent, clickEvent);
-            this.mapper.Add(cell);
+            var cell = this.cellGenerator.Generate(id, cellType, this.parent, clickEvent, this.cellMapper);
+            this.cellMapper.Add(cell);
         }
 
         private IClickableObject GetClickableObject()
