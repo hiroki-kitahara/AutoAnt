@@ -62,6 +62,16 @@ namespace HK.AutoAnt.CellControllers
                 })
                 .AddTo(this);
 
+            inputModule.DragAsObservable()
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    var cameraman = Cameraman.Instance;
+                    var forward = Vector3.Scale(cameraman.Camera.transform.forward, new Vector3(1.0f, 0.0f, 1.0f)).normalized;
+                    var right = cameraman.Camera.transform.right;
+                    Cameraman.Instance.Root.position -= ((forward * x.DeltaPosition.y) + (right * x.DeltaPosition.x)) * 0.05f;
+                })
+                .AddTo(this);
+
             for (var x = -this.initialRange; x <= this.initialRange; x++)
             {
                 for (var y = -this.initialRange; y <= this.initialRange; y++)

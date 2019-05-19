@@ -9,12 +9,15 @@ namespace HK.AutoAnt.InputControllers
     /// </summary>
     public sealed class InputUpdater : MonoBehaviour
     {
+        [SerializeField]
+        private InputSpec inputSpec;
+
         private IInputUpdater updater;
 
         void Awake()
         {
             // TODO: プラットフォーム対応
-            this.updater = new Standalone();
+            this.updater = new Standalone(this.inputSpec);
         }
 
         void Update()

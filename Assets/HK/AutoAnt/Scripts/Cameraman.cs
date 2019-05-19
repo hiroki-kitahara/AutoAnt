@@ -10,6 +10,7 @@ namespace HK.AutoAnt
     {
         [SerializeField]
         private Transform root;
+        public Transform Root => this.root;
 
         [SerializeField]
         private Transform pivot;

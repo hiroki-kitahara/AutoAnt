@@ -32,5 +32,13 @@ namespace HK.AutoAnt.InputControllers
         {
             public int ButtonId { get { return this.param1; } }
         }
+
+        /// <summary>
+        /// ドラッグ時のイベント
+        /// </summary>
+        public class Drag : Message<Drag, Vector3>
+        {
+            public Vector3 DeltaPosition { get { return this.param1; } }
+        }
     }
 }

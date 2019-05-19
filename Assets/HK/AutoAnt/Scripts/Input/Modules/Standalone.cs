@@ -26,5 +26,10 @@ namespace HK.AutoAnt.InputControllers.Modules
         {
             return Broker.Receive<Events.ClickUp>();
         }
+
+        public IObservable<Events.Drag> DragAsObservable()
+        {
+            return Broker.Receive<Events.Drag>();
+        }
     }
 }
