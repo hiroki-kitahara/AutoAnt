@@ -36,42 +36,6 @@ namespace HK.AutoAnt.CellControllers
             this.cellGenerator = new CellGenerator(this.cellSpec);
             this.cellEventGenerator = new CellEventGenerator(this, this.cellSpec, this.cellEventGenerateSpec, this.cellMapper);
 
-            var inputModule = InputControllers.Input.Current;
-
-            inputModule.ClickDownAsObservable()
-                .Where(x => x.ButtonId == 0)
-                .SubscribeWithState(this, (x, _this) =>
-                {
-                    var clickableObject = this.GetClickableObject();
-                    if (clickableObject != null)
-                    {
-                        clickableObject.OnClickDown();
-                    }
-                })
-                .AddTo(this);
-
-            inputModule.ClickUpAsObservable()
-                .Where(x => x.ButtonId == 0)
-                .SubscribeWithState(this, (x, _this) =>
-                {
-                    var clickableObject = this.GetClickableObject();
-                    if (clickableObject != null)
-                    {
-                        clickableObject.OnClickUp();
-                    }
-                })
-                .AddTo(this);
-
-            inputModule.DragAsObservable()
-                .SubscribeWithState(this, (x, _this) =>
-                {
-                    var cameraman = Cameraman.Instance;
-                    var forward = Vector3.Scale(cameraman.Camera.transform.forward, new Vector3(1.0f, 0.0f, 1.0f)).normalized;
-                    var right = cameraman.Camera.transform.right;
-                    Cameraman.Instance.Root.position -= ((forward * x.DeltaPosition.y) + (right * x.DeltaPosition.x)) * 0.05f;
-                })
-                .AddTo(this);
-
             for (var x = -this.initialRange; x <= this.initialRange; x++)
             {
                 for (var y = -this.initialRange; y <= this.initialRange; y++)
@@ -87,7 +51,7 @@ namespace HK.AutoAnt.CellControllers
             this.cellMapper.Add(cell);
         }
 
-        private IClickableObject GetClickableObject()
+        public IClickableObject GetClickableObject()
         {
             var ray = Cameraman.Instance.Camera.ScreenPointToRay(Input.mousePosition, MonoOrStereoscopicEye.Mono);
             var hitInfo = default(RaycastHit);
