@@ -12,7 +12,7 @@ namespace HK.AutoAnt.InputControllers.Updaters
 
         private const int MainButtonId = 0;
 
-        private bool isDrag = false;
+        private bool isDragging = false;
 
         private Vector3 lastClickPosition;
 
@@ -33,6 +33,11 @@ namespace HK.AutoAnt.InputControllers.Updaters
 
         private void UpdateClickEvents()
         {
+            if(this.isDragging)
+            {
+                return;
+            }
+            
             for (var i = 0; i < ButtonMax; i++)
             {
                 if (UnityEngine.Input.GetMouseButton(i))
@@ -63,11 +68,16 @@ namespace HK.AutoAnt.InputControllers.Updaters
                 var newPosition = UnityEngine.Input.mousePosition;
                 if((this.lastClickPosition - newPosition).magnitude > this.inputSpec.DragThrehold)
                 {
-                    this.isDrag = true;
+                    this.isDragging = true;
                     var velocity = newPosition - this.currentPosition;
                     Input.Current.Broker.Publish(Events.Drag.Get(velocity));
                     this.currentPosition = newPosition;
                 }
+            }
+
+            if(UnityEngine.Input.GetMouseButtonUp(MainButtonId))
+            {
+                this.isDragging = false;
             }
         }
     }
