@@ -17,6 +17,10 @@ namespace HK.AutoAnt.CellControllers
         public Vector3 Scale => this.scale;
 
         [SerializeField]
+        private Vector3 effectScale = Vector3.one;
+        public Vector3 EffectScale => this.effectScale;
+
+        [SerializeField]
         private float interval = 1.5f;
         public float Interval => this.interval;
 

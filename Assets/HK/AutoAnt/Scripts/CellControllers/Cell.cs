@@ -62,6 +62,7 @@ namespace HK.AutoAnt.CellControllers
                 this.clickEventEffect = Instantiate(this.clickEvent.Prefab);
                 this.clickEventEffect.transform.SetParent(this.CachedTransform);
                 this.clickEventEffect.transform.localPosition = new Vector3(0.0f, this.cellSpec.Scale.y, 0.0f);
+                this.clickEventEffect.transform.localScale = this.cellSpec.EffectScale;
             }
             else
             {
