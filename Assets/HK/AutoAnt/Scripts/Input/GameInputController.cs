@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.CellControllers;
+﻿using HK.AutoAnt.CameraControllers;
+using HK.AutoAnt.CellControllers;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -16,6 +17,9 @@ namespace HK.AutoAnt.InputControllers
         [SerializeField]
         private CellManager cellManager;
 
+        [SerializeField]
+        private GameCameraController gameCameraController;
+
         void Awake()
         {
             var inputModule = InputControllers.Input.Current;
@@ -25,7 +29,7 @@ namespace HK.AutoAnt.InputControllers
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     var ray = _this.cameraman.Camera.ScreenPointToRay(x.Data.Position);
-                    var clickableObject = this.cellManager.GetClickableObject(ray);
+                    var clickableObject = _this.cellManager.GetClickableObject(ray);
                     if (clickableObject != null)
                     {
                         clickableObject.OnClickDown();
@@ -38,7 +42,7 @@ namespace HK.AutoAnt.InputControllers
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     var ray = _this.cameraman.Camera.ScreenPointToRay(x.Data.Position);
-                    var clickableObject = this.cellManager.GetClickableObject(ray);
+                    var clickableObject = _this.cellManager.GetClickableObject(ray);
                     if (clickableObject != null)
                     {
                         clickableObject.OnClickUp();
@@ -49,10 +53,8 @@ namespace HK.AutoAnt.InputControllers
             inputModule.DragAsObservable()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    var cameraman = Cameraman.Instance;
-                    var forward = Vector3.Scale(cameraman.Camera.transform.forward, new Vector3(1.0f, 0.0f, 1.0f)).normalized;
-                    var right = cameraman.Camera.transform.right;
-                    Cameraman.Instance.Root.position -= ((forward * x.DeltaPosition.y) + (right * x.DeltaPosition.x)) * 0.05f;
+                    // FIXME: ドラッグ移動量をオプションか何かで編集出来るように
+                    _this.gameCameraController.Move(x.DeltaPosition.y * 0.05f, x.DeltaPosition.x * 0.05f);
                 })
                 .AddTo(this);
         }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace HK.AutoAnt
+namespace HK.AutoAnt.CameraControllers
 {
     /// <summary>
     /// カメラマン
@@ -37,6 +37,18 @@ namespace HK.AutoAnt
         {
             Assert.IsNotNull(Instance);
             Instance = null;
+        }
+
+        /// <summary>
+        /// FPS視点での移動量にして返す
+        /// </summary>
+        public Vector3 ToFirstPersonVector(float forwardVelocity, float rightVelocity)
+        {
+            var t = this.Camera.transform;
+            var forward = Vector3.Scale(t.forward, new Vector3(1.0f, 0.0f, 1.0f)).normalized;
+            var right = t.right;
+
+            return (forward * forwardVelocity) + (right * rightVelocity);
         }
     }
 }
