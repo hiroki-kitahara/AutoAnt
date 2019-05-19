@@ -319,6 +319,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32a9e39d6b1a4883b98a904a8a2dd89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cellSpec: {fileID: 11400000, guid: bbb385992dea9409485f0d0c2ae781ff, type: 2}
+  cellPrefabs: {fileID: 11400000, guid: 3a14d687e11f445ab9d941c249e95759, type: 2}
+  cellPrefab: {fileID: 0}
+  initialRange: 1
 --- !u!4 &1341767712
 Transform:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HK.AutoAnt.Constants;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -12,12 +13,22 @@ namespace HK.AutoAnt.CellControllers
     public sealed class CellManager : MonoBehaviour
     {
         [SerializeField]
-        private Cell cellPrefab;
+        private CellSpec cellSpec;
 
-        private List<Cell> cells;
+        [SerializeField]
+        private CellPrefabs cellPrefabs;
+
+        [SerializeField]
+        private int initialRange;
+
+        private CellMapper mapper = new CellMapper();
+
+        private CellGenerator generator;
 
         void Awake()
         {
+            this.generator = new CellGenerator(this.cellSpec, this.cellPrefabs);
+
             var inputModule = InputControllers.Input.Current;
 
             inputModule.ClickDownAsObservable()
@@ -44,6 +55,19 @@ namespace HK.AutoAnt.CellControllers
                 })
                 .AddTo(this);
 
+            for (var x = -this.initialRange; x <= this.initialRange; x++)
+            {
+                for (var y = -this.initialRange; y <= this.initialRange; y++)
+                {
+                    this.GenerateCell(new Vector2Int(x, y), CellType.Grassland);
+                }
+            }
+        }
+
+        public void GenerateCell(Vector2Int id, CellType cellType)
+        {
+            var cell = this.generator.Generate(id, cellType);
+            this.mapper.Add(cell);
         }
 
         private IClickableObject GetClickableObject()
