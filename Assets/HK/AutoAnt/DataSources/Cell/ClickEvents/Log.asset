@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1785c24a9ab24220b134efd06b786ad, type: 3}
   m_Name: Log
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7891609510736089681, guid: b28e34b3e453b45a39311093d3c52858, type: 3}
+  gimmickPrefab: {fileID: 1696405967700200454, guid: b28e34b3e453b45a39311093d3c52858,
+    type: 3}

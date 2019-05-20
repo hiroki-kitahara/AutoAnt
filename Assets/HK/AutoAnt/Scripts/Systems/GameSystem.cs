@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.CellControllers;
+﻿using HK.AutoAnt.CameraControllers;
+using HK.AutoAnt.CellControllers;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.UserControllers;
 using UnityEngine;
@@ -23,6 +24,10 @@ namespace HK.AutoAnt.Systems
         [SerializeField]
         private CellManager cellManager;
         public CellManager CellManager => this.cellManager;
+
+        [SerializeField]
+        private Cameraman cameraman;
+        public Cameraman Cameraman => this.cameraman;
 
         void Awake()
         {
