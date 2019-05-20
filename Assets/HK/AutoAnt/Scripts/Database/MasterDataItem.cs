@@ -15,6 +15,14 @@ namespace HK.AutoAnt.Database
         [SerializeField]
         private List<Element> elements = new List<Element>();
 
+        public Element GetByName(string name)
+        {
+            var result = this.elements.Find(e => e.Name == name);
+            Assert.IsNotNull(result, $"{name}に対応するアイテムがありませんでした");
+
+            return result;
+        }
+
         [Serializable]
         public class Element
         {

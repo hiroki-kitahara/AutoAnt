@@ -71,6 +71,11 @@ namespace HK.AutoAnt.CellControllers
             }
         }
 
+        public void ClearEvent()
+        {
+            this.AddEvent(null);
+        }
+
         public void OnClickDown()
         {
         }
