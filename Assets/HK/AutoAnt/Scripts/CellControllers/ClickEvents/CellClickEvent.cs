@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using HK.AutoAnt.CellControllers.Gimmicks;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.CellControllers.ClickEvents
@@ -9,9 +10,13 @@ namespace HK.AutoAnt.CellControllers.ClickEvents
     public abstract class CellClickEvent : ScriptableObject, ICellClickEvent
     {
         [SerializeField]
-        private GameObject prefab;
-        public GameObject Prefab => this.prefab;
-        
+        private CellGimmickController gimmickPrefab;
+
+        public CellGimmickController CreateGimmickController()
+        {
+            return Instantiate(this.gimmickPrefab);
+        }
+
         public abstract void Do(Cell owner);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HK.AutoAnt.CellControllers.ClickEvents;
+using HK.AutoAnt.CellControllers.Gimmicks;
 using HK.AutoAnt.Constants;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -26,7 +27,7 @@ namespace HK.AutoAnt.CellControllers
 
         public Transform CachedTransform{ get; private set; }
 
-        private GameObject clickEventEffect;
+        private CellGimmickController gimmickController;
 
         private CellSpec cellSpec;
 
@@ -59,15 +60,15 @@ namespace HK.AutoAnt.CellControllers
             if(this.clickEvent != null)
             {
                 this.cellMapper.RegisterHasEvent(this);
-                this.clickEventEffect = Instantiate(this.clickEvent.Prefab);
-                this.clickEventEffect.transform.SetParent(this.CachedTransform);
-                this.clickEventEffect.transform.localPosition = new Vector3(0.0f, this.cellSpec.Scale.y, 0.0f);
-                this.clickEventEffect.transform.localScale = this.cellSpec.EffectScale;
+                this.gimmickController = this.clickEvent.CreateGimmickController();
+                this.gimmickController.transform.SetParent(this.CachedTransform);
+                this.gimmickController.transform.localPosition = new Vector3(0.0f, this.cellSpec.Scale.y, 0.0f);
+                this.gimmickController.transform.localScale = this.cellSpec.EffectScale;
             }
             else
             {
                 this.cellMapper.RegisterNotHasEvent(this);
-                Destroy(this.clickEventEffect);
+                Destroy(this.gimmickController.gameObject);
             }
         }
 

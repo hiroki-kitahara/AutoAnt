@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using HK.AutoAnt.CellControllers.Gimmicks;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.CellControllers.ClickEvents
@@ -8,8 +9,12 @@ namespace HK.AutoAnt.CellControllers.ClickEvents
     /// </summary>
     public interface ICellClickEvent
     {
-        GameObject Prefab { get; }
-        
+        /// <summary>
+        /// <see cref="CellGimmickController"/>を生成する
+        /// </summary>
+        /// <returns></returns>
+        CellGimmickController CreateGimmickController();
+
         /// <summary>
         /// イベントを実行する
         /// </summary>
