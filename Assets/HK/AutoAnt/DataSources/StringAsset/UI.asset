@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1deb88924c2e04de18eb891929363977, type: 3}
-  m_Name: Grassland
+  m_Script: {fileID: 11500000, guid: c932cb5455f464b288e33eb7fa54f213, type: 3}
+  m_Name: UI
   m_EditorClassIdentifier: 
-  cellType: 0
-  prefab: {fileID: 1087446381315328015, guid: 0c5dbbdf4c3d649a4b60b2739640fbd0, type: 3}
-  clickEvents:
-  - {fileID: 11400000, guid: 4f1d9b3a2172e4e0293ea62dc4a0c22c, type: 2}
+  database:
+  - value:
+      ja: '{0} +{1} ({2})'
+      en: 
+    guid: 65d51f7d-b2d2-4668-848e-3b79864930c3

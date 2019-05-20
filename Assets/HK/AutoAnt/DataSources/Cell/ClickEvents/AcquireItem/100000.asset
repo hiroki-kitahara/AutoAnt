@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04be38530dab14a59883aa54fbb60e8a, type: 3}
   m_Name: 100000
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 7891609510736089681, guid: 4939fec1941f14f869d9cdaf30268eb8, type: 3}
   itemName:
-    target: {fileID: 0}
-    value: 
-    guid: 
-  min: 0
-  max: 0
+    target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
+    value: "\u9244\u9271\u77F3"
+    guid: 2529d8c5-7d90-4263-bf83-5488875c491f
+  min: 1
+  max: 1

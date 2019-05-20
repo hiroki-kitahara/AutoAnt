@@ -32,8 +32,6 @@ namespace HK.AutoAnt.UserControllers
             {
                 this.items.Add(itemId, value);
             }
-
-            Debug.Log($"itemId = {itemId}, value = {this.items[itemId]}");
         }
     }
 }
