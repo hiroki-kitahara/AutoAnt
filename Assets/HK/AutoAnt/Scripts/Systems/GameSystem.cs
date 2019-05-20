@@ -1,4 +1,5 @@
 ﻿using HK.AutoAnt.CellControllers;
+using HK.AutoAnt.Database;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -11,6 +12,10 @@ namespace HK.AutoAnt.Systems
     {
         private static GameSystem instance;
         public static GameSystem Instance => instance;
+
+        [SerializeField]
+        private MasterData masterData;
+        public MasterData MasterData => this.masterData;
 
         [SerializeField]
         private CellManager cellManager;

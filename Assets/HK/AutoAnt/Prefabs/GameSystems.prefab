@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cd4eba738d314db482b17748114ef4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterData: {fileID: 11400000, guid: bcc32b98e556a446c8a2ae4ef6a4d42f, type: 2}
   cellManager: {fileID: 7500671137712836563}
 --- !u!114 &7500671137712836563
 MonoBehaviour:
