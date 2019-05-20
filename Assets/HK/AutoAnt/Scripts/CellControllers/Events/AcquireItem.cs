@@ -9,7 +9,7 @@ namespace HK.AutoAnt.CellControllers.ClickEvents
     /// アイテムを取得するクリックイベント
     /// </summary>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/AcquireItem")]
-    public sealed class AcquireItem : CellClickEvent
+    public sealed class AcquireItem : CellEvent
     {
         /// <summary>
         /// 取得するアイテム名

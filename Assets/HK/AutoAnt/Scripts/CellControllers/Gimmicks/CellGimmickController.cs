@@ -8,5 +8,6 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
     /// </summary>
     public abstract class CellGimmickController : MonoBehaviour
     {
+        public abstract CellGimmickController Initialize();
     }
 }

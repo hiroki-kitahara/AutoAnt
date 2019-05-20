@@ -21,7 +21,7 @@ namespace HK.AutoAnt.CellControllers
         public Cell Prefab => this.prefab;
 
         [SerializeField]
-        private List<CellClickEvent> clickEvents = new List<CellClickEvent>();
-        public List<CellClickEvent> ClickEvents => this.clickEvents;
+        private List<CellEvent> clickEvents = new List<CellEvent>();
+        public List<CellEvent> ClickEvents => this.clickEvents;
     }
 }

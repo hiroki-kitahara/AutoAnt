@@ -7,7 +7,7 @@ namespace HK.AutoAnt.CellControllers.ClickEvents
     /// セルクリック時にログを表示するイベント
     /// </summary>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Log")]
-    public sealed class Log : CellClickEvent
+    public sealed class Log : CellEvent
     {
         public override void OnClick(Cell owner)
         {
