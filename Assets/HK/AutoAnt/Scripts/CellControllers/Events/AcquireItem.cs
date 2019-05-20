@@ -29,7 +29,7 @@ namespace HK.AutoAnt.CellControllers.ClickEvents
         [SerializeField]
         private int max;
 
-        public override void Do(Cell owner)
+        public override void OnClick(Cell owner)
         {
             var gameSystem = GameSystem.Instance;
             var item = gameSystem.MasterData.Item.GetByName(this.itemName.Get);

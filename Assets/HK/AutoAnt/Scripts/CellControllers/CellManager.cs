@@ -45,7 +45,7 @@ namespace HK.AutoAnt.CellControllers
             }
         }
 
-        public void GenerateCell(Vector2Int id, CellType cellType, ICellClickEvent clickEvent)
+        public void GenerateCell(Vector2Int id, CellType cellType, ICellEvent clickEvent)
         {
             var cell = this.cellGenerator.Generate(id, cellType, this.parent, clickEvent, this.cellMapper);
             this.cellMapper.Add(cell);

@@ -7,7 +7,7 @@ namespace HK.AutoAnt.CellControllers.ClickEvents
     /// <summary>
     /// <see cref="Cell"/>をクリックされた際のイベント抽象クラス
     /// </summary>
-    public abstract class CellClickEvent : ScriptableObject, ICellClickEvent
+    public abstract class CellClickEvent : ScriptableObject, ICellEvent
     {
         [SerializeField]
         private CellGimmickController gimmickPrefab;
@@ -17,6 +17,6 @@ namespace HK.AutoAnt.CellControllers.ClickEvents
             return Instantiate(this.gimmickPrefab);
         }
 
-        public abstract void Do(Cell owner);
+        public abstract void OnClick(Cell owner);
     }
 }

@@ -9,7 +9,7 @@ namespace HK.AutoAnt.CellControllers.ClickEvents
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Log")]
     public sealed class Log : CellClickEvent
     {
-        public override void Do(Cell owner)
+        public override void OnClick(Cell owner)
         {
             Debug.Log($"{owner.Id}", owner);
             owner.ClearEvent();

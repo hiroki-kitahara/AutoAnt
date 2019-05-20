@@ -21,7 +21,7 @@ namespace HK.AutoAnt.CellControllers
 
         public CellType Type { get; private set; }
 
-        private ICellClickEvent clickEvent = null;
+        private ICellEvent cellEvent = null;
 
         private CellMapper cellMapper;
 
@@ -31,18 +31,18 @@ namespace HK.AutoAnt.CellControllers
 
         private CellSpec cellSpec;
 
-        public bool HasEvent => this.clickEvent != null;
+        public bool HasEvent => this.cellEvent != null;
 
         void Awake()
         {
             this.CachedTransform = this.transform;
         }
 
-        public Cell Initialize(Vector2Int id, CellType cellType, CellSpec cellSpec, ICellClickEvent clickEvent, CellMapper cellMapper)
+        public Cell Initialize(Vector2Int id, CellType cellType, CellSpec cellSpec, ICellEvent clickEvent, CellMapper cellMapper)
         {
             this.Id = id;
             this.Type = cellType;
-            this.clickEvent = clickEvent;
+            this.cellEvent = clickEvent;
             this.cellMapper = cellMapper;
             this.cellSpec = cellSpec;
 
@@ -54,21 +54,18 @@ namespace HK.AutoAnt.CellControllers
             return this;
         }
 
-        public void AddEvent(ICellClickEvent clickEvent)
+        public void AddEvent(ICellEvent cellEvent)
         {
-            this.clickEvent = clickEvent;
-            if(this.clickEvent != null)
+            this.cellEvent = cellEvent;
+            if(this.cellEvent != null)
             {
                 this.cellMapper.RegisterHasEvent(this);
-                this.gimmickController = this.clickEvent.CreateGimmickController();
-                this.gimmickController.transform.SetParent(this.CachedTransform);
-                this.gimmickController.transform.localPosition = new Vector3(0.0f, this.cellSpec.Scale.y, 0.0f);
-                this.gimmickController.transform.localScale = this.cellSpec.EffectScale;
+                this.CreateGimmickController();
             }
             else
             {
                 this.cellMapper.RegisterNotHasEvent(this);
-                Destroy(this.gimmickController.gameObject);
+                this.DestroyGimmickController();
             }
         }
 
@@ -83,12 +80,33 @@ namespace HK.AutoAnt.CellControllers
 
         public void OnClickUp()
         {
-            if(this.clickEvent == null)
+            if(this.cellEvent == null)
             {
                 return;
             }
 
-            this.clickEvent.Do(this);
+            this.cellEvent.OnClick(this);
+        }
+
+        private void CreateGimmickController()
+        {
+            this.DestroyGimmickController();
+
+            this.gimmickController = this.cellEvent.CreateGimmickController();
+            this.gimmickController.transform.SetParent(this.CachedTransform);
+            this.gimmickController.transform.localPosition = new Vector3(0.0f, this.cellSpec.Scale.y, 0.0f);
+            this.gimmickController.transform.localScale = this.cellSpec.EffectScale;
+        }
+
+        private void DestroyGimmickController()
+        {
+            if(this.gimmickController == null)
+            {
+                return;
+            }
+
+            Destroy(this.gimmickController.gameObject);
+            this.gimmickController = null;
         }
     }
 }

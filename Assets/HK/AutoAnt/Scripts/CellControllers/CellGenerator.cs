@@ -17,7 +17,7 @@ namespace HK.AutoAnt.CellControllers
             this.cellSpec = cellSpec;
         }
 
-        public Cell Generate(Vector2Int id, CellType cellType, Transform parent, ICellClickEvent clickEvent, CellMapper cellMapper)
+        public Cell Generate(Vector2Int id, CellType cellType, Transform parent, ICellEvent clickEvent, CellMapper cellMapper)
         {
             var cell = Object.Instantiate(this.cellSpec.GetPrefab(cellType))
                 .Initialize(id, cellType, this.cellSpec, clickEvent, cellMapper);

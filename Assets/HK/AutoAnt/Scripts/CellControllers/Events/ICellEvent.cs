@@ -5,9 +5,9 @@ using UnityEngine.Assertions;
 namespace HK.AutoAnt.CellControllers.ClickEvents
 {
     /// <summary>
-    /// <see cref="Cell"/>をクリックした際のイベントのインターフェイス
+    /// <see cref="Cell"/>の各種イベントを持つインターフェイス
     /// </summary>
-    public interface ICellClickEvent
+    public interface ICellEvent
     {
         /// <summary>
         /// <see cref="CellGimmickController"/>を生成する
@@ -16,8 +16,8 @@ namespace HK.AutoAnt.CellControllers.ClickEvents
         CellGimmickController CreateGimmickController();
 
         /// <summary>
-        /// イベントを実行する
+        /// セルがクリックされた時の処理
         /// </summary>
-        void Do(Cell owner);
+        void OnClick(Cell owner);
     }
 }
