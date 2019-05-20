@@ -34,7 +34,7 @@ namespace HK.AutoAnt.CellControllers.ClickEvents
             var gameSystem = GameSystem.Instance;
             var item = gameSystem.MasterData.Item.GetByName(this.itemName.Get);
             var value = Random.Range(this.min, this.max + 1);
-            gameSystem.User.Inventory.AddItem(item.Id, value);
+            gameSystem.User.Inventory.AddItem(item, value);
             owner.ClearEvent();
         }
     }

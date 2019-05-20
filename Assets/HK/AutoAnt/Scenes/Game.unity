@@ -179,5 +179,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4160828636176809720, guid: 3e0d948adcda84a32b78e970693ffac2,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7366381507976614924, guid: 3e0d948adcda84a32b78e970693ffac2,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7366381507976614924, guid: 3e0d948adcda84a32b78e970693ffac2,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2950524959997789192, guid: 3e0d948adcda84a32b78e970693ffac2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8598071642209598751, guid: 3e0d948adcda84a32b78e970693ffac2,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8598071642209598751, guid: 3e0d948adcda84a32b78e970693ffac2,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131747902066085097, guid: 3e0d948adcda84a32b78e970693ffac2,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131747902066085097, guid: 3e0d948adcda84a32b78e970693ffac2,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e0d948adcda84a32b78e970693ffac2, type: 3}
