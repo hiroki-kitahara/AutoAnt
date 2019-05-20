@@ -31,8 +31,12 @@ namespace HK.AutoAnt.CellControllers
                 {
                     if(_this.cellMapper.NotHasEventCellIds.Count > 0)
                     {
-                        var cell = _this.cellMapper.Map[_this.cellMapper.NotHasEventCellIds[0]];
-                        cell.AddEvent(_this.cellSpec.GetUnitSpec(cell.Type).ClickEvents[0]);
+                        var cellId = UnityEngine.Random.Range(0, _this.cellMapper.NotHasEventCellIds.Count);
+                        var cell = _this.cellMapper.Map[_this.cellMapper.NotHasEventCellIds[cellId]];
+                        var clickEvents = _this.cellSpec.GetUnitSpec(cell.Type).ClickEvents;
+                        var eventId = UnityEngine.Random.Range(0, clickEvents.Count);
+                        
+                        cell.AddEvent(clickEvents[eventId]);
                     }
                 })
                 .AddTo(this.manager);
