@@ -10,7 +10,7 @@ namespace HK.AutoAnt.InputControllers
     public sealed class InputUpdater : MonoBehaviour
     {
         [SerializeField]
-        private InputSpec inputSpec;
+        private InputSpec inputSpec = null;
 
         private IInputUpdater updater;
 

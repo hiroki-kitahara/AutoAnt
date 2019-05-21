@@ -18,15 +18,15 @@ namespace HK.AutoAnt.Systems
         public readonly User User = new User();
 
         [SerializeField]
-        private MasterData masterData;
+        private MasterData masterData = null;
         public MasterData MasterData => this.masterData;
 
         [SerializeField]
-        private CellManager cellManager;
+        private CellManager cellManager = null;
         public CellManager CellManager => this.cellManager;
 
         [SerializeField]
-        private Cameraman cameraman;
+        private Cameraman cameraman = null;
         public Cameraman Cameraman => this.cameraman;
 
         void Awake()

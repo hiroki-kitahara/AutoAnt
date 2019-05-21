@@ -13,10 +13,10 @@ namespace HK.AutoAnt.UI
     public sealed class HeaderMoneyController : MonoBehaviour
     {
         [SerializeField]
-        private TextMeshProUGUI value;
+        private TextMeshProUGUI value = null;
 
         [SerializeField]
-        private StringAsset.Finder format;
+        private StringAsset.Finder format = null;
 
         void Start()
         {

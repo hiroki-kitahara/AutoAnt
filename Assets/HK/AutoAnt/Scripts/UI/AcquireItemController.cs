@@ -14,7 +14,7 @@ namespace HK.AutoAnt.UI
     public sealed class AcquireItemController : MonoBehaviour
     {
         [SerializeField]
-        private AcquireItemElement elementPrefab;
+        private AcquireItemElement elementPrefab = null;
 
         void Awake()
         {

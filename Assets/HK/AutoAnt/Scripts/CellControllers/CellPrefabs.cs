@@ -27,11 +27,11 @@ namespace HK.AutoAnt.CellControllers
         public class Element
         {
             [SerializeField]
-            private CellType type;
+            private CellType type = CellType.Grassland;
             public CellType Type => this.type;
 
             [SerializeField]
-            private Cell prefab;
+            private Cell prefab = null;
             public Cell Prefab => this.prefab;
         }
     }

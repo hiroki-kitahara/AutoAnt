@@ -10,7 +10,7 @@ namespace HK.AutoAnt.Database
     public sealed class MasterData : ScriptableObject
     {
         [SerializeField]
-        private MasterDataItem item;
+        private MasterDataItem item = null;
         public MasterDataItem Item => this.item;
     }
 }

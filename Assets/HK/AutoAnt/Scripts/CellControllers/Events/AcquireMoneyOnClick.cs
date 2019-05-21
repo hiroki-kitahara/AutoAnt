@@ -16,13 +16,13 @@ namespace HK.AutoAnt.CellControllers.Events
         /// 取得できる量
         /// </summary>
         [SerializeField]
-        private int amount;
+        private int amount = 0;
 
         /// <summary>
         /// クリックされたらイベントを削除するか
         /// </summary>
         [SerializeField]
-        private bool onClickClearEvent;
+        private bool onClickClearEvent = false;
 
         public override void OnClick(Cell owner)
         {

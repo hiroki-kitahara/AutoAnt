@@ -27,11 +27,11 @@ namespace HK.AutoAnt.Database
         public class Element
         {
             [SerializeField]
-            private int id;
+            private int id = 0;
             public int Id => this.id;
 
             [SerializeField]
-            private StringAsset.Finder name;
+            private StringAsset.Finder name = null;
             public string Name => this.name.Get;
         }
     }

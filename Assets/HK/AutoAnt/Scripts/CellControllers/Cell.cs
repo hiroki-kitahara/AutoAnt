@@ -15,10 +15,10 @@ namespace HK.AutoAnt.CellControllers
     public sealed class Cell : MonoBehaviour, IClickableObject
     {
         [SerializeField]
-        private BoxCollider boxCollider;
+        private BoxCollider boxCollider = null;
 
         [SerializeField]
-        private Transform scalableObject;
+        private Transform scalableObject = null;
 
         public Vector2Int Id { get; private set; }
 

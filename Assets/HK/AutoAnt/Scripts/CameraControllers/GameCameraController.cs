@@ -9,7 +9,7 @@ namespace HK.AutoAnt.CameraControllers
     public sealed class GameCameraController : MonoBehaviour
     {
         [SerializeField]
-        private Cameraman cameraman;
+        private Cameraman cameraman = null;
 
         public void Move(float forwardVelocity, float rightVelocity)
         {

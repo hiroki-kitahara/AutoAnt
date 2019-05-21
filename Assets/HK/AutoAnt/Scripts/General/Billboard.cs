@@ -12,7 +12,7 @@ namespace HK.AutoAnt
     public sealed class Billboard : MonoBehaviour
     {
         [SerializeField]
-        private bool isReverse;
+        private bool isReverse = false;
 
         private Transform cachedTransform;
 

@@ -14,19 +14,16 @@ namespace HK.AutoAnt.CellControllers
     public sealed class CellManager : MonoBehaviour
     {
         [SerializeField]
-        private CellSpec cellSpec;
+        private CellSpec cellSpec = null;
 
         [SerializeField]
-        private CellEventGenerateSpec cellEventGenerateSpec;
+        private CellEventGenerateSpec cellEventGenerateSpec = null;
 
         [SerializeField]
-        private Transform parent;
+        private Transform parent = null;
 
         [SerializeField]
-        private FieldInitializer fieldInitializer;
-
-        [SerializeField]
-        private int initialRange;
+        private FieldInitializer fieldInitializer = null;
 
         private CellMapper cellMapper = new CellMapper();
 

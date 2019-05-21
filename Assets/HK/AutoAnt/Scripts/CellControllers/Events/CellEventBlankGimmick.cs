@@ -14,7 +14,7 @@ namespace HK.AutoAnt.CellControllers.Events
     public abstract class CellEventBlankGimmick : CellEvent, ICellEvent
     {
         [SerializeField]
-        private Blank gimmickPrefab;
+        private Blank gimmickPrefab = null;
 
         public override CellGimmickController CreateGimmickController()
         {

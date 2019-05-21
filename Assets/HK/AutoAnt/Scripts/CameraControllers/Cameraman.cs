@@ -9,20 +9,20 @@ namespace HK.AutoAnt.CameraControllers
     public sealed class Cameraman : MonoBehaviour
     {
         [SerializeField]
-        private Transform root;
+        private Transform root = null;
         public Transform Root => this.root;
 
         [SerializeField]
-        private Transform pivot;
+        private Transform pivot = null;
 
         [SerializeField]
-        private Transform rig;
+        private Transform rig = null;
 
         [SerializeField]
-        private Transform distance;
+        private Transform distance = null;
 
         [SerializeField]
-        private Camera controlledCamera;
+        private Camera controlledCamera = null;
         public Camera Camera => this.controlledCamera;
 
         public static Cameraman Instance { get; private set; }

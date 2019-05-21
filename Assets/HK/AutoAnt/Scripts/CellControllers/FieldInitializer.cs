@@ -27,15 +27,15 @@ namespace HK.AutoAnt.CellControllers
         public class Cell
         {
             [SerializeField]
-            private Vector2Int id;
+            private Vector2Int id = Vector2Int.zero;
             public Vector2Int Id => this.id;
 
             [SerializeField]
-            private CellUnitSpec unitSpec;
+            private CellUnitSpec unitSpec = null;
             public CellUnitSpec UnitSpec => this.unitSpec;
 
             [SerializeField]
-            private CellEvent cellEvent;
+            private CellEvent cellEvent = null;
             public CellEvent CellEvent => this.cellEvent;
         }
     }

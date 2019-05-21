@@ -15,13 +15,13 @@ namespace HK.AutoAnt.UI
     public sealed class AcquireItemElement : MonoBehaviour
     {
         [SerializeField]
-        private TextMeshProUGUI text;
+        private TextMeshProUGUI text = null;
 
         [SerializeField]
-        private StringAsset.Finder format;
+        private StringAsset.Finder format = null;
 
         [SerializeField]
-        private float destroyDelay;
+        private float destroyDelay = 0.0f;
 
         public AcquireItemElement Initialize(MasterDataItem.Element item, int amount, Inventory inventory)
         {

@@ -18,13 +18,13 @@ namespace HK.AutoAnt.CellControllers.Events
         /// 取得するまでの時間
         /// </summary>
         [SerializeField]
-        private float intervalSeconds;
+        private float intervalSeconds = 1.0f;
 
         /// <summary>
         /// 取得できる量
         /// </summary>
         [SerializeField]
-        private int amount;
+        private int amount = 0;
 
         public override void OnRegister(Cell owner)
         {

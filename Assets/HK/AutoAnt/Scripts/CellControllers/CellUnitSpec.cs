@@ -13,11 +13,11 @@ namespace HK.AutoAnt.CellControllers
     public sealed class CellUnitSpec : ScriptableObject
     {
         [SerializeField]
-        private CellType cellType;
+        private CellType cellType = CellType.Grassland;
         public CellType Type => this.cellType;
 
         [SerializeField]
-        private Cell prefab;
+        private Cell prefab = null;
         public Cell Prefab => this.prefab;
 
         [SerializeField]
