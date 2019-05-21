@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace HK.AutoAnt.CellControllers.ClickEvents
+namespace HK.AutoAnt.CellControllers.Events
 {
     /// <summary>
     /// セルクリック時にログを表示するイベント

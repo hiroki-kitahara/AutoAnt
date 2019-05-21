@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using HK.AutoAnt.CellControllers.ClickEvents;
+using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Constants;
 using UnityEngine;
 using UnityEngine.Assertions;

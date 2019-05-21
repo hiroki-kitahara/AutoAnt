@@ -1,4 +1,4 @@
-﻿using HK.AutoAnt.CellControllers.ClickEvents;
+﻿using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.CellControllers.Gimmicks;
 using HK.AutoAnt.Constants;
 using UnityEngine;
@@ -49,7 +49,7 @@ namespace HK.AutoAnt.CellControllers
             this.scalableObject.localScale = cellSpec.Scale;
             this.boxCollider.center = new Vector3(0.0f, cellSpec.Scale.y / 2.0f, 0.0f);
             this.boxCollider.size = cellSpec.Scale;
-            
+
             this.cellMapper.Add(this);
             this.AddEvent(cellEvent);
 

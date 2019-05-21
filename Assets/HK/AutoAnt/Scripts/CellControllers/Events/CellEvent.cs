@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace HK.AutoAnt.CellControllers.ClickEvents
+namespace HK.AutoAnt.CellControllers.Events
 {
     /// <summary>
     /// <see cref="Cell"/>のイベントを持つ抽象クラス

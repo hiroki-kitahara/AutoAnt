@@ -3,7 +3,7 @@ using HK.Framework.Text;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace HK.AutoAnt.CellControllers.ClickEvents
+namespace HK.AutoAnt.CellControllers.Events
 {
     /// <summary>
     /// アイテムを取得するクリックイベント
