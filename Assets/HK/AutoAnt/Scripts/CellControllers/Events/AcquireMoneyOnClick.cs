@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.Systems;
+﻿using HK.AutoAnt.CellControllers.Gimmicks;
+using HK.AutoAnt.Systems;
 using HK.Framework.Text;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -11,6 +12,9 @@ namespace HK.AutoAnt.CellControllers.Events
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/AcquireMoneyOnClick")]
     public sealed class AcquireMoneyOnClick : CellEvent
     {
+        [SerializeField]
+        private CellGimmickController gimmickPrefab;
+
         /// <summary>
         /// 取得できる量
         /// </summary>
@@ -22,6 +26,11 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         [SerializeField]
         private bool onClickClearEvent;
+
+        public override CellGimmickController CreateGimmickController()
+        {
+            return Instantiate(this.gimmickPrefab);
+        }
 
         public override void OnClick(Cell owner)
         {

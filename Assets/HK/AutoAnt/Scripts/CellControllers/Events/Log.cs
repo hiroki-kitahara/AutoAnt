@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using HK.AutoAnt.CellControllers.Gimmicks;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.CellControllers.Events
@@ -9,6 +10,14 @@ namespace HK.AutoAnt.CellControllers.Events
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Log")]
     public sealed class Log : CellEvent
     {
+        [SerializeField]
+        private CellGimmickController gimmickPrefab;
+        
+        public override CellGimmickController CreateGimmickController()
+        {
+            return Instantiate(this.gimmickPrefab);
+        }
+
         public override void OnClick(Cell owner)
         {
             Debug.Log($"{owner.Id}", owner);

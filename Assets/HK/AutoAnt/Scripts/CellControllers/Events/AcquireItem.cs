@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.Systems;
+﻿using HK.AutoAnt.CellControllers.Gimmicks;
+using HK.AutoAnt.Systems;
 using HK.Framework.Text;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -11,6 +12,9 @@ namespace HK.AutoAnt.CellControllers.Events
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/AcquireItem")]
     public sealed class AcquireItem : CellEvent
     {
+        [SerializeField]
+        private CellGimmickController gimmickPrefab;
+        
         /// <summary>
         /// 取得するアイテム名
         /// </summary>
@@ -28,6 +32,11 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         [SerializeField]
         private int max;
+
+        public override CellGimmickController CreateGimmickController()
+        {
+            return Instantiate(this.gimmickPrefab);
+        }
 
         public override void OnClick(Cell owner)
         {

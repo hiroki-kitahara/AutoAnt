@@ -9,13 +9,7 @@ namespace HK.AutoAnt.CellControllers.Events
     /// </summary>
     public abstract class CellEvent : ScriptableObject, ICellEvent
     {
-        [SerializeField]
-        private CellGimmickController gimmickPrefab;
-
-        public CellGimmickController CreateGimmickController()
-        {
-            return Instantiate(this.gimmickPrefab).Initialize();
-        }
+        public abstract CellGimmickController CreateGimmickController();
 
         public virtual void OnRegister(Cell owner)
         {
