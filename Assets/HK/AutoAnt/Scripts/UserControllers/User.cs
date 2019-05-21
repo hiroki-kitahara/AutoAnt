@@ -12,5 +12,10 @@ namespace HK.AutoAnt.UserControllers
         /// インベントリ
         /// </summary>
         public readonly Inventory Inventory = new Inventory();
+
+        /// <summary>
+        /// 財布
+        /// </summary>
+        public readonly Wallet Wallet = new Wallet();
     }
 }
