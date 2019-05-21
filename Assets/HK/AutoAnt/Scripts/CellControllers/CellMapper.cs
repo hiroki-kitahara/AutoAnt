@@ -42,14 +42,6 @@ namespace HK.AutoAnt.CellControllers
 
             this.cells.Add(cell);
             this.map.Add(id, cell);
-            if(!cell.HasEvent)
-            {
-                this.notHasEventCellIds.Add(id);
-            }
-            else
-            {
-                this.hasEventCellIds.Add(id);
-            }
         }
 
         /// <summary>
@@ -60,7 +52,6 @@ namespace HK.AutoAnt.CellControllers
             var id = cell.Id;
             Assert.IsNotNull(cell);
             Assert.IsFalse(cell.HasEvent);
-            //Assert.AreNotEqual(this.hasEventCellIds.Contains(id), this.notHasEventCellIds.Contains(id), $"{id}はすでにイベントを持っていません");
 
             this.hasEventCellIds.Remove(id);
             this.notHasEventCellIds.Add(id);
@@ -74,7 +65,7 @@ namespace HK.AutoAnt.CellControllers
             var id = cell.Id;
             Assert.IsNotNull(cell);
             Assert.IsTrue(cell.HasEvent);
-            Assert.AreNotEqual(this.hasEventCellIds.Contains(id), this.notHasEventCellIds.Contains(id), $"{id}はすでにイベントを持っています");
+            Assert.IsFalse(this.hasEventCellIds.Contains(id), $"{id}はすでにイベントを持っています");
 
             this.hasEventCellIds.Add(id);
             this.notHasEventCellIds.Remove(id);
