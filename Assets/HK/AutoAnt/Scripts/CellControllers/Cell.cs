@@ -1,6 +1,9 @@
-﻿using HK.AutoAnt.CellControllers.Events;
+﻿using System;
+using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.CellControllers.Gimmicks;
 using HK.AutoAnt.Constants;
+using HK.AutoAnt.Events;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -20,6 +23,8 @@ namespace HK.AutoAnt.CellControllers
         public Vector2Int Id { get; private set; }
 
         public CellType Type { get; private set; }
+
+        private readonly IMessageBroker Broker = new MessageBroker();
 
         private ICellEvent cellEvent = null;
 
@@ -58,10 +63,16 @@ namespace HK.AutoAnt.CellControllers
 
         public void AddEvent(ICellEvent cellEvent)
         {
+            if(this.cellEvent != null)
+            {
+                this.Broker.Publish(ReleasedCellEvent.Get());
+            }
+
             this.cellEvent = cellEvent;
             if(this.cellEvent != null)
             {
                 this.cellMapper.RegisterHasEvent(this);
+                this.cellEvent.OnRegister(this);
                 this.CreateGimmickController();
             }
             else
@@ -88,6 +99,11 @@ namespace HK.AutoAnt.CellControllers
             }
 
             this.cellEvent.OnClick(this);
+        }
+
+        public IObservable<ReleasedCellEvent> ReleasedCellEventAsObservable()
+        {
+            return this.Broker.Receive<ReleasedCellEvent>();
         }
 
         private void CreateGimmickController()
