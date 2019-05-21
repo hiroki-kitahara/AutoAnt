@@ -31,8 +31,8 @@ namespace HK.AutoAnt.UserControllers
         /// </summary>
         public void AddMoney(int value)
         {
-            Assert.IsTrue(this.IsEnoughMoney(value));
             this.money.Value += value;
+            Assert.IsTrue(this.Money >= 0);
         }
     }
 }
