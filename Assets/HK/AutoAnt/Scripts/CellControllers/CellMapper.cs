@@ -60,7 +60,7 @@ namespace HK.AutoAnt.CellControllers
             var id = cell.Id;
             Assert.IsNotNull(cell);
             Assert.IsFalse(cell.HasEvent);
-            Assert.AreNotEqual(this.hasEventCellIds.Contains(id), this.notHasEventCellIds.Contains(id), $"{id}はすでにイベントを持っていません");
+            //Assert.AreNotEqual(this.hasEventCellIds.Contains(id), this.notHasEventCellIds.Contains(id), $"{id}はすでにイベントを持っていません");
 
             this.hasEventCellIds.Remove(id);
             this.notHasEventCellIds.Add(id);

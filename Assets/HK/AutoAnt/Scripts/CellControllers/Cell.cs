@@ -38,11 +38,10 @@ namespace HK.AutoAnt.CellControllers
             this.CachedTransform = this.transform;
         }
 
-        public Cell Initialize(Vector2Int id, CellType cellType, CellSpec cellSpec, ICellEvent clickEvent, CellMapper cellMapper)
+        public Cell Initialize(Vector2Int id, CellType cellType, CellSpec cellSpec, ICellEvent cellEvent, CellMapper cellMapper)
         {
             this.Id = id;
             this.Type = cellType;
-            this.cellEvent = clickEvent;
             this.cellMapper = cellMapper;
             this.cellSpec = cellSpec;
 
@@ -50,6 +49,9 @@ namespace HK.AutoAnt.CellControllers
             this.scalableObject.localScale = cellSpec.Scale;
             this.boxCollider.center = new Vector3(0.0f, cellSpec.Scale.y / 2.0f, 0.0f);
             this.boxCollider.size = cellSpec.Scale;
+            
+            this.cellMapper.Add(this);
+            this.AddEvent(cellEvent);
 
             return this;
         }

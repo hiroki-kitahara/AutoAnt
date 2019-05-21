@@ -29,8 +29,6 @@ namespace HK.AutoAnt.CellControllers
                 .Initialize(id, cellType, this.cellSpec, clickEvent, this.cellMapper);
             cell.CachedTransform.SetParent(this.cellParent);
 
-            this.cellMapper.Add(cell);
-
             return cell;
         }
     }

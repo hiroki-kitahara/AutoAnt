@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HK.AutoAnt.CellControllers.ClickEvents;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -18,7 +19,7 @@ namespace HK.AutoAnt.CellControllers
         {
             foreach(var cell in this.cells)
             {
-                cellManager.Generator.Generate(cell.Id, cell.UnitSpec.Type, null);
+                cellManager.Generator.Generate(cell.Id, cell.UnitSpec.Type, cell.CellEvent);
             }
         }
 
@@ -32,6 +33,10 @@ namespace HK.AutoAnt.CellControllers
             [SerializeField]
             private CellUnitSpec unitSpec;
             public CellUnitSpec UnitSpec => this.unitSpec;
+
+            [SerializeField]
+            private CellEvent cellEvent;
+            public CellEvent CellEvent => this.cellEvent;
         }
     }
 }
