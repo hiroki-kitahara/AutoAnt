@@ -8,9 +8,5 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
     /// </summary>
     public sealed class Blank : CellGimmickController
     {
-        public override CellGimmickController Initialize()
-        {
-            return this;
-        }
     }
 }
