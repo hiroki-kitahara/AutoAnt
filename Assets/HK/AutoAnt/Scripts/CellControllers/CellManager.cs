@@ -30,22 +30,16 @@ namespace HK.AutoAnt.CellControllers
 
         private CellMapper cellMapper = new CellMapper();
 
-        private CellGenerator cellGenerator;
+        public CellGenerator Generator { get; private set; }
 
         private CellEventGenerator cellEventGenerator;
 
         void Awake()
         {
-            this.cellGenerator = new CellGenerator(this.cellSpec);
+            this.Generator = new CellGenerator(this.cellSpec, this.cellMapper, this.parent);
             this.cellEventGenerator = new CellEventGenerator(this, this.cellSpec, this.cellEventGenerateSpec, this.cellMapper);
 
             this.fieldInitializer.Generate(this);
-        }
-
-        public void GenerateCell(Vector2Int id, CellType cellType, ICellEvent clickEvent)
-        {
-            var cell = this.cellGenerator.Generate(id, cellType, this.parent, clickEvent, this.cellMapper);
-            this.cellMapper.Add(cell);
         }
 
         public IClickableObject GetClickableObject(Ray ray)

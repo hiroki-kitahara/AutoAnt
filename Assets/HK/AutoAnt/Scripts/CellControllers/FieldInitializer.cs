@@ -18,7 +18,7 @@ namespace HK.AutoAnt.CellControllers
         {
             foreach(var cell in this.cells)
             {
-                cellManager.GenerateCell(cell.Id, cell.UnitSpec.Type, null);
+                cellManager.Generator.Generate(cell.Id, cell.UnitSpec.Type, null);
             }
         }
 

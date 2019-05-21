@@ -12,16 +12,24 @@ namespace HK.AutoAnt.CellControllers
     {
         private readonly CellSpec cellSpec;
 
-        public CellGenerator(CellSpec cellSpec)
+        private readonly CellMapper cellMapper;
+
+        private Transform cellParent;
+
+        public CellGenerator(CellSpec cellSpec, CellMapper cellMapper, Transform cellParent)
         {
             this.cellSpec = cellSpec;
+            this.cellMapper = cellMapper;
+            this.cellParent = cellParent;
         }
 
-        public Cell Generate(Vector2Int id, CellType cellType, Transform parent, ICellEvent clickEvent, CellMapper cellMapper)
+        public Cell Generate(Vector2Int id, CellType cellType, ICellEvent clickEvent)
         {
             var cell = Object.Instantiate(this.cellSpec.GetPrefab(cellType))
-                .Initialize(id, cellType, this.cellSpec, clickEvent, cellMapper);
-            cell.CachedTransform.SetParent(parent);
+                .Initialize(id, cellType, this.cellSpec, clickEvent, this.cellMapper);
+            cell.CachedTransform.SetParent(this.cellParent);
+
+            this.cellMapper.Add(cell);
 
             return cell;
         }
