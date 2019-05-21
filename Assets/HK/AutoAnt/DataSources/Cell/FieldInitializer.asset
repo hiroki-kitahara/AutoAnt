@@ -15,19 +15,28 @@ MonoBehaviour:
   cells:
   - id: {x: 0, y: 0}
     unitSpec: {fileID: 11400000, guid: 99a472e38af9f47d6a78557eaa105c6b, type: 2}
+    cellEvent: {fileID: 0}
   - id: {x: 1, y: 0}
     unitSpec: {fileID: 11400000, guid: 99a472e38af9f47d6a78557eaa105c6b, type: 2}
+    cellEvent: {fileID: 11400000, guid: daffd7eb90c66463d91f3d3e37fdf3eb, type: 2}
   - id: {x: 2, y: 0}
     unitSpec: {fileID: 11400000, guid: 99a472e38af9f47d6a78557eaa105c6b, type: 2}
+    cellEvent: {fileID: 0}
   - id: {x: 0, y: 1}
     unitSpec: {fileID: 11400000, guid: 99a472e38af9f47d6a78557eaa105c6b, type: 2}
+    cellEvent: {fileID: 0}
   - id: {x: 1, y: 1}
     unitSpec: {fileID: 11400000, guid: 99a472e38af9f47d6a78557eaa105c6b, type: 2}
+    cellEvent: {fileID: 0}
   - id: {x: 2, y: 1}
     unitSpec: {fileID: 11400000, guid: 99a472e38af9f47d6a78557eaa105c6b, type: 2}
+    cellEvent: {fileID: 0}
   - id: {x: 0, y: 2}
     unitSpec: {fileID: 11400000, guid: 99a472e38af9f47d6a78557eaa105c6b, type: 2}
+    cellEvent: {fileID: 0}
   - id: {x: 1, y: 2}
     unitSpec: {fileID: 11400000, guid: 99a472e38af9f47d6a78557eaa105c6b, type: 2}
+    cellEvent: {fileID: 0}
   - id: {x: 2, y: 2}
     unitSpec: {fileID: 11400000, guid: 99a472e38af9f47d6a78557eaa105c6b, type: 2}
+    cellEvent: {fileID: 0}
