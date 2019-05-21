@@ -573,6 +573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4732661472262345497}
   - component: {fileID: 2395997954626171054}
+  - component: {fileID: 1723123901772966431}
   m_Layer: 5
   m_Name: Money
   m_TagString: Untagged
@@ -624,6 +625,23 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
+--- !u!114 &1723123901772966431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8178919854038702203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3786a1c1a991647deb616955701a6752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: {fileID: 5311725237419794689}
+  format:
+    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
+    value: '{0}G'
+    guid: f7054202-e708-4110-bbbd-d225828c3cd9
 --- !u!1 &8934084665150422696
 GameObject:
   m_ObjectHideFlags: 0
