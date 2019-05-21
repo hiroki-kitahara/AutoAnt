@@ -17,6 +17,12 @@ namespace HK.AutoAnt.CellControllers.Events
             return Instantiate(this.gimmickPrefab).Initialize();
         }
 
-        public abstract void OnClick(Cell owner);
+        public virtual void OnRegister(Cell owner)
+        {
+        }
+
+        public virtual void OnClick(Cell owner)
+        {
+        }
     }
 }

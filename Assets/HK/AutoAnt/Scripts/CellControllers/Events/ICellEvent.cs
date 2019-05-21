@@ -12,8 +12,12 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// <see cref="CellGimmickController"/>を生成する
         /// </summary>
-        /// <returns></returns>
         CellGimmickController CreateGimmickController();
+
+        /// <summary>
+        /// イベントがセルに登録された時の処理
+        /// </summary>
+        void OnRegister(Cell owner);
 
         /// <summary>
         /// セルがクリックされた時の処理
