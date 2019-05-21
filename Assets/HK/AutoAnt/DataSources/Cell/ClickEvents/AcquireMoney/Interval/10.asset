@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b775d57b90f9c47c3bd4a60c8b02ac11, type: 3}
+  m_Script: {fileID: 11500000, guid: 80fb6b87ce11d49b0ba3123f3e7ac31e, type: 3}
   m_Name: 10
   m_EditorClassIdentifier: 
-  gimmickPrefab: {fileID: 1696405967700200454, guid: 81339a340327d4660946cc3c5dee835b,
-    type: 3}
-  amount: 10
-  onClickClearEvent: 0
+  gimmickPrefab: {fileID: 0}
+  intervalSeconds: 0
+  amount: 0
