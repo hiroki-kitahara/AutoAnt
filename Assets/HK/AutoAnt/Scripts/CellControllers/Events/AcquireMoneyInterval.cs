@@ -12,11 +12,8 @@ namespace HK.AutoAnt.CellControllers.Events
     /// 一定間隔でお金を取得するセルイベント
     /// </summary>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/AcquireMoneyInterval")]
-    public sealed class AcquireMoneyInterval : CellEvent
+    public sealed class AcquireMoneyInterval : CellEventBlankGimmick
     {
-        [SerializeField]
-        private CellGimmickController gimmickPrefab;
-
         /// <summary>
         /// 取得するまでの時間
         /// </summary>
@@ -28,11 +25,6 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         [SerializeField]
         private int amount;
-
-        public override CellGimmickController CreateGimmickController()
-        {
-            return Instantiate(this.gimmickPrefab);
-        }
 
         public override void OnRegister(Cell owner)
         {

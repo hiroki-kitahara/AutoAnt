@@ -10,11 +10,8 @@ namespace HK.AutoAnt.CellControllers.Events
     /// クリックでお金を取得するセルイベント
     /// </summary>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/AcquireMoneyOnClick")]
-    public sealed class AcquireMoneyOnClick : CellEvent
+    public sealed class AcquireMoneyOnClick : CellEventBlankGimmick
     {
-        [SerializeField]
-        private CellGimmickController gimmickPrefab;
-
         /// <summary>
         /// 取得できる量
         /// </summary>
@@ -26,11 +23,6 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         [SerializeField]
         private bool onClickClearEvent;
-
-        public override CellGimmickController CreateGimmickController()
-        {
-            return Instantiate(this.gimmickPrefab);
-        }
 
         public override void OnClick(Cell owner)
         {

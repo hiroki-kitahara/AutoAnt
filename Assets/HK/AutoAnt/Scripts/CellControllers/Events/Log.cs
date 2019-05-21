@@ -8,16 +8,8 @@ namespace HK.AutoAnt.CellControllers.Events
     /// セルクリック時にログを表示するイベント
     /// </summary>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Log")]
-    public sealed class Log : CellEvent
+    public sealed class Log : CellEventBlankGimmick
     {
-        [SerializeField]
-        private CellGimmickController gimmickPrefab;
-        
-        public override CellGimmickController CreateGimmickController()
-        {
-            return Instantiate(this.gimmickPrefab);
-        }
-
         public override void OnClick(Cell owner)
         {
             Debug.Log($"{owner.Id}", owner);

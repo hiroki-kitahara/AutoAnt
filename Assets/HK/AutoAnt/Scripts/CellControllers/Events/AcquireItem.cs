@@ -10,11 +10,8 @@ namespace HK.AutoAnt.CellControllers.Events
     /// アイテムを取得するクリックイベント
     /// </summary>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/AcquireItem")]
-    public sealed class AcquireItem : CellEvent
+    public sealed class AcquireItem : CellEventBlankGimmick
     {
-        [SerializeField]
-        private CellGimmickController gimmickPrefab;
-        
         /// <summary>
         /// 取得するアイテム名
         /// </summary>
@@ -32,11 +29,6 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         [SerializeField]
         private int max;
-
-        public override CellGimmickController CreateGimmickController()
-        {
-            return Instantiate(this.gimmickPrefab);
-        }
 
         public override void OnClick(Cell owner)
         {
