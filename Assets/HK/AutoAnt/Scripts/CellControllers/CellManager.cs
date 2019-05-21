@@ -23,6 +23,9 @@ namespace HK.AutoAnt.CellControllers
         private Transform parent;
 
         [SerializeField]
+        private FieldInitializer fieldInitializer;
+
+        [SerializeField]
         private int initialRange;
 
         private CellMapper cellMapper = new CellMapper();
@@ -36,13 +39,7 @@ namespace HK.AutoAnt.CellControllers
             this.cellGenerator = new CellGenerator(this.cellSpec);
             this.cellEventGenerator = new CellEventGenerator(this, this.cellSpec, this.cellEventGenerateSpec, this.cellMapper);
 
-            for (var x = -this.initialRange; x <= this.initialRange; x++)
-            {
-                for (var y = -this.initialRange; y <= this.initialRange; y++)
-                {
-                    this.GenerateCell(new Vector2Int(x, y), CellType.Grassland, null);
-                }
-            }
+            this.fieldInitializer.Generate(this);
         }
 
         public void GenerateCell(Vector2Int id, CellType cellType, ICellEvent clickEvent)

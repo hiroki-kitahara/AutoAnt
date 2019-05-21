@@ -14,14 +14,24 @@ namespace HK.AutoAnt.CellControllers
         [SerializeField]
         private List<Cell> cells = new List<Cell>();
 
+        public void Generate(CellManager cellManager)
+        {
+            foreach(var cell in this.cells)
+            {
+                cellManager.GenerateCell(cell.Id, cell.UnitSpec.Type, null);
+            }
+        }
+
         [Serializable]
         public class Cell
         {
             [SerializeField]
             private Vector2Int id;
+            public Vector2Int Id => this.id;
 
             [SerializeField]
             private CellUnitSpec unitSpec;
+            public CellUnitSpec UnitSpec => this.unitSpec;
         }
     }
 }
