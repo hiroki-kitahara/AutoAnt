@@ -18,3 +18,7 @@ MonoBehaviour:
     prefab: {fileID: 1087446381315328015, guid: 0c5dbbdf4c3d649a4b60b2739640fbd0,
       type: 3}
     clickEvents: []
+  constants:
+    scale: {x: 1, y: 0.2, z: 1}
+    effectScale: {x: 1, y: 1, z: 1}
+    interval: 0.1
