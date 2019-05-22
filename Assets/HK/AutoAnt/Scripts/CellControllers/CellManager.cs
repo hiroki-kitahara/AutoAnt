@@ -14,9 +14,6 @@ namespace HK.AutoAnt.CellControllers
     public sealed class CellManager : MonoBehaviour
     {
         [SerializeField]
-        private CellSpec cellSpec = null;
-
-        [SerializeField]
         private CellEventGenerateSpec cellEventGenerateSpec = null;
 
         [SerializeField]
@@ -33,7 +30,7 @@ namespace HK.AutoAnt.CellControllers
 
         void Awake()
         {
-            this.Generator = new CellGenerator(this.cellSpec, this.cellMapper, this.parent);
+            this.Generator = new CellGenerator(this.cellMapper, this.parent);
             // this.cellEventGenerator = new CellEventGenerator(this, this.cellSpec, this.cellEventGenerateSpec, this.cellMapper);
 
             this.fieldInitializer.Generate(this);

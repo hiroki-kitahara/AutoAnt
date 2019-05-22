@@ -3,6 +3,7 @@ using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.CellControllers.Gimmicks;
 using HK.AutoAnt.Constants;
 using HK.AutoAnt.Events;
+using HK.AutoAnt.Systems;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -34,8 +35,6 @@ namespace HK.AutoAnt.CellControllers
 
         private CellGimmickController gimmickController;
 
-        private CellSpec cellSpec;
-
         public bool HasEvent => this.cellEvent != null;
 
         void Awake()
@@ -43,17 +42,17 @@ namespace HK.AutoAnt.CellControllers
             this.CachedTransform = this.transform;
         }
 
-        public Cell Initialize(Vector2Int id, CellType cellType, CellSpec cellSpec, ICellEvent cellEvent, CellMapper cellMapper)
+        public Cell Initialize(Vector2Int id, CellType cellType, ICellEvent cellEvent, CellMapper cellMapper)
         {
             this.Id = id;
             this.Type = cellType;
             this.cellMapper = cellMapper;
-            this.cellSpec = cellSpec;
 
-            this.CachedTransform.position = new Vector3(id.x * (cellSpec.Scale.x + cellSpec.Interval), 0.0f, id.y * (cellSpec.Scale.z + cellSpec.Interval));
-            this.scalableObject.localScale = cellSpec.Scale;
-            this.boxCollider.center = new Vector3(0.0f, cellSpec.Scale.y / 2.0f, 0.0f);
-            this.boxCollider.size = cellSpec.Scale;
+            var constants = GameSystem.Instance.MasterData.Cell.Constants;
+            this.CachedTransform.position = new Vector3(id.x * (constants.Scale.x + constants.Interval), 0.0f, id.y * (constants.Scale.z + constants.Interval));
+            this.scalableObject.localScale = constants.Scale;
+            this.boxCollider.center = new Vector3(0.0f, constants.Scale.y / 2.0f, 0.0f);
+            this.boxCollider.size = constants.Scale;
 
             this.cellMapper.Add(this);
             this.AddEvent(cellEvent);
@@ -110,10 +109,11 @@ namespace HK.AutoAnt.CellControllers
         {
             this.DestroyGimmickController();
 
+            var constants = GameSystem.Instance.MasterData.Cell.Constants;
             this.gimmickController = this.cellEvent.CreateGimmickController();
             this.gimmickController.transform.SetParent(this.CachedTransform);
-            this.gimmickController.transform.localPosition = new Vector3(0.0f, this.cellSpec.Scale.y, 0.0f);
-            this.gimmickController.transform.localScale = this.cellSpec.EffectScale;
+            this.gimmickController.transform.localPosition = new Vector3(0.0f, constants.Scale.y, 0.0f);
+            this.gimmickController.transform.localScale = constants.EffectScale;
         }
 
         private void DestroyGimmickController()

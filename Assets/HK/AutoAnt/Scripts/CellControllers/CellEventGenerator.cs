@@ -13,13 +13,11 @@ namespace HK.AutoAnt.CellControllers
     {
         private readonly CellManager manager;
 
-        private readonly CellSpec cellSpec;
-
         private readonly CellEventGenerateSpec cellEventGenerateSpec;
 
         private readonly CellMapper cellMapper;
 
-        public CellEventGenerator(CellManager manager, CellSpec cellSpec, CellEventGenerateSpec cellEventGenerateSpec, CellMapper cellMapper)
+        public CellEventGenerator(CellManager manager, CellEventGenerateSpec cellEventGenerateSpec, CellMapper cellMapper)
         {
             // this.manager = manager;
             // this.cellSpec = cellSpec;

@@ -14,6 +14,26 @@ namespace HK.AutoAnt.Database
     [CreateAssetMenu(menuName = "AutoAnt/Database/Cell")]
     public sealed class MasterDataCell : MasterDataBase<MasterDataCell.Record>
     {
+        [SerializeField]
+        private ConstantData constants = null;
+        public ConstantData Constants => this.constants;
+
+        [Serializable]
+        public class ConstantData
+        {
+            [SerializeField]
+            private Vector3 scale = new Vector3(1.0f, 0.2f, 1.0f);
+            public Vector3 Scale => this.scale;
+
+            [SerializeField]
+            private Vector3 effectScale = Vector3.one;
+            public Vector3 EffectScale => this.effectScale;
+
+            [SerializeField]
+            private float interval = 1.5f;
+            public float Interval => this.interval;
+        }
+
         [Serializable]
         public class Record : IRecord
         {

@@ -12,15 +12,12 @@ namespace HK.AutoAnt.CellControllers
     /// </summary>
     public sealed class CellGenerator
     {
-        private readonly CellSpec cellSpec;
-
         private readonly CellMapper cellMapper;
 
         private Transform cellParent;
 
-        public CellGenerator(CellSpec cellSpec, CellMapper cellMapper, Transform cellParent)
+        public CellGenerator(CellMapper cellMapper, Transform cellParent)
         {
-            this.cellSpec = cellSpec;
             this.cellMapper = cellMapper;
             this.cellParent = cellParent;
         }
@@ -29,7 +26,7 @@ namespace HK.AutoAnt.CellControllers
         {
             var record = GameSystem.Instance.MasterData.Cell.Records.Get(masterDataId);
             var cell = Object.Instantiate(record.Prefab)
-                .Initialize(position, record.CellType, this.cellSpec, clickEvent, this.cellMapper);
+                .Initialize(position, record.CellType, clickEvent, this.cellMapper);
             cell.CachedTransform.SetParent(this.cellParent);
 
             return cell;
