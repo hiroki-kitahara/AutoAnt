@@ -10,21 +10,10 @@ namespace HK.AutoAnt.Database
     /// アイテムのマスターデータ
     /// </summary>
     [CreateAssetMenu(menuName = "AutoAnt/Database/Item")]
-    public sealed class MasterDataItem : ScriptableObject
+    public sealed class MasterDataItem : MasterDataBase<MasterDataItem.Record>
     {
-        [SerializeField]
-        private List<Element> elements = new List<Element>();
-
-        public Element GetByName(string name)
-        {
-            var result = this.elements.Find(e => e.Name == name);
-            Assert.IsNotNull(result, $"{name}に対応するアイテムがありませんでした");
-
-            return result;
-        }
-
         [Serializable]
-        public class Element
+        public class Record : IRecord, IRecordName
         {
             [SerializeField]
             private int id = 0;

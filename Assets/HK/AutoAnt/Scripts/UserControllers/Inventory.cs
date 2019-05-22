@@ -25,7 +25,7 @@ namespace HK.AutoAnt.UserControllers
         /// <summary>
         /// アイテムを追加する
         /// </summary>
-        public void AddItem(MasterDataItem.Element item, int amount)
+        public void AddItem(MasterDataItem.Record item, int amount)
         {
             var itemId = item.Id;
             if(this.items.ContainsKey(itemId))

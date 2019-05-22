@@ -23,7 +23,7 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private float destroyDelay = 0.0f;
 
-        public AcquireItemElement Initialize(MasterDataItem.Element item, int amount, Inventory inventory)
+        public AcquireItemElement Initialize(MasterDataItem.Record item, int amount, Inventory inventory)
         {
             this.text.text = this.format.Format(item.Name, amount, inventory.Items[item.Id]);
 

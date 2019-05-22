@@ -1,4 +1,5 @@
 ﻿using HK.AutoAnt.CellControllers.Gimmicks;
+using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
 using HK.Framework.Text;
 using UnityEngine;
@@ -33,7 +34,7 @@ namespace HK.AutoAnt.CellControllers.Events
         public override void OnClick(Cell owner)
         {
             var gameSystem = GameSystem.Instance;
-            var item = gameSystem.MasterData.Item.GetByName(this.itemName.Get);
+            var item = gameSystem.MasterData.Item.Records.GetByName(this.itemName.Get);
             var value = Random.Range(this.min, this.max + 1);
             gameSystem.User.Inventory.AddItem(item, value);
             owner.ClearEvent();

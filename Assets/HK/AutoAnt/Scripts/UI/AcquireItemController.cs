@@ -26,7 +26,7 @@ namespace HK.AutoAnt.UI
                 .AddTo(this);
         }
 
-        private void CreateElement(Inventory inventory, MasterDataItem.Element item, int amount)
+        private void CreateElement(Inventory inventory, MasterDataItem.Record item, int amount)
         {
             Instantiate(this.elementPrefab, this.transform, false).Initialize(item, amount, inventory);
         }

@@ -9,7 +9,7 @@ namespace HK.AutoAnt.Events
     /// <summary>
     /// <see cref="Inventory"/>にアイテムが追加された際のイベント
     /// </summary>
-    public sealed class AddedItem : Message<AddedItem, Inventory, MasterDataItem.Element, int>
+    public sealed class AddedItem : Message<AddedItem, Inventory, MasterDataItem.Record, int>
     {
         /// <summary>
         /// 追加された<see cref="Inventory"/>
@@ -19,7 +19,7 @@ namespace HK.AutoAnt.Events
         /// <summary>
         /// 追加されたアイテムのマスターデータ
         /// </summary>
-        public MasterDataItem.Element Item => this.param2;
+        public MasterDataItem.Record Item => this.param2;
 
         /// <summary>
         /// 追加された量
