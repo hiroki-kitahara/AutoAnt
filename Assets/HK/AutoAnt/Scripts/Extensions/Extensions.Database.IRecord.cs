@@ -11,7 +11,10 @@ namespace HK.AutoAnt.Extensions
     /// </summary>
     public static partial class Extensions
     {
-        public static T GetById<T>(this IEnumerable<T> self, int id) where T : class, IRecord
+        /// <summary>
+        /// IDからレコードを返す
+        /// </summary>
+        public static T Get<T>(this IEnumerable<T> self, int id) where T : class, IRecord
         {
             var result = self.FirstOrDefault(r => r.Id == id);
             Assert.IsNotNull(result, $"Id = {id}に対応する{typeof(T)}がありませんでした");

@@ -11,7 +11,10 @@ namespace HK.AutoAnt.Extensions
     /// </summary>
     public static partial class Extensions
     {
-        public static T GetByName<T>(this IEnumerable<T> self, string name) where T : class, IRecordName
+        /// <summary>
+        /// 名前からレコードを返す
+        /// </summary>
+        public static T Get<T>(this IEnumerable<T> self, string name) where T : class, IRecordName
         {
             var result = self.FirstOrDefault(r => r.Name == name);
             Assert.IsNotNull(result, $"Name = {name}に対応する{typeof(T)}がありませんでした");
