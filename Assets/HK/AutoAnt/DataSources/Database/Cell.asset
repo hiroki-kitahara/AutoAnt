@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71a70dbfeeffe41a2900a0c43e0d7e5d, type: 3}
-  m_Name: MasterData
+  m_Script: {fileID: 11500000, guid: e78b4ec4398784ec1a11a279b2717f4f, type: 3}
+  m_Name: Cell
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: e716878cc8f4b49e8bb8c2d426359025, type: 2}
-  cell: {fileID: 11400000, guid: 8151ac8e4f13a4602acf637185ec1e0b, type: 2}
+  records:
+  - id: 100000
+    cellType: 0
+    prefab: {fileID: 1087446381315328015, guid: 0c5dbbdf4c3d649a4b60b2739640fbd0,
+      type: 3}
+    clickEvents: []

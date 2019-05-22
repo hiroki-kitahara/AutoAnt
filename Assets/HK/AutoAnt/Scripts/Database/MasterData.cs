@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.Database
@@ -12,5 +13,9 @@ namespace HK.AutoAnt.Database
         [SerializeField]
         private MasterDataItem item = null;
         public MasterDataItem Item => this.item;
+
+        [SerializeField]
+        private MasterDataCell cell = null;
+        public MasterDataCell Cell => this.cell;
     }
 }
