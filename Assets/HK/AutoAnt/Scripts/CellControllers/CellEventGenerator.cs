@@ -21,25 +21,25 @@ namespace HK.AutoAnt.CellControllers
 
         public CellEventGenerator(CellManager manager, CellSpec cellSpec, CellEventGenerateSpec cellEventGenerateSpec, CellMapper cellMapper)
         {
-            this.manager = manager;
-            this.cellSpec = cellSpec;
-            this.cellEventGenerateSpec = cellEventGenerateSpec;
-            this.cellMapper = cellMapper;
+            // this.manager = manager;
+            // this.cellSpec = cellSpec;
+            // this.cellEventGenerateSpec = cellEventGenerateSpec;
+            // this.cellMapper = cellMapper;
 
-            Observable.Interval(TimeSpan.FromSeconds(this.cellEventGenerateSpec.GenerateInterval))
-                .SubscribeWithState(this, (_, _this) =>
-                {
-                    if(_this.cellMapper.NotHasEventCellIds.Count > 0)
-                    {
-                        var cellId = UnityEngine.Random.Range(0, _this.cellMapper.NotHasEventCellIds.Count);
-                        var cell = _this.cellMapper.Map[_this.cellMapper.NotHasEventCellIds[cellId]];
-                        var clickEvents = _this.cellSpec.GetUnitSpec(cell.Type).ClickEvents;
-                        var eventId = UnityEngine.Random.Range(0, clickEvents.Count);
+            // Observable.Interval(TimeSpan.FromSeconds(this.cellEventGenerateSpec.GenerateInterval))
+            //     .SubscribeWithState(this, (_, _this) =>
+            //     {
+            //         if(_this.cellMapper.NotHasEventCellIds.Count > 0)
+            //         {
+            //             var cellId = UnityEngine.Random.Range(0, _this.cellMapper.NotHasEventCellIds.Count);
+            //             var cell = _this.cellMapper.Map[_this.cellMapper.NotHasEventCellIds[cellId]];
+            //             var clickEvents = _this.cellSpec.GetUnitSpec(cell.Type).ClickEvents;
+            //             var eventId = UnityEngine.Random.Range(0, clickEvents.Count);
                         
-                        cell.AddEvent(clickEvents[eventId]);
-                    }
-                })
-                .AddTo(this.manager);
+            //             cell.AddEvent(clickEvents[eventId]);
+            //         }
+            //     })
+            //     .AddTo(this.manager);
         }
     }
 }
