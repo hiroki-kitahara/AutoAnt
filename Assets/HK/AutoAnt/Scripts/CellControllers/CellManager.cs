@@ -36,7 +36,13 @@ namespace HK.AutoAnt.CellControllers
             this.fieldInitializer.Generate(this);
         }
 
-        public IClickableObject GetClickableObject(Ray ray)
+        /// <summary>
+        /// クリック可能なオブジェクトを返す
+        /// </summary>
+        /// <remarks>
+        /// FIXME: ここに記述する必要がない
+        /// </remarks>
+        public static IClickableObject GetClickableObject(Ray ray)
         {
             var hitInfo = default(RaycastHit);
             if (Physics.Raycast(ray, out hitInfo))

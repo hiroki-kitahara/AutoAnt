@@ -1,5 +1,6 @@
 ﻿using HK.AutoAnt.CameraControllers;
 using HK.AutoAnt.CellControllers;
+using HK.AutoAnt.GameControllers;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -20,41 +21,36 @@ namespace HK.AutoAnt.InputControllers
         [SerializeField]
         private GameCameraController gameCameraController = null;
 
+        private InputActions inputActions;
+
         void Awake()
         {
             var inputModule = InputControllers.Input.Current;
+            this.inputActions = new ClickToClickableObjectAction(this.gameCameraController);
 
             inputModule.ClickDownAsObservable()
                 .Where(x => x.Data.ButtonId == 0)
+                .Where(_ => this.inputActions.ClickDownAction != null)
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    var ray = _this.cameraman.Camera.ScreenPointToRay(x.Data.Position);
-                    var clickableObject = _this.cellManager.GetClickableObject(ray);
-                    if (clickableObject != null)
-                    {
-                        clickableObject.OnClickDown();
-                    }
+                    _this.inputActions.ClickDownAction.Do(x.Data);
                 })
                 .AddTo(this);
 
             inputModule.ClickUpAsObservable()
                 .Where(x => x.Data.ButtonId == 0)
+                .Where(_ => this.inputActions.ClickUpAction != null)
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    var ray = _this.cameraman.Camera.ScreenPointToRay(x.Data.Position);
-                    var clickableObject = _this.cellManager.GetClickableObject(ray);
-                    if (clickableObject != null)
-                    {
-                        clickableObject.OnClickUp();
-                    }
+                    _this.inputActions.ClickUpAction.Do(x.Data);
                 })
                 .AddTo(this);
 
             inputModule.DragAsObservable()
+                .Where(_ => this.inputActions.DragAction != null)
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    // FIXME: ドラッグ移動量をオプションか何かで編集出来るように
-                    _this.gameCameraController.Move(x.Data.DeltaPosition.y * 0.05f, x.Data.DeltaPosition.x * 0.05f);
+                    _this.inputActions.DragAction.Do(x.Data);
                 })
                 .AddTo(this);
         }
