@@ -13,7 +13,7 @@ namespace HK.AutoAnt.CameraControllers
 
         public void Move(float forwardVelocity, float rightVelocity)
         {
-            Cameraman.Instance.Root.position -= this.cameraman.ToFirstPersonVector(forwardVelocity, rightVelocity);
+            Cameraman.Instance.Position -= this.cameraman.ToFirstPersonVector(forwardVelocity, rightVelocity);
         }
     }
 }

@@ -10,7 +10,6 @@ namespace HK.AutoAnt.CameraControllers
     {
         [SerializeField]
         private Transform root = null;
-        public Transform Root => this.root;
 
         [SerializeField]
         private Transform pivot = null;
@@ -37,6 +36,56 @@ namespace HK.AutoAnt.CameraControllers
         {
             Assert.IsNotNull(Instance);
             Instance = null;
+        }
+
+        public Vector3 Position
+        {
+            get
+            {
+                return this.root.position;
+            }
+            set
+            {
+                this.root.position = value;
+            }
+        }
+
+        public Vector3 Pivot
+        {
+            get
+            {
+                return this.pivot.localEulerAngles;
+            }
+            set
+            {
+                this.pivot.localEulerAngles = value;
+            }
+        }
+
+        public Vector3 Rig
+        {
+            get
+            {
+                return this.rig.localEulerAngles;
+            }
+            set
+            {
+                this.rig.localEulerAngles = value;
+            }
+        }
+
+        public float Distance
+        {
+            get
+            {
+                return this.distance.localPosition.z;
+            }
+            set
+            {
+                var position = this.distance.localPosition;
+                position.z = value;
+                this.distance.localPosition = position;
+            }
         }
 
         /// <summary>
