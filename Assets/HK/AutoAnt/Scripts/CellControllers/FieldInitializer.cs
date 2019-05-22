@@ -19,7 +19,7 @@ namespace HK.AutoAnt.CellControllers
         {
             foreach(var cell in this.cells)
             {
-                cellManager.Generator.Generate(cell.Id, cell.UnitSpec.Type, cell.CellEvent);
+                cellManager.Generator.Generate(cell.Id, cell.Position, cell.CellEvent);
             }
         }
 
@@ -27,12 +27,12 @@ namespace HK.AutoAnt.CellControllers
         public class Cell
         {
             [SerializeField]
-            private Vector2Int id = Vector2Int.zero;
-            public Vector2Int Id => this.id;
+            private int id = 0;
+            public int Id => this.id;
 
             [SerializeField]
-            private CellUnitSpec unitSpec = null;
-            public CellUnitSpec UnitSpec => this.unitSpec;
+            private Vector2Int position = Vector2Int.zero;
+            public Vector2Int Position => this.position;
 
             [SerializeField]
             private CellEvent cellEvent = null;
