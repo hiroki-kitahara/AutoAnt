@@ -54,7 +54,7 @@ namespace HK.AutoAnt.InputControllers
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     // FIXME: ドラッグ移動量をオプションか何かで編集出来るように
-                    _this.gameCameraController.Move(x.DeltaPosition.y * 0.05f, x.DeltaPosition.x * 0.05f);
+                    _this.gameCameraController.Move(x.Data.DeltaPosition.y * 0.05f, x.Data.DeltaPosition.x * 0.05f);
                 })
                 .AddTo(this);
         }

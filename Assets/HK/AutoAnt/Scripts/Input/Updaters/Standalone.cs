@@ -70,7 +70,7 @@ namespace HK.AutoAnt.InputControllers.Updaters
                 {
                     this.isDragging = true;
                     var velocity = newPosition - this.currentPosition;
-                    Input.Current.Broker.Publish(Events.Drag.Get(velocity));
+                    Input.Current.Broker.Publish(Events.Drag.Get(Events.DragData.Get(velocity)));
                     this.currentPosition = newPosition;
                 }
             }

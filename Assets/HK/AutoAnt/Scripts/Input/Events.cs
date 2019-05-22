@@ -36,14 +36,14 @@ namespace HK.AutoAnt.InputControllers
         /// <summary>
         /// ドラッグ時のイベント
         /// </summary>
-        public class Drag : Message<Drag, Vector3>
+        public class Drag : Message<Drag, DragData>
         {
-            public Vector3 DeltaPosition { get { return this.param1; } }
+            public DragData Data { get { return this.param1; } }
         }
 
         public class ClickData
         {
-            private static ClickData cache = new ClickData();
+            private static readonly ClickData cache = new ClickData();
             public static ClickData Get(int buttonId, Vector2 position)
             {
                 cache.ButtonId = buttonId;
@@ -55,6 +55,19 @@ namespace HK.AutoAnt.InputControllers
             public int ButtonId { get; private set; }
 
             public Vector2 Position { get; private set; }
+        }
+
+        public class DragData
+        {
+            private static readonly DragData cache = new DragData();
+            public static DragData Get(Vector3 deltaPosition)
+            {
+                cache.DeltaPosition = deltaPosition;
+
+                return cache;
+            }
+
+            public Vector3 DeltaPosition { get; private set; }
         }
     }
 }
