@@ -54,5 +54,17 @@ namespace HK.AutoAnt.InputControllers
                 })
                 .AddTo(this);
         }
+
+        void Update()
+        {
+            if(UnityEngine.Input.GetKeyDown(KeyCode.Q))
+            {
+                this.inputActions = new ClickToClickableObjectAction(this.gameCameraController);
+            }
+            if(UnityEngine.Input.GetKeyDown(KeyCode.W))
+            {
+                this.inputActions = new AddCellEventAction(this.cellManager.EventGenerator);
+            }
+        }
     }
 }
