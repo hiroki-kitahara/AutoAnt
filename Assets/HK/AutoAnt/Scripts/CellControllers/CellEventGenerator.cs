@@ -18,7 +18,7 @@ namespace HK.AutoAnt.CellControllers
         /// <summary>
         /// 作成可能なセルイベントのレコードID
         /// </summary>
-        public int RecordId { get; set; }
+        public int RecordId { get; set; } = 100000;
 
         public void Generate(Cell cell)
         {
