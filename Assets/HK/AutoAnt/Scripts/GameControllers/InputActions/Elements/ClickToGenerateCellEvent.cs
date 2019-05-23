@@ -9,11 +9,11 @@ namespace HK.AutoAnt.GameControllers
     /// <summary>
     /// クリックイベントでセルにイベントを追加する
     /// </summary>
-    public sealed class ClickToAddCellEvent : IInputAction<InputControllers.Events.ClickData>
+    public sealed class ClickToGenerateCellEvent : IInputAction<InputControllers.Events.ClickData>
     {
         private readonly CellEventGenerator eventGenerator;
 
-        public ClickToAddCellEvent(CellEventGenerator eventGenerator)
+        public ClickToGenerateCellEvent(CellEventGenerator eventGenerator)
         {
             this.eventGenerator = eventGenerator;
         }
