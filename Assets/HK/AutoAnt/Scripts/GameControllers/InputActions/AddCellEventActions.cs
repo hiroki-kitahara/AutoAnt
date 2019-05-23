@@ -8,9 +8,9 @@ namespace HK.AutoAnt.GameControllers
     /// <summary>
     /// セルにイベントを追加するアクション
     /// </summary>
-    public sealed class AddCellEventAction : InputActions
+    public sealed class AddCellEventActions : InputActions
     {
-        public AddCellEventAction(CellEventGenerator eventGenerator)
+        public AddCellEventActions(CellEventGenerator eventGenerator)
             : base(
                 null,
                 null,

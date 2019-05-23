@@ -26,7 +26,7 @@ namespace HK.AutoAnt.InputControllers
         void Awake()
         {
             var inputModule = InputControllers.Input.Current;
-            this.inputActions = new ClickToClickableObjectAction(this.gameCameraController);
+            this.inputActions = new ClickToClickableObjectActions(this.gameCameraController);
 
             inputModule.ClickDownAsObservable()
                 .Where(x => x.Data.ButtonId == 0)
@@ -59,11 +59,11 @@ namespace HK.AutoAnt.InputControllers
         {
             if(UnityEngine.Input.GetKeyDown(KeyCode.Q))
             {
-                this.inputActions = new ClickToClickableObjectAction(this.gameCameraController);
+                this.inputActions = new ClickToClickableObjectActions(this.gameCameraController);
             }
             if(UnityEngine.Input.GetKeyDown(KeyCode.W))
             {
-                this.inputActions = new AddCellEventAction(this.cellManager.EventGenerator);
+                this.inputActions = new AddCellEventActions(this.cellManager.EventGenerator);
             }
         }
     }

@@ -7,9 +7,9 @@ namespace HK.AutoAnt.GameControllers
     /// <summary>
     /// <see cref="IClickableObject"/>をクリックするアクション
     /// </summary>
-    public sealed class ClickToClickableObjectAction : InputActions
+    public sealed class ClickToClickableObjectActions : InputActions
     {
-        public ClickToClickableObjectAction(GameCameraController gameCameraController)
+        public ClickToClickableObjectActions(GameCameraController gameCameraController)
             : base(
                 null,
                 new ClickDownToClickableObject(),
