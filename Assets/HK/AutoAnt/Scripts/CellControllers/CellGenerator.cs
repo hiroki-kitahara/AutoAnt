@@ -22,9 +22,9 @@ namespace HK.AutoAnt.CellControllers
             this.cellParent = cellParent;
         }
 
-        public Cell Generate(int masterDataId, Vector2Int position, ICellEvent clickEvent)
+        public Cell Generate(int recordId, Vector2Int position, ICellEvent clickEvent)
         {
-            var record = GameSystem.Instance.MasterData.Cell.Records.Get(masterDataId);
+            var record = GameSystem.Instance.MasterData.Cell.Records.Get(recordId);
             var cell = Object.Instantiate(record.Prefab)
                 .Initialize(position, record.CellType, clickEvent, this.cellMapper);
             cell.CachedTransform.SetParent(this.cellParent);

@@ -31,7 +31,7 @@ namespace HK.AutoAnt.CellControllers
         void Awake()
         {
             this.Generator = new CellGenerator(this.cellMapper, this.parent);
-            // this.cellEventGenerator = new CellEventGenerator(this, this.cellSpec, this.cellEventGenerateSpec, this.cellMapper);
+            this.cellEventGenerator = new CellEventGenerator();
 
             this.fieldInitializer.Generate(this);
         }
