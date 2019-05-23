@@ -42,12 +42,12 @@ namespace HK.AutoAnt.CellControllers
         /// <remarks>
         /// FIXME: ここに記述する必要がない
         /// </remarks>
-        public static IClickableObject GetClickableObject(Ray ray)
+        public static Cell GetCell(Ray ray)
         {
             var hitInfo = default(RaycastHit);
             if (Physics.Raycast(ray, out hitInfo))
             {
-                return hitInfo.collider.GetComponent<IClickableObject>();
+                return hitInfo.collider.GetComponent<Cell>();
             }
 
             return null;

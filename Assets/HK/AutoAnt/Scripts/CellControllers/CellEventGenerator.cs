@@ -1,5 +1,8 @@
 ﻿using System;
 using HK.AutoAnt.CellControllers.Events;
+using HK.AutoAnt.Extensions;
+using HK.AutoAnt.GameControllers;
+using HK.AutoAnt.Systems;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -10,13 +13,17 @@ namespace HK.AutoAnt.CellControllers
     /// <summary>
     /// <see cref="Cell"/>のイベントを生成する
     /// </summary>
-    /// <remarks>
-    /// いらないかも
-    /// </remarks>
-    public sealed class CellEventGenerator
+    public sealed class CellEventGenerator : IMasterDataCellEventRecordIdHolder
     {
-        public void Generate(Cell cell, ICellEvent cellEvent)
+        /// <summary>
+        /// 作成可能なセルイベントのレコードID
+        /// </summary>
+        public int RecordId { get; set; }
+
+        public void Generate(Cell cell)
         {
+            Assert.IsFalse(cell.HasEvent);
+            var cellEvent = GameSystem.Instance.MasterData.CellEvent.Records.Get(this.RecordId).EventData;
             cell.AddEvent(cellEvent);
         }
     }

@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.CellControllers;
+﻿using HK.AutoAnt.CameraControllers;
+using HK.AutoAnt.CellControllers;
 using HK.AutoAnt.InputControllers;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -19,6 +20,8 @@ namespace HK.AutoAnt.GameControllers
 
         public void Do(InputControllers.Events.ClickData data)
         {
+            var cell = CellManager.GetCell(Cameraman.Instance.Camera.ScreenPointToRay(data.Position));
+            this.eventGenerator.Generate(cell);
         }
     }
 }
