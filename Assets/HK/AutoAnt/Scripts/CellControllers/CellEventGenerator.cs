@@ -10,9 +10,12 @@ namespace HK.AutoAnt.CellControllers
     /// <summary>
     /// <see cref="Cell"/>のイベントを生成する
     /// </summary>
+    /// <remarks>
+    /// いらないかも
+    /// </remarks>
     public sealed class CellEventGenerator
     {
-        public static void Generate(Cell cell, ICellEvent cellEvent)
+        public void Generate(Cell cell, ICellEvent cellEvent)
         {
             cell.AddEvent(cellEvent);
         }
