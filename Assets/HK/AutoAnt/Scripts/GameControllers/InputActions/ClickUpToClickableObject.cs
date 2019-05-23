@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 namespace HK.AutoAnt.GameControllers
 {
     /// <summary>
-    /// クリックアップ時に<see cref="IClickableObject.OnClickUp"/>を実行する
+    /// クリックイベントで<see cref="IClickableObject.OnClickUp"/>を実行する
     /// </summary>
     public sealed class ClickUpToClickableObject : IInputAction<InputControllers.Events.ClickData>
     {
