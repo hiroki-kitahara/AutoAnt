@@ -26,5 +26,11 @@ namespace HK.AutoAnt.CellControllers
             var cellEvent = GameSystem.Instance.MasterData.CellEvent.Records.Get(this.RecordId).EventData;
             cell.AddEvent(cellEvent);
         }
+
+        public void Erase(Cell cell)
+        {
+            Assert.IsTrue(cell.HasEvent);
+            cell.ClearEvent();
+        }
     }
 }

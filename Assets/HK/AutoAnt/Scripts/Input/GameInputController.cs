@@ -65,6 +65,10 @@ namespace HK.AutoAnt.InputControllers
             {
                 this.inputActions = new AddCellEventActions(this.cellManager.EventGenerator);
             }
+            if(UnityEngine.Input.GetKeyDown(KeyCode.E))
+            {
+                this.inputActions = new EraseCellEventActions(this.cellManager.EventGenerator);
+            }
         }
     }
 }
