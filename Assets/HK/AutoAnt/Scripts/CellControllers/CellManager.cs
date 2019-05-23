@@ -14,9 +14,6 @@ namespace HK.AutoAnt.CellControllers
     public sealed class CellManager : MonoBehaviour
     {
         [SerializeField]
-        private CellEventGenerateSpec cellEventGenerateSpec = null;
-
-        [SerializeField]
         private Transform parent = null;
 
         [SerializeField]

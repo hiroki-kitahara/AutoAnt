@@ -68,12 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32a9e39d6b1a4883b98a904a8a2dd89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellSpec: {fileID: 11400000, guid: bbb385992dea9409485f0d0c2ae781ff, type: 2}
-  cellEventGenerateSpec: {fileID: 11400000, guid: 166ba7f4d13b646ddb6018bac70a6a92,
-    type: 2}
   parent: {fileID: 2040718279388478634}
   fieldInitializer: {fileID: 11400000, guid: 76ec690736641484397c596d778da882, type: 2}
-  initialRange: 2
 --- !u!114 &7500671137712836589
 MonoBehaviour:
   m_ObjectHideFlags: 0
