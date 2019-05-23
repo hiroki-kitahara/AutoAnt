@@ -21,7 +21,7 @@ namespace HK.AutoAnt.CellControllers
         [SerializeField]
         private Transform scalableObject = null;
 
-        public Vector2Int Id { get; private set; }
+        public Vector2Int Position { get; private set; }
 
         public CellType Type { get; private set; }
 
@@ -42,14 +42,14 @@ namespace HK.AutoAnt.CellControllers
             this.CachedTransform = this.transform;
         }
 
-        public Cell Initialize(Vector2Int id, CellType cellType, ICellEvent cellEvent, CellMapper cellMapper)
+        public Cell Initialize(Vector2Int position, CellType cellType, ICellEvent cellEvent, CellMapper cellMapper)
         {
-            this.Id = id;
+            this.Position = position;
             this.Type = cellType;
             this.cellMapper = cellMapper;
 
             var constants = GameSystem.Instance.MasterData.Cell.Constants;
-            this.CachedTransform.position = new Vector3(id.x * (constants.Scale.x + constants.Interval), 0.0f, id.y * (constants.Scale.z + constants.Interval));
+            this.CachedTransform.position = new Vector3(position.x * (constants.Scale.x + constants.Interval), 0.0f, position.y * (constants.Scale.z + constants.Interval));
             this.scalableObject.localScale = constants.Scale;
             this.boxCollider.center = new Vector3(0.0f, constants.Scale.y / 2.0f, 0.0f);
             this.boxCollider.size = constants.Scale;

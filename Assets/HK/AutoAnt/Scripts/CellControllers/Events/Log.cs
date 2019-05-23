@@ -12,7 +12,7 @@ namespace HK.AutoAnt.CellControllers.Events
     {
         public override void OnClick(Cell owner)
         {
-            Debug.Log($"{owner.Id}", owner);
+            Debug.Log($"{owner.Position}", owner);
             owner.ClearEvent();
         }
     }

@@ -16,26 +16,26 @@ namespace HK.AutoAnt.CellControllers
         public IReadOnlyList<Cell> Cells => this.cells;
 
         /// <summary>
-        /// <see cref="Cell.Id"/>と紐づくマップ
+        /// <see cref="Cell.Position"/>と紐づくマップ
         /// </summary>
         private readonly Dictionary<Vector2Int, Cell> map = new Dictionary<Vector2Int, Cell>();
         public IReadOnlyDictionary<Vector2Int, Cell> Map => this.map;
 
         /// <summary>
-        /// イベントを持つ<see cref="Cell.Id"/>
+        /// イベントを持つ<see cref="Cell.Position"/>
         /// </summary>
         private readonly List<Vector2Int> hasEventCellIds = new List<Vector2Int>();
         public IReadOnlyList<Vector2Int> HasEventCellIds => this.hasEventCellIds;
 
         /// <summary>
-        /// イベントが無い<see cref="Cell.Id"/>
+        /// イベントが無い<see cref="Cell.Position"/>
         /// </summary>
         private readonly List<Vector2Int> notHasEventCellIds = new List<Vector2Int>();
         public IReadOnlyList<Vector2Int> NotHasEventCellIds => this.notHasEventCellIds;
 
         public void Add(Cell cell)
         {
-            var id = cell.Id;
+            var id = cell.Position;
             
             Assert.IsFalse(this.cells.Contains(cell));
             Assert.IsFalse(this.map.ContainsKey(id), $"{id}の{typeof(Cell)}は既に登録されています");
@@ -49,7 +49,7 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public void RegisterNotHasEvent(Cell cell)
         {
-            var id = cell.Id;
+            var id = cell.Position;
             Assert.IsNotNull(cell);
             Assert.IsFalse(cell.HasEvent);
 
@@ -62,7 +62,7 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public void RegisterHasEvent(Cell cell)
         {
-            var id = cell.Id;
+            var id = cell.Position;
             Assert.IsNotNull(cell);
             Assert.IsTrue(cell.HasEvent);
             Assert.IsFalse(this.hasEventCellIds.Contains(id), $"{id}はすでにイベントを持っています");
