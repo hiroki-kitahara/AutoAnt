@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: e716878cc8f4b49e8bb8c2d426359025, type: 2}
   cell: {fileID: 11400000, guid: 8151ac8e4f13a4602acf637185ec1e0b, type: 2}
+  cellEvent: {fileID: 11400000, guid: 2bf1b63062ba94bd2b22e0195c95d3ba, type: 2}
