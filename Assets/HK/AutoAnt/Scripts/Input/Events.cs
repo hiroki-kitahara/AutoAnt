@@ -41,6 +41,11 @@ namespace HK.AutoAnt.InputControllers
             public DragData Data { get { return this.param1; } }
         }
 
+        public class Scroll : Message<Scroll, ScrollData>
+        {
+            public ScrollData Data { get { return this.param1; } }
+        }
+
         public class ClickData
         {
             private static readonly ClickData cache = new ClickData();
@@ -68,6 +73,19 @@ namespace HK.AutoAnt.InputControllers
             }
 
             public Vector3 DeltaPosition { get; private set; }
+        }
+
+        public class ScrollData
+        {
+            private static readonly ScrollData cache = new ScrollData();
+            public static ScrollData Get(int directionId)
+            {
+                cache.DirectionId = directionId;
+
+                return cache;
+            }
+
+            public int DirectionId { get; private set; }
         }
     }
 }

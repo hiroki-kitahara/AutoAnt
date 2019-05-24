@@ -15,6 +15,7 @@ namespace HK.AutoAnt.GameControllers
                 null,
                 null,
                 new ClickToGenerateCellEvent(eventGenerator),
+                null,
                 null
             )
         {

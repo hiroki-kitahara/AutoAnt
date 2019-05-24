@@ -15,6 +15,7 @@ namespace HK.AutoAnt.GameControllers
                 null,
                 null,
                 new ClickToEraseCellEvent(eventGenerator),
+                null,
                 null
             )
         {

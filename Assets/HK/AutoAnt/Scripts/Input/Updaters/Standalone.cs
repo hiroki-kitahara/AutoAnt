@@ -29,6 +29,7 @@ namespace HK.AutoAnt.InputControllers.Updaters
         {
             this.UpdateClickEvents();
             this.UpdateDragEvents();
+            this.UpdateScrollEvents();
         }
 
         private void UpdateClickEvents()
@@ -78,6 +79,17 @@ namespace HK.AutoAnt.InputControllers.Updaters
             if(UnityEngine.Input.GetMouseButtonUp(MainButtonId))
             {
                 this.isDragging = false;
+            }
+        }
+
+        private void UpdateScrollEvents()
+        {
+            var amount = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
+            if (amount != 0f)
+            {
+                // FIXME: ダサい
+                int direction = amount > 0f ? 1 : -1;
+                Input.Current.Broker.Publish(Events.Scroll.Get(Events.ScrollData.Get(direction)));
             }
         }
     }
