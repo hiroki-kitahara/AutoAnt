@@ -1,5 +1,6 @@
 ﻿using HK.AutoAnt.CameraControllers;
 using HK.AutoAnt.CellControllers;
+using HK.AutoAnt.Systems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -12,7 +13,7 @@ namespace HK.AutoAnt.GameControllers
     {
         public void Do(InputControllers.Events.ClickData data)
         {
-            var ray = Cameraman.Instance.Camera.ScreenPointToRay(data.Position);
+            var ray = GameSystem.Instance.Cameraman.Camera.ScreenPointToRay(data.Position);
             var clickableObject = CellManager.GetCell(ray);
             if (clickableObject != null)
             {

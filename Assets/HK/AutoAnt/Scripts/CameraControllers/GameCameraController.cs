@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using HK.AutoAnt.Systems;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.CameraControllers
@@ -8,12 +9,10 @@ namespace HK.AutoAnt.CameraControllers
     /// </summary>
     public sealed class GameCameraController : MonoBehaviour
     {
-        [SerializeField]
-        private Cameraman cameraman = null;
-
         public void Move(float forwardVelocity, float rightVelocity)
         {
-            Cameraman.Instance.Position -= this.cameraman.ToFirstPersonVector(forwardVelocity, rightVelocity);
+            var cameraman = GameSystem.Instance.Cameraman;
+            cameraman.Position -= cameraman.ToFirstPersonVector(forwardVelocity, rightVelocity);
         }
     }
 }

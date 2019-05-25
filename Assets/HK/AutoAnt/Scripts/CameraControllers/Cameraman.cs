@@ -24,20 +24,6 @@ namespace HK.AutoAnt.CameraControllers
         private Camera controlledCamera = null;
         public Camera Camera => this.controlledCamera;
 
-        public static Cameraman Instance { get; private set; }
-
-        void Awake()
-        {
-            Assert.IsNull(Instance);
-            Instance = this;
-        }
-
-        void OnDestroy()
-        {
-            Assert.IsNotNull(Instance);
-            Instance = null;
-        }
-
         public Vector3 Position
         {
             get
