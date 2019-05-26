@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04be38530dab14a59883aa54fbb60e8a, type: 3}
   m_Name: 100000
   m_EditorClassIdentifier: 
+  condition: {fileID: 11400000, guid: 4c0900e2970f54676923b8814d79aff7, type: 2}
   gimmickPrefab: {fileID: 4617508434534536205, guid: 4939fec1941f14f869d9cdaf30268eb8,
     type: 3}
   itemName:

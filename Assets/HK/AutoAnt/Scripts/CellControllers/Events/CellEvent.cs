@@ -9,7 +9,17 @@ namespace HK.AutoAnt.CellControllers.Events
     /// </summary>
     public abstract class CellEvent : ScriptableObject, ICellEvent
     {
+        [SerializeField]
+        private CellEventGenerateCondition condition;
+        
         public abstract CellGimmickController CreateGimmickController();
+
+        public bool CanGenerate(Cell owner)
+        {
+            Assert.IsNotNull(this.condition);
+            
+            return this.condition.Evalute(owner);
+        }
 
         public virtual void OnRegister(Cell owner)
         {

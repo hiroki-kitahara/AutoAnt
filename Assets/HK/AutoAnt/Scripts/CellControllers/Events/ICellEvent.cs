@@ -15,6 +15,11 @@ namespace HK.AutoAnt.CellControllers.Events
         CellGimmickController CreateGimmickController();
 
         /// <summary>
+        /// 作成可能か返す
+        /// </summary>
+        bool CanGenerate(Cell owner);
+
+        /// <summary>
         /// イベントがセルに登録された時の処理
         /// </summary>
         void OnRegister(Cell owner);
