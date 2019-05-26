@@ -13,9 +13,6 @@ namespace HK.AutoAnt.InputControllers
     public sealed class GameInputController : MonoBehaviour
     {
         [SerializeField]
-        private Cameraman cameraman = null;
-
-        [SerializeField]
         private CellManager cellManager = null;
 
         [SerializeField]
