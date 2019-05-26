@@ -32,5 +32,13 @@ namespace HK.AutoAnt.CellControllers
             Assert.IsTrue(cell.HasEvent);
             cell.ClearEvent();
         }
+
+        /// <summary>
+        /// イベントが作成可能か返す
+        /// </summary>
+        public bool CanGenerate(Cell cell)
+        {
+            return true;
+        }
     }
 }
