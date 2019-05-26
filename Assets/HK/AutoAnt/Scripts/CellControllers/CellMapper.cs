@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -80,6 +81,56 @@ namespace HK.AutoAnt.CellControllers
 
             this.hasEventCellIds.Add(position);
             this.notHasEventCellIds.Remove(position);
+        }
+
+        /// <summary>
+        /// <paramref name="origin"/>を原点とした範囲の座標を評価する
+        /// </summary>
+        /// <remarks>
+        /// <paramref name="range"/>が<c>1</c>の場合は以下の範囲を評価する
+        /// o = origin
+        /// x = range
+        /// xxx
+        /// xox
+        /// xxx
+        /// <paramref name="range"/>が<c>2</c>の場合は以下の範囲を評価する
+        /// o = origin
+        /// x = range
+        /// xxxxx
+        /// xxxxx
+        /// xxoxx
+        /// xxxxx
+        /// xxxxx
+        /// </remarks>
+        public Vector2Int[] GetRange(Vector2Int origin, int range, Func<Vector2Int, bool> selector)
+        {
+            Assert.IsTrue(range > 0);
+
+            var result = new List<Vector2Int>();
+
+            for (var y = -range; y <= range; y++)
+            {
+                for (var x = -range; x <= range; x++)
+                {
+                    var position = origin + new Vector2Int(x, y);
+                    if(!selector(position))
+                    {
+                        continue;
+                    }
+
+                    result.Add(position);
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// 指定した範囲でセルが配置されていない座標を返す
+        /// </summary>
+        public Vector2Int[] GetEmptyPositions(Vector2Int origin, int range)
+        {
+            return this.GetRange(origin, range, (p) => !this.map.ContainsKey(p));
         }
     }
 }
