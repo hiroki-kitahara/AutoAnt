@@ -57,17 +57,28 @@ namespace HK.AutoAnt.InputControllers
 
         void Update()
         {
-            if(UnityEngine.Input.GetKeyDown(KeyCode.Q))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Q))
             {
                 this.inputActions = new ClickToClickableObjectActions(this.gameCameraController);
             }
-            if(UnityEngine.Input.GetKeyDown(KeyCode.W))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.W))
             {
                 this.inputActions = new GenerateCellEventActions(this.cellManager.EventGenerator);
             }
-            if(UnityEngine.Input.GetKeyDown(KeyCode.E))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.E))
             {
                 this.inputActions = new EraseCellEventActions(this.cellManager.EventGenerator);
+            }
+            if (UnityEngine.Input.GetKeyDown(KeyCode.R))
+            {
+                this.inputActions = new DevelopCellActions(
+                    this.cellManager.Generator,
+                    this.cellManager.Mapper,
+                    100100,
+                    100000,
+                    1,
+                    this.gameCameraController
+                    );
             }
         }
     }
