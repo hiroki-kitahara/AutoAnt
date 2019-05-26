@@ -10,11 +10,24 @@ namespace HK.AutoAnt.GameControllers
     /// </summary>
     public sealed class DevelopCellActions : InputActions
     {
-        public DevelopCellActions(CellGenerator cellGenerator, CellMapper cellMapper, int replaceCellRecordId, int blankCellRecordId, int generateBlankRange, GameCameraController gameCameraController)
+        public DevelopCellActions(
+            CellGenerator cellGenerator,
+            CellMapper cellMapper,
+            int replaceCellRecordId,
+            int blankCellRecordId,
+            int generateBlankRange,
+            GameCameraController gameCameraController
+            )
             : base(
                 null,
                 null,
-                new ClickToDevelopCell(cellGenerator, cellMapper, replaceCellRecordId, blankCellRecordId, generateBlankRange),
+                new ClickToDevelopCell(
+                    cellGenerator,
+                    cellMapper,
+                    replaceCellRecordId,
+                    blankCellRecordId,
+                    generateBlankRange
+                    ),
                 new DragToMoveCamera(gameCameraController)
             )
         {
