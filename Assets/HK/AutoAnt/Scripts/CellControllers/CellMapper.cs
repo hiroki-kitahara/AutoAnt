@@ -35,13 +35,24 @@ namespace HK.AutoAnt.CellControllers
 
         public void Add(Cell cell)
         {
-            var id = cell.Position;
+            var position = cell.Position;
             
             Assert.IsFalse(this.cells.Contains(cell));
-            Assert.IsFalse(this.map.ContainsKey(id), $"{id}の{typeof(Cell)}は既に登録されています");
+            Assert.IsFalse(this.map.ContainsKey(position), $"{position}の{typeof(Cell)}は既に登録されています");
 
             this.cells.Add(cell);
-            this.map.Add(id, cell);
+            this.map.Add(position, cell);
+        }
+
+        public void Remove(Cell cell)
+        {
+            var position = cell.Position;
+
+            Assert.IsTrue(this.cells.Contains(cell));
+            Assert.IsTrue(this.map.ContainsKey(position), $"{position}の{typeof(Cell)}は存在しません");
+
+            this.cells.Remove(cell);
+            this.map.Remove(position);
         }
 
         /// <summary>
@@ -49,12 +60,12 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public void RegisterNotHasEvent(Cell cell)
         {
-            var id = cell.Position;
+            var position = cell.Position;
             Assert.IsNotNull(cell);
             Assert.IsFalse(cell.HasEvent);
 
-            this.hasEventCellIds.Remove(id);
-            this.notHasEventCellIds.Add(id);
+            this.hasEventCellIds.Remove(position);
+            this.notHasEventCellIds.Add(position);
         }
 
         /// <summary>
@@ -62,13 +73,13 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public void RegisterHasEvent(Cell cell)
         {
-            var id = cell.Position;
+            var position = cell.Position;
             Assert.IsNotNull(cell);
             Assert.IsTrue(cell.HasEvent);
-            Assert.IsFalse(this.hasEventCellIds.Contains(id), $"{id}はすでにイベントを持っています");
+            Assert.IsFalse(this.hasEventCellIds.Contains(position), $"{position}はすでにイベントを持っています");
 
-            this.hasEventCellIds.Add(id);
-            this.notHasEventCellIds.Remove(id);
+            this.hasEventCellIds.Add(position);
+            this.notHasEventCellIds.Remove(position);
         }
     }
 }

@@ -31,5 +31,16 @@ namespace HK.AutoAnt.CellControllers
 
             return cell;
         }
+
+        public Cell Replace(int recordId, Vector2Int position, ICellEvent clickEvent)
+        {
+            Assert.IsTrue(this.cellMapper.Map.ContainsKey(position), $"position = {position}にセルがないのにReplace関数が実行されました");
+            
+            var oldCell = this.cellMapper.Map[position];
+            this.cellMapper.Remove(oldCell);
+            Object.Destroy(oldCell.gameObject);
+
+            return this.Generate(recordId, position, clickEvent);
+        }
     }
 }
