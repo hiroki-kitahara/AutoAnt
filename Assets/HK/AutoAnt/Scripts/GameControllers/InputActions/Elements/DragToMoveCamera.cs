@@ -20,7 +20,7 @@ namespace HK.AutoAnt.GameControllers
         public void Do(InputControllers.Events.DragData data)
         {
             // FIXME: ドラッグ移動量をオプションか何かで編集出来るように
-            var delta = data.DeltaPosition * 0.05f;
+            var delta = data.DeltaPosition * 0.025f;
             this.gameCameraController.Move(delta.y, delta.x);
         }
     }
