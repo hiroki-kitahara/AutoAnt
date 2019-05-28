@@ -19,8 +19,8 @@ namespace HK.AutoAnt.GameControllers
 
         public void Do(InputControllers.Events.ScrollData data)
         {
-            // FIXME: ズーム移動量をオプションか何かで編集出来るように
-            var delta = data.DirectionId * 0.25f;
+            // FIXME: ドラッグ移動量をオプションか何かで編集出来るように
+            var delta = data.Amount;
             this.gameCameraController.Zoom(delta);
         }
     }

@@ -78,14 +78,14 @@ namespace HK.AutoAnt.InputControllers
         public class ScrollData
         {
             private static readonly ScrollData cache = new ScrollData();
-            public static ScrollData Get(int directionId)
+            public static ScrollData Get(float amount)
             {
-                cache.DirectionId = directionId;
+                cache.Amount = amount;
 
                 return cache;
             }
 
-            public int DirectionId { get; private set; }
+            public float Amount { get; private set; }
         }
     }
 }

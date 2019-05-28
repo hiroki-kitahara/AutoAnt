@@ -87,10 +87,8 @@ namespace HK.AutoAnt.InputControllers.Updaters
             var amount = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
             if (amount != 0f)
             {
-                // FIXME: ダサい
-                int direction = amount > 0f ? 1 : -1;
-                Input.Current.Broker.Publish(Events.Scroll.Get(Events.ScrollData.Get(direction)));
+                Input.Current.Broker.Publish(Events.Scroll.Get(Events.ScrollData.Get(amount)));
             }
         }
     }
-}
+} 
