@@ -23,20 +23,68 @@ MonoBehaviour:
     position: {x: 2, y: 0}
     cellEvent: {fileID: 0}
   - id: 100000
-    position: {x: 0, y: 1}
+    position: {x: 3, y: 0}
     cellEvent: {fileID: 0}
   - id: 100000
-    position: {x: 1, y: 1}
-    cellEvent: {fileID: 11400000, guid: 6c5248d0edfd5463dbe82a807eccb4df, type: 2}
+    position: {x: 4, y: 0}
+    cellEvent: {fileID: 0}
   - id: 100000
+    position: {x: 0, y: 1}
+    cellEvent: {fileID: 0}
+  - id: 100100
+    position: {x: 1, y: 1}
+    cellEvent: {fileID: 0}
+  - id: 100100
     position: {x: 2, y: 1}
+    cellEvent: {fileID: 0}
+  - id: 100100
+    position: {x: 3, y: 1}
+    cellEvent: {fileID: 0}
+  - id: 100000
+    position: {x: 4, y: 1}
     cellEvent: {fileID: 0}
   - id: 100000
     position: {x: 0, y: 2}
     cellEvent: {fileID: 0}
-  - id: 100000
+  - id: 100100
     position: {x: 1, y: 2}
     cellEvent: {fileID: 0}
-  - id: 100000
+  - id: 100100
     position: {x: 2, y: 2}
+    cellEvent: {fileID: 0}
+  - id: 100100
+    position: {x: 3, y: 2}
+    cellEvent: {fileID: 0}
+  - id: 100000
+    position: {x: 4, y: 2}
+    cellEvent: {fileID: 0}
+  - id: 100000
+    position: {x: 0, y: 3}
+    cellEvent: {fileID: 0}
+  - id: 100100
+    position: {x: 1, y: 3}
+    cellEvent: {fileID: 0}
+  - id: 100100
+    position: {x: 2, y: 3}
+    cellEvent: {fileID: 0}
+  - id: 100100
+    position: {x: 3, y: 3}
+    cellEvent: {fileID: 0}
+  - id: 100000
+    position: {x: 4, y: 3}
+    cellEvent: {fileID: 0}
+  - id: 100000
+    position: {x: 0, y: 4}
+    cellEvent: {fileID: 0}
+  - id: 100000
+    position: {x: 1, y: 4}
+    cellEvent: {fileID: 0}
+  - id: 100000
+    position: {x: 2, y: 4}
+    cellEvent: {fileID: 0}
+  - id: 100000
+    position: {x: 3, y: 4}
+    cellEvent: {fileID: 0}
+  - id: 100000
+    position: {x: 4, y: 4}
     cellEvent: {fileID: 0}

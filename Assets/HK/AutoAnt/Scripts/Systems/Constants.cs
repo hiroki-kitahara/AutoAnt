@@ -9,6 +9,11 @@ namespace HK.AutoAnt.Constants
     public enum CellType
     {
         /// <summary>
+        /// 空白
+        /// </summary>
+        Blank,
+
+        /// <summary>
         /// 草原
         /// </summary>
         Grassland,

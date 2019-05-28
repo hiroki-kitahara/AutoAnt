@@ -20,17 +20,26 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public int RecordId { get; set; } = 100000;
 
+        private CellEvent GeneratableCellEvent => GameSystem.Instance.MasterData.CellEvent.Records.Get(this.RecordId).EventData;
+
         public void Generate(Cell cell)
         {
             Assert.IsFalse(cell.HasEvent);
-            var cellEvent = GameSystem.Instance.MasterData.CellEvent.Records.Get(this.RecordId).EventData;
-            cell.AddEvent(cellEvent);
+            cell.AddEvent(this.GeneratableCellEvent);
         }
 
         public void Erase(Cell cell)
         {
             Assert.IsTrue(cell.HasEvent);
             cell.ClearEvent();
+        }
+
+        /// <summary>
+        /// イベントが作成可能か返す
+        /// </summary>
+        public bool CanGenerate(Cell cell)
+        {
+            return this.GeneratableCellEvent.CanGenerate(cell);
         }
     }
 }
