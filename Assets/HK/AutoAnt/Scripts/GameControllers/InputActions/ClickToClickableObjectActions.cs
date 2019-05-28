@@ -14,7 +14,8 @@ namespace HK.AutoAnt.GameControllers
                 null,
                 new ClickDownToClickableObject(),
                 new ClickUpToClickableObject(),
-                new DragToMoveCamera(gameCameraController)
+                new DragToMoveCamera(gameCameraController),
+                new ScrollToZoomCamera(gameCameraController)
             )
         {
         }

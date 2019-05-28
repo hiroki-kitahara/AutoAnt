@@ -14,5 +14,16 @@ namespace HK.AutoAnt.CameraControllers
             var cameraman = GameSystem.Instance.Cameraman;
             cameraman.Position -= cameraman.ToFirstPersonVector(forwardVelocity, rightVelocity);
         }
+
+        public void Zoom(float velocity)
+        {
+
+            // ズームの限界以上は動かさない
+            if(Cameraman.Instance.Size <= velocity && velocity > 0f)
+            {
+                return;
+            }
+            Cameraman.Instance.Size -= velocity;
+        }
     }
 }
