@@ -17,13 +17,13 @@ namespace HK.AutoAnt.CameraControllers
 
         public void Zoom(float velocity)
         {
-
+            var cameraman = GameSystem.Instance.Cameraman;
             // ズームの限界以上は動かさない
-            if(Cameraman.Instance.Size <= velocity && velocity > 0f)
+            if(cameraman.Size <= velocity && velocity > 0f)
             {
                 return;
             }
-            Cameraman.Instance.Size -= velocity;
+            cameraman.Size -= velocity;
         }
     }
 }

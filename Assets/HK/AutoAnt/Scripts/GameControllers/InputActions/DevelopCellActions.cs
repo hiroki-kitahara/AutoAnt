@@ -28,7 +28,8 @@ namespace HK.AutoAnt.GameControllers
                     blankCellRecordId,
                     generateBlankRange
                     ),
-                new DragToMoveCamera(gameCameraController)
+                new DragToMoveCamera(gameCameraController),
+                null
             )
         {
         }
