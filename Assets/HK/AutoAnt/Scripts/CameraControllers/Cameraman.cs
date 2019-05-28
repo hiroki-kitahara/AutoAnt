@@ -60,6 +60,18 @@ namespace HK.AutoAnt.CameraControllers
             }
         }
 
+        public float Size
+        {
+            get
+            {
+                return this.controlledCamera.orthographicSize;
+            }
+            set
+            {
+                this.controlledCamera.orthographicSize = value;
+            }
+        }
+
         public float Distance
         {
             get

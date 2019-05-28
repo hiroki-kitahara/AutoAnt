@@ -15,7 +15,8 @@ namespace HK.AutoAnt.GameControllers
                 null,
                 null,
                 new ClickToEraseCellEvent(eventGenerator),
-                new DragToMoveCamera(gameCameraController)
+                new DragToMoveCamera(gameCameraController),
+                null
             )
         {
         }

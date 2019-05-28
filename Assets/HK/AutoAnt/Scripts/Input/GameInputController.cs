@@ -50,6 +50,14 @@ namespace HK.AutoAnt.InputControllers
                     _this.inputActions.DragAction.Do(x.Data);
                 })
                 .AddTo(this);
+
+            inputModule.ScrollAsObservable()
+                .Where(_ => this.inputActions.ScrollAction != null)
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    _this.inputActions.ScrollAction.Do(x.Data);
+                })
+                .AddTo(this);
         }
 
         void Update()

@@ -19,5 +19,7 @@ namespace HK.AutoAnt.InputControllers.Modules
         IObservable<Events.ClickDown> ClickDownAsObservable();
 
         IObservable<Events.Drag> DragAsObservable();
+
+        IObservable<Events.Scroll> ScrollAsObservable();
     }
 }
