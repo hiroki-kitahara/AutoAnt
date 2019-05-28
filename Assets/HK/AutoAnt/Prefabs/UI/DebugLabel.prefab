@@ -66,7 +66,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: "Q = \u30AF\u30EA\u30C3\u30AF\u30E2\u30FC\u30C9\nW = \u30A4\u30D9\u30F3\u30C8\u751F\u6210\u30E2\u30FC\u30C9\uFF08\u5BB6\u5EFA\u3066\u308B\uFF09\nE
-    = \u30A4\u30D9\u30F3\u30C8\u524A\u9664\u30E2\u30FC\u30C9\uFF08\u5BB6\u58CA\u3059\uFF09"
+    = \u30A4\u30D9\u30F3\u30C8\u524A\u9664\u30E2\u30FC\u30C9\uFF08\u5BB6\u58CA\u3059\uFF09\nR
+    = \u30BB\u30EB\u958B\u62D3\uFF08Blank\u30BB\u30EB\u3092\u8349\u539F\u306B\uFF09"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3000f372b7ba5a9419c51c28a99ca55a, type: 2}
   m_sharedMaterial: {fileID: 21076451342146514, guid: 3000f372b7ba5a9419c51c28a99ca55a,
@@ -136,12 +137,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 8594150242506100511}
-    characterCount: 50
+    characterCount: 72
     spriteCount: 0
-    spaceCount: 8
-    wordCount: 8
+    spaceCount: 11
+    wordCount: 11
     linkCount: 0
-    lineCount: 3
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0

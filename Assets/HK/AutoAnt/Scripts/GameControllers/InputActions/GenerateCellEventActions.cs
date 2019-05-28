@@ -10,12 +10,12 @@ namespace HK.AutoAnt.GameControllers
     /// </summary>
     public sealed class GenerateCellEventActions : InputActions
     {
-        public GenerateCellEventActions(CellEventGenerator eventGenerator)
+        public GenerateCellEventActions(CellEventGenerator eventGenerator, GameCameraController gameCameraController)
             : base(
                 null,
                 null,
                 new ClickToGenerateCellEvent(eventGenerator),
-                null,
+                new DragToMoveCamera(gameCameraController),
                 null
             )
         {

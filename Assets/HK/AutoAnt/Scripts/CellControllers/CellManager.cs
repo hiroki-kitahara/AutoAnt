@@ -19,7 +19,7 @@ namespace HK.AutoAnt.CellControllers
         [SerializeField]
         private FieldInitializer fieldInitializer = null;
 
-        private CellMapper cellMapper = new CellMapper();
+        public CellMapper Mapper { get; private set; } = new CellMapper();
 
         public CellGenerator Generator { get; private set; }
 
@@ -27,7 +27,7 @@ namespace HK.AutoAnt.CellControllers
 
         void Awake()
         {
-            this.Generator = new CellGenerator(this.cellMapper, this.parent);
+            this.Generator = new CellGenerator(this.Mapper, this.parent);
             this.EventGenerator = new CellEventGenerator();
 
             this.fieldInitializer.Generate(this);

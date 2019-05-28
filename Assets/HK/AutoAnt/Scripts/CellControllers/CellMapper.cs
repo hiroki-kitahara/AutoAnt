@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -35,13 +36,24 @@ namespace HK.AutoAnt.CellControllers
 
         public void Add(Cell cell)
         {
-            var id = cell.Position;
+            var position = cell.Position;
             
             Assert.IsFalse(this.cells.Contains(cell));
-            Assert.IsFalse(this.map.ContainsKey(id), $"{id}の{typeof(Cell)}は既に登録されています");
+            Assert.IsFalse(this.map.ContainsKey(position), $"{position}の{typeof(Cell)}は既に登録されています");
 
             this.cells.Add(cell);
-            this.map.Add(id, cell);
+            this.map.Add(position, cell);
+        }
+
+        public void Remove(Cell cell)
+        {
+            var position = cell.Position;
+
+            Assert.IsTrue(this.cells.Contains(cell));
+            Assert.IsTrue(this.map.ContainsKey(position), $"{position}の{typeof(Cell)}は存在しません");
+
+            this.cells.Remove(cell);
+            this.map.Remove(position);
         }
 
         /// <summary>
@@ -49,12 +61,12 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public void RegisterNotHasEvent(Cell cell)
         {
-            var id = cell.Position;
+            var position = cell.Position;
             Assert.IsNotNull(cell);
             Assert.IsFalse(cell.HasEvent);
 
-            this.hasEventCellIds.Remove(id);
-            this.notHasEventCellIds.Add(id);
+            this.hasEventCellIds.Remove(position);
+            this.notHasEventCellIds.Add(position);
         }
 
         /// <summary>
@@ -62,13 +74,63 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public void RegisterHasEvent(Cell cell)
         {
-            var id = cell.Position;
+            var position = cell.Position;
             Assert.IsNotNull(cell);
             Assert.IsTrue(cell.HasEvent);
-            Assert.IsFalse(this.hasEventCellIds.Contains(id), $"{id}はすでにイベントを持っています");
+            Assert.IsFalse(this.hasEventCellIds.Contains(position), $"{position}はすでにイベントを持っています");
 
-            this.hasEventCellIds.Add(id);
-            this.notHasEventCellIds.Remove(id);
+            this.hasEventCellIds.Add(position);
+            this.notHasEventCellIds.Remove(position);
+        }
+
+        /// <summary>
+        /// <paramref name="origin"/>を原点とした範囲の座標を評価する
+        /// </summary>
+        /// <remarks>
+        /// <paramref name="range"/>が<c>1</c>の場合は以下の範囲を評価する
+        /// o = origin
+        /// x = range
+        /// xxx
+        /// xox
+        /// xxx
+        /// <paramref name="range"/>が<c>2</c>の場合は以下の範囲を評価する
+        /// o = origin
+        /// x = range
+        /// xxxxx
+        /// xxxxx
+        /// xxoxx
+        /// xxxxx
+        /// xxxxx
+        /// </remarks>
+        public Vector2Int[] GetRange(Vector2Int origin, int range, Func<Vector2Int, bool> selector)
+        {
+            Assert.IsTrue(range > 0);
+
+            var result = new List<Vector2Int>();
+
+            for (var y = -range; y <= range; y++)
+            {
+                for (var x = -range; x <= range; x++)
+                {
+                    var position = origin + new Vector2Int(x, y);
+                    if(!selector(position))
+                    {
+                        continue;
+                    }
+
+                    result.Add(position);
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// 指定した範囲でセルが配置されていない座標を返す
+        /// </summary>
+        public Vector2Int[] GetEmptyPositions(Vector2Int origin, int range)
+        {
+            return this.GetRange(origin, range, (p) => !this.map.ContainsKey(p));
         }
     }
 }
