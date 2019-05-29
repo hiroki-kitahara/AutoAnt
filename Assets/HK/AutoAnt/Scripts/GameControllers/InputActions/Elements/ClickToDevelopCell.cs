@@ -42,12 +42,12 @@ namespace HK.AutoAnt.GameControllers
                 return;
             }
 
-            this.cellGenerator.Replace(this.replaceCellRecordId, cell.Position, null);
+            this.cellGenerator.Replace(this.replaceCellRecordId, cell.Position);
 
             // 周りのセルのない座標にBlankセルを作成する　
             foreach(var position in this.cellMapper.GetEmptyPositions(cell.Position, this.generateBlankRange))
             {
-                this.cellGenerator.Generate(this.blankCellRecordId, position, null);
+                this.cellGenerator.Generate(this.blankCellRecordId, position);
             }
         }
     }

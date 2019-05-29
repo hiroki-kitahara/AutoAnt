@@ -23,18 +23,6 @@ namespace HK.AutoAnt.CellControllers
         private readonly Dictionary<Vector2Int, Cell> map = new Dictionary<Vector2Int, Cell>();
         public IReadOnlyDictionary<Vector2Int, Cell> Map => this.map;
 
-        /// <summary>
-        /// イベントを持つ<see cref="Cell.Position"/>
-        /// </summary>
-        private readonly List<Vector2Int> hasEventCellIds = new List<Vector2Int>();
-        public IReadOnlyList<Vector2Int> HasEventCellIds => this.hasEventCellIds;
-
-        /// <summary>
-        /// イベントが無い<see cref="Cell.Position"/>
-        /// </summary>
-        private readonly List<Vector2Int> notHasEventCellIds = new List<Vector2Int>();
-        public IReadOnlyList<Vector2Int> NotHasEventCellIds => this.notHasEventCellIds;
-
         private readonly List<ICellEvent> cellEvents = new List<ICellEvent>();
 
         private readonly Dictionary<Vector2Int, ICellEvent> eventMap = new Dictionary<Vector2Int, ICellEvent>();
@@ -100,33 +88,6 @@ namespace HK.AutoAnt.CellControllers
         public bool HasEvent(Cell cell)
         {
             return this.eventMap.ContainsKey(cell.Position);
-        }
-
-        /// <summary>
-        /// イベントを持たない<see cref="Cell"/>として登録する
-        /// </summary>
-        public void RegisterNotHasEvent(Cell cell)
-        {
-            var position = cell.Position;
-            Assert.IsNotNull(cell);
-            Assert.IsFalse(cell.HasEvent);
-
-            this.hasEventCellIds.Remove(position);
-            this.notHasEventCellIds.Add(position);
-        }
-
-        /// <summary>
-        /// イベントを持つ<see cref="Cell"/>として登録する
-        /// </summary>
-        public void RegisterHasEvent(Cell cell)
-        {
-            var position = cell.Position;
-            Assert.IsNotNull(cell);
-            Assert.IsTrue(cell.HasEvent);
-            Assert.IsFalse(this.hasEventCellIds.Contains(position), $"{position}はすでにイベントを持っています");
-
-            this.hasEventCellIds.Add(position);
-            this.notHasEventCellIds.Remove(position);
         }
 
         /// <summary>
