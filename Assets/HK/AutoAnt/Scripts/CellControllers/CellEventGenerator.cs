@@ -32,7 +32,9 @@ namespace HK.AutoAnt.CellControllers
         public void Generate(Cell cell)
         {
             Assert.IsFalse(cell.HasEvent);
-            cell.AddEvent(this.GeneratableCellEvent);
+            var cellEvent = UnityEngine.Object.Instantiate(this.GeneratableCellEvent);
+            cellEvent.Initialize(cell.Position);
+            cellMapper.Add(cellEvent);
         }
 
         public void Erase(Cell cell)

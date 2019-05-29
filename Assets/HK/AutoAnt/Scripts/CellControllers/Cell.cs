@@ -113,7 +113,7 @@ namespace HK.AutoAnt.CellControllers
             this.gimmickController = this.cellEvent.CreateGimmickController();
             this.gimmickController.transform.SetParent(this.CachedTransform);
             this.gimmickController.transform.localPosition = new Vector3(0.0f, constants.Scale.y, 0.0f);
-            this.gimmickController.transform.localScale = constants.EffectScale;
+            // this.gimmickController.transform.localScale = constants.EffectScale;
         }
 
         private void DestroyGimmickController()

@@ -1,4 +1,5 @@
 ﻿using HK.AutoAnt.CellControllers.Gimmicks;
+using HK.AutoAnt.Systems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -18,7 +19,13 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public override CellGimmickController CreateGimmickController()
         {
-            return Instantiate(this.gimmickPrefab);
+            var gimmick = Instantiate(this.gimmickPrefab);
+            var constants = GameSystem.Instance.MasterData.Cell.Constants;
+            var constantScale = constants.EffectScale;
+            gimmick.transform.position = new Vector3(this.Position.x * (constants.Scale.x + constants.Interval), 0.0f, this.Position.y * (constants.Scale.z + constants.Interval));
+            gimmick.transform.localScale = constantScale * this.size;
+
+            return gimmick;
         }
     }
 }

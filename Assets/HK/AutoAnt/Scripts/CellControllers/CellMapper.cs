@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HK.AutoAnt.CellControllers.Events;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -34,6 +35,10 @@ namespace HK.AutoAnt.CellControllers
         private readonly List<Vector2Int> notHasEventCellIds = new List<Vector2Int>();
         public IReadOnlyList<Vector2Int> NotHasEventCellIds => this.notHasEventCellIds;
 
+        private readonly List<ICellEvent> cellEvents = new List<ICellEvent>();
+
+        private readonly Dictionary<Vector2Int, ICellEvent> eventMap = new Dictionary<Vector2Int, ICellEvent>();
+
         public void Add(Cell cell)
         {
             var position = cell.Position;
@@ -45,6 +50,23 @@ namespace HK.AutoAnt.CellControllers
             this.map.Add(position, cell);
         }
 
+        public void Add(ICellEvent cellEvent)
+        {
+            var position = cellEvent.Position;
+            Assert.IsTrue(this.Map.ContainsKey(position), $"position = {position}にセルが無いのにイベントが登録されました");
+            this.cellEvents.Add(cellEvent);
+
+            for (var y = 0; y < cellEvent.Size; y++)
+            {
+                for (var x = 0; x < cellEvent.Size; x++)
+                {
+                    var p = position + new Vector2Int(x, y);
+                    Assert.IsFalse(this.eventMap.ContainsKey(p), $"{p}には既にイベントが登録されています");
+                    this.eventMap.Add(p, cellEvent);
+                }
+            }
+        }
+
         public void Remove(Cell cell)
         {
             var position = cell.Position;
@@ -54,6 +76,11 @@ namespace HK.AutoAnt.CellControllers
 
             this.cells.Remove(cell);
             this.map.Remove(position);
+        }
+
+        public bool HasEvent(Cell cell)
+        {
+            return this.eventMap.ContainsKey(cell.Position);
         }
 
         /// <summary>

@@ -10,6 +10,24 @@ namespace HK.AutoAnt.CellControllers.Events
     public interface ICellEvent
     {
         /// <summary>
+        /// 座標
+        /// </summary>
+        Vector2Int Position { get; }
+
+        /// <summary>
+        /// セルサイズ
+        /// </summary>
+        /// <remarks>
+        /// 正方形にのみ対応しています
+        /// </remarks>
+        int Size { get; }
+
+        /// <summary>
+        /// 初期化
+        /// </summary>
+        void Initialize(Vector2Int position);
+
+        /// <summary>
         /// <see cref="CellGimmickController"/>を生成する
         /// </summary>
         CellGimmickController CreateGimmickController();
