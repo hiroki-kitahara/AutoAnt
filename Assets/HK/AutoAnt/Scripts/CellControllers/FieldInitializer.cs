@@ -19,7 +19,7 @@ namespace HK.AutoAnt.CellControllers
         {
             foreach(var c in this.cells)
             {
-                var cell = cellManager.Generator.Generate(c.Id, c.Position);
+                var cell = cellManager.CellGenerator.Generate(c.Id, c.Position);
                 if(c.CellEvent != null)
                 {
                     cellManager.EventGenerator.Generate(cell, c.CellEvent);

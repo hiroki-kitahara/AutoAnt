@@ -21,13 +21,13 @@ namespace HK.AutoAnt.CellControllers
 
         public CellMapper Mapper { get; private set; } = new CellMapper();
 
-        public CellGenerator Generator { get; private set; }
+        public CellGenerator CellGenerator { get; private set; }
 
         public CellEventGenerator EventGenerator { get; private set; }
 
         void Awake()
         {
-            this.Generator = new CellGenerator(this.Mapper, this.parent);
+            this.CellGenerator = new CellGenerator(this.Mapper, this.parent);
             this.EventGenerator = new CellEventGenerator(this.Mapper);
 
             this.fieldInitializer.Generate(this);
