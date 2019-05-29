@@ -167,24 +167,13 @@ namespace HK.AutoAnt.CellControllers
 
         public interface IReadonlyElement<Key, Value>
         {
-            IReadOnlyList<Value> List { get; }
-
-            IReadOnlyDictionary<Key, Value> Map { get; }
-        }
-
-        public class Element<Key, Value> : IReadonlyElement<Key, Value>
-        {
-            private readonly List<Value> list = new List<Value>();
-
             /// <summary>
             /// 全要素を持つリスト
             /// </summary>
             /// <remarks>
             /// 全検索などはこれを利用してください
             /// </remarks>
-            public List<Value> List => this.list;
-
-            private readonly Dictionary<Key, Value> map = new Dictionary<Key, Value>();
+            IReadOnlyList<Value> List { get; }
 
             /// <summary>
             /// 紐づけされたマップ
@@ -192,11 +181,18 @@ namespace HK.AutoAnt.CellControllers
             /// <remarks>
             /// <see cref="cell"/>の場合は座標と紐付けられているため、座標で検索したい場合はこれを利用してください
             /// </remarks>
-            public Dictionary<Key, Value> Map => this.map;
+            IReadOnlyDictionary<Key, Value> Map { get; }
+        }
 
-            IReadOnlyList<Value> IReadonlyElement<Key, Value>.List => this.list;
+        public class Element<Key, Value> : IReadonlyElement<Key, Value>
+        {
+            private readonly List<Value> list = new List<Value>();
 
-            IReadOnlyDictionary<Key, Value> IReadonlyElement<Key, Value>.Map => this.map;
+            private readonly Dictionary<Key, Value> map = new Dictionary<Key, Value>();
+
+            public IReadOnlyList<Value> List => this.list;
+
+            public IReadOnlyDictionary<Key, Value> Map => this.map;
 
             public void Add(Key key, Value value)
             {
