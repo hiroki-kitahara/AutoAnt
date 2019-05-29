@@ -17,7 +17,7 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// 作成可能か返す
         /// </summary>
-        bool CanGenerate(Cell owner);
+        bool CanGenerate(Cell owner, CellMapper cellMapper);
 
         /// <summary>
         /// イベントがセルに登録された時の処理

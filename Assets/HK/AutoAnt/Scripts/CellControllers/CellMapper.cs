@@ -126,6 +126,56 @@ namespace HK.AutoAnt.CellControllers
         }
 
         /// <summary>
+        /// <paramref name="origin"/>を原点とした範囲の座標を評価する
+        /// </summary>
+        /// <remarks>
+        /// <paramref name="size"/>が<c>(2, 2)</c>の場合は以下の範囲を評価する
+        /// o = origin
+        /// x = range
+        /// xx
+        /// ox
+        /// </remarks>
+        public Vector2Int[] GetRange(Vector2Int origin, Vector2Int size, Func<Vector2Int, bool> selector)
+        {
+            Assert.IsTrue(size.x >= 0);
+            Assert.IsTrue(size.y >= 0);
+
+            var result = new List<Vector2Int>();
+
+            for (var y = 0; y < size.y; y++)
+            {
+                for (var x = 0; x < size.x; x++)
+                {
+                    var position = origin + new Vector2Int(x, y);
+                    if (!selector(position))
+                    {
+                        continue;
+                    }
+
+                    result.Add(position);
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// <paramref name="positions"/>に存在する全てのセルを返す
+        /// </summary>
+        public Cell[] GetCells(Vector2Int[] positions)
+        {
+            var result = new Cell[positions.Length];
+            for (var i = 0; i < positions.Length; i++)
+            {
+                var position = positions[i];
+                Assert.IsTrue(this.Map.ContainsKey(position));
+                result[i] = this.Map[position];
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// 指定した範囲でセルが配置されていない座標を返す
         /// </summary>
         public Vector2Int[] GetEmptyPositions(Vector2Int origin, int range)

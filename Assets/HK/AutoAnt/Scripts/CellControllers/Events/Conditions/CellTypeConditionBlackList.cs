@@ -14,9 +14,17 @@ namespace HK.AutoAnt.CellControllers.Events
         [SerializeField]
         private CellType[] blackList;
         
-        public override bool Evalute(Cell cell)
+        public override bool Evalute(Cell[] cells)
         {
-            return Array.FindIndex(this.blackList, c => c == cell.Type) <= -1;
+            foreach(var cell in cells)
+            {
+                if(Array.FindIndex(this.blackList, c => c == cell.Type) >= 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

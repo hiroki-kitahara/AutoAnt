@@ -20,7 +20,14 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public int RecordId { get; set; } = 100000;
 
+        private readonly CellMapper cellMapper;
+
         private CellEvent GeneratableCellEvent => GameSystem.Instance.MasterData.CellEvent.Records.Get(this.RecordId).EventData;
+
+        public CellEventGenerator(CellMapper cellMapper)
+        {
+            this.cellMapper = cellMapper;
+        }
 
         public void Generate(Cell cell)
         {
@@ -39,7 +46,7 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public bool CanGenerate(Cell cell)
         {
-            return this.GeneratableCellEvent.CanGenerate(cell);
+            return this.GeneratableCellEvent.CanGenerate(cell, this.cellMapper);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.CellControllers.Gimmicks;
+﻿using System;
+using HK.AutoAnt.CellControllers.Gimmicks;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -30,11 +31,26 @@ namespace HK.AutoAnt.CellControllers.Events
         }
 #endif
 
-        public bool CanGenerate(Cell owner)
+        public bool CanGenerate(Cell origin, CellMapper cellMapper)
         {
             Assert.IsNotNull(this.condition);
-            
-            return this.condition.Evalute(owner);
+
+            var cellPositions = cellMapper.GetRange(origin.Position, this.size, p => cellMapper.Map.ContainsKey(p));
+
+            // 配置したいところにセルがない場合は生成できない
+            if(cellPositions.Length != this.TotalSize)
+            {
+                return false;
+            }
+
+            // 配置したいセルにイベントがあった場合は生成できない
+            var cells = cellMapper.GetCells(cellPositions);
+            if(Array.FindIndex(cells, c => c.HasEvent) != -1)
+            {
+                return false;
+            }
+
+            return this.condition.Evalute(cells);
         }
 
         public virtual void OnRegister(Cell owner)
@@ -43,6 +59,22 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public virtual void OnClick(Cell owner)
         {
+        }
+
+        private int TotalSize
+        {
+            get
+            {
+                if(this.size == Vector2Int.one)
+                {
+                    return 1;
+                }
+
+                var x = this.size.x <= 1 ? 0 : this.size.x;
+                var y = this.size.y <= 1 ? 0 : this.size.y;
+
+                return x + y;
+            }
         }
     }
 }
