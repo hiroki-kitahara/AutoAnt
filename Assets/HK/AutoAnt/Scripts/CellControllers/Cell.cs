@@ -61,7 +61,7 @@ namespace HK.AutoAnt.CellControllers
         {
             Assert.IsTrue(this.HasEvent);
 
-            this.cellMapper.Remove(this.cellMapper.EventMap[this.Position]);
+            this.cellMapper.Remove(this.cellMapper.CellEvent.Map[this.Position]);
         }
 
         public void OnClickDown()
@@ -75,7 +75,7 @@ namespace HK.AutoAnt.CellControllers
                 return;
             }
 
-            this.cellMapper.EventMap[this.Position].OnClick(this);
+            this.cellMapper.CellEvent.Map[this.Position].OnClick(this);
         }
 
         public IObservable<ReleasedCellEvent> ReleasedCellEventAsObservable()

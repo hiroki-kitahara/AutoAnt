@@ -52,7 +52,7 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             Assert.IsNotNull(this.condition);
 
-            var cellPositions = cellMapper.GetRange(origin.Position, Vector2Int.one * this.size, p => cellMapper.Map.ContainsKey(p));
+            var cellPositions = cellMapper.GetRange(origin.Position, Vector2Int.one * this.size, p => cellMapper.Cell.Map.ContainsKey(p));
 
             // 配置したいところにセルがない場合は生成できない
             if(cellPositions.Length != this.size * this.size)

@@ -11,83 +11,58 @@ namespace HK.AutoAnt.CellControllers
     /// </summary>
     public sealed class CellMapper
     {
-        /// <summary>
-        /// 全ての<see cref="Cell"/>
-        /// </summary>
-        private readonly List<Cell> cells = new List<Cell>();
-        public IReadOnlyList<Cell> Cells => this.cells;
+        private readonly Element<Vector2Int, Cell> cell = new Element<Vector2Int, Cell>();
+        public IReadonlyElement<Vector2Int, Cell> Cell => this.cell;
 
-        /// <summary>
-        /// <see cref="Cell.Position"/>と紐づくマップ
-        /// </summary>
-        private readonly Dictionary<Vector2Int, Cell> map = new Dictionary<Vector2Int, Cell>();
-        public IReadOnlyDictionary<Vector2Int, Cell> Map => this.map;
-
-        private readonly List<ICellEvent> cellEvents = new List<ICellEvent>();
-
-        private readonly Dictionary<Vector2Int, ICellEvent> eventMap = new Dictionary<Vector2Int, ICellEvent>();
-        public IReadOnlyDictionary<Vector2Int, ICellEvent> EventMap => this.eventMap;
+        private readonly Element<Vector2Int, ICellEvent> cellEvent = new Element<Vector2Int, ICellEvent>();
+        public IReadonlyElement<Vector2Int, ICellEvent> CellEvent => this.cellEvent;
 
         public void Add(Cell cell)
         {
-            var position = cell.Position;
-            
-            Assert.IsFalse(this.cells.Contains(cell));
-            Assert.IsFalse(this.map.ContainsKey(position), $"{position}の{typeof(Cell)}は既に登録されています");
-
-            this.cells.Add(cell);
-            this.map.Add(position, cell);
+            this.cell.Add(cell.Position, cell);
         }
 
         public void Add(ICellEvent cellEvent)
         {
+            this.cellEvent.AddListOnly(cellEvent);
+
             var position = cellEvent.Origin;
-            Assert.IsTrue(this.Map.ContainsKey(position), $"position = {position}にセルが無いのにイベントが登録されました");
-            this.cellEvents.Add(cellEvent);
+            Assert.IsTrue(this.cell.Map.ContainsKey(position), $"position = {position}にセルが無いのにイベントが登録されました");
 
             for (var y = 0; y < cellEvent.Size; y++)
             {
                 for (var x = 0; x < cellEvent.Size; x++)
                 {
                     var p = position + new Vector2Int(x, y);
-                    Assert.IsFalse(this.eventMap.ContainsKey(p), $"{p}には既にイベントが登録されています");
-                    this.eventMap.Add(p, cellEvent);
+                    this.cellEvent.AddMapOnly(p, cellEvent);
                 }
             }
         }
 
         public void Remove(Cell cell)
         {
-            var position = cell.Position;
-
-            Assert.IsTrue(this.cells.Contains(cell));
-            Assert.IsTrue(this.map.ContainsKey(position), $"{position}の{typeof(Cell)}は存在しません");
-
-            this.cells.Remove(cell);
-            this.map.Remove(position);
+            this.cell.Remove(cell.Position);
         }
 
         public void Remove(ICellEvent cellEvent)
         {
             Assert.IsNotNull(cellEvent);
 
-            var position = cellEvent.Origin;
-            this.cellEvents.Remove(cellEvent);
+            this.cellEvent.RemoveListOnly(cellEvent);
 
             for (var y = 0; y < cellEvent.Size; y++)
             {
                 for (var x = 0; x < cellEvent.Size; x++)
                 {
-                    var p = position + new Vector2Int(x, y);
-                    Assert.IsTrue(this.eventMap.ContainsKey(p));
-                    eventMap.Remove(p);
+                    var p = cellEvent.Origin + new Vector2Int(x, y);
+                    this.cellEvent.RemoveMapOnly(p);
                 }
             }
         }
 
         public bool HasEvent(Cell cell)
         {
-            return this.eventMap.ContainsKey(cell.Position);
+            return this.cellEvent.Map.ContainsKey(cell.Position);
         }
 
         /// <summary>
@@ -175,8 +150,8 @@ namespace HK.AutoAnt.CellControllers
             for (var i = 0; i < positions.Length; i++)
             {
                 var position = positions[i];
-                Assert.IsTrue(this.Map.ContainsKey(position));
-                result[i] = this.Map[position];
+                Assert.IsTrue(this.Cell.Map.ContainsKey(position));
+                result[i] = this.Cell.Map[position];
             }
 
             return result;
@@ -187,7 +162,81 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public Vector2Int[] GetEmptyPositions(Vector2Int origin, int range)
         {
-            return this.GetRange(origin, range, (p) => !this.map.ContainsKey(p));
+            return this.GetRange(origin, range, (p) => !this.cell.Map.ContainsKey(p));
+        }
+
+        public interface IReadonlyElement<Key, Value>
+        {
+            IReadOnlyList<Value> List { get; }
+
+            IReadOnlyDictionary<Key, Value> Map { get; }
+        }
+
+        public class Element<Key, Value> : IReadonlyElement<Key, Value>
+        {
+            private readonly List<Value> list = new List<Value>();
+
+            /// <summary>
+            /// 全要素を持つリスト
+            /// </summary>
+            /// <remarks>
+            /// 全検索などはこれを利用してください
+            /// </remarks>
+            public List<Value> List => this.list;
+
+            private readonly Dictionary<Key, Value> map = new Dictionary<Key, Value>();
+
+            /// <summary>
+            /// 紐づけされたマップ
+            /// </summary>
+            /// <remarks>
+            /// <see cref="cell"/>の場合は座標と紐付けられているため、座標で検索したい場合はこれを利用してください
+            /// </remarks>
+            public Dictionary<Key, Value> Map => this.map;
+
+            IReadOnlyList<Value> IReadonlyElement<Key, Value>.List => this.list;
+
+            IReadOnlyDictionary<Key, Value> IReadonlyElement<Key, Value>.Map => this.map;
+
+            public void Add(Key key, Value value)
+            {
+                this.AddListOnly(value);
+                this.AddMapOnly(key, value);
+            }
+
+            public void AddListOnly(Value value)
+            {
+                Assert.IsFalse(this.list.Contains(value), $"{value}は既に登録されています");
+                this.list.Add(value);
+            }
+
+            public void AddMapOnly(Key key, Value value)
+            {
+                Assert.IsFalse(this.map.ContainsKey(key), $"{key}は既に登録されています");
+                this.map.Add(key, value);
+            }
+
+            public void Remove(Key key)
+            {
+                var value = this.map[key];
+                Assert.IsTrue(this.map.ContainsKey(key), $"{key}は登録されていません");
+
+                this.RemoveListOnly(value);
+                this.RemoveMapOnly(key);
+            }
+
+            public void RemoveListOnly(Value value)
+            {
+                Assert.IsTrue(this.list.Contains(value), $"{value}は登録されていません");
+                this.list.Remove(value);
+            }
+
+            public void RemoveMapOnly(Key key)
+            {
+                Assert.IsTrue(this.map.ContainsKey(key), $"{key}は登録されていません");
+
+                this.map.Remove(key);
+            }
         }
     }
 }

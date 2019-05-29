@@ -34,9 +34,9 @@ namespace HK.AutoAnt.CellControllers
 
         public Cell Replace(int recordId, Vector2Int position)
         {
-            Assert.IsTrue(this.cellMapper.Map.ContainsKey(position), $"position = {position}にセルがないのにReplace関数が実行されました");
+            Assert.IsTrue(this.cellMapper.Cell.Map.ContainsKey(position), $"position = {position}にセルがないのにReplace関数が実行されました");
             
-            var oldCell = this.cellMapper.Map[position];
+            var oldCell = this.cellMapper.Cell.Map[position];
             this.cellMapper.Remove(oldCell);
             Object.Destroy(oldCell.gameObject);
 
