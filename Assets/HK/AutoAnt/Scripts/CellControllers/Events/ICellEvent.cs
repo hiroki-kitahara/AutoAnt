@@ -28,6 +28,11 @@ namespace HK.AutoAnt.CellControllers.Events
         void Initialize(Vector2Int position);
 
         /// <summary>
+        /// 削除処理
+        /// </summary>
+        void Remove();
+
+        /// <summary>
         /// <see cref="CellGimmickController"/>を生成する
         /// </summary>
         CellGimmickController CreateGimmickController();

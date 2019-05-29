@@ -31,7 +31,7 @@ namespace HK.AutoAnt.CellControllers
 
         public void Generate(Cell cell)
         {
-            Assert.IsFalse(cell.HasEvent);
+            Assert.IsFalse(this.cellMapper.HasEvent(cell));
             var cellEvent = UnityEngine.Object.Instantiate(this.GeneratableCellEvent);
             cellEvent.Initialize(cell.Position);
             cellMapper.Add(cellEvent);
@@ -39,8 +39,10 @@ namespace HK.AutoAnt.CellControllers
 
         public void Erase(Cell cell)
         {
-            Assert.IsTrue(cell.HasEvent);
-            cell.ClearEvent();
+            Assert.IsTrue(this.cellMapper.HasEvent(cell));
+            var cellEvent = this.cellMapper.EventMap[cell.Position];
+            this.cellMapper.Remove(cellEvent);
+            cellEvent.Remove();
         }
 
         /// <summary>

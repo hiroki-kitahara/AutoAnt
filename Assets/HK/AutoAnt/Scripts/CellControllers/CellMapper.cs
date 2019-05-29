@@ -38,6 +38,7 @@ namespace HK.AutoAnt.CellControllers
         private readonly List<ICellEvent> cellEvents = new List<ICellEvent>();
 
         private readonly Dictionary<Vector2Int, ICellEvent> eventMap = new Dictionary<Vector2Int, ICellEvent>();
+        public IReadOnlyDictionary<Vector2Int, ICellEvent> EventMap => this.eventMap;
 
         public void Add(Cell cell)
         {
@@ -76,6 +77,24 @@ namespace HK.AutoAnt.CellControllers
 
             this.cells.Remove(cell);
             this.map.Remove(position);
+        }
+
+        public void Remove(ICellEvent cellEvent)
+        {
+            Assert.IsNotNull(cellEvent);
+
+            var position = cellEvent.Position;
+            this.cellEvents.Remove(cellEvent);
+
+            for (var y = 0; y < cellEvent.Size; y++)
+            {
+                for (var x = 0; x < cellEvent.Size; x++)
+                {
+                    var p = position + new Vector2Int(x, y);
+                    Assert.IsTrue(this.eventMap.ContainsKey(p));
+                    eventMap.Remove(p);
+                }
+            }
         }
 
         public bool HasEvent(Cell cell)

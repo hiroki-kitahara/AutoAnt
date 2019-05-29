@@ -36,6 +36,11 @@ namespace HK.AutoAnt.CellControllers.Events
             this.gimmick = this.CreateGimmickController();
         }
 
+        public virtual void Remove()
+        {
+            Destroy(this.gimmick.gameObject);
+        }
+
         public bool CanGenerate(Cell origin, CellMapper cellMapper)
         {
             Assert.IsNotNull(this.condition);
