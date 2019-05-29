@@ -1,5 +1,6 @@
 ﻿using System;
 using HK.AutoAnt.CellControllers.Gimmicks;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -18,6 +19,11 @@ namespace HK.AutoAnt.CellControllers.Events
         public int Size => this.size;
 
         public Vector2Int Position { get; protected set; }
+
+        /// <summary>
+        /// 実体が持つイベント
+        /// </summary>
+        protected readonly CompositeDisposable instanceEvents = new CompositeDisposable();
 
         protected CellGimmickController gimmick;
 
@@ -38,6 +44,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public virtual void Remove()
         {
+            this.instanceEvents.Clear();
             Destroy(this.gimmick.gameObject);
         }
 
@@ -61,10 +68,6 @@ namespace HK.AutoAnt.CellControllers.Events
             }
 
             return this.condition.Evalute(cells);
-        }
-
-        public virtual void OnRegister(Cell owner)
-        {
         }
 
         public virtual void OnClick(Cell owner)

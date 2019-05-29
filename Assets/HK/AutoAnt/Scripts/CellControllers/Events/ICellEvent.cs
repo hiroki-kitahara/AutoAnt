@@ -43,11 +43,6 @@ namespace HK.AutoAnt.CellControllers.Events
         bool CanGenerate(Cell owner, CellMapper cellMapper);
 
         /// <summary>
-        /// イベントがセルに登録された時の処理
-        /// </summary>
-        void OnRegister(Cell owner);
-
-        /// <summary>
         /// セルがクリックされた時の処理
         /// </summary>
         void OnClick(Cell owner);
