@@ -18,7 +18,7 @@ namespace HK.AutoAnt.CellControllers.Events
         protected int size = 1;
         public int Size => this.size;
 
-        public Vector2Int Position { get; protected set; }
+        public Vector2Int Origin { get; protected set; }
 
         /// <summary>
         /// 実体が持つイベント
@@ -38,7 +38,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public virtual void Initialize(Vector2Int position)
         {
-            this.Position = position;
+            this.Origin = position;
             this.gimmick = this.CreateGimmickController();
         }
 

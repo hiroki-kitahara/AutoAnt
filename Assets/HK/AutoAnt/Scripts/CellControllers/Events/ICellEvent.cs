@@ -10,9 +10,9 @@ namespace HK.AutoAnt.CellControllers.Events
     public interface ICellEvent
     {
         /// <summary>
-        /// 座標
+        /// 原点座標
         /// </summary>
-        Vector2Int Position { get; }
+        Vector2Int Origin { get; }
 
         /// <summary>
         /// セルサイズ

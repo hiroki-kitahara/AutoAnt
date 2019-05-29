@@ -21,9 +21,12 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             var gimmick = Instantiate(this.gimmickPrefab);
             var constants = GameSystem.Instance.MasterData.Cell.Constants;
-            var constantScale = constants.EffectScale;
-            gimmick.transform.position = new Vector3(this.Position.x * (constants.Scale.x + constants.Interval), 0.0f, this.Position.y * (constants.Scale.z + constants.Interval));
-            gimmick.transform.localScale = constantScale * this.size;
+            var position = new Vector3(this.Origin.x * (constants.Scale.x + constants.Interval), 0.0f, this.Origin.y * (constants.Scale.z + constants.Interval));
+            var fixedSize = this.size - 1;
+            position += new Vector3((constants.Scale.x / 2.0f) * fixedSize, 0.0f, (constants.Scale.z / 2.0f) * fixedSize);
+            position += new Vector3(constants.Interval * fixedSize, 0.0f, constants.Interval * fixedSize);
+            gimmick.transform.position = position;
+            gimmick.transform.localScale = constants.EffectScale * this.size + (Vector3.one * (constants.Interval * fixedSize));
 
             return gimmick;
         }

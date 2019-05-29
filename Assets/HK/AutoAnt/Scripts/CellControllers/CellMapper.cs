@@ -41,7 +41,7 @@ namespace HK.AutoAnt.CellControllers
 
         public void Add(ICellEvent cellEvent)
         {
-            var position = cellEvent.Position;
+            var position = cellEvent.Origin;
             Assert.IsTrue(this.Map.ContainsKey(position), $"position = {position}にセルが無いのにイベントが登録されました");
             this.cellEvents.Add(cellEvent);
 
@@ -71,7 +71,7 @@ namespace HK.AutoAnt.CellControllers
         {
             Assert.IsNotNull(cellEvent);
 
-            var position = cellEvent.Position;
+            var position = cellEvent.Origin;
             this.cellEvents.Remove(cellEvent);
 
             for (var y = 0; y < cellEvent.Size; y++)
