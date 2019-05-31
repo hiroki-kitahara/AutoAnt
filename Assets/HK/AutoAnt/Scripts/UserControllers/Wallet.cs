@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -7,6 +8,7 @@ namespace HK.AutoAnt.UserControllers
     /// <summary>
     /// 財布を管理するクラス
     /// </summary>
+    [Serializable]
     public sealed class Wallet
     {
         /// <summary>
@@ -16,7 +18,8 @@ namespace HK.AutoAnt.UserControllers
 
         public IReactiveProperty<int> MoneyAsObservable => this.money;
 
-        private readonly ReactiveProperty<int> money = new ReactiveProperty<int>();
+        [SerializeField]
+        private IntReactiveProperty money = new IntReactiveProperty();
 
         /// <summary>
         /// お金が足りているか返す

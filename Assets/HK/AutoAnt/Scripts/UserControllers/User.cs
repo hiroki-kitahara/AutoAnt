@@ -12,11 +12,15 @@ namespace HK.AutoAnt.UserControllers
         /// <summary>
         /// インベントリ
         /// </summary>
-        public readonly Inventory Inventory = new Inventory();
+        [SerializeField]
+        private Inventory inventory = null;
+        public Inventory Inventory => this.inventory;
 
         /// <summary>
         /// 財布
         /// </summary>
-        public readonly Wallet Wallet = new Wallet();
+        [SerializeField]
+        private Wallet wallet = null;
+        public Wallet Wallet => this.wallet;
     }
 }
