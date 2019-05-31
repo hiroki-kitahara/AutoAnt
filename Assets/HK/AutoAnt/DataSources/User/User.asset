@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8bb11c2434642928867a59702abe4c, type: 3}
   m_Name: User
   m_EditorClassIdentifier: 
+  wallet:
+    money:
+      value: 1000
