@@ -6,7 +6,8 @@ namespace HK.AutoAnt.UserControllers
     /// <summary>
     /// ユーザー
     /// </summary>
-    public sealed class User
+    [CreateAssetMenu(menuName = "AutoAnt/User")]
+    public sealed class User : ScriptableObject
     {
         /// <summary>
         /// インベントリ

@@ -15,7 +15,9 @@ namespace HK.AutoAnt.Systems
         private static GameSystem instance;
         public static GameSystem Instance => instance;
 
-        public readonly User User = new User();
+        [SerializeField]
+        private User user = new User();
+        public User User => this.user;
 
         [SerializeField]
         private MasterData masterData = null;
