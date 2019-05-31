@@ -10,11 +10,11 @@ namespace HK.AutoAnt.GameControllers
     /// </summary>
     public sealed class EraseCellEventActions : InputActions
     {
-        public EraseCellEventActions(CellEventGenerator eventGenerator, GameCameraController gameCameraController)
+        public EraseCellEventActions(CellEventGenerator eventGenerator, CellMapper cellMapper, GameCameraController gameCameraController)
             : base(
                 null,
                 null,
-                new ClickToEraseCellEvent(eventGenerator),
+                new ClickToEraseCellEvent(eventGenerator, cellMapper),
                 new DragToMoveCamera(gameCameraController),
                 null
             )

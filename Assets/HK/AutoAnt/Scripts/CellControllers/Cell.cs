@@ -27,22 +27,18 @@ namespace HK.AutoAnt.CellControllers
 
         private readonly IMessageBroker Broker = new MessageBroker();
 
-        private ICellEvent cellEvent = null;
-
         private CellMapper cellMapper;
 
         public Transform CachedTransform{ get; private set; }
 
         private CellGimmickController gimmickController;
 
-        public bool HasEvent => this.cellEvent != null;
-
         void Awake()
         {
             this.CachedTransform = this.transform;
         }
 
-        public Cell Initialize(Vector2Int position, CellType cellType, ICellEvent cellEvent, CellMapper cellMapper)
+        public Cell Initialize(Vector2Int position, CellType cellType, CellMapper cellMapper)
         {
             this.Position = position;
             this.Type = cellType;
@@ -55,35 +51,17 @@ namespace HK.AutoAnt.CellControllers
             this.boxCollider.size = constants.Scale;
 
             this.cellMapper.Add(this);
-            this.AddEvent(cellEvent);
 
             return this;
         }
 
-        public void AddEvent(ICellEvent cellEvent)
-        {
-            if(this.cellEvent != null)
-            {
-                this.Broker.Publish(ReleasedCellEvent.Get());
-            }
-
-            this.cellEvent = cellEvent;
-            if(this.cellEvent != null)
-            {
-                this.cellMapper.RegisterHasEvent(this);
-                this.cellEvent.OnRegister(this);
-                this.CreateGimmickController();
-            }
-            else
-            {
-                this.cellMapper.RegisterNotHasEvent(this);
-                this.DestroyGimmickController();
-            }
-        }
+        public bool HasEvent => this.cellMapper.HasEvent(this);
 
         public void ClearEvent()
         {
-            this.AddEvent(null);
+            Assert.IsTrue(this.HasEvent);
+
+            this.cellMapper.Remove(this.cellMapper.CellEvent.Map[this.Position]);
         }
 
         public void OnClickDown()
@@ -92,28 +70,17 @@ namespace HK.AutoAnt.CellControllers
 
         public void OnClickUp()
         {
-            if(this.cellEvent == null)
+            if(!this.HasEvent)
             {
                 return;
             }
 
-            this.cellEvent.OnClick(this);
+            this.cellMapper.CellEvent.Map[this.Position].OnClick(this);
         }
 
         public IObservable<ReleasedCellEvent> ReleasedCellEventAsObservable()
         {
             return this.Broker.Receive<ReleasedCellEvent>();
-        }
-
-        private void CreateGimmickController()
-        {
-            this.DestroyGimmickController();
-
-            var constants = GameSystem.Instance.MasterData.Cell.Constants;
-            this.gimmickController = this.cellEvent.CreateGimmickController();
-            this.gimmickController.transform.SetParent(this.CachedTransform);
-            this.gimmickController.transform.localPosition = new Vector3(0.0f, constants.Scale.y, 0.0f);
-            this.gimmickController.transform.localScale = constants.EffectScale;
         }
 
         private void DestroyGimmickController()
