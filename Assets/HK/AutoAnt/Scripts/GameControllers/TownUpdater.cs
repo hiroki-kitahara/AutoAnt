@@ -22,24 +22,19 @@ namespace HK.AutoAnt.GameControllers
         /// <summary>
         /// 街の人口を加算する要素リスト
         /// </summary>
-        private List<IAddTownPopulation> addTownPopulations = new List<IAddTownPopulation>();
+        public readonly List<IAddTownPopulation> AddTownPopulations = new List<IAddTownPopulation>();
 
         public void Initialize(User user, GameObject owner)
         {
             Observable.Interval(TimeSpan.FromSeconds(this.parameterUpdateInterval))
                 .SubscribeWithState2(this, user, (_, _this, _user) =>
                 {
-                    foreach(var a in _this.addTownPopulations)
+                    foreach(var a in _this.AddTownPopulations)
                     {
                         _user.Town.AddPopulation(a.GetAmount(_user.Town));
                     }
                 })
                 .AddTo(owner);
-        }
-
-        public void AddTownPopulationElement(IAddTownPopulation element)
-        {
-            this.addTownPopulations.Add(element);
         }
     }
 }

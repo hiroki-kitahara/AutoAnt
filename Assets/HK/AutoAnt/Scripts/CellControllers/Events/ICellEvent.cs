@@ -31,7 +31,7 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// 削除処理
         /// </summary>
-        void Remove();
+        void Remove(GameSystem gameSystem);
 
         /// <summary>
         /// <see cref="CellGimmickController"/>を生成する

@@ -50,7 +50,7 @@ namespace HK.AutoAnt.CellControllers
             Assert.IsTrue(this.cellMapper.HasEvent(cell));
             var cellEvent = this.cellMapper.CellEvent.Map[cell.Position];
             this.cellMapper.Remove(cellEvent);
-            cellEvent.Remove();
+            cellEvent.Remove(this.gameSystem);
         }
 
         /// <summary>

@@ -43,7 +43,7 @@ namespace HK.AutoAnt.CellControllers.Events
             this.gimmick = this.CreateGimmickController();
         }
 
-        public virtual void Remove()
+        public virtual void Remove(GameSystem gameSystem)
         {
             this.instanceEvents.Clear();
             Destroy(this.gimmick.gameObject);
