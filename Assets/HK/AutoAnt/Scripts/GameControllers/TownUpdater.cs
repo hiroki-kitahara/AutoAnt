@@ -27,8 +27,12 @@ namespace HK.AutoAnt.GameControllers
         public void Initialize(User user, GameObject owner)
         {
             Observable.Interval(TimeSpan.FromSeconds(this.parameterUpdateInterval))
-                .SubscribeWithState(this, (_, _this) =>
+                .SubscribeWithState2(this, user, (_, _this, _user) =>
                 {
+                    foreach(var a in _this.addTownPopulations)
+                    {
+                        _user.Town.AddPopulation(a.AddAmount);
+                    }
                 })
                 .AddTo(owner);
         }

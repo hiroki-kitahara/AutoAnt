@@ -9,8 +9,8 @@ namespace HK.AutoAnt.GameControllers
     public interface IAddTownPopulation
     {
         /// <summary>
-        /// 人口を加算する
+        /// 加算する人口の量を返す
         /// </summary>
-        void Add();
+        int AddAmount { get; }
     }
 }
