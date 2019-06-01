@@ -26,10 +26,14 @@ namespace HK.AutoAnt.GameControllers
 
         public void Initialize(User user, GameObject owner)
         {
-            // 街の人口の増加
             Observable.Interval(TimeSpan.FromSeconds(this.parameterUpdateInterval))
                 .SubscribeWithState2(this, user, (_, _this, _user) =>
                 {
+                    // 税金徴収
+                    // FIXME: 税金計算を実装する
+                    _user.Wallet.AddMoney(_user.Town.Population.Value * 10);
+
+                    // 街の人口の増加
                     foreach(var a in _this.AddTownPopulations)
                     {
                         a.Add(_user.Town);
