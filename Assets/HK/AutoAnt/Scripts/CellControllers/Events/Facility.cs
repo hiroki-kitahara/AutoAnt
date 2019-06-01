@@ -44,9 +44,9 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         public int CurrentItemNumber;
 
-        public override void Initialize(Vector2Int position)
+        public override void Initialize(Vector2Int position, GameSystem gameSystem)
         {
-            base.Initialize(position);
+            base.Initialize(position, gameSystem);
         }
     }
 }
