@@ -1,6 +1,7 @@
 ﻿using HK.AutoAnt.CameraControllers;
 using HK.AutoAnt.CellControllers;
 using HK.AutoAnt.Database;
+using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.UserControllers;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -18,6 +19,9 @@ namespace HK.AutoAnt.Systems
         public readonly User User = new User();
 
         [SerializeField]
+        private TownUpdater townUpdater = null;
+
+        [SerializeField]
         private MasterData masterData = null;
         public MasterData MasterData => this.masterData;
 
@@ -33,6 +37,8 @@ namespace HK.AutoAnt.Systems
         {
             Assert.IsNull(instance);
             instance = this;
+
+            this.townUpdater.Initialize(this.gameObject);
         }
 
         void OnDestroy()
