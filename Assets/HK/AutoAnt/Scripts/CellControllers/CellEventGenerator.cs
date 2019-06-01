@@ -20,12 +20,15 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public int RecordId { get; set; } = 100000;
 
+        private readonly GameSystem gameSystem;
+
         private readonly CellMapper cellMapper;
 
         private CellEvent GeneratableCellEvent => GameSystem.Instance.MasterData.CellEvent.Records.Get(this.RecordId).EventData;
 
-        public CellEventGenerator(CellMapper cellMapper)
+        public CellEventGenerator(GameSystem gameSystem, CellMapper cellMapper)
         {
+            this.gameSystem = gameSystem;
             this.cellMapper = cellMapper;
         }
 
@@ -38,7 +41,7 @@ namespace HK.AutoAnt.CellControllers
         {
             Assert.IsFalse(this.cellMapper.HasEvent(cell));
             var cellEventInstance = UnityEngine.Object.Instantiate(this.GeneratableCellEvent);
-            cellEventInstance.Initialize(cell.Position);
+            cellEventInstance.Initialize(cell.Position, this.gameSystem);
             cellMapper.Add(cellEventInstance);
         }
 

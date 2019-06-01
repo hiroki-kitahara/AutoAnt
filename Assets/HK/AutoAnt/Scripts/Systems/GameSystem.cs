@@ -20,6 +20,7 @@ namespace HK.AutoAnt.Systems
 
         [SerializeField]
         private TownUpdater townUpdater = null;
+        public TownUpdater TownUpdater => this.townUpdater;
 
         [SerializeField]
         private MasterData masterData = null;

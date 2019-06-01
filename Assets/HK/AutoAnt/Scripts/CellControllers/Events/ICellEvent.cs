@@ -1,4 +1,5 @@
 ﻿using HK.AutoAnt.CellControllers.Gimmicks;
+using HK.AutoAnt.Systems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -25,7 +26,7 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// 初期化
         /// </summary>
-        void Initialize(Vector2Int position);
+        void Initialize(Vector2Int position, GameSystem gameSystem);
 
         /// <summary>
         /// 削除処理

@@ -1,5 +1,6 @@
 ﻿using System;
 using HK.AutoAnt.CellControllers.Gimmicks;
+using HK.AutoAnt.Systems;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -36,7 +37,7 @@ namespace HK.AutoAnt.CellControllers.Events
         }
 #endif
 
-        public virtual void Initialize(Vector2Int position)
+        public virtual void Initialize(Vector2Int position, GameSystem gameSystem)
         {
             this.Origin = position;
             this.gimmick = this.CreateGimmickController();
