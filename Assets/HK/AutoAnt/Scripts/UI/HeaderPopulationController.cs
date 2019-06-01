@@ -20,7 +20,7 @@ namespace HK.AutoAnt.UI
 
         void Start()
         {
-            GameSystem.Instance.User.Town.PopulationAsObservable
+            GameSystem.Instance.User.Town.Population
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     _this.value.text = _this.format.Format(x.ToString());
