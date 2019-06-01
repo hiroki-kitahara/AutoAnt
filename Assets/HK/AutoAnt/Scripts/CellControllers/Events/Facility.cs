@@ -56,7 +56,7 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             base.Remove(gameSystem);
             gameSystem.UserUpdater.AddTownPopularities.Remove(this);
-            gameSystem.User.Town.AddPopularity(this.CurrentPopularity);
+            gameSystem.User.Town.AddPopularity(-this.CurrentPopularity);
         }
 
         void IAddTownPopularity.Add(Town town)
