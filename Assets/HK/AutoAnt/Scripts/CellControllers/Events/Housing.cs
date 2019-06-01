@@ -11,7 +11,7 @@ namespace HK.AutoAnt.CellControllers.Events
     /// </summary>
     /// <remarks>
     /// - やっていること
-    ///     - n秒間隔で人口が増加する
+    ///     - 人口を増やす
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Housing")]
     public sealed class Housing : CellEventBlankGimmick, IAddTownPopulation
@@ -19,13 +19,13 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// ベース人口増加量
         /// </summary>
-        public int BasePopulationAmount;
+        public int BasePopulationAmount = 0;
 
         /// <summary>
         /// 保持している人口
         /// </summary>
         [HideInInspector]
-        public int CurrentPopulation;
+        public int CurrentPopulation = 0;
 
         /// <summary>
         /// レベル
@@ -33,12 +33,13 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <remarks>
         /// 人口増加の変動に利用しています
         /// </remarks>
-        [HideInInspector]
-        public int Level;
+        public int Level = 1;
 
         int IAddTownPopulation.GetAmount(Town town)
         {
-            return (this.BasePopulationAmount * this.Level) * Mathf.FloorToInt(town.Popularity.Value / 1000);
+            var result = (this.BasePopulationAmount * this.Level) * Mathf.FloorToInt(town.Popularity.Value / 1000);
+            Debug.Log(result);
+            return result;
         }
 
         public override void Initialize(Vector2Int position, GameSystem gameSystem)

@@ -26,6 +26,8 @@ namespace HK.AutoAnt.UserControllers
         /// <summary>
         /// 街データ
         /// </summary>
-        public readonly Town Town = new Town();
+        [SerializeField]
+        private Town town = null;
+        public Town Town => this.town;
     }
 }

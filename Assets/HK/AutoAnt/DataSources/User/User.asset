@@ -15,3 +15,8 @@ MonoBehaviour:
   wallet:
     money:
       value: 1000
+  town:
+    population:
+      value: 0
+    popularity:
+      value: 1000

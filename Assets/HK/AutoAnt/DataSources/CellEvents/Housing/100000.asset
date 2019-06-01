@@ -18,4 +18,4 @@ MonoBehaviour:
     type: 3}
   BasePopulationAmount: 10
   CurrentPopulation: 0
-  Level: 0
+  Level: 1
