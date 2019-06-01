@@ -35,11 +35,12 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </remarks>
         public int Level = 1;
 
-        int IAddTownPopulation.GetAmount(Town town)
+        void IAddTownPopulation.Add(Town town)
         {
             var result = (this.BasePopulationAmount * this.Level) * Mathf.FloorToInt(town.Popularity.Value / 1000);
             Debug.Log(result);
-            return result;
+            this.CurrentPopulation += result;
+            town.AddPopulation(result);
         }
 
         public override void Initialize(Vector2Int position, GameSystem gameSystem)
