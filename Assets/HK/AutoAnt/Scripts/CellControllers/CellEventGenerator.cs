@@ -20,18 +20,34 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public int RecordId { get; set; } = 100000;
 
+        private readonly CellMapper cellMapper;
+
         private CellEvent GeneratableCellEvent => GameSystem.Instance.MasterData.CellEvent.Records.Get(this.RecordId).EventData;
+
+        public CellEventGenerator(CellMapper cellMapper)
+        {
+            this.cellMapper = cellMapper;
+        }
 
         public void Generate(Cell cell)
         {
-            Assert.IsFalse(cell.HasEvent);
-            cell.AddEvent(this.GeneratableCellEvent);
+            this.Generate(cell, this.GeneratableCellEvent);
+        }
+
+        public void Generate(Cell cell, ICellEvent cellEvent)
+        {
+            Assert.IsFalse(this.cellMapper.HasEvent(cell));
+            var cellEventInstance = UnityEngine.Object.Instantiate(this.GeneratableCellEvent);
+            cellEventInstance.Initialize(cell.Position);
+            cellMapper.Add(cellEventInstance);
         }
 
         public void Erase(Cell cell)
         {
-            Assert.IsTrue(cell.HasEvent);
-            cell.ClearEvent();
+            Assert.IsTrue(this.cellMapper.HasEvent(cell));
+            var cellEvent = this.cellMapper.CellEvent.Map[cell.Position];
+            this.cellMapper.Remove(cellEvent);
+            cellEvent.Remove();
         }
 
         /// <summary>
@@ -39,7 +55,7 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public bool CanGenerate(Cell cell)
         {
-            return this.GeneratableCellEvent.CanGenerate(cell);
+            return this.GeneratableCellEvent.CanGenerate(cell, this.cellMapper);
         }
     }
 }

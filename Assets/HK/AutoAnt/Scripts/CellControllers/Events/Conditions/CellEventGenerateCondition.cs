@@ -8,6 +8,6 @@ namespace HK.AutoAnt.CellControllers.Events
     /// </summary>
     public abstract class CellEventGenerateCondition : ScriptableObject, ICellEventGenerateCondition
     {
-        public abstract bool Evalute(Cell cell);
+        public abstract bool Evalute(Cell[] cells);
     }
 }

@@ -22,25 +22,25 @@ namespace HK.AutoAnt.CellControllers
             this.cellParent = cellParent;
         }
 
-        public Cell Generate(int recordId, Vector2Int position, ICellEvent clickEvent)
+        public Cell Generate(int recordId, Vector2Int position)
         {
             var record = GameSystem.Instance.MasterData.Cell.Records.Get(recordId);
             var cell = Object.Instantiate(record.Prefab)
-                .Initialize(position, record.CellType, clickEvent, this.cellMapper);
+                .Initialize(position, record.CellType, this.cellMapper);
             cell.CachedTransform.SetParent(this.cellParent);
 
             return cell;
         }
 
-        public Cell Replace(int recordId, Vector2Int position, ICellEvent clickEvent)
+        public Cell Replace(int recordId, Vector2Int position)
         {
-            Assert.IsTrue(this.cellMapper.Map.ContainsKey(position), $"position = {position}にセルがないのにReplace関数が実行されました");
+            Assert.IsTrue(this.cellMapper.Cell.Map.ContainsKey(position), $"position = {position}にセルがないのにReplace関数が実行されました");
             
-            var oldCell = this.cellMapper.Map[position];
+            var oldCell = this.cellMapper.Cell.Map[position];
             this.cellMapper.Remove(oldCell);
             Object.Destroy(oldCell.gameObject);
 
-            return this.Generate(recordId, position, clickEvent);
+            return this.Generate(recordId, position);
         }
     }
 }

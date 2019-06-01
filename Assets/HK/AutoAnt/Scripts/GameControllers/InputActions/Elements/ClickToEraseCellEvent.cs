@@ -14,15 +14,18 @@ namespace HK.AutoAnt.GameControllers
     {
         private readonly CellEventGenerator eventGenerator;
 
-        public ClickToEraseCellEvent(CellEventGenerator eventGenerator)
+        private readonly CellMapper cellMapper;
+
+        public ClickToEraseCellEvent(CellEventGenerator eventGenerator, CellMapper cellMapper)
         {
             this.eventGenerator = eventGenerator;
+            this.cellMapper = cellMapper;
         }
 
         public void Do(InputControllers.Events.ClickData data)
         {
             var cell = CellManager.GetCell(GameSystem.Instance.Cameraman.Camera.ScreenPointToRay(data.Position));
-            if(cell != null && cell.HasEvent)
+            if(cell != null && this.cellMapper.HasEvent(cell))
             {
                 this.eventGenerator.Erase(cell);
             }

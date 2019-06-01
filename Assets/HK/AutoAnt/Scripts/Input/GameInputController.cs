@@ -72,12 +72,12 @@ namespace HK.AutoAnt.InputControllers
             }
             if (UnityEngine.Input.GetKeyDown(KeyCode.E))
             {
-                this.inputActions = new EraseCellEventActions(this.cellManager.EventGenerator, this.gameCameraController);
+                this.inputActions = new EraseCellEventActions(this.cellManager.EventGenerator, this.cellManager.Mapper, this.gameCameraController);
             }
             if (UnityEngine.Input.GetKeyDown(KeyCode.R))
             {
                 this.inputActions = new DevelopCellActions(
-                    this.cellManager.Generator,
+                    this.cellManager.CellGenerator,
                     this.cellManager.Mapper,
                     100100,
                     100000,

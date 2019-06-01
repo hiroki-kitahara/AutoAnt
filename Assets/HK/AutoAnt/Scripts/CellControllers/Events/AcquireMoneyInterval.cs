@@ -26,15 +26,16 @@ namespace HK.AutoAnt.CellControllers.Events
         [SerializeField]
         private int amount = 0;
 
-        public override void OnRegister(Cell owner)
+        public override void Initialize(Vector2Int position)
         {
+            base.Initialize(position);
+
             Observable.Interval(TimeSpan.FromSeconds(this.intervalSeconds))
-                .TakeUntil(owner.ReleasedCellEventAsObservable())
                 .SubscribeWithState(this, (_, _this) =>
                 {
                     GameSystem.Instance.User.Wallet.AddMoney(_this.amount);
                 })
-                .AddTo(owner);
+                .AddTo(this.instanceEvents);
         }
     }
 }
