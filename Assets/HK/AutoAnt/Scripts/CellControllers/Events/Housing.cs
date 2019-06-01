@@ -38,7 +38,6 @@ namespace HK.AutoAnt.CellControllers.Events
         void IAddTownPopulation.Add(Town town)
         {
             var result = (this.BasePopulationAmount * this.Level) * Mathf.FloorToInt(town.Popularity.Value / 1000);
-            Debug.Log(result);
             this.CurrentPopulation += result;
             town.AddPopulation(result);
         }
