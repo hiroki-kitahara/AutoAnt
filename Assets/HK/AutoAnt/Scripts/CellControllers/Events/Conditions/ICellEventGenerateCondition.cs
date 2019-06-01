@@ -11,6 +11,6 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// 作成可能か返す
         /// </summary>
-        bool Evalute(Cell cell);
+        bool Evalute(Cell[] cells);
     }
 }

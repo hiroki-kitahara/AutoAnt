@@ -9,7 +9,7 @@ namespace HK.AutoAnt.CellControllers.Events
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Condition/True")]
     public sealed class TrueCondition : CellEventGenerateCondition
     {
-        public override bool Evalute(Cell cell)
+        public override bool Evalute(Cell[] cells)
         {
             return true;
         }
