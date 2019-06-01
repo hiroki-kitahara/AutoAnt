@@ -8,10 +8,10 @@ namespace HK.Framework.Text
     public sealed class LocalizedText : MonoBehaviour
     {
         [SerializeField]
-        private UnityEngine.UI.Text text;
+        private UnityEngine.UI.Text text = null;
 
         [SerializeField]
-        private StringAsset.Finder finder;
+        private StringAsset.Finder finder = null;
         
         void Start()
         {

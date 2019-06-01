@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.Framework.EventSystems;
@@ -10,6 +11,7 @@ namespace HK.AutoAnt.UserControllers
     /// <summary>
     /// 持ち物を保持する
     /// </summary>
+    [Serializable]
     public sealed class Inventory
     {
         /// <summary>
