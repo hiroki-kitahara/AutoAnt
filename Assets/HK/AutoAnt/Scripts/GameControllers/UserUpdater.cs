@@ -8,10 +8,10 @@ using UnityEngine.Assertions;
 namespace HK.AutoAnt.GameControllers
 {
     /// <summary>
-    /// 街データを更新する
+    /// ユーザーデータを更新する
     /// </summary>
     [CreateAssetMenu(menuName = "AutoAnt/TownUpdater")]
-    public sealed class TownUpdater : ScriptableObject
+    public sealed class UserUpdater : ScriptableObject
     {
         /// <summary>
         /// 各パラメータの更新を行う間隔（秒）
@@ -26,6 +26,7 @@ namespace HK.AutoAnt.GameControllers
 
         public void Initialize(User user, GameObject owner)
         {
+            // 街の人口の増加
             Observable.Interval(TimeSpan.FromSeconds(this.parameterUpdateInterval))
                 .SubscribeWithState2(this, user, (_, _this, _user) =>
                 {

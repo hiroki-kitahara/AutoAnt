@@ -45,13 +45,13 @@ namespace HK.AutoAnt.CellControllers.Events
         public override void Initialize(Vector2Int position, GameSystem gameSystem)
         {
             base.Initialize(position, gameSystem);
-            gameSystem.TownUpdater.AddTownPopulations.Add(this);
+            gameSystem.UserUpdater.AddTownPopulations.Add(this);
         }
 
         public override void Remove(GameSystem gameSystem)
         {
             base.Remove(gameSystem);
-            gameSystem.TownUpdater.AddTownPopulations.Remove(this);
+            gameSystem.UserUpdater.AddTownPopulations.Remove(this);
             gameSystem.User.Town.AddPopulation(-this.CurrentPopulation);
         }
     }

@@ -22,8 +22,8 @@ namespace HK.AutoAnt.Systems
         public User User => this.instanceUser = this.instanceUser ?? Instantiate(this.user);
 
         [SerializeField]
-        private TownUpdater townUpdater = null;
-        public TownUpdater TownUpdater => this.townUpdater;
+        private UserUpdater userUpdater = null;
+        public UserUpdater UserUpdater => this.userUpdater;
 
         [SerializeField]
         private MasterData masterData = null;
@@ -42,7 +42,7 @@ namespace HK.AutoAnt.Systems
             Assert.IsNull(instance);
             instance = this;
 
-            this.townUpdater.Initialize(this.User, this.gameObject);
+            this.userUpdater.Initialize(this.User, this.gameObject);
         }
 
         void OnDestroy()
