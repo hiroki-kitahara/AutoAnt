@@ -17,5 +17,10 @@ namespace HK.AutoAnt.UserControllers
         /// 財布
         /// </summary>
         public readonly Wallet Wallet = new Wallet();
+
+        /// <summary>
+        /// 街データ
+        /// </summary>
+        public readonly Town Town = new Town();
     }
 }
