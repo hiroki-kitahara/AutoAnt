@@ -17,7 +17,7 @@ namespace HK.AutoAnt.GameControllers
         /// 各パラメータの更新を行う間隔（秒）
         /// </summary>
         [SerializeField]
-        private float parameterUpdateInterval;
+        private float parameterUpdateInterval = 1.0f;
 
         /// <summary>
         /// 街の人口を加算する要素リスト

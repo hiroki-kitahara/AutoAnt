@@ -13,7 +13,7 @@ namespace HK.AutoAnt.CellControllers.Events
     public abstract class CellEvent : ScriptableObject, ICellEvent
     {
         [SerializeField]
-        private CellEventGenerateCondition condition;
+        private CellEventGenerateCondition condition = null;
 
         [SerializeField]
         protected int size = 1;

@@ -15,7 +15,7 @@ namespace HK.AutoAnt.CellControllers
     public sealed class CellManager : MonoBehaviour
     {
         [SerializeField]
-        private GameSystem gameSystem;
+        private GameSystem gameSystem = null;
         
         [SerializeField]
         private Transform parent = null;
