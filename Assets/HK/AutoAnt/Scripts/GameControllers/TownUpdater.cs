@@ -31,7 +31,7 @@ namespace HK.AutoAnt.GameControllers
                 {
                     foreach(var a in _this.addTownPopulations)
                     {
-                        _user.Town.AddPopulation(a.AddAmount);
+                        _user.Town.AddPopulation(a.GetAmount(_user.Town));
                     }
                 })
                 .AddTo(owner);
