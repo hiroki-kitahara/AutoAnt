@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf28c7d3935b4fdb81813efd8758226, type: 3}
   m_Name: TownUpdater
   m_EditorClassIdentifier: 
-  parameterUpdateInterval: 0
+  parameterUpdateInterval: 5
