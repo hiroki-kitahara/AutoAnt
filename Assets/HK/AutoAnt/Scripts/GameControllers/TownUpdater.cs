@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using HK.AutoAnt.UserControllers;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -17,14 +19,23 @@ namespace HK.AutoAnt.GameControllers
         [SerializeField]
         private float parameterUpdateInterval;
 
-        public void Initialize(GameObject owner)
+        /// <summary>
+        /// 街の人口を加算する要素リスト
+        /// </summary>
+        private List<IAddTownPopulation> addTownPopulations = new List<IAddTownPopulation>();
+
+        public void Initialize(User user, GameObject owner)
         {
             Observable.Interval(TimeSpan.FromSeconds(this.parameterUpdateInterval))
                 .SubscribeWithState(this, (_, _this) =>
                 {
-                    Debug.Log("TownUpdater");
                 })
                 .AddTo(owner);
+        }
+
+        public void AddTownPopulationElement(IAddTownPopulation element)
+        {
+            this.addTownPopulations.Add(element);
         }
     }
 }

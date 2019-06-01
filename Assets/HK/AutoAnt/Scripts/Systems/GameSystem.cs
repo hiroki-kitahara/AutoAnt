@@ -38,7 +38,7 @@ namespace HK.AutoAnt.Systems
             Assert.IsNull(instance);
             instance = this;
 
-            this.townUpdater.Initialize(this.gameObject);
+            this.townUpdater.Initialize(this.User, this.gameObject);
         }
 
         void OnDestroy()
