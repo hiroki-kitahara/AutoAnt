@@ -12,7 +12,7 @@ namespace HK.AutoAnt.CellControllers.Events
     /// 何もしないギミックを持つイベント特化のクラス
     /// ギミックになにか仕込みたい場合は<see cref="CellEvent"/>を継承してください
     /// </remarks>
-    public abstract class CellEventBlankGimmick : CellEvent, ICellEvent
+    public abstract class CellEventBlankGimmick : CellEvent
     {
         [SerializeField]
         private Blank gimmickPrefab = null;
