@@ -18,3 +18,8 @@ MonoBehaviour:
     cost:
       money: 100
       needItems: []
+  - id: 101000
+    level: 0
+    cost:
+      money: 100
+      needItems: []
