@@ -71,7 +71,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
             // コストが満たしていない場合は生成できない
             var masterData = gameSystem.MasterData.LevelUpCost.Records.Get(cellEventRecordId, 0);
-            if(!masterData.Cost.IsEnough(gameSystem))
+            if(!masterData.Cost.IsEnough(gameSystem.User, gameSystem.MasterData.Item))
             {
                 return false;
             }

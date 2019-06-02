@@ -40,6 +40,11 @@ namespace HK.AutoAnt.CellControllers
             Assert.IsNotNull(cellEventRecord);
             Assert.IsNotNull(cellEventRecord.EventData);
 
+            var levelUpCostRecord = this.gameSystem.MasterData.LevelUpCost.Records.Get(cellEventRecordId, 0);
+            Assert.IsNotNull(levelUpCostRecord);
+
+            levelUpCostRecord.Cost.Consume(this.gameSystem.User, this.gameSystem.MasterData.Item);
+
             var cellEventInstance = UnityEngine.Object.Instantiate(cellEventRecord.EventData);
             cellEventInstance.Initialize(cell.Position);
             cellMapper.Add(cellEventInstance);

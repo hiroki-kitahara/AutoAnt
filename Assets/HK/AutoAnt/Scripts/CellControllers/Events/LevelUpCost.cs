@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HK.AutoAnt.Database;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.UserControllers;
@@ -27,15 +28,31 @@ namespace HK.AutoAnt.CellControllers
         [SerializeField]
         private List<NeedItem> needItems = new List<NeedItem>();
 
-        public bool IsEnough(GameSystem gameSystem)
+        /// <summary>
+        /// 足りているか返す
+        /// </summary>
+        public bool IsEnough(User user, MasterDataItem masterData)
         {
-            var user = gameSystem.User;
             if (!user.Wallet.IsEnoughMoney(this.money))
             {
                 return false;
             }
 
-            return this.needItems.FindIndex(n => !n.IsEnough(gameSystem)) == -1;
+            return this.needItems.FindIndex(n => !n.IsEnough(user.Inventory, masterData)) == -1;
+        }
+
+        /// <summary>
+        /// 消費する
+        /// </summary>
+        public void Consume(User user, MasterDataItem masterData)
+        {
+            Assert.IsTrue(this.IsEnough(user, masterData));
+
+            user.Wallet.AddMoney(-this.money);
+            foreach(var n in this.needItems)
+            {
+                n.Consume(user.Inventory, masterData);
+            }
         }
 
         /// <summary>
@@ -56,16 +73,29 @@ namespace HK.AutoAnt.CellControllers
             [SerializeField]
             private int amount;
 
-            public bool IsEnough(GameSystem gameSystem)
+            /// <summary>
+            /// 足りているか返す
+            /// </summary>
+            public bool IsEnough(Inventory inventory, MasterDataItem masterData)
             {
-                var masterData = gameSystem.MasterData.Item.Records.Get(this.itemName.Get);
-                var inventory = gameSystem.User.Inventory;
-                if(!inventory.Items.ContainsKey(masterData.Id))
+                var record = masterData.Records.Get(this.itemName.Get);
+                if(!inventory.Items.ContainsKey(record.Id))
                 {
                     return false;
                 }
 
-                return inventory.Items[masterData.Id] >= this.amount;
+                return inventory.Items[record.Id] >= this.amount;
+            }
+
+            /// <summary>
+            /// 消費する
+            /// </summary>
+            public void Consume(Inventory inventory, MasterDataItem masterData)
+            {
+                Assert.IsTrue(this.IsEnough(inventory, masterData));
+                var record = masterData.Records.Get(this.itemName.Get);
+
+                inventory.AddItem(record, -this.amount);
             }
         }
     }
