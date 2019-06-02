@@ -38,12 +38,9 @@ namespace HK.AutoAnt.CellControllers
 
             var cellEventRecord = this.gameSystem.MasterData.CellEvent.Records.Get(cellEventRecordId);
             Assert.IsNotNull(cellEventRecord);
-            this.Generate(cell, cellEventRecord.EventData);
-        }
+            Assert.IsNotNull(cellEventRecord.EventData);
 
-        public void Generate(Cell cell, CellEvent cellEvent)
-        {
-            var cellEventInstance = UnityEngine.Object.Instantiate(cellEvent);
+            var cellEventInstance = UnityEngine.Object.Instantiate(cellEventRecord.EventData);
             cellEventInstance.Initialize(cell.Position);
             cellMapper.Add(cellEventInstance);
         }
