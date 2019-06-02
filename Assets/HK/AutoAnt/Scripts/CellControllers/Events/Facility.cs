@@ -37,11 +37,6 @@ namespace HK.AutoAnt.CellControllers.Events
         public int AcquireItemRecordId = 0;
 
         /// <summary>
-        /// 保持している人気度
-        /// </summary>
-        public int CurrentPopularity;
-
-        /// <summary>
         /// 保持しているアイテムの数
         /// </summary>
         public int CurrentItemNumber;
@@ -50,19 +45,18 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             base.Initialize(position, gameSystem);
             gameSystem.UserUpdater.AddTownPopularities.Add(this);
+            gameSystem.User.Town.AddPopularity(this.PopularityAmount);
         }
 
         public override void Remove(GameSystem gameSystem)
         {
             base.Remove(gameSystem);
             gameSystem.UserUpdater.AddTownPopularities.Remove(this);
-            gameSystem.User.Town.AddPopularity(-this.CurrentPopularity);
+            gameSystem.User.Town.AddPopularity(-this.PopularityAmount);
         }
 
         void IAddTownPopularity.Add(Town town)
         {
-            town.AddPopularity(this.PopularityAmount);
-            this.CurrentPopularity += this.PopularityAmount;
         }
     }
 }
