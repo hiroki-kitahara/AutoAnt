@@ -27,9 +27,9 @@ namespace HK.AutoAnt.GameControllers
                 return;
             }
 
-            if(this.eventGenerator.CanGenerate(cell))
+            if(this.eventGenerator.CanGenerate(cell, this.eventGenerator.RecordId))
             {
-                this.eventGenerator.Generate(cell);
+                this.eventGenerator.Generate(cell, this.eventGenerator.RecordId);
             }
         }
     }

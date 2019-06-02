@@ -32,14 +32,17 @@ namespace HK.AutoAnt.CellControllers
             this.cellMapper = cellMapper;
         }
 
-        public void Generate(Cell cell)
+        public void Generate(Cell cell, int cellEventRecordId)
         {
-            this.Generate(cell, this.GeneratableCellEvent);
+            Assert.IsFalse(this.cellMapper.HasEvent(cell));
+
+            var cellEventRecord = this.gameSystem.MasterData.CellEvent.Records.Get(cellEventRecordId);
+            Assert.IsNotNull(cellEventRecord);
+            this.Generate(cell, cellEventRecord.EventData);
         }
 
         public void Generate(Cell cell, CellEvent cellEvent)
         {
-            Assert.IsFalse(this.cellMapper.HasEvent(cell));
             var cellEventInstance = UnityEngine.Object.Instantiate(cellEvent);
             cellEventInstance.Initialize(cell.Position);
             cellMapper.Add(cellEventInstance);
@@ -56,9 +59,9 @@ namespace HK.AutoAnt.CellControllers
         /// <summary>
         /// イベントが作成可能か返す
         /// </summary>
-        public bool CanGenerate(Cell cell)
+        public bool CanGenerate(Cell cell, int cellEventRecordId)
         {
-            return this.GeneratableCellEvent.CanGenerate(cell, this.RecordId, this.gameSystem, this.cellMapper);
+            return this.GeneratableCellEvent.CanGenerate(cell, cellEventRecordId, this.gameSystem, this.cellMapper);
         }
     }
 }
