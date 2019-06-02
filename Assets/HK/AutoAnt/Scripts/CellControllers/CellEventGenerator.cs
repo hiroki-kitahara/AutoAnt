@@ -37,10 +37,10 @@ namespace HK.AutoAnt.CellControllers
             this.Generate(cell, this.GeneratableCellEvent);
         }
 
-        public void Generate(Cell cell, ICellEvent cellEvent)
+        public void Generate(Cell cell, CellEvent cellEvent)
         {
             Assert.IsFalse(this.cellMapper.HasEvent(cell));
-            var cellEventInstance = UnityEngine.Object.Instantiate(this.GeneratableCellEvent);
+            var cellEventInstance = UnityEngine.Object.Instantiate(cellEvent);
             cellEventInstance.Initialize(cell.Position);
             cellMapper.Add(cellEventInstance);
         }
