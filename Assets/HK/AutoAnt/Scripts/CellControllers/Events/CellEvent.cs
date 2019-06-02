@@ -14,7 +14,7 @@ namespace HK.AutoAnt.CellControllers.Events
     public abstract class CellEvent : ScriptableObject, ICellEvent
     {
         [SerializeField]
-        private CellEventGenerateCondition condition;
+        private CellEventGenerateCondition condition = null;
 
         [SerializeField]
         protected int size = 1;
@@ -38,13 +38,13 @@ namespace HK.AutoAnt.CellControllers.Events
         }
 #endif
 
-        public virtual void Initialize(Vector2Int position)
+        public virtual void Initialize(Vector2Int position, GameSystem gameSystem)
         {
             this.Origin = position;
             this.gimmick = this.CreateGimmickController();
         }
 
-        public virtual void Remove()
+        public virtual void Remove(GameSystem gameSystem)
         {
             this.instanceEvents.Clear();
             Destroy(this.gimmick.gameObject);

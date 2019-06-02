@@ -20,7 +20,7 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public int RecordId { get; set; } = 100000;
 
-        public readonly GameSystem gameSystem;
+        private readonly GameSystem gameSystem;
 
         private readonly CellMapper cellMapper;
 
@@ -46,7 +46,7 @@ namespace HK.AutoAnt.CellControllers
             levelUpCostRecord.Cost.Consume(this.gameSystem.User, this.gameSystem.MasterData.Item);
 
             var cellEventInstance = UnityEngine.Object.Instantiate(cellEventRecord.EventData);
-            cellEventInstance.Initialize(cell.Position);
+            cellEventInstance.Initialize(cell.Position, this.gameSystem);
             cellMapper.Add(cellEventInstance);
         }
 
@@ -55,7 +55,7 @@ namespace HK.AutoAnt.CellControllers
             Assert.IsTrue(this.cellMapper.HasEvent(cell));
             var cellEvent = this.cellMapper.CellEvent.Map[cell.Position];
             this.cellMapper.Remove(cellEvent);
-            cellEvent.Remove();
+            cellEvent.Remove(this.gameSystem);
         }
 
         /// <summary>

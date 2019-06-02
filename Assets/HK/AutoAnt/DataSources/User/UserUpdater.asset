@@ -9,14 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8bb11c2434642928867a59702abe4c, type: 3}
-  m_Name: User
+  m_Script: {fileID: 11500000, guid: baf28c7d3935b4fdb81813efd8758226, type: 3}
+  m_Name: UserUpdater
   m_EditorClassIdentifier: 
-  wallet:
-    money:
-      value: 1000
-  town:
-    population:
-      value: 0
-    popularity:
-      value: 1000
+  parameterUpdateInterval: 5

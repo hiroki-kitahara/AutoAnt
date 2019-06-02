@@ -26,12 +26,12 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// 初期化
         /// </summary>
-        void Initialize(Vector2Int position);
+        void Initialize(Vector2Int position, GameSystem gameSystem);
 
         /// <summary>
         /// 削除処理
         /// </summary>
-        void Remove();
+        void Remove(GameSystem gameSystem);
 
         /// <summary>
         /// <see cref="CellGimmickController"/>を生成する
