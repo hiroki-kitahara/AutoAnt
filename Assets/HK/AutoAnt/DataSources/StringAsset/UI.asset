@@ -21,3 +21,7 @@ MonoBehaviour:
       ja: '{0}G'
       en: 
     guid: f7054202-e708-4110-bbbd-d225828c3cd9
+  - value:
+      ja: "{0}\u4EBA"
+      en: 
+    guid: 5a68e184-7945-4df5-9ca1-8a083d44a88b
