@@ -4,6 +4,7 @@ using HK.AutoAnt.Systems;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using HK.AutoAnt.Extensions;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -49,7 +50,7 @@ namespace HK.AutoAnt.CellControllers.Events
             Destroy(this.gimmick.gameObject);
         }
 
-        public bool CanGenerate(Cell origin, CellMapper cellMapper)
+        public bool CanGenerate(Cell origin, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper)
         {
             Assert.IsNotNull(this.condition);
 
@@ -64,6 +65,13 @@ namespace HK.AutoAnt.CellControllers.Events
             // 配置したいセルにイベントがあった場合は生成できない
             var cells = cellMapper.GetCells(cellPositions);
             if(Array.FindIndex(cells, c => cellMapper.HasEvent(c)) != -1)
+            {
+                return false;
+            }
+
+            // コストが満たしていない場合は生成できない
+            var masterData = gameSystem.MasterData.LevelUpCost.Records.Get(cellEventRecordId, 0);
+            if(!masterData.Cost.IsEnough(gameSystem.User, gameSystem.MasterData.Item))
             {
                 return false;
             }

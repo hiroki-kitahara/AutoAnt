@@ -41,7 +41,7 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// 作成可能か返す
         /// </summary>
-        bool CanGenerate(Cell owner, CellMapper cellMapper);
+        bool CanGenerate(Cell owner, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper);
 
         /// <summary>
         /// セルがクリックされた時の処理
