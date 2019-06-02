@@ -22,5 +22,10 @@ namespace HK.AutoAnt.UserControllers
         [SerializeField]
         private Wallet wallet = null;
         public Wallet Wallet => this.wallet;
+
+        /// <summary>
+        /// 街データ
+        /// </summary>
+        public readonly Town Town = new Town();
     }
 }
