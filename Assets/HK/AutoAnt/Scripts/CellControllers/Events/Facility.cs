@@ -19,7 +19,7 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - アイテムの生産
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Facility")]
-    public sealed class Facility : CellEventBlankGimmick, IAddTownPopularity
+    public sealed class Facility : CellEventBlankGimmick
     {
         /// <summary>
         /// 加算する人気度
@@ -44,19 +44,13 @@ namespace HK.AutoAnt.CellControllers.Events
         public override void Initialize(Vector2Int position, GameSystem gameSystem)
         {
             base.Initialize(position, gameSystem);
-            gameSystem.UserUpdater.AddTownPopularities.Add(this);
             gameSystem.User.Town.AddPopularity(this.PopularityAmount);
         }
 
         public override void Remove(GameSystem gameSystem)
         {
             base.Remove(gameSystem);
-            gameSystem.UserUpdater.AddTownPopularities.Remove(this);
             gameSystem.User.Town.AddPopularity(-this.PopularityAmount);
-        }
-
-        void IAddTownPopularity.Add(Town town)
-        {
         }
     }
 }

@@ -24,11 +24,6 @@ namespace HK.AutoAnt.GameControllers
         /// </summary>
         public readonly List<IAddTownPopulation> AddTownPopulations = new List<IAddTownPopulation>();
 
-        /// <summary>
-        /// 街の人気度を加算する要素リスト
-        /// </summary>
-        public readonly List<IAddTownPopularity> AddTownPopularities = new List<IAddTownPopularity>();
-
         public void Initialize(User user, GameObject owner)
         {
             Observable.Interval(TimeSpan.FromSeconds(this.parameterUpdateInterval))
@@ -40,12 +35,6 @@ namespace HK.AutoAnt.GameControllers
 
                     // 街の人口の増加
                     foreach(var a in _this.AddTownPopulations)
-                    {
-                        a.Add(_user.Town);
-                    }
-
-                    // 街の人気度の増加
-                    foreach(var a in _this.AddTownPopularities)
                     {
                         a.Add(_user.Town);
                     }
