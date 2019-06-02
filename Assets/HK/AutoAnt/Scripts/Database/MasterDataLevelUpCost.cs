@@ -25,6 +25,16 @@ namespace HK.AutoAnt.Database
             public int Id => this.id;
 
             /// <summary>
+            /// <see cref="MasterDataCellEvent.Record.Id"/>の該当するレベル
+            /// </summary>
+            /// <remarks>
+            /// <c>0</c>の場合は生産する際に必要なコストとなります
+            /// </remarks>
+            [SerializeField]
+            private int level = 0;
+            public int Level => this.level;
+
+            /// <summary>
             /// コスト
             /// </summary>
             [SerializeField]

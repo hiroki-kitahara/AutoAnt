@@ -69,6 +69,13 @@ namespace HK.AutoAnt.CellControllers.Events
                 return false;
             }
 
+            // コストが満たしていない場合は生成できない
+            var masterData = gameSystem.MasterData.LevelUpCost.Records.Get(cellEventRecordId, 0);
+            if(!masterData.Cost.IsEnough(gameSystem))
+            {
+                return false;
+            }
+
             return this.condition.Evalute(cells);
         }
 
