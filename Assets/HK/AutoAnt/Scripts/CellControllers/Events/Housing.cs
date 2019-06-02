@@ -37,7 +37,8 @@ namespace HK.AutoAnt.CellControllers.Events
 
         void IAddTownPopulation.Add(Town town)
         {
-            var result = (this.BasePopulationAmount * this.Level) * Mathf.FloorToInt(town.Popularity.Value / 1000);
+            // FIXME: 正式な計算式を適用する
+            var result = Mathf.FloorToInt((this.BasePopulationAmount * (this.Level / 10.0f)) * (town.Popularity.Value / 1000.0f));
             this.CurrentPopulation += result;
             town.AddPopulation(result);
         }
