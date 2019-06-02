@@ -1,8 +1,10 @@
 ﻿using System;
 using HK.AutoAnt.CellControllers.Gimmicks;
+using HK.AutoAnt.Systems;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using HK.AutoAnt.Extensions;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -48,7 +50,7 @@ namespace HK.AutoAnt.CellControllers.Events
             Destroy(this.gimmick.gameObject);
         }
 
-        public bool CanGenerate(Cell origin, CellMapper cellMapper)
+        public bool CanGenerate(Cell origin, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper)
         {
             Assert.IsNotNull(this.condition);
 

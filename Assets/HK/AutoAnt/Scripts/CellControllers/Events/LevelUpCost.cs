@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HK.Framework.Text;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -30,10 +31,10 @@ namespace HK.AutoAnt.CellControllers
         public class NeedItem
         {
             /// <summary>
-            /// アイテムレコードID
+            /// アイテムの名前
             /// </summary>
             [SerializeField]
-            private int itemRecordId;
+            private StringAsset.Finder itemName;
 
             /// <summary>
             /// 必要な量
