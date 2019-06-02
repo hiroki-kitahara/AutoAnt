@@ -9,17 +9,19 @@ using UnityEngine.Assertions;
 /// </summary>
 public partial class SROptions
 {
-    [Category("Game")]
-    [DisplayName("生成する建設物のID")]
-    public int ChangeCellEventGenerator
+    private const string UserCategory = "User";
+
+    [Category(UserCategory)]
+    [DisplayName("お金")]
+    public int SetMoney
     {
         get
         {
-            return GameSystem.Instance.CellManager.EventGenerator.RecordId;
+            return GameSystem.Instance.User.Wallet.Money;
         }
         set
         {
-            GameSystem.Instance.CellManager.EventGenerator.RecordId = value;
+            GameSystem.Instance.User.Wallet.SetMoney(value);
         }
     }
 }
