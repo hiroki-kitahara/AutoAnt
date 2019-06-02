@@ -41,8 +41,6 @@ namespace HK.AutoAnt.UserControllers
         public void AddPopularity(int value)
         {
             this.popularity.Value += value;
-
-            Assert.IsTrue(this.Popularity.Value >= 0);
         }
     }
 }
