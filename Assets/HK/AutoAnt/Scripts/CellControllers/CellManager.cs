@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Constants;
+using HK.AutoAnt.GameControllers;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -11,7 +12,7 @@ namespace HK.AutoAnt.CellControllers
     /// <summary>
     /// <see cref="Cell"/>を管理するクラス
     /// </summary>
-    public sealed class CellManager : MonoBehaviour
+    public sealed class CellManager : MonoBehaviour, ISavable
     {
         [SerializeField]
         private Transform parent = null;
@@ -48,6 +49,11 @@ namespace HK.AutoAnt.CellControllers
             }
 
             return null;
+        }
+
+        void ISavable.Initialize()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
