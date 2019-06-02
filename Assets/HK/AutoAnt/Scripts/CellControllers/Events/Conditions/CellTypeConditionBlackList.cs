@@ -12,7 +12,7 @@ namespace HK.AutoAnt.CellControllers.Events
     public sealed class CellTypeConditionBlackList : CellEventGenerateCondition
     {
         [SerializeField]
-        private CellType[] blackList;
+        private CellType[] blackList = null;
         
         public override bool Evalute(Cell[] cells)
         {

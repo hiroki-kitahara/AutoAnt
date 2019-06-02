@@ -2,6 +2,7 @@
 using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Constants;
 using HK.AutoAnt.GameControllers;
+using HK.AutoAnt.Systems;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -14,6 +15,9 @@ namespace HK.AutoAnt.CellControllers
     /// </summary>
     public sealed class CellManager : MonoBehaviour, ISavable
     {
+        [SerializeField]
+        private GameSystem gameSystem = null;
+        
         [SerializeField]
         private Transform parent = null;
 
@@ -29,7 +33,7 @@ namespace HK.AutoAnt.CellControllers
         void Awake()
         {
             this.CellGenerator = new CellGenerator(this.Mapper, this.parent);
-            this.EventGenerator = new CellEventGenerator(this.Mapper);
+            this.EventGenerator = new CellEventGenerator(this.gameSystem, this.Mapper);
 
             this.fieldInitializer.Generate(this);
         }
