@@ -21,5 +21,9 @@ namespace HK.AutoAnt.Database
         [SerializeField]
         private MasterDataCellEvent cellEvent = null;
         public MasterDataCellEvent CellEvent => this.cellEvent;
+
+        [SerializeField]
+        private MasterDataLevelUpCost levelUpCost = null;
+        public MasterDataLevelUpCost LevelUpCost => this.levelUpCost;
     }
 }
