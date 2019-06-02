@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -7,19 +8,22 @@ namespace HK.AutoAnt.UserControllers
     /// <summary>
     /// 街のデータ
     /// </summary>
+    [Serializable]
     public sealed class Town
     {
         /// <summary>
         /// 総人口
         /// </summary>
         public IReadOnlyReactiveProperty<int> Population => this.population;
-        private readonly ReactiveProperty<int> population = new ReactiveProperty<int>();
+        [SerializeField]
+        private IntReactiveProperty population = new IntReactiveProperty();
 
         /// <summary>
         /// 人気度
         /// </summary>
         public IReadOnlyReactiveProperty<int> Popularity => this.popularity;
-        private readonly ReactiveProperty<int> popularity = new ReactiveProperty<int>();
+        [SerializeField]
+        private IntReactiveProperty popularity = new IntReactiveProperty();
 
         /// <summary>
         /// 人口を加算する
