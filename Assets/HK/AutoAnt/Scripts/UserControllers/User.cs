@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using HK.AutoAnt.GameControllers;
+using HK.AutoAnt.SaveData;
+using HK.AutoAnt.SaveData.Serializables;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.UserControllers
@@ -7,7 +10,7 @@ namespace HK.AutoAnt.UserControllers
     /// ユーザー
     /// </summary>
     [CreateAssetMenu(menuName = "AutoAnt/User")]
-    public sealed class User : ScriptableObject
+    public sealed class User : ScriptableObject, ISavable
     {
         /// <summary>
         /// インベントリ
@@ -29,5 +32,28 @@ namespace HK.AutoAnt.UserControllers
         [SerializeField]
         private Town town = null;
         public Town Town => this.town;
+
+        public SerializableUser GetSerializable()
+        {
+            return new SerializableUser()
+            {
+                Wallet = this.Wallet.GetSerializable()
+            };
+        }
+
+        void ISavable.Initialize()
+        {
+            var saveData = LocalSaveData.User;
+            if(saveData.Exists())
+            {
+                var serializableData = saveData.Load();
+                this.wallet.Deserialize(serializableData.Wallet);
+            }
+        }
+
+        void ISavable.Save()
+        {
+            LocalSaveData.User.Save(this.GetSerializable());
+        }
     }
 }

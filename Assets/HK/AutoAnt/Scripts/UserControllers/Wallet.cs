@@ -1,4 +1,5 @@
 ﻿using System;
+using HK.AutoAnt.SaveData.Serializables;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -36,6 +37,19 @@ namespace HK.AutoAnt.UserControllers
         {
             this.money.Value += value;
             Assert.IsTrue(this.Money >= 0);
+        }
+
+        public SerializableWallet GetSerializable()
+        {
+            return new SerializableWallet()
+            {
+                Money = this.Money
+            };
+        }
+
+        public void Deserialize(SerializableWallet serializableData)
+        {
+            this.money.Value = serializableData.Money;
         }
     }
 }

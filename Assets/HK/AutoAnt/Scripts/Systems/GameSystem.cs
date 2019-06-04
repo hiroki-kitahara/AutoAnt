@@ -40,6 +40,7 @@ namespace HK.AutoAnt.Systems
 
         private ISavable[] Savables => new ISavable[]
         {
+            this.User,
             this.CellManager
         };
 
