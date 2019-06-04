@@ -1,6 +1,7 @@
 ﻿using HK.AutoAnt.CameraControllers;
 using HK.AutoAnt.CellControllers;
 using HK.AutoAnt.GameControllers;
+using HK.AutoAnt.Systems;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -62,6 +63,15 @@ namespace HK.AutoAnt.InputControllers
 
         void Update()
         {
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                GameSystem.Instance.CellManager.EventGenerator.RecordId = 100000;
+            }
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                GameSystem.Instance.CellManager.EventGenerator.RecordId = 101000;
+            }
+
             if (UnityEngine.Input.GetKeyDown(KeyCode.Q))
             {
                 this.inputActions = new ClickToClickableObjectActions(this.gameCameraController);

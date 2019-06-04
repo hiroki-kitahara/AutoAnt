@@ -20,9 +20,9 @@ namespace HK.AutoAnt.CellControllers
             foreach(var c in this.cells)
             {
                 var cell = cellManager.CellGenerator.Generate(c.Id, c.Position);
-                if(c.CellEvent != null)
+                if(c.CellEventRecordId != 0)
                 {
-                    cellManager.EventGenerator.Generate(cell, c.CellEvent);
+                    cellManager.EventGenerator.Generate(cell, c.CellEventRecordId);
                 }
             }
         }
@@ -39,8 +39,8 @@ namespace HK.AutoAnt.CellControllers
             public Vector2Int Position => this.position;
 
             [SerializeField]
-            private CellEvent cellEvent = null;
-            public CellEvent CellEvent => this.cellEvent;
+            private int cellEventRecordId = 0;
+            public int CellEventRecordId => this.cellEventRecordId;
         }
     }
 }
