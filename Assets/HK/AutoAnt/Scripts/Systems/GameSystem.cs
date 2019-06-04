@@ -2,6 +2,7 @@
 using HK.AutoAnt.CellControllers;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.GameControllers;
+using HK.AutoAnt.SaveData;
 using HK.AutoAnt.UserControllers;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -37,19 +38,36 @@ namespace HK.AutoAnt.Systems
         private Cameraman cameraman = null;
         public Cameraman Cameraman => this.cameraman;
 
+        private ISavable[] Savables => new ISavable[]
+        {
+            this.CellManager
+        };
+
         void Awake()
         {
             Assert.IsNull(instance);
             instance = this;
 
             this.userUpdater.Initialize(this.User, this.gameObject);
-            ((ISavable)this.cellManager).Initialize();
+
+            foreach(var savable in this.Savables)
+            {
+                savable.Initialize();
+            }
         }
 
         void OnDestroy()
         {
             Assert.IsNotNull(instance);
             instance = null;
+        }
+
+        void OnApplicationQuit()
+        {
+            foreach(var savable in this.Savables)
+            {
+                savable.Save();
+            }
         }
     }
 }

@@ -12,5 +12,10 @@ namespace HK.AutoAnt.GameControllers
         /// セーブデータがある場合は読み込み、ない場合は通常通り初期化する
         /// </summary>
         void Initialize();
+
+        /// <summary>
+        /// セーブする
+        /// </summary>
+        void Save();
     }
 }

@@ -30,11 +30,6 @@ namespace HK.AutoAnt.CellControllers
         public CellGenerator CellGenerator { get; private set; }
 
         public CellEventGenerator EventGenerator { get; private set; }
-
-        void OnApplicationQuit()
-        {
-            LocalSaveData.Game.Mapper.Save(this.Mapper.GetSerializable());
-        }
         
         /// <summary>
         /// クリック可能なオブジェクトを返す
@@ -51,6 +46,11 @@ namespace HK.AutoAnt.CellControllers
             }
 
             return null;
+        }
+
+        void ISavable.Save()
+        {
+            LocalSaveData.Game.Mapper.Save(this.Mapper.GetSerializable());
         }
 
         void ISavable.Initialize()
