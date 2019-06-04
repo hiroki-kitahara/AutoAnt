@@ -24,5 +24,16 @@ public partial class SROptions
             GameSystem.Instance.User.Wallet.SetMoney(value);
         }
     }
+
+    [Category(UserCategory)]
+    [DisplayName("全部のアイテム手に入れる")]
+    public void AcquireItemAll()
+    {
+        var masterData = GameSystem.Instance.MasterData.Item;
+        foreach(var record in masterData.Records)
+        {
+            GameSystem.Instance.User.Inventory.AddItem(record, 10);
+        }
+    }
 }
 #endif
