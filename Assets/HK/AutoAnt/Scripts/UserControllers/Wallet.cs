@@ -51,5 +51,14 @@ namespace HK.AutoAnt.UserControllers
         {
             this.money.Value = serializableData.Money;
         }
+#if AA_DEBUG
+        /// <summary>
+        /// お金を設定する
+        /// </summary>
+        public void SetMoney(int value)
+        {
+            this.money.Value = value;
+        }
+#endif
     }
 }
