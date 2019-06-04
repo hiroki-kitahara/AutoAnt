@@ -33,7 +33,7 @@ namespace HK.AutoAnt.CellControllers
 
         void OnApplicationQuit()
         {
-            LocalSaveData.Game.Mapper.Save(this.Mapper);
+            LocalSaveData.Game.Mapper.Save(this.Mapper.GetSerializable());
         }
         
         /// <summary>
@@ -56,18 +56,15 @@ namespace HK.AutoAnt.CellControllers
         void ISavable.Initialize()
         {
             var saveData = LocalSaveData.Game;
-            if(saveData.Mapper.Exists())
-            {
-                this.Mapper = saveData.Mapper.Load();
-            }
-            else
-            {
-                this.Mapper = new CellMapper();
-            }
+            this.Mapper = new CellMapper();
             this.CellGenerator = new CellGenerator(this.Mapper, this.parent);
             this.EventGenerator = new CellEventGenerator(this.gameSystem, this.Mapper);
 
-            if(!saveData.Mapper.Exists())
+            if(saveData.Mapper.Exists())
+            {
+                this.Mapper.Deserialize(saveData.Mapper.Load(), this.CellGenerator, this.EventGenerator);
+            }
+            else
             {
                 this.fieldInitializer.Generate(this);
             }

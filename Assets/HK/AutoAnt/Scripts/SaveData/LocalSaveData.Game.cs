@@ -1,5 +1,6 @@
 ﻿using HK.AutoAnt.CellControllers;
 using HK.AutoAnt.SaveData.Internal;
+using HK.AutoAnt.SaveData.Serializables;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -14,7 +15,7 @@ namespace HK.AutoAnt.SaveData
 
         public class GameSaveData
         {
-            public readonly ISaveData<CellMapper> Mapper = new SaveData<CellMapper>("Game.CellMapper", new ES3Settings() { format = ES3.Format.JSON });
+            public readonly ISaveData<SerializableCellMapper> Mapper = new SaveData<SerializableCellMapper>("Game.CellMapper", new ES3Settings() { format = ES3.Format.JSON });
         }
     }
 }
