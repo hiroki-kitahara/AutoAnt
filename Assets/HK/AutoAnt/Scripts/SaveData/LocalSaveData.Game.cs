@@ -10,6 +10,8 @@ namespace HK.AutoAnt.SaveData
     /// </summary>
     public static partial class LocalSaveData
     {
+        public static readonly GameSaveData Game = new GameSaveData();
+
         public class GameSaveData
         {
             public readonly ISaveData<CellMapper> Mapper = new SaveData<CellMapper>("Game.CellMapper", new ES3Settings() { format = ES3.Format.JSON });
