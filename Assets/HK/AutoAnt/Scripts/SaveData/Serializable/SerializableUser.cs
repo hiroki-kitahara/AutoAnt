@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using HK.AutoAnt.UserControllers;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.SaveData.Serializables
@@ -9,5 +10,7 @@ namespace HK.AutoAnt.SaveData.Serializables
     public sealed class SerializableUser
     {
         public SerializableWallet Wallet { get; set; }
+
+        public Inventory Inventory { get; set; }
     }
 }

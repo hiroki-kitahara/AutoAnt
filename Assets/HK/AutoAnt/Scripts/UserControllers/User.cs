@@ -37,7 +37,8 @@ namespace HK.AutoAnt.UserControllers
         {
             return new SerializableUser()
             {
-                Wallet = this.Wallet.GetSerializable()
+                Wallet = this.Wallet.GetSerializable(),
+                Inventory = this.Inventory
             };
         }
 
@@ -48,6 +49,7 @@ namespace HK.AutoAnt.UserControllers
             {
                 var serializableData = saveData.Load();
                 this.wallet.Deserialize(serializableData.Wallet);
+                this.inventory = serializableData.Inventory;
             }
         }
 
