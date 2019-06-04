@@ -43,6 +43,7 @@ namespace HK.AutoAnt.Systems
             instance = this;
 
             this.userUpdater.Initialize(this.User, this.gameObject);
+            ((ISavable)this.cellManager).Initialize();
         }
 
         void OnDestroy()

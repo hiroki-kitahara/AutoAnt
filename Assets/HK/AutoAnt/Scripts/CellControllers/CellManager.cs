@@ -2,6 +2,7 @@
 using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Constants;
 using HK.AutoAnt.GameControllers;
+using HK.AutoAnt.SaveData;
 using HK.AutoAnt.Systems;
 using UniRx;
 using UnityEngine;
@@ -24,20 +25,17 @@ namespace HK.AutoAnt.CellControllers
         [SerializeField]
         private FieldInitializer fieldInitializer = null;
 
-        public CellMapper Mapper { get; private set; } = new CellMapper();
+        public CellMapper Mapper { get; private set; }
 
         public CellGenerator CellGenerator { get; private set; }
 
         public CellEventGenerator EventGenerator { get; private set; }
 
-        void Awake()
+        void OnApplicationQuit()
         {
-            this.CellGenerator = new CellGenerator(this.Mapper, this.parent);
-            this.EventGenerator = new CellEventGenerator(this.gameSystem, this.Mapper);
-
-            this.fieldInitializer.Generate(this);
+            LocalSaveData.Game.Mapper.Save(this.Mapper);
         }
-
+        
         /// <summary>
         /// クリック可能なオブジェクトを返す
         /// </summary>
@@ -57,7 +55,22 @@ namespace HK.AutoAnt.CellControllers
 
         void ISavable.Initialize()
         {
-            throw new System.NotImplementedException();
+            var saveData = LocalSaveData.Game;
+            if(saveData.Mapper.Exists())
+            {
+                this.Mapper = saveData.Mapper.Load();
+            }
+            else
+            {
+                this.Mapper = new CellMapper();
+            }
+            this.CellGenerator = new CellGenerator(this.Mapper, this.parent);
+            this.EventGenerator = new CellEventGenerator(this.gameSystem, this.Mapper);
+
+            if(!saveData.Mapper.Exists())
+            {
+                this.fieldInitializer.Generate(this);
+            }
         }
     }
 }
