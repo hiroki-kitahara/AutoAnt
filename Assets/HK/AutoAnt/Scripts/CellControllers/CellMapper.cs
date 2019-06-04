@@ -173,6 +173,10 @@ namespace HK.AutoAnt.CellControllers
             {
                 result.Cells.Add(new SerializableCell() { RecordId = c.RecordId, Position = c.Position });
             }
+            foreach(var e in this.CellEvent.List)
+            {
+                result.CellEvents.Add(e);
+            }
 
             return result;
         }
@@ -182,6 +186,10 @@ namespace HK.AutoAnt.CellControllers
             foreach(var c in serializableData.Cells)
             {
                 cellGenerator.Generate(c.RecordId, c.Position);
+            }
+            foreach(var e in serializableData.CellEvents)
+            {
+                cellEventGenerator.GenerateOnDeserialize((CellEvent)e);
             }
         }
 

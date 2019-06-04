@@ -17,11 +17,11 @@ namespace HK.AutoAnt.CellControllers.Events
         [SerializeField]
         private Blank gimmickPrefab = null;
 
-        public override CellGimmickController CreateGimmickController()
+        public override CellGimmickController CreateGimmickController(Vector2Int origin)
         {
             var gimmick = Instantiate(this.gimmickPrefab);
             var constants = GameSystem.Instance.MasterData.Cell.Constants;
-            var position = new Vector3(this.Origin.x * (constants.Scale.x + constants.Interval), 0.0f, this.Origin.y * (constants.Scale.z + constants.Interval));
+            var position = new Vector3(origin.x * (constants.Scale.x + constants.Interval), 0.0f, origin.y * (constants.Scale.z + constants.Interval));
             var fixedSize = this.size - 1;
             position += new Vector3((constants.Scale.x / 2.0f) * fixedSize, 0.0f, (constants.Scale.z / 2.0f) * fixedSize);
             position += new Vector3(constants.Interval * fixedSize, 0.0f, constants.Interval * fixedSize);

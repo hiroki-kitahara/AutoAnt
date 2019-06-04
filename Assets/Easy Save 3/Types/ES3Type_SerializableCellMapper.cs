@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("Cells")]
+	[ES3PropertiesAttribute("Cells", "CellEvents")]
 	public class ES3Type_SerializableCellMapper : ES3ObjectType
 	{
 		public static ES3Type Instance = null;
@@ -15,6 +15,7 @@ namespace ES3Types
 			var instance = (HK.AutoAnt.SaveData.Serializables.SerializableCellMapper)obj;
 			
 			writer.WriteProperty("Cells", instance.Cells);
+			writer.WriteProperty("CellEvents", instance.CellEvents);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -27,6 +28,9 @@ namespace ES3Types
 					
 					case "Cells":
 						instance.Cells = reader.Read<System.Collections.Generic.List<HK.AutoAnt.SaveData.Serializables.SerializableCell>>();
+						break;
+					case "CellEvents":
+						instance.CellEvents = reader.Read<System.Collections.Generic.List<HK.AutoAnt.CellControllers.Events.ICellEvent>>();
 						break;
 					default:
 						reader.Skip();
