@@ -14,10 +14,12 @@ namespace HK.AutoAnt.Extensions
         /// <summary>
         /// IDとレベルからレコードを返す
         /// </summary>
+        /// <remarks>
+        /// <c>null</c>が返る場合はレベルアップ出来ないと判断する
+        /// </remarks>
         public static MasterDataLevelUpCost.Record Get(this IEnumerable<MasterDataLevelUpCost.Record> self, int id, int level)
         {
             var result = self.FirstOrDefault(r => r.Id == id && r.Level == level);
-            Assert.IsNotNull(result, $"Id = {id}, Level = {level}に対応する{typeof(MasterDataLevelUpCost.Record)}がありませんでした");
 
             return result;
         }

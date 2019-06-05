@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.GameControllers;
+﻿using HK.AutoAnt.Extensions;
+using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.UserControllers;
 using UnityEngine;
@@ -35,6 +36,8 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </remarks>
         public int Level = 1;
 
+        private GameSystem gameSystem;
+
         void IAddTownPopulation.Add(Town town)
         {
             // FIXME: 正式な計算式を適用する
@@ -46,8 +49,9 @@ namespace HK.AutoAnt.CellControllers.Events
         public override void Initialize(Vector2Int position, GameSystem gameSystem)
         {
             base.Initialize(position, gameSystem);
-            gameSystem.User.Town.AddPopulation(this.CurrentPopulation);
-            gameSystem.UserUpdater.AddTownPopulations.Add(this);
+            this.gameSystem = gameSystem;
+            this.gameSystem.User.Town.AddPopulation(this.CurrentPopulation);
+            this.gameSystem.UserUpdater.AddTownPopulations.Add(this);
         }
 
         public override void Remove(GameSystem gameSystem)
@@ -55,6 +59,26 @@ namespace HK.AutoAnt.CellControllers.Events
             base.Remove(gameSystem);
             gameSystem.UserUpdater.AddTownPopulations.Remove(this);
             gameSystem.User.Town.AddPopulation(-this.CurrentPopulation);
+        }
+
+        public override void OnClick(Cell owner)
+        {
+            var levelUpCostRecord = this.gameSystem.MasterData.LevelUpCost.Records.Get(this.Id, this.Level);
+            if(levelUpCostRecord == null)
+            {
+                Debug.Log($"Id = {this.Id}は既にレベルMAX");
+                return;
+            }
+
+            if(!levelUpCostRecord.Cost.IsEnough(this.gameSystem.User, this.gameSystem.MasterData.Item))
+            {
+                Debug.Log($"Id = {this.Id}, Level = {this.Level}の必要な素材が足りない");
+                return;
+            }
+
+            levelUpCostRecord.Cost.Consume(this.gameSystem.User, this.gameSystem.MasterData.Item);
+            this.Level++;
+            Debug.Log($"LevelUp -> {this.Level}");
         }
     }
 }
