@@ -15,7 +15,7 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - 人口を増やす
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Housing")]
-    public sealed class Housing : CellEventBlankGimmick, IAddTownPopulation
+    public sealed class Housing : CellEventBlankGimmick, IAddTownPopulation, ILevelUpEvent
     {
         /// <summary>
         /// ベース人口増加量
@@ -63,18 +63,33 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public override void OnClick(Cell owner)
         {
+            if(this.CanLevelUp())
+            {
+                this.LevelUp();
+            }
+        }
+
+        public bool CanLevelUp()
+        {
             var levelUpCostRecord = this.gameSystem.MasterData.LevelUpCost.Records.Get(this.Id, this.Level);
-            if(levelUpCostRecord == null)
+            if (levelUpCostRecord == null)
             {
                 Debug.Log($"Id = {this.Id}は既にレベルMAX");
-                return;
+                return false;
             }
 
-            if(!levelUpCostRecord.Cost.IsEnough(this.gameSystem.User, this.gameSystem.MasterData.Item))
+            if (!levelUpCostRecord.Cost.IsEnough(this.gameSystem.User, this.gameSystem.MasterData.Item))
             {
                 Debug.Log($"Id = {this.Id}, Level = {this.Level}の必要な素材が足りない");
-                return;
+                return false;
             }
+
+            return true;
+        }
+
+        public void LevelUp()
+        {
+            var levelUpCostRecord = this.gameSystem.MasterData.LevelUpCost.Records.Get(this.Id, this.Level);
 
             levelUpCostRecord.Cost.Consume(this.gameSystem.User, this.gameSystem.MasterData.Item);
             this.Level++;
