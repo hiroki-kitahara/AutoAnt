@@ -20,7 +20,7 @@ namespace HK.AutoAnt.CellControllers
         /// お金
         /// </summary>
         [SerializeField]
-        private int money;
+        private int money = 0;
 
         /// <summary>
         /// 必要なアイテムリスト
@@ -65,13 +65,13 @@ namespace HK.AutoAnt.CellControllers
             /// アイテムの名前
             /// </summary>
             [SerializeField]
-            private StringAsset.Finder itemName;
+            private StringAsset.Finder itemName = null;
 
             /// <summary>
             /// 必要な量
             /// </summary>
             [SerializeField]
-            private int amount;
+            private int amount = 0;
 
             /// <summary>
             /// 足りているか返す

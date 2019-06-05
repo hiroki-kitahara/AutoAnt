@@ -37,6 +37,7 @@ namespace HK.AutoAnt.CellControllers.Events
         public int Level = 1;
 
         private GameSystem gameSystem;
+        
 
         int ILevelUpEvent.Level
         {
