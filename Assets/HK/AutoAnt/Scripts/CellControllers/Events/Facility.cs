@@ -1,5 +1,6 @@
 ﻿using System;
 using HK.AutoAnt.CellControllers.Gimmicks;
+using HK.AutoAnt.Extensions;
 using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.UserControllers;
@@ -19,7 +20,7 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - アイテムの生産
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Facility")]
-    public sealed class Facility : CellEventBlankGimmick
+    public sealed class Facility : CellEventBlankGimmick, ILevelUpEvent
     {
         /// <summary>
         /// 加算する人気度
@@ -29,7 +30,7 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// レベル
         /// </summary>
-        public int Level = 1;
+        public int Level { get; set; } = 1;
 
         /// <summary>
         /// 獲得できるアイテムのレコードID
@@ -41,9 +42,12 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         public int CurrentItemNumber;
 
+        private GameSystem gameSystem;
+
         public override void Initialize(Vector2Int position, GameSystem gameSystem)
         {
             base.Initialize(position, gameSystem);
+            this.gameSystem = gameSystem;
             gameSystem.User.Town.AddPopularity(this.PopularityAmount);
         }
 
@@ -51,6 +55,24 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             base.Remove(gameSystem);
             gameSystem.User.Town.AddPopularity(-this.PopularityAmount);
+        }
+
+        public override void OnClick(Cell owner)
+        {
+            if(this.CanLevelUp())
+            {
+                this.LevelUp();
+            }
+        }
+
+        public bool CanLevelUp()
+        {
+            return this.CanLevelUp(this.gameSystem);
+        }
+
+        public void LevelUp()
+        {
+            this.LevelUp(this.gameSystem);
         }
     }
 }
