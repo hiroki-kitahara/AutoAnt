@@ -34,22 +34,9 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <remarks>
         /// 人口増加の変動に利用しています
         /// </remarks>
-        public int Level = 1;
+        public int Level { get; set; } = 1;
 
         private GameSystem gameSystem;
-        
-
-        int ILevelUpEvent.Level
-        {
-            get
-            {
-                return this.Level;
-            }
-            set
-            {
-                this.Level = value;
-            }
-        }
 
         void IAddTownPopulation.Add(Town town)
         {
