@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using HK.AutoAnt.CellControllers;
 using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Constants;
@@ -17,9 +18,22 @@ namespace HK.AutoAnt.Database
         [Serializable]
         public class Record : IRecord
         {
-            [SerializeField]
-            private int id = 0;
-            public int Id => this.id;
+            private int cachedId = int.MinValue;
+            public int Id
+            {
+                get
+                {
+                    if(this.cachedId == int.MinValue)
+                    {
+                        if(!int.TryParse(this.eventData.name, out this.cachedId))
+                        {
+                            Assert.IsTrue(false, $"{typeof(CellEvent).Name}の{this.eventData.name}を数値に変換出来ませんでした");
+                        }
+                    }
+
+                    return this.cachedId;
+                }
+            }
 
             [SerializeField]
             private CellEvent eventData = null;
