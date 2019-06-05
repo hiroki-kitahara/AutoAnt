@@ -8,6 +8,10 @@ namespace HK.AutoAnt.CellControllers.Events
     /// </summary>
     public interface ILevelUpEvent
     {
+        int Id { get; }
+
+        int Level { get; set; }
+        
         /// <summary>
         /// レベルアップ可能か返す
         /// </summary>

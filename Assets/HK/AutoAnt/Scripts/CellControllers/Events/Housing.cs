@@ -38,6 +38,18 @@ namespace HK.AutoAnt.CellControllers.Events
 
         private GameSystem gameSystem;
 
+        int ILevelUpEvent.Level
+        {
+            get
+            {
+                return this.Level;
+            }
+            set
+            {
+                this.Level = value;
+            }
+        }
+
         void IAddTownPopulation.Add(Town town)
         {
             // FIXME: 正式な計算式を適用する
@@ -71,29 +83,12 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public bool CanLevelUp()
         {
-            var levelUpCostRecord = this.gameSystem.MasterData.LevelUpCost.Records.Get(this.Id, this.Level);
-            if (levelUpCostRecord == null)
-            {
-                Debug.Log($"Id = {this.Id}は既にレベルMAX");
-                return false;
-            }
-
-            if (!levelUpCostRecord.Cost.IsEnough(this.gameSystem.User, this.gameSystem.MasterData.Item))
-            {
-                Debug.Log($"Id = {this.Id}, Level = {this.Level}の必要な素材が足りない");
-                return false;
-            }
-
-            return true;
+            return this.CanLevelUp(this.gameSystem);
         }
 
         public void LevelUp()
         {
-            var levelUpCostRecord = this.gameSystem.MasterData.LevelUpCost.Records.Get(this.Id, this.Level);
-
-            levelUpCostRecord.Cost.Consume(this.gameSystem.User, this.gameSystem.MasterData.Item);
-            this.Level++;
-            Debug.Log($"LevelUp -> {this.Level}");
+            this.LevelUp(this.gameSystem);
         }
     }
 }
