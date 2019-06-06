@@ -24,24 +24,9 @@ namespace HK.AutoAnt.CellControllers.Events
     public sealed class Facility : CellEventBlankGimmick, ILevelUpEvent
     {
         /// <summary>
-        /// 加算する人気度
-        /// </summary>
-        public int PopularityAmount = 0;
-
-        /// <summary>
         /// レベル
         /// </summary>
         public int Level { get; set; } = 1;
-
-        /// <summary>
-        /// 獲得できるアイテムのレコードID
-        /// </summary>
-        public int AcquireItemRecordId = 0;
-
-        /// <summary>
-        /// 保持しているアイテムの数
-        /// </summary>
-        public int CurrentItemNumber;
 
         private GameSystem gameSystem;
 
