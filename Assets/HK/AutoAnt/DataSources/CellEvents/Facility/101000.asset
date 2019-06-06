@@ -17,7 +17,5 @@ MonoBehaviour:
   gimmickPrefab: {fileID: 1696405967700200454, guid: c6dfb78c161aa4669837e113d5c41c8a,
     type: 3}
   PopularityAmount: 10
-  Level: 1
   AcquireItemRecordId: 0
-  CurrentPopularity: 0
   CurrentItemNumber: 0
