@@ -112,6 +112,9 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         private bool CanCollectionProducts => this.products.Count > 0;
 
+        /// <summary>
+        /// 生産物をインベントリに追加する
+        /// </summary>
         private void CollectionProducts()
         {
             Assert.IsTrue(this.CanCollectionProducts);
