@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("size", "Level", "Origin", "name")]
+	[ES3PropertiesAttribute("productTimer", "products", "size", "Level", "Origin", "name")]
 	public class ES3Type_Facility : ES3ScriptableObjectType
 	{
 		public static ES3Type Instance = null;
@@ -14,6 +14,8 @@ namespace ES3Types
 		{
 			var instance = (HK.AutoAnt.CellControllers.Events.Facility)obj;
 			
+			writer.WritePrivateField("productTimer", instance);
+			writer.WritePrivateField("products", instance);
 			writer.WritePrivateField("size", instance);
 			writer.WriteProperty("Level", instance.Level, ES3Type_int.Instance);
 			writer.WritePrivateProperty("Origin", instance);
@@ -28,6 +30,12 @@ namespace ES3Types
 				switch(propertyName)
 				{
 					
+					case "productTimer":
+					reader.SetPrivateField("productTimer", reader.Read<System.Single>(), instance);
+					break;
+					case "products":
+					reader.SetPrivateField("products", reader.Read<System.Collections.Generic.List<System.String>>(), instance);
+					break;
 					case "size":
 					reader.SetPrivateField("size", reader.Read<System.Int32>(), instance);
 					break;

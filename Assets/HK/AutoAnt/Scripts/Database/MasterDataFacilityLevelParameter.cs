@@ -38,6 +38,13 @@ namespace HK.AutoAnt.Database
             public string ProductName => this.productName.Get;
 
             /// <summary>
+            /// 生産物を生産するのに必要な時間（秒）
+            /// </summary>
+            [SerializeField]
+            private float needProductTime = 0.0f;
+            public float NeedProductTime => this.needProductTime;
+
+            /// <summary>
             /// 人気度
             /// </summary>
             [SerializeField]
