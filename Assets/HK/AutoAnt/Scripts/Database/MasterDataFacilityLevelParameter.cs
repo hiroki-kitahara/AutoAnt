@@ -7,7 +7,7 @@ using UnityEngine.Assertions;
 namespace HK.AutoAnt.Database
 {
     /// <summary>
-    /// アイテムのマスターデータ
+    /// 施設のレベルに紐づくパラメータのマスターデータ
     /// </summary>
     [CreateAssetMenu(menuName = "AutoAnt/Database/FacilityLevelParameter")]
     public sealed class MasterDataFacilityLevelParameter : MasterDataBase<MasterDataFacilityLevelParameter.Record>

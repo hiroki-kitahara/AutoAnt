@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03afc050a6af247a4bcc038b95309fae, type: 3}
+  m_Name: FacilityLevelParameter
+  m_EditorClassIdentifier: 
+  records:
+  - id: 101000
+    level: 1
+    productSlot: 5
+    productName:
+      target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
+      value: "\u9244\u9271\u77F3"
+      guid: 2529d8c5-7d90-4263-bf83-5488875c491f
+    popularity: 10
