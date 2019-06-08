@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   condition: {fileID: 11400000, guid: 4c0900e2970f54676923b8814d79aff7, type: 2}
   size: 1
+  buildingSE: {fileID: 8300000, guid: 0468cadb0012c46d2a975df3af8b8038, type: 3}
+  destructionSE: {fileID: 8300000, guid: ded58d45a41ac4c32ad7d0dfcce0239a, type: 3}
   gimmickPrefab: {fileID: 1696405967700200454, guid: 81339a340327d4660946cc3c5dee835b,
     type: 3}
   BasePopulationAmount: 10
   CurrentPopulation: 0
-  Level: 1

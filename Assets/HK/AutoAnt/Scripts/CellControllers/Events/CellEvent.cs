@@ -20,6 +20,16 @@ namespace HK.AutoAnt.CellControllers.Events
         protected int size = 1;
         public int Size => this.size;
 
+        [SerializeField]
+        private AudioClip buildingSE = null;
+        public AudioClip BuildingSE => this.buildingSE;
+
+        [SerializeField]
+        private AudioClip destructionSE = null;
+        public AudioClip DestructionSE => this.destructionSE;
+
+        public int Id => int.Parse(this.name);
+
         public Vector2Int Origin { get; protected set; }
 
         /// <summary>
@@ -29,7 +39,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
         protected CellGimmickController gimmick;
 
-        public abstract CellGimmickController CreateGimmickController();
+        public abstract CellGimmickController CreateGimmickController(Vector2Int origin);
 
 #if UNITY_EDITOR
         protected virtual void OnValidate()
@@ -38,16 +48,33 @@ namespace HK.AutoAnt.CellControllers.Events
         }
 #endif
 
-        public virtual void Initialize(Vector2Int position, GameSystem gameSystem)
+        public virtual void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializeGame)
         {
             this.Origin = position;
-            this.gimmick = this.CreateGimmickController();
+
+            // 自分自身のマスターデータを取得してデータを参照している
+            // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
+            var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
+            this.gimmick = record.EventData.CreateGimmickController(this.Origin);
+
+            if(!isInitializeGame)
+            {
+                Assert.IsNotNull(record.EventData.buildingSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
+                AutoAntSystem.Audio.SE.Play(record.EventData.buildingSE);
+            }
         }
 
         public virtual void Remove(GameSystem gameSystem)
         {
             this.instanceEvents.Clear();
             Destroy(this.gimmick.gameObject);
+
+            // 自分自身のマスターデータを取得してデータを参照している
+            // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
+            var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
+
+            Assert.IsNotNull(record.EventData.destructionSE, $"Id = {this.Id}の破壊時のSE再生に失敗しました");
+            AutoAntSystem.Audio.SE.Play(record.EventData.destructionSE);
         }
 
         public bool CanGenerate(Cell origin, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper)

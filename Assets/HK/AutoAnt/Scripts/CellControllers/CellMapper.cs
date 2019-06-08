@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using HK.AutoAnt.CellControllers.Events;
+using HK.AutoAnt.SaveData.Serializables;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -163,6 +164,33 @@ namespace HK.AutoAnt.CellControllers
         public Vector2Int[] GetEmptyPositions(Vector2Int origin, int range)
         {
             return this.GetRange(origin, range, (p) => !this.cell.Map.ContainsKey(p));
+        }
+
+        public SerializableCellMapper GetSerializable()
+        {
+            var result = new SerializableCellMapper();
+            foreach(var c in this.Cell.List)
+            {
+                result.Cells.Add(new SerializableCell() { RecordId = c.RecordId, Position = c.Position });
+            }
+            foreach(var e in this.CellEvent.List)
+            {
+                result.CellEvents.Add(e);
+            }
+
+            return result;
+        }
+
+        public void Deserialize(SerializableCellMapper serializableData, CellGenerator cellGenerator, CellEventGenerator cellEventGenerator)
+        {
+            foreach(var c in serializableData.Cells)
+            {
+                cellGenerator.Generate(c.RecordId, c.Position);
+            }
+            foreach(var e in serializableData.CellEvents)
+            {
+                cellEventGenerator.GenerateOnDeserialize((CellEvent)e);
+            }
         }
 
         public interface IReadonlyElement<Key, Value>
