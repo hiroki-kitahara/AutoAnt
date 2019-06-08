@@ -15,6 +15,11 @@ namespace HK.AutoAnt.AudioSystems
 
         private readonly CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+        public void Play(ClipBundle clipBundle)
+        {
+            this.Play(clipBundle.Intro, clipBundle.Loop);
+        }
+
         public void Play(AudioClip intro, AudioClip loop)
         {
             this.compositeDisposable.Clear();
@@ -31,6 +36,18 @@ namespace HK.AutoAnt.AudioSystems
                 })
                 .AddTo(this)
                 .AddTo(this.compositeDisposable);
+        }
+
+        [Serializable]
+        public class ClipBundle
+        {
+            [SerializeField]
+            private AudioClip intro;
+            public AudioClip Intro => this.intro;
+
+            [SerializeField]
+            private AudioClip loop;
+            public AudioClip Loop => this.loop;
         }
     }
 }
