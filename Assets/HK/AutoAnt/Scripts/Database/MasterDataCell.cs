@@ -32,6 +32,13 @@ namespace HK.AutoAnt.Database
             [SerializeField]
             private float interval = 1.5f;
             public float Interval => this.interval;
+
+            /// <summary>
+            /// セル開拓時のSE
+            /// </summary>
+            [SerializeField]
+            private AudioClip developSE = null;
+            public AudioClip DevelopSE => this.developSE;
         }
 
         [Serializable]
