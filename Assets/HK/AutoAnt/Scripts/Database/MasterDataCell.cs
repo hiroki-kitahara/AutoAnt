@@ -39,6 +39,13 @@ namespace HK.AutoAnt.Database
             [SerializeField]
             private AudioClip developSE = null;
             public AudioClip DevelopSE => this.developSE;
+            
+            /// <summary>
+            /// 開拓するためのコスト係数
+            /// </summary>
+            [SerializeField]
+            private int developCost = 10;
+            public int DevelopCost => this.developCost;
         }
 
         [Serializable]
