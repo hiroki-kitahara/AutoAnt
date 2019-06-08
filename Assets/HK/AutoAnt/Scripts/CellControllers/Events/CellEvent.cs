@@ -21,12 +21,10 @@ namespace HK.AutoAnt.CellControllers.Events
         public int Size => this.size;
 
         [SerializeField]
-        private AudioClip buildingSE = null;
-        public AudioClip BuildingSE => this.buildingSE;
+        private AudioClip constructionSE = null;
 
         [SerializeField]
         private AudioClip destructionSE = null;
-        public AudioClip DestructionSE => this.destructionSE;
 
         public int Id => int.Parse(this.name);
 
@@ -59,8 +57,8 @@ namespace HK.AutoAnt.CellControllers.Events
 
             if(!isInitializeGame)
             {
-                Assert.IsNotNull(record.EventData.buildingSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
-                AutoAntSystem.Audio.SE.Play(record.EventData.buildingSE);
+                Assert.IsNotNull(record.EventData.constructionSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
+                AutoAntSystem.Audio.SE.Play(record.EventData.constructionSE);
             }
         }
 
