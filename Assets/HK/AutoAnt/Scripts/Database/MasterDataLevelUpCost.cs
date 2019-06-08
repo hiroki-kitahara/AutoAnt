@@ -15,7 +15,7 @@ namespace HK.AutoAnt.Database
     public sealed class MasterDataLevelUpCost : MasterDataBase<MasterDataLevelUpCost.Record>
     {
         [Serializable]
-        public class Record : IRecord
+        public class Record : IRecord, IRecordLevel
         {
             /// <summary>
             /// <see cref="MasterDataCellEvent.Record.Id"/>に紐づくID
@@ -38,7 +38,7 @@ namespace HK.AutoAnt.Database
             /// コスト
             /// </summary>
             [SerializeField]
-            private LevelUpCost cost;
+            private LevelUpCost cost = null;
             public LevelUpCost Cost => this.cost;
         }
     }
