@@ -2,6 +2,7 @@
 using HK.AutoAnt.Events;
 using HK.AutoAnt.UserControllers;
 using HK.Framework.EventSystems;
+using HK.Framework.Text;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -16,19 +17,21 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private NotificationUIElement elementPrefab = null;
 
+        [SerializeField]
+        private float delayElementDestroy = 0.0f;
+
+        [SerializeField]
+        private StringAsset.Finder acquireItemFormat = null;
+
         void Awake()
         {
             Broker.Global.Receive<AddedItem>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.CreateElement(x.Inventory, x.Item, x.Amount);
+                    var message = _this.acquireItemFormat.Format(x.Item.Name, x.Amount, x.Inventory.Items[x.Item.Id]);
+                    Instantiate(this.elementPrefab, this.transform, false).Initialize(message, this.delayElementDestroy);
                 })
                 .AddTo(this);
-        }
-
-        private void CreateElement(Inventory inventory, MasterDataItem.Record item, int amount)
-        {
-            Instantiate(this.elementPrefab, this.transform, false).Initialize(item, amount, inventory);
         }
     }
 }
