@@ -57,8 +57,11 @@ namespace HK.AutoAnt.CellControllers.Events
             var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
             this.gimmick = record.EventData.CreateGimmickController(this.Origin);
 
-            Assert.IsNotNull(record.EventData.buildingSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
-            AutoAntSystem.Audio.SE.Play(record.EventData.buildingSE);
+            if(!isInitializeGame)
+            {
+                Assert.IsNotNull(record.EventData.buildingSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
+                AutoAntSystem.Audio.SE.Play(record.EventData.buildingSE);
+            }
         }
 
         public virtual void Remove(GameSystem gameSystem)
