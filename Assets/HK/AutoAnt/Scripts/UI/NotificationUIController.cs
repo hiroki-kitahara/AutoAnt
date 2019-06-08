@@ -29,9 +29,21 @@ namespace HK.AutoAnt.UI
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     var message = _this.acquireItemFormat.Format(x.Item.Name, x.Amount, x.Inventory.Items[x.Item.Id]);
-                    Instantiate(this.elementPrefab, this.transform, false).Initialize(message, this.delayElementDestroy);
+                    _this.CreateElement(message);
                 })
                 .AddTo(this);
+
+            Broker.Global.Receive<RequestNotification>()
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    _this.CreateElement(x.Message);
+                })
+                .AddTo(this);
+        }
+
+        private void CreateElement(string message)
+        {
+            Instantiate(this.elementPrefab, this.transform, false).Initialize(message, this.delayElementDestroy);
         }
     }
 }
