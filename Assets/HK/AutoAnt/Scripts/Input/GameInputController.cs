@@ -1,7 +1,9 @@
 ﻿using HK.AutoAnt.CameraControllers;
 using HK.AutoAnt.CellControllers;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.Systems;
+using HK.Framework.EventSystems;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -66,23 +68,28 @@ namespace HK.AutoAnt.InputControllers
             if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha1))
             {
                 GameSystem.Instance.CellManager.EventGenerator.RecordId = 100000;
+                Broker.Global.Publish(RequestNotification.Get($"建設するID = {GameSystem.Instance.CellManager.EventGenerator.RecordId}"));
             }
             if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha2))
             {
                 GameSystem.Instance.CellManager.EventGenerator.RecordId = 101000;
+                Broker.Global.Publish(RequestNotification.Get($"建設するID = {GameSystem.Instance.CellManager.EventGenerator.RecordId}"));
             }
 
             if (UnityEngine.Input.GetKeyDown(KeyCode.Q))
             {
                 this.inputActions = new ClickToClickableObjectActions(this.gameCameraController);
+                Broker.Global.Publish(RequestNotification.Get("クリックモード"));
             }
             if (UnityEngine.Input.GetKeyDown(KeyCode.W))
             {
                 this.inputActions = new GenerateCellEventActions(this.cellManager.EventGenerator, this.gameCameraController);
+                Broker.Global.Publish(RequestNotification.Get("建設モード"));
             }
             if (UnityEngine.Input.GetKeyDown(KeyCode.E))
             {
                 this.inputActions = new EraseCellEventActions(this.cellManager.EventGenerator, this.cellManager.Mapper, this.gameCameraController);
+                Broker.Global.Publish(RequestNotification.Get("解体モード"));
             }
             if (UnityEngine.Input.GetKeyDown(KeyCode.R))
             {
@@ -94,6 +101,8 @@ namespace HK.AutoAnt.InputControllers
                     1,
                     this.gameCameraController
                     );
+
+                Broker.Global.Publish(RequestNotification.Get("開拓モード"));
             }
         }
     }
