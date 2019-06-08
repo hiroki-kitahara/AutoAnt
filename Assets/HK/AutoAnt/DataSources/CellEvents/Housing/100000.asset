@@ -16,6 +16,10 @@ MonoBehaviour:
   size: 1
   buildingSE: {fileID: 8300000, guid: 0468cadb0012c46d2a975df3af8b8038, type: 3}
   destructionSE: {fileID: 8300000, guid: ded58d45a41ac4c32ad7d0dfcce0239a, type: 3}
+  constructionEffect: {fileID: 5627195095854224365, guid: 0711bbe0ce4314abc8f01b087057aff1,
+    type: 3}
+  destructionEffect: {fileID: 5627195095854224365, guid: ec119e0e5201742a4a8b32fdece1a100,
+    type: 3}
   gimmickPrefab: {fileID: 1696405967700200454, guid: 81339a340327d4660946cc3c5dee835b,
     type: 3}
   BasePopulationAmount: 10
