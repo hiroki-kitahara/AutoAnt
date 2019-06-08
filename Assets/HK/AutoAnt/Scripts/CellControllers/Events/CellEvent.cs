@@ -48,7 +48,7 @@ namespace HK.AutoAnt.CellControllers.Events
         }
 #endif
 
-        public virtual void Initialize(Vector2Int position, GameSystem gameSystem)
+        public virtual void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializeGame)
         {
             this.Origin = position;
 

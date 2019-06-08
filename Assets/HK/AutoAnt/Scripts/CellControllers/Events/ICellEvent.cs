@@ -26,7 +26,7 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// 初期化
         /// </summary>
-        void Initialize(Vector2Int position, GameSystem gameSystem);
+        void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializeGame);
 
         /// <summary>
         /// 削除処理

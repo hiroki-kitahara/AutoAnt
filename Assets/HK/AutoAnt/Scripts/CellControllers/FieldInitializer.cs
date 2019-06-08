@@ -22,7 +22,7 @@ namespace HK.AutoAnt.CellControllers
                 var cell = cellManager.CellGenerator.Generate(c.Id, c.Position);
                 if(c.CellEventRecordId != 0)
                 {
-                    cellManager.EventGenerator.Generate(cell, c.CellEventRecordId);
+                    cellManager.EventGenerator.Generate(cell, c.CellEventRecordId, true);
                 }
             }
         }
