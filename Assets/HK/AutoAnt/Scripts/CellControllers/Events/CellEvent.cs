@@ -70,6 +70,7 @@ namespace HK.AutoAnt.CellControllers.Events
                 Assert.IsNotNull(record.EventData.constructionEffect, $"Id = {this.Id}の建設時のエフェクト生成に失敗しました");
                 var effect = record.EventData.constructionEffect.Rent();
                 effect.transform.position = this.gimmick.transform.position;
+                effect.transform.localScale = Vector3.one * record.EventData.size;
             }
         }
 
@@ -87,6 +88,7 @@ namespace HK.AutoAnt.CellControllers.Events
             Assert.IsNotNull(record.EventData.destructionEffect, $"Id = {this.Id}の破壊時のエフェクト生成に失敗しました");
             var effect = record.EventData.destructionEffect.Rent();
             effect.transform.position = this.gimmick.transform.position;
+            effect.transform.localScale = Vector3.one * record.EventData.size;
 
             Destroy(this.gimmick.gameObject);
         }
