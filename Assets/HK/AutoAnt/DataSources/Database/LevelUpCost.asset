@@ -18,8 +18,58 @@ MonoBehaviour:
     cost:
       money: 100
       needItems: []
+  - id: 100000
+    level: 1
+    cost:
+      money: 400
+      needItems: []
+  - id: 100000
+    level: 2
+    cost:
+      money: 800
+      needItems: []
+  - id: 100000
+    level: 3
+    cost:
+      money: 1400
+      needItems: []
+  - id: 100000
+    level: 4
+    cost:
+      money: 2200
+      needItems: []
+  - id: 100000
+    level: 5
+    cost:
+      money: 3300
+      needItems: []
   - id: 101000
     level: 0
     cost:
       money: 100
+      needItems: []
+  - id: 101000
+    level: 1
+    cost:
+      money: 300
+      needItems: []
+  - id: 101000
+    level: 2
+    cost:
+      money: 600
+      needItems: []
+  - id: 101000
+    level: 3
+    cost:
+      money: 1100
+      needItems: []
+  - id: 101000
+    level: 4
+    cost:
+      money: 1900
+      needItems: []
+  - id: 101000
+    level: 5
+    cost:
+      money: 3000
       needItems: []
