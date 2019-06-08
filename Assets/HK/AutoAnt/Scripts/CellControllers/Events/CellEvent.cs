@@ -20,6 +20,14 @@ namespace HK.AutoAnt.CellControllers.Events
         protected int size = 1;
         public int Size => this.size;
 
+        [SerializeField]
+        private AudioClip buildingSE;
+        public AudioClip BuildingSE => this.buildingSE;
+
+        [SerializeField]
+        private AudioClip destructionSE;
+        public AudioClip DestructionSE => this.destructionSE;
+
         public Vector2Int Origin { get; protected set; }
 
         /// <summary>
@@ -42,12 +50,14 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             this.Origin = position;
             this.gimmick = this.CreateGimmickController();
+            AutoAntSystem.Audio.SE.Play(this.buildingSE);
         }
 
         public virtual void Remove(GameSystem gameSystem)
         {
             this.instanceEvents.Clear();
             Destroy(this.gimmick.gameObject);
+            AutoAntSystem.Audio.SE.Play(this.destructionSE);
         }
 
         public bool CanGenerate(Cell origin, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper)
