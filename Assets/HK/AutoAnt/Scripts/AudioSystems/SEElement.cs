@@ -10,7 +10,7 @@ namespace HK.AutoAnt.AudioSystems
     public sealed class SEElement : MonoBehaviour
     {
         [SerializeField]
-        private AudioSource audioSource;
+        private AudioSource audioSource = null;
 
         private static readonly ObjectPoolBundle<SEElement> pools = new ObjectPoolBundle<SEElement>();
 

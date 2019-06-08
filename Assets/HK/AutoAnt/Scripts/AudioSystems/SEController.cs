@@ -11,7 +11,7 @@ namespace HK.AutoAnt.AudioSystems
     public sealed class SEController : MonoBehaviour
     {
         [SerializeField]
-        private SEElement elementPrefab;
+        private SEElement elementPrefab = null;
 
         public void Play(AudioClip clip)
         {

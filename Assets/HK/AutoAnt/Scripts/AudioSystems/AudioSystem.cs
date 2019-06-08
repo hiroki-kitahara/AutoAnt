@@ -11,5 +11,9 @@ namespace HK.AutoAnt.AudioSystems
         [SerializeField]
         private BGMController bgm = null;
         public BGMController BGM => this.bgm;
+
+        [SerializeField]
+        private SEController se = null;
+        public SEController SE => this.se;
     }
 }
