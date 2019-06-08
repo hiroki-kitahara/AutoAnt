@@ -25,10 +25,12 @@ namespace HK.AutoAnt.Extensions
         /// <summary>
         /// IDとレベルからレコードを返す
         /// </summary>
+        /// <remarks>
+        /// <c>null</c>の場合はレベルアップしないという意味なので注意
+        /// </remarks>
         public static T Get<T>(this IEnumerable<T> self, int id, int level) where T : class, IRecord, IRecordLevel
         {
             var result = self.FirstOrDefault(r => r.Id == id && r.Level == level);
-            Assert.IsNotNull(result, $"Id = {id}, Level = {level}に対応する{typeof(T)}がありませんでした");
 
             return result;
         }
