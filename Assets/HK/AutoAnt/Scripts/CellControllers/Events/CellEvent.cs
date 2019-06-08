@@ -22,12 +22,10 @@ namespace HK.AutoAnt.CellControllers.Events
         public int Size => this.size;
 
         [SerializeField]
-        private AudioClip buildingSE = null;
-        public AudioClip BuildingSE => this.buildingSE;
+        private AudioClip constructionSE = null;
 
         [SerializeField]
         private AudioClip destructionSE = null;
-        public AudioClip DestructionSE => this.destructionSE;
 
         [SerializeField]
         private PoolableEffect constructionEffect = null;
@@ -66,8 +64,8 @@ namespace HK.AutoAnt.CellControllers.Events
 
             if(!isInitializeGame)
             {
-                Assert.IsNotNull(record.EventData.buildingSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
-                AutoAntSystem.Audio.SE.Play(record.EventData.buildingSE);
+                Assert.IsNotNull(record.EventData.constructionSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
+                AutoAntSystem.Audio.SE.Play(record.EventData.constructionSE);
 
                 Assert.IsNotNull(record.EventData.constructionEffect, $"Id = {this.Id}の建設時のエフェクト生成に失敗しました");
                 var effect = record.EventData.constructionEffect.Rent();
