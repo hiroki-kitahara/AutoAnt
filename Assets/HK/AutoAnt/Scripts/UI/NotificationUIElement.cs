@@ -10,9 +10,9 @@ using UnityEngine.Assertions;
 namespace HK.AutoAnt.UI
 {
     /// <summary>
-    /// アイテム取得UIの要素を制御するクラス
+    /// 通知UIの要素を制御するクラス
     /// </summary>
-    public sealed class AcquireItemElement : MonoBehaviour
+    public sealed class NotificationUIElement : MonoBehaviour
     {
         [SerializeField]
         private TextMeshProUGUI text = null;
@@ -23,7 +23,7 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private float destroyDelay = 0.0f;
 
-        public AcquireItemElement Initialize(MasterDataItem.Record item, int amount, Inventory inventory)
+        public NotificationUIElement Initialize(MasterDataItem.Record item, int amount, Inventory inventory)
         {
             this.text.text = this.format.Format(item.Name, amount, inventory.Items[item.Id]);
 

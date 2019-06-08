@@ -9,12 +9,12 @@ using UnityEngine.Assertions;
 namespace HK.AutoAnt.UI
 {
     /// <summary>
-    /// アイテム取得UIを制御するクラス
+    /// 通知UIを制御するクラス
     /// </summary>
-    public sealed class AcquireItemController : MonoBehaviour
+    public sealed class NotificationUIController : MonoBehaviour
     {
         [SerializeField]
-        private AcquireItemElement elementPrefab = null;
+        private NotificationUIElement elementPrefab = null;
 
         void Awake()
         {
