@@ -128,6 +128,7 @@ MonoBehaviour:
   clipBundle:
     intro: {fileID: 8300000, guid: 0fcc88b39c3984552b9b734079952973, type: 3}
     loop: {fileID: 8300000, guid: 57db3af722bc141c587ae7a24b36eddf, type: 3}
+    offsetIntroChangeSeconds: -0.05
 --- !u!1 &7658445820341224520
 GameObject:
   m_ObjectHideFlags: 0

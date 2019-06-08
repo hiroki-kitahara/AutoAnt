@@ -17,18 +17,15 @@ namespace HK.AutoAnt.AudioSystems
 
         public void Play(ClipBundle clipBundle)
         {
-            this.Play(clipBundle.Intro, clipBundle.Loop);
-        }
-
-        public void Play(AudioClip intro, AudioClip loop)
-        {
             this.compositeDisposable.Clear();
-            this.audioSource.clip = intro;
+            this.audioSource.clip = clipBundle.Intro;
             this.audioSource.Play();
             this.audioSource.loop = false;
 
-            Observable.Timer(TimeSpan.FromSeconds(intro.length))
-                .SubscribeWithState2(this, loop, (_, _this, _loop) =>
+            this.audioSource.ObserveEveryValueChanged(x => x.time)
+                .Where(x => (x - clipBundle.OffsetIntroChangeSeconds) >= this.audioSource.clip.length)
+                .Take(1)
+                .SubscribeWithState2(this, clipBundle.Loop, (_, _this, _loop) =>
                 {
                     _this.audioSource.clip = _loop;
                     _this.audioSource.loop = true;
@@ -48,6 +45,13 @@ namespace HK.AutoAnt.AudioSystems
             [SerializeField]
             private AudioClip loop;
             public AudioClip Loop => this.loop;
+
+            /// <summary>
+            /// イントロからループに切り替えるタイミングの補正値（秒）
+            /// </summary>
+            [SerializeField]
+            private float offsetIntroChangeSeconds = 0.0f;
+            public float OffsetIntroChangeSeconds => this.offsetIntroChangeSeconds;
         }
     }
 }
