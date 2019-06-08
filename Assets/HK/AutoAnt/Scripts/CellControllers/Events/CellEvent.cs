@@ -21,11 +21,11 @@ namespace HK.AutoAnt.CellControllers.Events
         public int Size => this.size;
 
         [SerializeField]
-        private AudioClip buildingSE;
+        private AudioClip buildingSE = null;
         public AudioClip BuildingSE => this.buildingSE;
 
         [SerializeField]
-        private AudioClip destructionSE;
+        private AudioClip destructionSE = null;
         public AudioClip DestructionSE => this.destructionSE;
 
         public int Id => int.Parse(this.name);
@@ -51,18 +51,22 @@ namespace HK.AutoAnt.CellControllers.Events
         public virtual void Initialize(Vector2Int position, GameSystem gameSystem)
         {
             this.Origin = position;
-            AutoAntSystem.Audio.SE.Play(this.buildingSE);
 
             // 自分自身のマスターデータを取得してギミックを作成している
             // セーブデータから読み込む時にプレハブの参照はセーブしていないのでちょっとややこしい作りになっている
             var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
             this.gimmick = record.EventData.CreateGimmickController(this.Origin);
+
+            Assert.IsNotNull(this.buildingSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
+            AutoAntSystem.Audio.SE.Play(this.buildingSE);
         }
 
         public virtual void Remove(GameSystem gameSystem)
         {
             this.instanceEvents.Clear();
             Destroy(this.gimmick.gameObject);
+
+            Assert.IsNotNull(this.destructionSE, $"Id = {this.Id}の破壊時のSE再生に失敗しました");
             AutoAntSystem.Audio.SE.Play(this.destructionSE);
         }
 
