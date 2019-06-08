@@ -11,7 +11,7 @@ namespace HK.AutoAnt.GameControllers
     public sealed class GameBGMController : MonoBehaviour
     {
         [SerializeField]
-        private BGMController.ClipBundle clipBundle;
+        private BGMController.ClipBundle clipBundle = null;
 
         void Start()
         {

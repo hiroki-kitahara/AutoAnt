@@ -9,7 +9,7 @@ namespace HK.AutoAnt.AudioSystems
     public sealed class AudioSystem : MonoBehaviour
     {
         [SerializeField]
-        private BGMController bgm;
+        private BGMController bgm = null;
         public BGMController BGM => this.bgm;
     }
 }

@@ -10,7 +10,7 @@ namespace HK.AutoAnt.Systems
     public class AutoAntSystem : MonoBehaviour
     {
         [SerializeField]
-        private AudioSystem audioSystem;
+        private AudioSystem audioSystem = null;
         public static AudioSystem Audio { get; private set; }
         
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

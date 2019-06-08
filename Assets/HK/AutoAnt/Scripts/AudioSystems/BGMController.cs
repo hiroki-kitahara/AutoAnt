@@ -11,7 +11,7 @@ namespace HK.AutoAnt.AudioSystems
     public sealed class BGMController : MonoBehaviour
     {
         [SerializeField]
-        private AudioSource audioSource;
+        private AudioSource audioSource = null;
 
         private readonly CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -39,11 +39,11 @@ namespace HK.AutoAnt.AudioSystems
         public class ClipBundle
         {
             [SerializeField]
-            private AudioClip intro;
+            private AudioClip intro = null;
             public AudioClip Intro => this.intro;
 
             [SerializeField]
-            private AudioClip loop;
+            private AudioClip loop = null;
             public AudioClip Loop => this.loop;
 
             /// <summary>
