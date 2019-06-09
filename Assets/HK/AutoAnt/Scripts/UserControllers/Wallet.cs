@@ -37,5 +37,15 @@ namespace HK.AutoAnt.UserControllers
             this.money.Value += value;
             Assert.IsTrue(this.Money >= 0);
         }
+
+#if AA_DEBUG
+        /// <summary>
+        /// お金を設定する
+        /// </summary>
+        public void SetMoney(int value)
+        {
+            this.money.Value = value;
+        }
+#endif
     }
 }
