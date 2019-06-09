@@ -22,11 +22,15 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 06d1595d0416942858f0e5a4983e79ec
-    m_Address: Cell.Blank.000000
+    m_Address: Cell.Blank.000
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0711bbe0ce4314abc8f01b087057aff1
+    m_Address: Effect.Construction.000
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 0c5dbbdf4c3d649a4b60b2739640fbd0
-    m_Address: Cell.Grassland.000000
+    m_Address: Cell.Grassland.000
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 0fcc88b39c3984552b9b734079952973
