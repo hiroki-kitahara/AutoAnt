@@ -15,13 +15,14 @@ MonoBehaviour:
   m_DefaultGroup: 563a019b9f4d942f98ed11a2d8b8c501
   m_BuildRemoteCatalog: 0
   m_RemoteCatalogBuildPath:
-    m_Id: 
+    m_Id: 930d411b934724f6a8767577b4caa198
   m_RemoteCatalogLoadPath:
-    m_Id: 
+    m_Id: f7f74e410898e44ca8fd034936ac5618
   m_overridePlayerVersion: 
   m_GroupAssets:
   - {fileID: 11400000, guid: a6e6057796764414ca00aa6da2a4b193, type: 2}
   - {fileID: 11400000, guid: e2a8f7b90d1f641e798a71a9aae9ddec, type: 2}
+  - {fileID: 11400000, guid: 8126e311aa431404ab923cede73382ce, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
