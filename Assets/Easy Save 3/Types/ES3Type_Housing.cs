@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("BasePopulationAmount", "CurrentPopulation", "Level", "size", "Origin", "name")]
+	[ES3PropertiesAttribute("BasePopulationAmount", "CurrentPopulation", "size", "Level", "Origin", "name")]
 	public class ES3Type_Housing : ES3ScriptableObjectType
 	{
 		public static ES3Type Instance = null;
@@ -16,8 +16,8 @@ namespace ES3Types
 			
 			writer.WriteProperty("BasePopulationAmount", instance.BasePopulationAmount, ES3Type_int.Instance);
 			writer.WriteProperty("CurrentPopulation", instance.CurrentPopulation, ES3Type_int.Instance);
-			writer.WriteProperty("Level", instance.Level, ES3Type_int.Instance);
 			writer.WritePrivateField("size", instance);
+			writer.WriteProperty("Level", instance.Level, ES3Type_int.Instance);
 			writer.WritePrivateProperty("Origin", instance);
 			writer.WriteProperty("name", instance.name, ES3Type_string.Instance);
 		}
@@ -36,12 +36,12 @@ namespace ES3Types
 					case "CurrentPopulation":
 						instance.CurrentPopulation = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
-					case "Level":
-						instance.Level = reader.Read<System.Int32>(ES3Type_int.Instance);
-						break;
 					case "size":
 					reader.SetPrivateField("size", reader.Read<System.Int32>(), instance);
 					break;
+					case "Level":
+						instance.Level = reader.Read<System.Int32>(ES3Type_int.Instance);
+						break;
 					case "Origin":
 					reader.SetPrivateProperty("Origin", reader.Read<UnityEngine.Vector2Int>(), instance);
 					break;

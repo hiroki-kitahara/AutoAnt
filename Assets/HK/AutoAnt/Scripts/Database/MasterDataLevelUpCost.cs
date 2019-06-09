@@ -38,7 +38,7 @@ namespace HK.AutoAnt.Database
             /// コスト
             /// </summary>
             [SerializeField]
-            private LevelUpCost cost;
+            private LevelUpCost cost = null;
             public LevelUpCost Cost => this.cost;
         }
     }
