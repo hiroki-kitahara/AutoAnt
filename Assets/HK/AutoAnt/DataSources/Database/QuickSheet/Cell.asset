@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SheetName: AutoAnt
   WorksheetName: Cell
-  dataArray:
+  Records:
   - id: 100000
     celltype: 0
-    prefab: Cell.Blank.000
+    prefabname: Cell.Blank.000
   - id: 100100
     celltype: 1
-    prefab: Cell.Grassland.000
+    prefabname: Cell.Grassland.000
