@@ -14,26 +14,26 @@ namespace HK.AutoAnt.Database
     ///
     /// !!! Machine generated code !!!
     ///
-    [CustomEditor(typeof($WorkSheetClassName))]
-    public class $ClassName : BaseGoogleEditor<$WorkSheetClassName>
+    [CustomEditor(typeof(Cell))]
+    public class CellEditor : BaseGoogleEditor<Cell>
     {	    
         public override bool Load()
         {        
-            $WorkSheetClassName targetData = target as $WorkSheetClassName;
+            Cell targetData = target as Cell;
             
             var client = new DatabaseClient("", "");
             string error = string.Empty;
             var db = client.GetDatabase(targetData.SheetName, ref error);	
-            var table = db.GetTable<$DataClassName>(targetData.WorksheetName) ?? db.CreateTable<$DataClassName>(targetData.WorksheetName);
+            var table = db.GetTable<CellData>(targetData.WorksheetName) ?? db.CreateTable<CellData>(targetData.WorksheetName);
             
-            List<$DataClassName> myDataList = new List<$DataClassName>();
+            List<CellData> myDataList = new List<CellData>();
             
             var all = table.FindAll();
             foreach(var elem in all)
             {
-                $DataClassName data = new $DataClassName();
+                CellData data = new CellData();
                 
-                data = Cloner.DeepCopy<$DataClassName>(elem.Element);
+                data = Cloner.DeepCopy<CellData>(elem.Element);
                 myDataList.Add(data);
             }
                     

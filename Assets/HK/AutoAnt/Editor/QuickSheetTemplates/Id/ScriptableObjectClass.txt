@@ -21,7 +21,7 @@ namespace HK.AutoAnt.Database
         public string WorksheetName = "";
         
         // Note: initialize in OnEnable() not here.
-        public $DataClassName[] dataArray;
+        public $DataClassName[] Records;
         
         void OnEnable()
         {
@@ -30,8 +30,8 @@ namespace HK.AutoAnt.Database
             //    Without this check, the array collection which already has its data get to be null 
             //    because OnEnable is called whenever Unity builds.
             // 
-            if (dataArray == null)
-                dataArray = new $DataClassName[0];
+            if (Records == null)
+                Records = new $DataClassName[0];
         }
     }
 }

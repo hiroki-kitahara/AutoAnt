@@ -60,8 +60,8 @@ namespace HK.AutoAnt.Database
             public CellType CellType => this.cellType;
 
             [SerializeField]
-            private Cell prefab = null;
-            public Cell Prefab => this.prefab;
+            private CellControllers.Cell prefab = null;
+            public CellControllers.Cell Prefab => this.prefab;
         }
     }
 }
