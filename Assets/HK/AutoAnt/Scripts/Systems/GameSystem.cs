@@ -31,6 +31,10 @@ namespace HK.AutoAnt.Systems
         public MasterData MasterData => this.masterData;
 
         [SerializeField]
+        private Database.Constants constants = null;
+        public Database.Constants Constants => this.constants;
+
+        [SerializeField]
         private CellManager cellManager = null;
         public CellManager CellManager => this.cellManager;
 

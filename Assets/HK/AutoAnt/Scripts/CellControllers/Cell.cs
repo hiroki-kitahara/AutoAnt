@@ -47,7 +47,7 @@ namespace HK.AutoAnt.CellControllers
             this.Type = cellType;
             this.cellMapper = cellMapper;
 
-            var constants = GameSystem.Instance.MasterData.Cell.Constants;
+            var constants = GameSystem.Instance.Constants.Cell;
             this.CachedTransform.position = new Vector3(position.x * (constants.Scale.x + constants.Interval), 0.0f, position.y * (constants.Scale.z + constants.Interval));
             this.scalableObject.localScale = constants.Scale;
             this.boxCollider.center = new Vector3(0.0f, constants.Scale.y / 2.0f, 0.0f);

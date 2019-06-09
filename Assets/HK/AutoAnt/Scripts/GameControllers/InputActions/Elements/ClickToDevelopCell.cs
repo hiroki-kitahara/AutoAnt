@@ -67,7 +67,7 @@ namespace HK.AutoAnt.GameControllers
                 this.cellGenerator.Generate(this.blankCellRecordId, position);
             }
 
-            var se = this.gameSystem.MasterData.Cell.Constants.DevelopSE;
+            var se = this.gameSystem.Constants.Cell.DevelopSE;
             Assert.IsNotNull(se);
             AutoAntSystem.Audio.SE.Play(se);
         }
