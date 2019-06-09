@@ -62,10 +62,6 @@ namespace HK.AutoAnt.Database
             [SerializeField]
             private Cell prefab = null;
             public Cell Prefab => this.prefab;
-
-            [SerializeField]
-            private List<CellEvent> clickEvents = new List<CellEvent>();
-            public List<CellEvent> ClickEvents => this.clickEvents;
         }
     }
 }
