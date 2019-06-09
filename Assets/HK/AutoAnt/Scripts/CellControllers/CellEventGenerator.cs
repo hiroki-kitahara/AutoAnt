@@ -46,8 +46,17 @@ namespace HK.AutoAnt.CellControllers
             levelUpCostRecord.Cost.Consume(this.gameSystem.User, this.gameSystem.MasterData.Item);
 
             var cellEventInstance = UnityEngine.Object.Instantiate(cellEventRecord.EventData);
+
+            // (Clone)という文字列が要らないのでnameを代入する必要がある
+            cellEventInstance.name = cellEventRecord.EventData.name;
             cellEventInstance.Initialize(cell.Position, this.gameSystem);
             cellMapper.Add(cellEventInstance);
+        }
+
+        public void GenerateOnDeserialize(CellEvent instance)
+        {
+            instance.Initialize(instance.Origin, this.gameSystem);
+            this.cellMapper.Add(instance);
         }
 
         public void Erase(Cell cell)

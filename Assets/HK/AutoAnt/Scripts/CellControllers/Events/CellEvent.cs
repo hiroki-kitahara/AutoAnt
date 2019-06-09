@@ -20,6 +20,8 @@ namespace HK.AutoAnt.CellControllers.Events
         protected int size = 1;
         public int Size => this.size;
 
+        public int Id => int.Parse(this.name);
+
         public Vector2Int Origin { get; protected set; }
 
         /// <summary>
@@ -29,7 +31,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
         protected CellGimmickController gimmick;
 
-        public abstract CellGimmickController CreateGimmickController();
+        public abstract CellGimmickController CreateGimmickController(Vector2Int origin);
 
 #if UNITY_EDITOR
         protected virtual void OnValidate()
@@ -41,7 +43,11 @@ namespace HK.AutoAnt.CellControllers.Events
         public virtual void Initialize(Vector2Int position, GameSystem gameSystem)
         {
             this.Origin = position;
-            this.gimmick = this.CreateGimmickController();
+
+            // 自分自身のマスターデータを取得してギミックを作成している
+            // セーブデータから読み込む時にプレハブの参照はセーブしていないのでちょっとややこしい作りになっている
+            var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
+            this.gimmick = record.EventData.CreateGimmickController(this.Origin);
         }
 
         public virtual void Remove(GameSystem gameSystem)

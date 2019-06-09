@@ -21,6 +21,8 @@ namespace HK.AutoAnt.CellControllers
         [SerializeField]
         private Transform scalableObject = null;
 
+        public int RecordId { get; private set; }
+
         public Vector2Int Position { get; private set; }
 
         public CellType Type { get; private set; }
@@ -38,8 +40,9 @@ namespace HK.AutoAnt.CellControllers
             this.CachedTransform = this.transform;
         }
 
-        public Cell Initialize(Vector2Int position, CellType cellType, CellMapper cellMapper)
+        public Cell Initialize(int recordId, Vector2Int position, CellType cellType, CellMapper cellMapper)
         {
+            this.RecordId = recordId;
             this.Position = position;
             this.Type = cellType;
             this.cellMapper = cellMapper;
