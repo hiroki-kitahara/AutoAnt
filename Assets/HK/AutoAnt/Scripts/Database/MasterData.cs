@@ -25,5 +25,9 @@ namespace HK.AutoAnt.Database
         [SerializeField]
         private MasterDataLevelUpCost levelUpCost = null;
         public MasterDataLevelUpCost LevelUpCost => this.levelUpCost;
+
+        [SerializeField]
+        private MasterDataFacilityLevelParameter facilityLevelParameter = null;
+        public MasterDataFacilityLevelParameter FacilityLevelParameter => this.facilityLevelParameter;
     }
 }
