@@ -8,6 +8,10 @@ using HK.Framework.Text;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace HK.AutoAnt.CellControllers
 {
     /// <summary>
@@ -27,6 +31,25 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         [SerializeField]
         private List<NeedItem> needItems = new List<NeedItem>();
+
+#if UNITY_EDITOR
+        public LevelUpCost(Database.SpreadSheetData.LevelUpCostData data)
+        {
+            this.money = data.Money;
+            this.needItems = new List<NeedItem>();
+            for (var i = 0; i < data.Items.Length; i+=2)
+            {
+                var itemName = data.Items[i];
+                int amount;
+                if(!int.TryParse(data.Items[i + 1], out amount))
+                {
+                    Debug.LogError($"Id = {data.Id}, Level = {data.Level}の{typeof(NeedItem).Name}への変換に失敗しました. {data.Items[i + 1]}はintに変換出来ません");
+                }
+
+                this.needItems.Add(new NeedItem(itemName, amount));
+            }
+        }
+#endif
 
         /// <summary>
         /// 足りているか返す
@@ -72,6 +95,15 @@ namespace HK.AutoAnt.CellControllers
             /// </summary>
             [SerializeField]
             private int amount = 0;
+
+#if UNITY_EDITOR
+            public NeedItem(string itemName, int amount)
+            {
+                var stringAsset = AssetDatabase.LoadAssetAtPath<StringAsset>("Assets/HK/AutoAnt/DataSources/StringAsset/Item.asset");
+                this.itemName = stringAsset.CreateFinder(itemName);
+                this.amount = amount;
+            }
+#endif
 
             /// <summary>
             /// 足りているか返す

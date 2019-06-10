@@ -6,6 +6,10 @@ using HK.AutoAnt.Constants;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace HK.AutoAnt.Database
 {
     /// <summary>
@@ -40,6 +44,15 @@ namespace HK.AutoAnt.Database
             [SerializeField]
             private LevelUpCost cost = null;
             public LevelUpCost Cost => this.cost;
+
+#if UNITY_EDITOR
+            public Record(SpreadSheetData.LevelUpCostData data)
+            {
+                this.id = data.Id;
+                this.level = data.Level;
+                this.cost = new LevelUpCost(data);
+            }
+#endif
         }
     }
 }
