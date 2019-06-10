@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.Extensions;
+﻿using HK.AutoAnt.Database;
+using HK.AutoAnt.Extensions;
 using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.UserControllers;
@@ -18,11 +19,6 @@ namespace HK.AutoAnt.CellControllers.Events
     public sealed class Housing : CellEventBlankGimmick, IAddTownPopulation, ILevelUpEvent
     {
         /// <summary>
-        /// ベース人口増加量
-        /// </summary>
-        public int BasePopulationAmount = 0;
-
-        /// <summary>
         /// 保持している人口
         /// </summary>
         [HideInInspector]
@@ -38,10 +34,12 @@ namespace HK.AutoAnt.CellControllers.Events
 
         private GameSystem gameSystem;
 
+        private MasterDataHousingLevelParameter.Record levelParameter;
+
         void IAddTownPopulation.Add(Town town)
         {
-            // FIXME: 正式な計算式を適用する
-            var result = Mathf.FloorToInt((this.BasePopulationAmount * (this.Level / 10.0f)) * (town.Popularity.Value / 1000.0f));
+            Assert.IsNotNull(this.levelParameter);
+            var result = this.levelParameter.Population;
             this.CurrentPopulation += result;
             town.AddPopulation(result);
         }
@@ -52,6 +50,7 @@ namespace HK.AutoAnt.CellControllers.Events
             this.gameSystem = gameSystem;
             this.gameSystem.User.Town.AddPopulation(this.CurrentPopulation);
             this.gameSystem.UserUpdater.AddTownPopulations.Add(this);
+            this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
         }
 
         public override void Remove(GameSystem gameSystem)
@@ -77,6 +76,7 @@ namespace HK.AutoAnt.CellControllers.Events
         public void LevelUp()
         {
             this.LevelUp(this.gameSystem);
+            this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
         }
     }
 }

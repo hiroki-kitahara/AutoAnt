@@ -14,7 +14,6 @@ namespace ES3Types
 		{
 			var instance = (HK.AutoAnt.CellControllers.Events.Housing)obj;
 			
-			writer.WriteProperty("BasePopulationAmount", instance.BasePopulationAmount, ES3Type_int.Instance);
 			writer.WriteProperty("CurrentPopulation", instance.CurrentPopulation, ES3Type_int.Instance);
 			writer.WritePrivateField("size", instance);
 			writer.WriteProperty("Level", instance.Level, ES3Type_int.Instance);
@@ -30,9 +29,6 @@ namespace ES3Types
 				switch(propertyName)
 				{
 					
-					case "BasePopulationAmount":
-						instance.BasePopulationAmount = reader.Read<System.Int32>(ES3Type_int.Instance);
-						break;
 					case "CurrentPopulation":
 						instance.CurrentPopulation = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
