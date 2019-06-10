@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using HK.AutoAnt.CellControllers;
 using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Constants;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace HK.AutoAnt.Database
 {
