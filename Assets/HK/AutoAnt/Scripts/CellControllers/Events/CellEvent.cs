@@ -7,6 +7,10 @@ using UnityEngine.Assertions;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.EffectSystems;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace HK.AutoAnt.CellControllers.Events
 {
     /// <summary>
@@ -15,23 +19,23 @@ namespace HK.AutoAnt.CellControllers.Events
     public abstract class CellEvent : ScriptableObject, ICellEvent
     {
         [SerializeField]
-        private CellEventGenerateCondition condition = null;
+        protected CellEventGenerateCondition condition = null;
 
         [SerializeField]
         protected int size = 1;
         public int Size => this.size;
 
         [SerializeField]
-        private AudioClip constructionSE = null;
+        protected AudioClip constructionSE = null;
 
         [SerializeField]
-        private AudioClip destructionSE = null;
+        protected AudioClip destructionSE = null;
 
         [SerializeField]
-        private PoolableEffect constructionEffect = null;
+        protected PoolableEffect constructionEffect = null;
 
         [SerializeField]
-        private PoolableEffect destructionEffect = null;
+        protected PoolableEffect destructionEffect = null;
 
         public int Id => int.Parse(this.name);
 
@@ -125,5 +129,48 @@ namespace HK.AutoAnt.CellControllers.Events
         public virtual void OnClick(Cell owner)
         {
         }
+
+#if UNITY_EDITOR
+        public static CellEvent GetOrCreateAsset(Database.SpreadSheetData.CellEventData data)
+        {
+            switch(data.Celleventtype)
+            {
+                case "Housing":
+                    return CellEvent.InternalGetOrCreateAsset<Housing>(data);
+                case "Facility":
+                    return CellEvent.InternalGetOrCreateAsset<Facility>(data);
+                default:
+                    Debug.LogError($"CellEventType = {data.Celleventtype}は未対応の値です");
+                    return null;
+            }
+        }
+
+        protected static T InternalGetOrCreateAsset<T>(Database.SpreadSheetData.CellEventData data)
+            where T : CellEvent
+        {
+            var path = $"Assets/HK/AutoAnt/DataSources/CellEvents/{data.Celleventtype}/{data.Id}.asset";
+            var result = AssetDatabase.LoadAssetAtPath<T>(path);
+            if (result == null)
+            {
+                result = CreateInstance<T>();
+                result.name = data.Id.ToString();
+                AssetDatabase.CreateAsset(result, path);
+            }
+
+            result.ApplyProperty(data);
+
+            return result;
+        } 
+
+        protected virtual void ApplyProperty(Database.SpreadSheetData.CellEventData data)
+        {
+            this.condition = AssetDatabase.LoadAssetAtPath<CellEventGenerateCondition>($"Assets/HK/AutoAnt/DataSources/CellEvents/Conditions/{data.Condition}.asset");
+            this.size = data.Size;
+            this.constructionSE = AssetDatabase.LoadAssetAtPath<AudioClip>($"Assets/HK/AutoAnt/DataSources/SE/{data.Constructionse}.mp3");
+            this.destructionSE = AssetDatabase.LoadAssetAtPath<AudioClip>($"Assets/HK/AutoAnt/DataSources/SE/{data.Destructionse}.mp3");
+            this.constructionEffect = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Effects/{data.Constructioneffect}.prefab").GetComponent<PoolableEffect>();
+            this.destructionEffect = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Effects/{data.Destructioneffect}.prefab").GetComponent<PoolableEffect>();
+        }
+#endif
     }
 }

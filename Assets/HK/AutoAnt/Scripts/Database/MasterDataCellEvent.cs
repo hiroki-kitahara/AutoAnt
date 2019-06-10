@@ -38,6 +38,13 @@ namespace HK.AutoAnt.Database
             [SerializeField]
             private CellEvent eventData = null;
             public CellEvent EventData => this.eventData;
+
+#if UNITY_EDITOR
+            public Record(SpreadSheetData.CellEventData data)
+            {
+                this.eventData = CellEvent.GetOrCreateAsset(data);
+            }
+#endif
         }
     }
 }

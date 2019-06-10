@@ -5,6 +5,7 @@ using HK.AutoAnt.Systems;
 using HK.AutoAnt.UserControllers;
 using UnityEngine;
 using UnityEngine.Assertions;
+using HK.AutoAnt.EffectSystems;
 
 namespace HK.AutoAnt.CellControllers.Events
 {

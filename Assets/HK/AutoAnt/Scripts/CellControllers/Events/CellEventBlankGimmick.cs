@@ -3,6 +3,10 @@ using HK.AutoAnt.Systems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace HK.AutoAnt.CellControllers.Events
 {
     /// <summary>
@@ -15,7 +19,7 @@ namespace HK.AutoAnt.CellControllers.Events
     public abstract class CellEventBlankGimmick : CellEvent
     {
         [SerializeField]
-        private Blank gimmickPrefab = null;
+        protected Blank gimmickPrefab = null;
 
         public override CellGimmickController CreateGimmickController(Vector2Int origin)
         {
@@ -30,5 +34,13 @@ namespace HK.AutoAnt.CellControllers.Events
 
             return gimmick;
         }
+
+#if UNITY_EDITOR
+        protected override void ApplyProperty(Database.SpreadSheetData.CellEventData data)
+        {
+            base.ApplyProperty(data);
+            this.gimmickPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/CellEvent/{data.Gimmickprefab}.prefab").GetComponent<Blank>();
+        }
+#endif
     }
 }
