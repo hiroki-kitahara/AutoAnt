@@ -35,17 +35,17 @@ namespace UnityQuickSheet
             T t = (T)target;
             targetObject = new SerializedObject(t);
 
-            spreadsheetProp = targetObject.FindProperty("SheetName");
-            if (spreadsheetProp == null)
-                Debug.LogError("Failed to find 'SheetName' property.");
+            // spreadsheetProp = targetObject.FindProperty("SheetName");
+            // if (spreadsheetProp == null)
+            //     Debug.LogError("Failed to find 'SheetName' property.");
 
-            worksheetProp = targetObject.FindProperty("WorksheetName");
-            if (worksheetProp == null)
-                Debug.LogError("Failed to find 'WorksheetName' property.");
+            // worksheetProp = targetObject.FindProperty("WorksheetName");
+            // if (worksheetProp == null)
+            //     Debug.LogError("Failed to find 'WorksheetName' property.");
 
-            serializedData = targetObject.FindProperty("Records");
-            if (serializedData == null)
-                Debug.LogError("Failed to find 'Records' member field.");
+            // serializedData = targetObject.FindProperty("Records");
+            // if (serializedData == null)
+            //     Debug.LogError("Failed to find 'Records' member field.");
         }
 
         /// <summary>

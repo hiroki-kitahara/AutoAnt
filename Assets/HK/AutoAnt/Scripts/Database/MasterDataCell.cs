@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HK.AutoAnt.CellControllers;
 using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Constants;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -32,7 +33,9 @@ namespace HK.AutoAnt.Database
 #if UNITY_EDITOR
             public Record(SpreadSheetData.CellData data)
             {
-
+                this.id = data.Id;
+                this.cellType = data.CELLTYPE;
+                this.prefab = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Cell/{data.Prefabname}.prefab").GetComponent<Cell>();
             }
 #endif
         }
