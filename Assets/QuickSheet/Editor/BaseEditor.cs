@@ -43,9 +43,9 @@ namespace UnityQuickSheet
             if (worksheetProp == null)
                 Debug.LogError("Failed to find 'WorksheetName' property.");
 
-            serializedData = targetObject.FindProperty("dataArray");
+            serializedData = targetObject.FindProperty("Records");
             if (serializedData == null)
-                Debug.LogError("Failed to find 'dataArray' member field.");
+                Debug.LogError("Failed to find 'Records' member field.");
         }
 
         /// <summary>

@@ -81,6 +81,14 @@ namespace UnityQuickSheet
             set { workSheetName = value; }
         }
 
+        [SerializeField]
+        private string scriptableObjectName;
+        public string ScriptableObjectName
+        {
+            get { return this.scriptableObjectName; }
+            set { this.scriptableObjectName = value; }
+        }
+
         [System.NonSerialized]
         public bool onlyCreateDataClass = false;
 

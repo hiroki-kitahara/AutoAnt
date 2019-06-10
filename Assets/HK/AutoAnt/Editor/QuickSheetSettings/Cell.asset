@@ -17,6 +17,7 @@ MonoBehaviour:
   editorScriptFilePath: HK/AutoAnt/Scripts/Database/Editor
   sheetName: AutoAnt
   workSheetName: Cell
+  scriptableObjectName: MasterDataCell
   columnHeaderList:
   - type: 3
     name: Id

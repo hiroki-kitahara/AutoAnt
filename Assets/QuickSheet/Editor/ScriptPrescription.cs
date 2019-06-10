@@ -25,6 +25,7 @@ namespace UnityQuickSheet
         public string dataClassName           = string.Empty;
         public string assetFileCreateFuncName = string.Empty;
         public string template                = string.Empty;
+        public string scriptableObjectName    = string.Empty;
 
         public string importedFilePath        = string.Empty; // should start with "Assets" not full path
         public string assetFilepath           = string.Empty; // should start with "Assets" not full path

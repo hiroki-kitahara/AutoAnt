@@ -28,6 +28,13 @@ namespace HK.AutoAnt.Database
             [SerializeField]
             private CellControllers.Cell prefab = null;
             public CellControllers.Cell Prefab => this.prefab;
+
+#if UNITY_EDITOR
+            public Record(SpreadSheetData.CellData data)
+            {
+
+            }
+#endif
         }
     }
 }

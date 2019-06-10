@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using HK.AutoAnt.Constants;
 
-namespace HK.AutoAnt.Database
+namespace HK.AutoAnt.Database.SpreadSheetData
 {
     ///
     /// !!! Machine generated code !!!

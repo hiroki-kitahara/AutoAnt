@@ -79,10 +79,10 @@ namespace UnityQuickSheet
             }
             else
             {
-                CreateScriptableObjectClassScript(m, sp);
+                //CreateScriptableObjectClassScript(m, sp);
                 CreateScriptableObjectEditorClassScript(m, sp);
                 CreateDataClassScript(m, sp);
-                CreateAssetCreationScript(m, sp);
+                //CreateAssetCreationScript(m, sp);
             }
 
             AssetDatabase.Refresh();
@@ -112,6 +112,8 @@ namespace UnityQuickSheet
                 return;
             }
 
+            Debug.Log(File.Exists(fullPath));
+
             StreamWriter writer = null;
             try
             {
@@ -140,6 +142,8 @@ namespace UnityQuickSheet
         {
             sp.className = machine.WorkSheetName + "Editor";
             sp.worksheetClassName = machine.WorkSheetName;
+            sp.scriptableObjectName = machine.ScriptableObjectName;
+            sp.spreadsheetName = machine.SpreadSheetName;
             sp.dataClassName = machine.WorkSheetName + "Data";
             sp.template = GetTemplate("ScriptableObjectEditorClass");
 

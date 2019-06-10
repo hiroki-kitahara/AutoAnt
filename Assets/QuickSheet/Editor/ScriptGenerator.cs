@@ -73,6 +73,16 @@ namespace UnityQuickSheet
             }
         }
 
+        private string ScriptableObjectName
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(m_ScriptPrescription.scriptableObjectName))
+                    return m_ScriptPrescription.scriptableObjectName;
+                return "Error_Empty_ScriptableObject_Name";
+            }
+        }
+
         private string DataClassName
         {
             get
@@ -149,6 +159,7 @@ namespace UnityQuickSheet
             m_Text = m_Text.Replace ("$WorkSheetClassName", WorkSheetClassName);
             m_Text = m_Text.Replace ("$DataClassName", DataClassName);
             m_Text = m_Text.Replace ("$AssetFileCreateFuncName", AssetFileCreateFuncName);
+            m_Text = m_Text.Replace("$ScriptableObjectName", ScriptableObjectName);
 
             m_Text = m_Text.Replace ("$AssetPostprocessorClass", AssetPostprocessorClass);
             m_Text = m_Text.Replace ("$IMPORT_PATH", ImportedFilePath);

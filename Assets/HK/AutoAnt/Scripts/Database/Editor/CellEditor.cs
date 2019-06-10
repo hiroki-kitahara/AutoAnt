@@ -9,32 +9,33 @@ using GDataDB.Linq;
 
 using UnityQuickSheet;
 
-namespace HK.AutoAnt.Database
+namespace HK.AutoAnt.Database.SpreadSheetData
 {
     ///
     /// !!! Machine generated code !!!
     ///
-    [CustomEditor(typeof(Cell))]
-    public class CellEditor : BaseGoogleEditor<Cell>
-    {	    
+    [CustomEditor(typeof(MasterDataCell))]
+    public class CellEditor : BaseGoogleEditor<MasterDataCell>
+    {
+        private const string WorkSheetName = "Cell";
+
+        private const string SpreadSheetName = "AutoAnt";
+
         public override bool Load()
         {        
-            Cell targetData = target as Cell;
-            
+            var targetData = target as MasterDataCell;
             var client = new DatabaseClient("", "");
-            string error = string.Empty;
-            var db = client.GetDatabase(targetData.SheetName, ref error);	
-            var table = db.GetTable<CellData>(targetData.WorksheetName) ?? db.CreateTable<CellData>(targetData.WorksheetName);
-            
-            List<CellData> myDataList = new List<CellData>();
-            
+            var error = string.Empty;
+            var db = client.GetDatabase(SpreadSheetName, ref error);	
+            var table = db.GetTable<CellData>(WorkSheetName) ?? db.CreateTable<CellData>(WorkSheetName);
+            var myDataList = new List<MasterDataCell.Record>();
             var all = table.FindAll();
-            foreach(var elem in all)
+
+            foreach(var element in all)
             {
-                CellData data = new CellData();
-                
-                data = Cloner.DeepCopy<CellData>(elem.Element);
-                myDataList.Add(data);
+                var data = new CellData();
+                data = Cloner.DeepCopy<CellData>(element.Element);
+                myDataList.Add(new MasterDataCell.Record(data));
             }
                     
             targetData.Records = myDataList.ToArray();

@@ -11,6 +11,16 @@ namespace HK.AutoAnt.Database
     {
         [SerializeField]
         protected Record[] records = new Record[0];
-        public Record[] Records => this.records;
+        public Record[] Records
+        {
+            get
+            {
+                return this.records;
+            }
+            set
+            {
+                this.records = value;
+            }
+        }
     }
 }

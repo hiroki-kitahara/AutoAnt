@@ -9,32 +9,33 @@ using GDataDB.Linq;
 
 using UnityQuickSheet;
 
-namespace HK.AutoAnt.Database
+namespace HK.AutoAnt.Database.SpreadSheetData
 {
     ///
     /// !!! Machine generated code !!!
     ///
-    [CustomEditor(typeof($WorkSheetClassName))]
-    public class $ClassName : BaseGoogleEditor<$WorkSheetClassName>
-    {	    
+    [CustomEditor(typeof($ScriptableObjectName))]
+    public class $ClassName : BaseGoogleEditor<$ScriptableObjectName>
+    {
+        private const string WorkSheetName = "$WorkSheetClassName";
+
+        private const string SpreadSheetName = "$SpreadSheetName";
+
         public override bool Load()
         {        
-            $WorkSheetClassName targetData = target as $WorkSheetClassName;
-            
+            var targetData = target as $ScriptableObjectName;
             var client = new DatabaseClient("", "");
-            string error = string.Empty;
-            var db = client.GetDatabase(targetData.SheetName, ref error);	
-            var table = db.GetTable<$DataClassName>(targetData.WorksheetName) ?? db.CreateTable<$DataClassName>(targetData.WorksheetName);
-            
-            List<$DataClassName> myDataList = new List<$DataClassName>();
-            
+            var error = string.Empty;
+            var db = client.GetDatabase(SpreadSheetName, ref error);	
+            var table = db.GetTable<$DataClassName>(WorkSheetName) ?? db.CreateTable<$DataClassName>(WorkSheetName);
+            var myDataList = new List<$ScriptableObjectName.Record>();
             var all = table.FindAll();
-            foreach(var elem in all)
+
+            foreach(var element in all)
             {
-                $DataClassName data = new $DataClassName();
-                
-                data = Cloner.DeepCopy<$DataClassName>(elem.Element);
-                myDataList.Add(data);
+                var data = new $DataClassName();
+                data = Cloner.DeepCopy<$DataClassName>(element.Element);
+                myDataList.Add(new $ScriptableObjectName.Record(data));
             }
                     
             targetData.Records = myDataList.ToArray();

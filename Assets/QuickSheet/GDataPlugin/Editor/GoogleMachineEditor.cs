@@ -78,6 +78,7 @@ namespace UnityQuickSheet
             GUILayout.Label("Script Path Settings:", headerStyle);
             machine.SpreadSheetName = EditorGUILayout.TextField("SpreadSheet Name: ", machine.SpreadSheetName);
             machine.WorkSheetName = EditorGUILayout.TextField("WorkSheet Name: ", machine.WorkSheetName);
+            machine.ScriptableObjectName = EditorGUILayout.TextField("ScriptableObject Name: ", machine.ScriptableObjectName);
 
             EditorGUILayout.Separator();
 
@@ -288,6 +289,7 @@ namespace UnityQuickSheet
             sp.className = machine.WorkSheetName;
             sp.spreadsheetName = machine.SpreadSheetName;
             sp.worksheetClassName = machine.WorkSheetName;
+            sp.scriptableObjectName = machine.ScriptableObjectName;
             sp.assetFileCreateFuncName = "Create" + machine.WorkSheetName + "AssetFile";
             sp.template = GetTemplate("AssetFileClass");
 
