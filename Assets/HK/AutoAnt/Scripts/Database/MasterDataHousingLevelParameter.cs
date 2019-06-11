@@ -29,6 +29,15 @@ namespace HK.AutoAnt.Database
             [SerializeField]
             private int population = 1;
             public int Population => this.population;
+
+#if UNITY_EDITOR
+            public Record(SpreadSheetData.HousingLevelParameterData data)
+            {
+                this.id = data.Id;
+                this.level = data.Level;
+                this.population = data.Population;
+            }
+#endif
         }
     }
 }
