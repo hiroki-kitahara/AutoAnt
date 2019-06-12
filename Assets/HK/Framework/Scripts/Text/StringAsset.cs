@@ -228,6 +228,19 @@ namespace HK.Framework.Text
 			Debug.AssertFormat(data != null, "{0}がありません.", defaultString);
 			return new Finder(this, data);
 		}
+
+        public Finder CreateFinderSafe(string defaultString)
+        {
+            var data = this.database.Find(d => d.value.Default == defaultString);
+            if(data == null)
+            {
+                data = new Data();
+                data.value.ja = defaultString;
+                this.database.Add(data);
+            }
+
+            return new Finder(this, data);
+        }
 #endif
 		/// <summary>
 		/// string.Formatのラッピング.
