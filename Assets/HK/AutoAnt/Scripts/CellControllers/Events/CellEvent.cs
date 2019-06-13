@@ -5,6 +5,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 using HK.AutoAnt.Extensions;
+using HK.AutoAnt.EffectSystems;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -25,6 +26,12 @@ namespace HK.AutoAnt.CellControllers.Events
 
         [SerializeField]
         private AudioClip destructionSE = null;
+
+        [SerializeField]
+        private PoolableEffect constructionEffect = null;
+
+        [SerializeField]
+        private PoolableEffect destructionEffect = null;
 
         public int Id => int.Parse(this.name);
 
@@ -59,13 +66,17 @@ namespace HK.AutoAnt.CellControllers.Events
             {
                 Assert.IsNotNull(record.EventData.constructionSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
                 AutoAntSystem.Audio.SE.Play(record.EventData.constructionSE);
+
+                Assert.IsNotNull(record.EventData.constructionEffect, $"Id = {this.Id}の建設時のエフェクト生成に失敗しました");
+                var effect = record.EventData.constructionEffect.Rent();
+                effect.transform.position = this.gimmick.transform.position;
+                effect.transform.localScale = Vector3.one * record.EventData.size;
             }
         }
 
         public virtual void Remove(GameSystem gameSystem)
         {
             this.instanceEvents.Clear();
-            Destroy(this.gimmick.gameObject);
 
             // 自分自身のマスターデータを取得してデータを参照している
             // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
@@ -73,6 +84,13 @@ namespace HK.AutoAnt.CellControllers.Events
 
             Assert.IsNotNull(record.EventData.destructionSE, $"Id = {this.Id}の破壊時のSE再生に失敗しました");
             AutoAntSystem.Audio.SE.Play(record.EventData.destructionSE);
+
+            Assert.IsNotNull(record.EventData.destructionEffect, $"Id = {this.Id}の破壊時のエフェクト生成に失敗しました");
+            var effect = record.EventData.destructionEffect.Rent();
+            effect.transform.position = this.gimmick.transform.position;
+            effect.transform.localScale = Vector3.one * record.EventData.size;
+
+            Destroy(this.gimmick.gameObject);
         }
 
         public bool CanGenerate(Cell origin, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper)

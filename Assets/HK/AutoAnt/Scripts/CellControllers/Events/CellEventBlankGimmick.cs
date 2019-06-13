@@ -24,7 +24,7 @@ namespace HK.AutoAnt.CellControllers.Events
             var position = new Vector3(origin.x * (constants.Scale.x + constants.Interval), 0.0f, origin.y * (constants.Scale.z + constants.Interval));
             var fixedSize = this.size - 1;
             position += new Vector3((constants.Scale.x / 2.0f) * fixedSize, 0.0f, (constants.Scale.z / 2.0f) * fixedSize);
-            position += new Vector3(constants.Interval * fixedSize, 0.0f, constants.Interval * fixedSize);
+            position += new Vector3(constants.Interval * fixedSize, constants.Scale.y, constants.Interval * fixedSize);
             gimmick.transform.position = position;
             gimmick.transform.localScale = constants.EffectScale * this.size + (Vector3.one * (constants.Interval * fixedSize));
 
