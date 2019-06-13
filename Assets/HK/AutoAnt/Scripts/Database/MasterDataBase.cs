@@ -7,7 +7,7 @@ namespace HK.AutoAnt.Database
     /// <summary>
     /// マスターデータの抽象クラス
     /// </summary>
-    public abstract class MasterDataBase<Record> : ScriptableObject, IMasterData<Record> where Record : class, IRecord
+    public abstract class MasterDataBase<Record> : ScriptableObject, IMasterData<Record> where Record : class
     {
         [SerializeField]
         protected Record[] records = new Record[0];
