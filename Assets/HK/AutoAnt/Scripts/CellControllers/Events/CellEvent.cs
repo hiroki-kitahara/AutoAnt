@@ -5,6 +5,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 using HK.AutoAnt.Extensions;
+using HK.AutoAnt.EffectSystems;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -19,6 +20,18 @@ namespace HK.AutoAnt.CellControllers.Events
         [SerializeField]
         protected int size = 1;
         public int Size => this.size;
+
+        [SerializeField]
+        private AudioClip constructionSE = null;
+
+        [SerializeField]
+        private AudioClip destructionSE = null;
+
+        [SerializeField]
+        private PoolableEffect constructionEffect = null;
+
+        [SerializeField]
+        private PoolableEffect destructionEffect = null;
 
         public int Id => int.Parse(this.name);
 
@@ -40,19 +53,43 @@ namespace HK.AutoAnt.CellControllers.Events
         }
 #endif
 
-        public virtual void Initialize(Vector2Int position, GameSystem gameSystem)
+        public virtual void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
         {
             this.Origin = position;
 
-            // 自分自身のマスターデータを取得してギミックを作成している
-            // セーブデータから読み込む時にプレハブの参照はセーブしていないのでちょっとややこしい作りになっている
+            // 自分自身のマスターデータを取得してデータを参照している
+            // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
             var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
             this.gimmick = record.EventData.CreateGimmickController(this.Origin);
+
+            if(!isInitializingGame)
+            {
+                Assert.IsNotNull(record.EventData.constructionSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
+                AutoAntSystem.Audio.SE.Play(record.EventData.constructionSE);
+
+                Assert.IsNotNull(record.EventData.constructionEffect, $"Id = {this.Id}の建設時のエフェクト生成に失敗しました");
+                var effect = record.EventData.constructionEffect.Rent();
+                effect.transform.position = this.gimmick.transform.position;
+                effect.transform.localScale = Vector3.one * record.EventData.size;
+            }
         }
 
         public virtual void Remove(GameSystem gameSystem)
         {
             this.instanceEvents.Clear();
+
+            // 自分自身のマスターデータを取得してデータを参照している
+            // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
+            var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
+
+            Assert.IsNotNull(record.EventData.destructionSE, $"Id = {this.Id}の破壊時のSE再生に失敗しました");
+            AutoAntSystem.Audio.SE.Play(record.EventData.destructionSE);
+
+            Assert.IsNotNull(record.EventData.destructionEffect, $"Id = {this.Id}の破壊時のエフェクト生成に失敗しました");
+            var effect = record.EventData.destructionEffect.Rent();
+            effect.transform.position = this.gimmick.transform.position;
+            effect.transform.localScale = Vector3.one * record.EventData.size;
+
             Destroy(this.gimmick.gameObject);
         }
 

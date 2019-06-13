@@ -26,9 +26,9 @@ namespace HK.AutoAnt.CellControllers.Events
         [SerializeField]
         private int amount = 0;
 
-        public override void Initialize(Vector2Int position, GameSystem gameSystem)
+        public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
         {
-            base.Initialize(position, gameSystem);
+            base.Initialize(position, gameSystem, isInitializingGame);
 
             Observable.Interval(TimeSpan.FromSeconds(this.intervalSeconds))
                 .SubscribeWithState(this, (_, _this) =>

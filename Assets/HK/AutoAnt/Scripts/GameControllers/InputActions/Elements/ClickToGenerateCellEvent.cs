@@ -29,7 +29,7 @@ namespace HK.AutoAnt.GameControllers
 
             if(this.eventGenerator.CanGenerate(cell, this.eventGenerator.RecordId))
             {
-                this.eventGenerator.Generate(cell, this.eventGenerator.RecordId);
+                this.eventGenerator.Generate(cell, this.eventGenerator.RecordId, false);
             }
         }
     }

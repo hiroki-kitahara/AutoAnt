@@ -44,9 +44,9 @@ namespace HK.AutoAnt.CellControllers.Events
             town.AddPopulation(result);
         }
 
-        public override void Initialize(Vector2Int position, GameSystem gameSystem)
+        public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
         {
-            base.Initialize(position, gameSystem);
+            base.Initialize(position, gameSystem, isInitializingGame);
             this.gameSystem = gameSystem;
             this.gameSystem.User.Town.AddPopulation(this.CurrentPopulation);
             this.gameSystem.UserUpdater.AddTownPopulations.Add(this);
