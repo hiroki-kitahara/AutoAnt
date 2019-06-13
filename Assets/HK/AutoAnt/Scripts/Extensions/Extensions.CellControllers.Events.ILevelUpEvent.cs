@@ -2,7 +2,9 @@
 using System.Linq;
 using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Database;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.Systems;
+using HK.Framework.EventSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -21,13 +23,15 @@ namespace HK.AutoAnt.Extensions
             var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(self.Id, self.Level);
             if (levelUpCostRecord == null)
             {
-                Debug.Log($"Id = {self.Id}は既にレベルMAX");
+                // FIXME: 不要になったら削除する
+                Broker.Global.Publish(RequestNotification.Get($"最大レベルです！"));
                 return false;
             }
 
             if (!levelUpCostRecord.Cost.IsEnough(gameSystem.User, gameSystem.MasterData.Item))
             {
-                Debug.Log($"Id = {self.Id}, Level = {self.Level}の必要な素材が足りない");
+                // FIXME: 不要になったら削除する
+                Broker.Global.Publish(RequestNotification.Get($"素材が足りません！"));
                 return false;
             }
 
@@ -40,7 +44,10 @@ namespace HK.AutoAnt.Extensions
 
             levelUpCostRecord.Cost.Consume(gameSystem.User, gameSystem.MasterData.Item);
             self.Level++;
-            Debug.Log($"LevelUp -> {self.Level}");
+            var record = gameSystem.MasterData.CellEvent.Records.Get(self.Id);
+
+            // FIXME: 不要になったら削除する
+            Broker.Global.Publish(RequestNotification.Get($"レベルアップ！ {self.Level - 1} -> {self.Level}"));
         }
     }
 }

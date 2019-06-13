@@ -10,24 +10,18 @@ using UnityEngine.Assertions;
 namespace HK.AutoAnt.UI
 {
     /// <summary>
-    /// アイテム取得UIの要素を制御するクラス
+    /// 通知UIの要素を制御するクラス
     /// </summary>
-    public sealed class AcquireItemElement : MonoBehaviour
+    public sealed class NotificationUIElement : MonoBehaviour
     {
         [SerializeField]
         private TextMeshProUGUI text = null;
 
-        [SerializeField]
-        private StringAsset.Finder format = null;
-
-        [SerializeField]
-        private float destroyDelay = 0.0f;
-
-        public AcquireItemElement Initialize(MasterDataItem.Record item, int amount, Inventory inventory)
+        public NotificationUIElement Initialize(string message, float delayDestroy)
         {
-            this.text.text = this.format.Format(item.Name, amount, inventory.Items[item.Id]);
+            this.text.text = message;
 
-            Observable.Timer(TimeSpan.FromSeconds(this.destroyDelay))
+            Observable.Timer(TimeSpan.FromSeconds(delayDestroy))
                 .SubscribeWithState(this, (_, _this) =>
                 {
                     Destroy(_this.gameObject);

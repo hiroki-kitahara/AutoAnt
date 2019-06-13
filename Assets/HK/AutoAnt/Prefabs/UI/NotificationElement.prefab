@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 5190821163163511288}
   - component: {fileID: 1951269792711926230}
   m_Layer: 5
-  m_Name: AcquireItemElement
+  m_Name: NotificationElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -295,8 +295,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 5623878423436314866}
-  format:
-    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
-    value: '{0} +{1} ({2})'
-    guid: 65d51f7d-b2d2-4668-848e-3b79864930c3
-  destroyDelay: 2
