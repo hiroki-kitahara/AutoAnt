@@ -14,6 +14,8 @@ namespace HK.AutoAnt.GameControllers
     /// </remarks>
     public sealed class ClickToDevelopCell : IInputAction<InputControllers.Events.ClickData>
     {
+        private readonly GameSystem gameSystem;
+
         private readonly CellGenerator cellGenerator;
 
         private readonly CellMapper cellMapper;
@@ -25,8 +27,16 @@ namespace HK.AutoAnt.GameControllers
 
         private int generateBlankRange;
 
-        public ClickToDevelopCell(CellGenerator cellGenerator, CellMapper cellMapper, int replaceCellRecordId, int blankCellRecordId, int generateBlankRange)
+        public ClickToDevelopCell(
+            GameSystem gameSystem,
+            CellGenerator cellGenerator,
+            CellMapper cellMapper,
+            int replaceCellRecordId,
+            int blankCellRecordId,
+            int generateBlankRange
+            )
         {
+            this.gameSystem = gameSystem;
             this.cellGenerator = cellGenerator;
             this.cellMapper = cellMapper;
             this.replaceCellRecordId = replaceCellRecordId;
@@ -42,6 +52,13 @@ namespace HK.AutoAnt.GameControllers
                 return;
             }
 
+            var needMoney = Calculator.DevelopCost(this.gameSystem, cell.Position);
+            if(!this.gameSystem.User.Wallet.IsEnoughMoney(needMoney))
+            {
+                return;
+            }
+
+            this.gameSystem.User.Wallet.AddMoney(-needMoney);
             this.cellGenerator.Replace(this.replaceCellRecordId, cell.Position);
 
             // 周りのセルのない座標にBlankセルを作成する　

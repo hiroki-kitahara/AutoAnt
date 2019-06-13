@@ -32,6 +32,13 @@ namespace HK.AutoAnt.Database
             [SerializeField]
             private float interval = 1.5f;
             public float Interval => this.interval;
+
+            /// <summary>
+            /// 開拓するためのコスト係数
+            /// </summary>
+            [SerializeField]
+            private int developCost = 10;
+            public int DevelopCost => this.developCost;
         }
 
         [Serializable]

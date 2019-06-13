@@ -94,6 +94,7 @@ namespace HK.AutoAnt.InputControllers
             if (UnityEngine.Input.GetKeyDown(KeyCode.R))
             {
                 this.inputActions = new DevelopCellActions(
+                    GameSystem.Instance,
                     this.cellManager.CellGenerator,
                     this.cellManager.Mapper,
                     100100,
