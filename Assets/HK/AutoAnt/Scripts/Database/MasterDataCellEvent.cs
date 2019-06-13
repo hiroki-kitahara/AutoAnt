@@ -18,12 +18,12 @@ namespace HK.AutoAnt.Database
         [Serializable]
         public class Record : IRecord
         {
-            private int cachedId = int.MinValue;
+            private int cachedId = 0;
             public int Id
             {
                 get
                 {
-                    if(this.cachedId == int.MinValue)
+                    if(this.cachedId == 0)
                     {
                         if(!int.TryParse(this.eventData.name, out this.cachedId))
                         {
@@ -42,6 +42,7 @@ namespace HK.AutoAnt.Database
 #if UNITY_EDITOR
             public Record(SpreadSheetData.CellEventData data)
             {
+                this.cachedId = 0;
                 this.eventData = CellEvent.GetOrCreateAsset(data);
             }
 #endif
