@@ -3,7 +3,6 @@ using HK.AutoAnt.Constants;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.CellControllers
