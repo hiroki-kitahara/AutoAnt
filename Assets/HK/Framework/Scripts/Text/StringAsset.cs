@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 
 namespace HK.Framework.Text
 {
@@ -235,8 +236,9 @@ namespace HK.Framework.Text
             if(data == null)
             {
                 data = new Data();
-                data.value.ja = defaultString;
+                data.value.Set(defaultString, "ja");
                 this.database.Add(data);
+                EditorUtility.SetDirty(this);
             }
 
             return new Finder(this, data);

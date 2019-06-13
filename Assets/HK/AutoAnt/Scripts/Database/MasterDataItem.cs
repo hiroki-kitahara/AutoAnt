@@ -32,7 +32,7 @@ namespace HK.AutoAnt.Database
             {
                 this.id = data.Id;
                 var stringAsset = AssetDatabase.LoadAssetAtPath<StringAsset>("Assets/HK/AutoAnt/DataSources/StringAsset/Item.asset");
-                this.name = stringAsset.CreateFinder(data.Name);
+                this.name = stringAsset.CreateFinderSafe(data.Name);
             }
 #endif
         }

@@ -57,7 +57,14 @@ namespace HK.Framework.Editor
 
 			if(cachedPopupList.ContainsKey(stringAsset))
 			{
-				return cachedPopupList[stringAsset];
+                if(cachedPopupList[stringAsset].Length == stringAsset.database.Count)
+                {
+                    return cachedPopupList[stringAsset];
+                }
+                else
+                {
+                    cachedPopupList.Remove(stringAsset);
+                }
 			}
 
 			string[] list = new string[stringAsset.database.Count];
