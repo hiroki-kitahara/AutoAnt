@@ -26,6 +26,10 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// 初期化
         /// </summary>
+        /// <remarks>
+        /// <see cref="isInitializeGame"/>はセーブデータから生成された場合は<c>true</c>になります
+        /// 例えばセーブデータから復帰した場合はSEを再生しないなどに利用してください
+        /// </remarks>
         void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializeGame);
 
         /// <summary>
