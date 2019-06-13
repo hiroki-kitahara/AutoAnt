@@ -20,6 +20,12 @@ namespace HK.AutoAnt.CellControllers.Events
         protected int size = 1;
         public int Size => this.size;
 
+        [SerializeField]
+        private AudioClip constructionSE = null;
+
+        [SerializeField]
+        private AudioClip destructionSE = null;
+
         public int Id => int.Parse(this.name);
 
         public Vector2Int Origin { get; protected set; }
@@ -40,20 +46,33 @@ namespace HK.AutoAnt.CellControllers.Events
         }
 #endif
 
-        public virtual void Initialize(Vector2Int position, GameSystem gameSystem)
+        public virtual void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
         {
             this.Origin = position;
 
-            // 自分自身のマスターデータを取得してギミックを作成している
-            // セーブデータから読み込む時にプレハブの参照はセーブしていないのでちょっとややこしい作りになっている
+            // 自分自身のマスターデータを取得してデータを参照している
+            // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
             var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
             this.gimmick = record.EventData.CreateGimmickController(this.Origin);
+
+            if(!isInitializingGame)
+            {
+                Assert.IsNotNull(record.EventData.constructionSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
+                AutoAntSystem.Audio.SE.Play(record.EventData.constructionSE);
+            }
         }
 
         public virtual void Remove(GameSystem gameSystem)
         {
             this.instanceEvents.Clear();
             Destroy(this.gimmick.gameObject);
+
+            // 自分自身のマスターデータを取得してデータを参照している
+            // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
+            var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
+
+            Assert.IsNotNull(record.EventData.destructionSE, $"Id = {this.Id}の破壊時のSE再生に失敗しました");
+            AutoAntSystem.Audio.SE.Play(record.EventData.destructionSE);
         }
 
         public bool CanGenerate(Cell origin, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper)
