@@ -44,9 +44,9 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         private List<string> products = new List<string>();
 
-        public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializeGame)
+        public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
         {
-            base.Initialize(position, gameSystem, isInitializeGame);
+            base.Initialize(position, gameSystem, isInitializingGame);
             this.gameSystem = gameSystem;
             this.levelParameter = this.gameSystem.MasterData.FacilityLevelParameter.Records.Get(this.Id, this.Level);
             gameSystem.User.Town.AddPopularity(this.levelParameter.Popularity);

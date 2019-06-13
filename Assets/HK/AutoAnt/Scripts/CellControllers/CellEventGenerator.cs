@@ -32,7 +32,7 @@ namespace HK.AutoAnt.CellControllers
             this.cellMapper = cellMapper;
         }
 
-        public void Generate(Cell cell, int cellEventRecordId, bool isInitializeGame)
+        public void Generate(Cell cell, int cellEventRecordId, bool isInitializingGame)
         {
             Assert.IsFalse(this.cellMapper.HasEvent(cell));
 
@@ -49,7 +49,7 @@ namespace HK.AutoAnt.CellControllers
 
             // (Clone)という文字列が要らないのでnameを代入する必要がある
             cellEventInstance.name = cellEventRecord.EventData.name;
-            cellEventInstance.Initialize(cell.Position, this.gameSystem, isInitializeGame);
+            cellEventInstance.Initialize(cell.Position, this.gameSystem, isInitializingGame);
             cellMapper.Add(cellEventInstance);
         }
 

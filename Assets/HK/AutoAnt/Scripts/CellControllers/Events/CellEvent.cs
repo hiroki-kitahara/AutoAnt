@@ -46,7 +46,7 @@ namespace HK.AutoAnt.CellControllers.Events
         }
 #endif
 
-        public virtual void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializeGame)
+        public virtual void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
         {
             this.Origin = position;
 
@@ -55,7 +55,7 @@ namespace HK.AutoAnt.CellControllers.Events
             var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
             this.gimmick = record.EventData.CreateGimmickController(this.Origin);
 
-            if(!isInitializeGame)
+            if(!isInitializingGame)
             {
                 Assert.IsNotNull(record.EventData.constructionSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
                 AutoAntSystem.Audio.SE.Play(record.EventData.constructionSE);
