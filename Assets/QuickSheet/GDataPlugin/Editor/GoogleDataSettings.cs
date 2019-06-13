@@ -17,8 +17,22 @@ namespace UnityQuickSheet
     /// A class manages google account setting.
     /// </summary>
     [CreateAssetMenu(menuName = "QuickSheet/Setting/GoogleData Setting")]
-    public class GoogleDataSettings : SingletonScriptableObject<GoogleDataSettings>
+    public class GoogleDataSettings : ScriptableObject
     {
+        private static GoogleDataSettings instance;
+        public static GoogleDataSettings Instance
+        {
+            get
+            {
+                if(instance == null)
+                {
+                    instance = AssetDatabase.LoadAssetAtPath<GoogleDataSettings>("Assets/QuickSheet/GDataPlugin/Editor/Google Data Settings.asset");
+                }
+
+                return instance;
+            }
+        }
+
         // A flag which indicates use local installed oauth2 json file for authentication or not.
         static public bool useOAuth2JsonFile = false;
 
