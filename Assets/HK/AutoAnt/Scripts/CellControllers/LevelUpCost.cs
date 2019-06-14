@@ -24,7 +24,7 @@ namespace HK.AutoAnt.CellControllers
         /// お金
         /// </summary>
         [SerializeField]
-        private int money = 0;
+        private double money = 0;
 
         /// <summary>
         /// 必要なアイテムリスト

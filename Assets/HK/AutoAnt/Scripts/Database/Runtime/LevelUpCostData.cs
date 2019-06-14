@@ -20,8 +20,8 @@ int level;
 public int Level { get {return level; } set { level = value;} }
 
 [SerializeField]
-int money;
-public int Money { get {return money; } set { money = value;} }
+double money;
+public double Money { get {return money; } set { money = value;} }
 
 [SerializeField]
 string[] items = new string[0];
