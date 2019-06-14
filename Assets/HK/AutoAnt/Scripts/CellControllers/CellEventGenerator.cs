@@ -51,6 +51,8 @@ namespace HK.AutoAnt.CellControllers
             cellEventInstance.name = cellEventRecord.EventData.name;
             cellEventInstance.Initialize(cell.Position, this.gameSystem, isInitializingGame);
             cellMapper.Add(cellEventInstance);
+
+            this.gameSystem.User.GenerateCellEventHistory.AddHistory(cellEventRecordId);
         }
 
         public void GenerateOnDeserialize(CellEvent instance)
