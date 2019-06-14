@@ -16,5 +16,16 @@ namespace HK.AutoAnt.GameControllers
         {
             return gameSystem.Constants.Cell.DevelopCost * position.sqrMagnitude;
         }
+
+        /// <summary>
+        /// 人口増加量を返す
+        /// </summary>
+        /// <param name="basePopulation">ベースの増加量</param>
+        /// <param name="popularity">人気度</param>
+        /// <param name="popularityRate">人気度の係数</param>
+        public static int AddPopulation(int basePopulation, int popularity, float popularityRate)
+        {
+            return Mathf.FloorToInt(basePopulation * (popularity / popularityRate));
+        }
     }
 }

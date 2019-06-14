@@ -40,7 +40,7 @@ namespace HK.AutoAnt.CellControllers.Events
         void IAddTownPopulation.Add(Town town)
         {
             Assert.IsNotNull(this.levelParameter);
-            var result = this.levelParameter.Population;
+            var result = Calculator.AddPopulation(this.levelParameter.Population, town.Popularity.Value, 1000.0f);
             this.CurrentPopulation += result;
             town.AddPopulation(result);
         }
