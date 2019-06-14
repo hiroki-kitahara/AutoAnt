@@ -15,17 +15,17 @@ namespace HK.AutoAnt.UserControllers
         /// <summary>
         /// お金
         /// </summary>
-        public int Money => this.money.Value;
+        public double Money => this.money.Value;
 
-        public IReactiveProperty<int> MoneyAsObservable => this.money;
+        public ReactiveProperty<double> MoneyAsObservable => this.money;
 
         [SerializeField]
-        private IntReactiveProperty money = new IntReactiveProperty();
+        private DoubleReactiveProperty money = new DoubleReactiveProperty();
 
         /// <summary>
         /// お金が足りているか返す
         /// </summary>
-        public bool IsEnoughMoney(int value)
+        public bool IsEnoughMoney(double value)
         {
             return this.Money >= value;
         }
@@ -33,7 +33,7 @@ namespace HK.AutoAnt.UserControllers
         /// <summary>
         /// お金を加算する
         /// </summary>
-        public void AddMoney(int value)
+        public void AddMoney(double value)
         {
             this.money.Value += value;
             Assert.IsTrue(this.Money >= 0);
@@ -55,7 +55,7 @@ namespace HK.AutoAnt.UserControllers
         /// <summary>
         /// お金を設定する
         /// </summary>
-        public void SetMoney(int value)
+        public void SetMoney(double value)
         {
             this.money.Value = value;
         }

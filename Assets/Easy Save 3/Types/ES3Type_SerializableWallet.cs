@@ -14,7 +14,7 @@ namespace ES3Types
 		{
 			var instance = (HK.AutoAnt.SaveData.Serializables.SerializableWallet)obj;
 			
-			writer.WriteProperty("Money", instance.Money, ES3Type_int.Instance);
+			writer.WriteProperty("Money", instance.Money, ES3Type_double.Instance);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -26,7 +26,7 @@ namespace ES3Types
 				{
 					
 					case "Money":
-						instance.Money = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.Money = reader.Read<System.Double>(ES3Type_double.Instance);
 						break;
 					default:
 						reader.Skip();
