@@ -11,7 +11,8 @@ namespace HK.AutoAnt.UserControllers
     [Serializable]
     public sealed class GenerateCellEventHistory
     {
-        private Dictionary<int, int> histories = new Dictionary<int, int>();
+        [SerializeField]
+        public Dictionary<int, int> histories = new Dictionary<int, int>();
 
         public void AddHistory(int cellEventRecordId)
         {
