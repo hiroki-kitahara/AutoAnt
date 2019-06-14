@@ -14,7 +14,7 @@ namespace ES3Types
 		{
 			var instance = (HK.AutoAnt.UserControllers.GenerateCellEventHistory)obj;
 			
-			writer.WriteProperty("histories", instance.histories);
+			writer.WritePrivateField("histories", instance);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -26,8 +26,8 @@ namespace ES3Types
 				{
 					
 					case "histories":
-						instance.histories = reader.Read<System.Collections.Generic.Dictionary<System.Int32, System.Int32>>();
-						break;
+					reader.SetPrivateField("histories", reader.Read<System.Collections.Generic.Dictionary<System.Int32, System.Int32>>(), instance);
+					break;
 					default:
 						reader.Skip();
 						break;

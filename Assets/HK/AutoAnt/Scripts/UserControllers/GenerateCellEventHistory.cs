@@ -11,8 +11,13 @@ namespace HK.AutoAnt.UserControllers
     [Serializable]
     public sealed class GenerateCellEventHistory
     {
-        [SerializeField]
-        public Dictionary<int, int> histories = new Dictionary<int, int>();
+        /// <summary>
+        /// 生成履歴
+        /// key = cellEventRecordId
+        /// value = 生成した数
+        /// </summary>
+        public IReadOnlyDictionary<int, int> Histories => this.histories;
+        private Dictionary<int, int> histories = new Dictionary<int, int>();
 
         public void AddHistory(int cellEventRecordId)
         {
