@@ -12,5 +12,9 @@ namespace HK.AutoAnt.Database
         [SerializeField]
         private ConstantsCell cell = null;
         public ConstantsCell Cell => this.cell;
+
+        [SerializeField]
+        private ConstantsHousing housing = null;
+        public ConstantsHousing Housing => this.housing;
     }
 }
