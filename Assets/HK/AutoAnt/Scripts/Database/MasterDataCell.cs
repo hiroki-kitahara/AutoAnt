@@ -6,6 +6,10 @@ using HK.AutoAnt.Constants;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace HK.AutoAnt.Database
 {
     /// <summary>
@@ -14,40 +18,6 @@ namespace HK.AutoAnt.Database
     [CreateAssetMenu(menuName = "AutoAnt/Database/Cell")]
     public sealed class MasterDataCell : MasterDataBase<MasterDataCell.Record>
     {
-        [SerializeField]
-        private ConstantData constants = null;
-        public ConstantData Constants => this.constants;
-
-        [Serializable]
-        public class ConstantData
-        {
-            [SerializeField]
-            private Vector3 scale = new Vector3(1.0f, 0.2f, 1.0f);
-            public Vector3 Scale => this.scale;
-
-            [SerializeField]
-            private Vector3 effectScale = Vector3.one;
-            public Vector3 EffectScale => this.effectScale;
-
-            [SerializeField]
-            private float interval = 1.5f;
-            public float Interval => this.interval;
-
-            /// <summary>
-            /// セル開拓時のSE
-            /// </summary>
-            [SerializeField]
-            private AudioClip developSE = null;
-            public AudioClip DevelopSE => this.developSE;
-            
-            /// <summary>
-            /// 開拓するためのコスト係数
-            /// </summary>
-            [SerializeField]
-            private int developCost = 10;
-            public int DevelopCost => this.developCost;
-        }
-
         [Serializable]
         public class Record : IRecord
         {
@@ -60,12 +30,17 @@ namespace HK.AutoAnt.Database
             public CellType CellType => this.cellType;
 
             [SerializeField]
-            private Cell prefab = null;
-            public Cell Prefab => this.prefab;
+            private CellControllers.Cell prefab = null;
+            public CellControllers.Cell Prefab => this.prefab;
 
-            [SerializeField]
-            private List<CellEvent> clickEvents = new List<CellEvent>();
-            public List<CellEvent> ClickEvents => this.clickEvents;
+#if UNITY_EDITOR
+            public Record(SpreadSheetData.CellData data)
+            {
+                this.id = data.Id;
+                this.cellType = data.CELLTYPE;
+                this.prefab = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Cell/{data.Prefabname}.prefab").GetComponent<Cell>();
+            }
+#endif
         }
     }
 }

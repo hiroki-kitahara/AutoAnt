@@ -14,7 +14,7 @@ namespace HK.AutoAnt.GameControllers
         /// </summary>
         public static int DevelopCost(GameSystem gameSystem, Vector2Int position)
         {
-            return gameSystem.MasterData.Cell.Constants.DevelopCost * position.sqrMagnitude;
+            return gameSystem.Constants.Cell.DevelopCost * position.sqrMagnitude;
         }
 
         /// <summary>

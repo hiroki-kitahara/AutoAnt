@@ -4,6 +4,10 @@ using HK.Framework.Text;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace HK.AutoAnt.Database
 {
     /// <summary>
@@ -50,6 +54,19 @@ namespace HK.AutoAnt.Database
             [SerializeField]
             private int popularity = 0;
             public int Popularity => this.popularity;
+
+#if UNITY_EDITOR
+            public Record(SpreadSheetData.FacilityLevelParameterData data)
+            {
+                this.id = data.Id;
+                this.level = data.Level;
+                this.productSlot = data.Productslot;
+                var stringAsset = AssetDatabase.LoadAssetAtPath<StringAsset>("Assets/HK/AutoAnt/DataSources/StringAsset/Item.asset");
+                this.productName = stringAsset.CreateFinder(data.Productname);
+                this.needProductTime = data.Needproducttime;
+                this.popularity = data.Popularity;
+            }
+#endif
         }
     }
 }

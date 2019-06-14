@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 
 namespace HK.Framework.Text
 {
@@ -228,6 +229,20 @@ namespace HK.Framework.Text
 			Debug.AssertFormat(data != null, "{0}がありません.", defaultString);
 			return new Finder(this, data);
 		}
+
+        public Finder CreateFinderSafe(string defaultString)
+        {
+            var data = this.database.Find(d => d.value.Default == defaultString);
+            if(data == null)
+            {
+                data = new Data();
+                data.value.Set(defaultString, "ja");
+                this.database.Add(data);
+                EditorUtility.SetDirty(this);
+            }
+
+            return new Finder(this, data);
+        }
 #endif
 		/// <summary>
 		/// string.Formatのラッピング.
