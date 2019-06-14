@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.Systems;
+﻿using HK.AutoAnt.Extensions;
+using HK.AutoAnt.Systems;
 using HK.Framework.Text;
 using TMPro;
 using UniRx;
@@ -23,7 +24,7 @@ namespace HK.AutoAnt.UI
             GameSystem.Instance.User.Wallet.MoneyAsObservable
                 .SubscribeWithState(this, (money, _this) =>
                 {
-                    _this.value.text = _this.format.Format(money.ToString());
+                    _this.value.text = _this.format.Format(money.ToReadableString());
                 })
                 .AddTo(this);
         }

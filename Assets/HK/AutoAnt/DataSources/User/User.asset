@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallet:
     money:
-      value: 1000
+      value: 1e+25
   town:
     population:
       value: 0
