@@ -24,8 +24,6 @@ namespace HK.AutoAnt.UserControllers
             {
                 this.histories[cellEventRecordId]++;
             }
-
-            Debug.Log($"celEventRecordId = {cellEventRecordId}, value = {this.histories[cellEventRecordId]}");
         }
     }
 }
