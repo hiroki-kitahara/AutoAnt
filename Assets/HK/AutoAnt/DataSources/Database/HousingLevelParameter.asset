@@ -15,7 +15,7 @@ MonoBehaviour:
   records:
   - id: 100000
     level: 1
-    population: 1e+17
+    population: 1
   - id: 100000
     level: 2
     population: 2
