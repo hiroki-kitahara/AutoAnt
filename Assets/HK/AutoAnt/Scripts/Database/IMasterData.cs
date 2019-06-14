@@ -6,7 +6,7 @@ namespace HK.AutoAnt.Database
     /// <summary>
     /// マスターデータのインターフェイス
     /// </summary>
-    public interface IMasterData<Record> where Record : class, IRecord
+    public interface IMasterData<Record> where Record : class
     {
         Record[] Records { get; }
     }

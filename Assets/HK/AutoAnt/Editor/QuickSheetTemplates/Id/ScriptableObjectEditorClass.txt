@@ -1,0 +1,49 @@
+using UnityEngine;
+using UnityEditor;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+
+using GDataDB;
+using GDataDB.Linq;
+
+using UnityQuickSheet;
+
+namespace HK.AutoAnt.Database.SpreadSheetData
+{
+    ///
+    /// !!! Machine generated code !!!
+    ///
+    [CustomEditor(typeof($ScriptableObjectName))]
+    public class $ClassName : BaseGoogleEditor<$ScriptableObjectName>
+    {
+        private const string WorkSheetName = "$WorkSheetClassName";
+
+        private const string SpreadSheetName = "$SpreadSheetName";
+
+        public override bool Load()
+        {        
+            var targetData = target as $ScriptableObjectName;
+            var client = new DatabaseClient("", "");
+            var error = string.Empty;
+            var db = client.GetDatabase(SpreadSheetName, ref error);	
+            var table = db.GetTable<$DataClassName>(WorkSheetName) ?? db.CreateTable<$DataClassName>(WorkSheetName);
+            var myDataList = new List<$ScriptableObjectName.Record>();
+            var all = table.FindAll();
+
+            foreach(var element in all)
+            {
+                var data = new $DataClassName();
+                data = Cloner.DeepCopy<$DataClassName>(element.Element);
+                myDataList.Add(new $ScriptableObjectName.Record(data));
+            }
+                    
+            targetData.Records = myDataList.ToArray();
+            
+            EditorUtility.SetDirty(targetData);
+            AssetDatabase.SaveAssets();
+            
+            return true;
+        }
+    }
+}

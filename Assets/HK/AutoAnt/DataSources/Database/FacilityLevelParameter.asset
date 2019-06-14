@@ -18,7 +18,7 @@ MonoBehaviour:
     productSlot: 3
     productName:
       target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-      value: "\u9244\u9271\u77F3"
+      value: "\u30A2\u30A4\u30C6\u30E01"
       guid: 2529d8c5-7d90-4263-bf83-5488875c491f
     needProductTime: 3
     popularity: 10
@@ -27,7 +27,7 @@ MonoBehaviour:
     productSlot: 5
     productName:
       target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-      value: "\u9244\u9271\u77F3"
+      value: "\u30A2\u30A4\u30C6\u30E01"
       guid: 2529d8c5-7d90-4263-bf83-5488875c491f
     needProductTime: 3
     popularity: 20
@@ -36,34 +36,25 @@ MonoBehaviour:
     productSlot: 7
     productName:
       target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-      value: "\u9244\u9271\u77F3"
+      value: "\u30A2\u30A4\u30C6\u30E01"
       guid: 2529d8c5-7d90-4263-bf83-5488875c491f
-    needProductTime: 3
+    needProductTime: 2
     popularity: 30
   - id: 101000
     level: 4
     productSlot: 9
     productName:
       target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-      value: "\u9244\u9271\u77F3"
+      value: "\u30A2\u30A4\u30C6\u30E01"
       guid: 2529d8c5-7d90-4263-bf83-5488875c491f
     needProductTime: 2
     popularity: 40
   - id: 101000
     level: 5
-    productSlot: 12
+    productSlot: 11
     productName:
       target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-      value: "\u9244\u9271\u77F3"
-      guid: 2529d8c5-7d90-4263-bf83-5488875c491f
-    needProductTime: 2
-    popularity: 50
-  - id: 101000
-    level: 6
-    productSlot: 15
-    productName:
-      target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-      value: "\u9244\u9271\u77F3"
+      value: "\u30A2\u30A4\u30C6\u30E01"
       guid: 2529d8c5-7d90-4263-bf83-5488875c491f
     needProductTime: 2
     popularity: 50
