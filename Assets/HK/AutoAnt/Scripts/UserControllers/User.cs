@@ -33,6 +33,10 @@ namespace HK.AutoAnt.UserControllers
         private Town town = null;
         public Town Town => this.town;
 
+        [SerializeField]
+        private GenerateCellEventHistory generateCellEventHistory = null;
+        public GenerateCellEventHistory GenerateCellEventHistory => this.generateCellEventHistory;
+
         public SerializableUser GetSerializable()
         {
             return new SerializableUser()
