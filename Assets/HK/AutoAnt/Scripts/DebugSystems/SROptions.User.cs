@@ -13,7 +13,7 @@ public partial class SROptions
 
     [Category(UserCategory)]
     [DisplayName("お金")]
-    public int SetMoney
+    public double SetMoney
     {
         get
         {

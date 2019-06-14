@@ -14,21 +14,21 @@ namespace HK.AutoAnt.UserControllers
         /// <summary>
         /// 総人口
         /// </summary>
-        public IReadOnlyReactiveProperty<int> Population => this.population;
+        public IReadOnlyReactiveProperty<double> Population => this.population;
         [SerializeField]
-        private IntReactiveProperty population = new IntReactiveProperty();
+        private DoubleReactiveProperty population = new DoubleReactiveProperty();
 
         /// <summary>
         /// 人気度
         /// </summary>
-        public IReadOnlyReactiveProperty<int> Popularity => this.popularity;
+        public IReadOnlyReactiveProperty<double> Popularity => this.popularity;
         [SerializeField]
-        private IntReactiveProperty popularity = new IntReactiveProperty();
+        private DoubleReactiveProperty popularity = new DoubleReactiveProperty();
 
         /// <summary>
         /// 人口を加算する
         /// </summary>
-        public void AddPopulation(int value)
+        public void AddPopulation(double value)
         {
             this.population.Value += value;
 
@@ -38,7 +38,7 @@ namespace HK.AutoAnt.UserControllers
         /// <summary>
         /// 人気度を加算する
         /// </summary>
-        public void AddPopularity(int value)
+        public void AddPopularity(double value)
         {
             this.popularity.Value += value;
         }

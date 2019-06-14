@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("BasePopulationAmount", "CurrentPopulation", "size", "Level", "Origin", "name")]
+	[ES3PropertiesAttribute("CurrentPopulation", "size", "Level", "Origin", "name")]
 	public class ES3Type_Housing : ES3ScriptableObjectType
 	{
 		public static ES3Type Instance = null;
@@ -14,7 +14,7 @@ namespace ES3Types
 		{
 			var instance = (HK.AutoAnt.CellControllers.Events.Housing)obj;
 			
-			writer.WriteProperty("CurrentPopulation", instance.CurrentPopulation, ES3Type_int.Instance);
+			writer.WriteProperty("CurrentPopulation", instance.CurrentPopulation, ES3Type_double.Instance);
 			writer.WritePrivateField("size", instance);
 			writer.WriteProperty("Level", instance.Level, ES3Type_int.Instance);
 			writer.WritePrivateProperty("Origin", instance);
@@ -30,7 +30,7 @@ namespace ES3Types
 				{
 					
 					case "CurrentPopulation":
-						instance.CurrentPopulation = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.CurrentPopulation = reader.Read<System.Double>(ES3Type_double.Instance);
 						break;
 					case "size":
 					reader.SetPrivateField("size", reader.Read<System.Int32>(), instance);

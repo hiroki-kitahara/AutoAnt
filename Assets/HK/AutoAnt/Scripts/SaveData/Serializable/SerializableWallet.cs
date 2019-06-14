@@ -8,6 +8,6 @@ namespace HK.AutoAnt.SaveData.Serializables
     /// </summary>
     public sealed class SerializableWallet
     {
-        public int Money { get; set; }
+        public double Money { get; set; }
     }
 }

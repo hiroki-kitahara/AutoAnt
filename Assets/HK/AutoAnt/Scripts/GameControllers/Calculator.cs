@@ -12,7 +12,7 @@ namespace HK.AutoAnt.GameControllers
         /// <summary>
         /// セルを開拓するために必要なお金を返す
         /// </summary>
-        public static int DevelopCost(GameSystem gameSystem, Vector2Int position)
+        public static double DevelopCost(GameSystem gameSystem, Vector2Int position)
         {
             return gameSystem.Constants.Cell.DevelopCost * position.sqrMagnitude;
         }
@@ -23,9 +23,9 @@ namespace HK.AutoAnt.GameControllers
         /// <param name="basePopulation">ベースの増加量</param>
         /// <param name="popularity">人気度</param>
         /// <param name="popularityRate">人気度の係数</param>
-        public static int AddPopulation(int basePopulation, int popularity, float popularityRate)
+        public static double AddPopulation(double basePopulation, double popularity, float popularityRate)
         {
-            return Mathf.FloorToInt(basePopulation * (popularity / popularityRate));
+            return System.Math.Floor(basePopulation * (popularity / popularityRate));
         }
     }
 }

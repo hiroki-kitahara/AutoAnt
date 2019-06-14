@@ -20,8 +20,8 @@ int level;
 public int Level { get {return level; } set { level = value;} }
 
 [SerializeField]
-int population;
-public int Population { get {return population; } set { population = value;} }
+double population;
+public double Population { get {return population; } set { population = value;} }
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.Systems;
+﻿using HK.AutoAnt.Extensions;
+using HK.AutoAnt.Systems;
 using HK.Framework.Text;
 using TMPro;
 using UniRx;
@@ -23,7 +24,7 @@ namespace HK.AutoAnt.UI
             GameSystem.Instance.User.Town.Popularity
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.value.text = _this.format.Format(x.ToString());
+                    _this.value.text = _this.format.Format(x.ToReadableString());
                 })
                 .AddTo(this);
         }

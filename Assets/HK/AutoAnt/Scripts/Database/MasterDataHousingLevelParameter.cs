@@ -27,8 +27,8 @@ namespace HK.AutoAnt.Database
             /// 増加する人口の量
             /// </summary>
             [SerializeField]
-            private int population = 1;
-            public int Population => this.population;
+            private double population = 1;
+            public double Population => this.population;
 
 #if UNITY_EDITOR
             public Record(SpreadSheetData.HousingLevelParameterData data)
