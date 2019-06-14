@@ -52,8 +52,8 @@ namespace HK.AutoAnt.Database
             /// 人気度
             /// </summary>
             [SerializeField]
-            private int popularity = 0;
-            public int Popularity => this.popularity;
+            private double popularity = 0;
+            public double Popularity => this.popularity;
 
 #if UNITY_EDITOR
             public Record(SpreadSheetData.FacilityLevelParameterData data)

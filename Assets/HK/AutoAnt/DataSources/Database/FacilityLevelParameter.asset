@@ -21,7 +21,7 @@ MonoBehaviour:
       value: "\u30A2\u30A4\u30C6\u30E01"
       guid: 2529d8c5-7d90-4263-bf83-5488875c491f
     needProductTime: 3
-    popularity: 10
+    popularity: -10
   - id: 101000
     level: 2
     productSlot: 5
@@ -30,7 +30,7 @@ MonoBehaviour:
       value: "\u30A2\u30A4\u30C6\u30E01"
       guid: 2529d8c5-7d90-4263-bf83-5488875c491f
     needProductTime: 3
-    popularity: 20
+    popularity: -20
   - id: 101000
     level: 3
     productSlot: 7
@@ -39,7 +39,7 @@ MonoBehaviour:
       value: "\u30A2\u30A4\u30C6\u30E01"
       guid: 2529d8c5-7d90-4263-bf83-5488875c491f
     needProductTime: 2
-    popularity: 30
+    popularity: -30
   - id: 101000
     level: 4
     productSlot: 9
@@ -48,7 +48,7 @@ MonoBehaviour:
       value: "\u30A2\u30A4\u30C6\u30E01"
       guid: 2529d8c5-7d90-4263-bf83-5488875c491f
     needProductTime: 2
-    popularity: 40
+    popularity: -40
   - id: 101000
     level: 5
     productSlot: 11
@@ -57,4 +57,4 @@ MonoBehaviour:
       value: "\u30A2\u30A4\u30C6\u30E01"
       guid: 2529d8c5-7d90-4263-bf83-5488875c491f
     needProductTime: 2
-    popularity: 50
+    popularity: -50
