@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using HK.AutoAnt.Events;
+using HK.Framework.EventSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -29,6 +31,8 @@ namespace HK.AutoAnt.UserControllers
             {
                 this.histories[cellEventRecordId]++;
             }
+
+            Broker.Global.Publish(AddedGenerateCellEventHistory.Get(this, cellEventRecordId));
         }
     }
 }
