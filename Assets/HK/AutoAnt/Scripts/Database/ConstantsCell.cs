@@ -32,7 +32,7 @@ namespace HK.AutoAnt.Database
         /// 開拓するためのコスト係数
         /// </summary>
         [SerializeField]
-        private int developCost = 10;
-        public int DevelopCost => this.developCost;
+        private double developCost = 10;
+        public double DevelopCost => this.developCost;
     }
 }
