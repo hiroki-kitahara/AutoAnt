@@ -23,7 +23,7 @@ namespace HK.AutoAnt.CellControllers.Events
         /// 保持している人口
         /// </summary>
         [HideInInspector]
-        public int CurrentPopulation = 0;
+        public double CurrentPopulation = 0;
 
         /// <summary>
         /// レベル
