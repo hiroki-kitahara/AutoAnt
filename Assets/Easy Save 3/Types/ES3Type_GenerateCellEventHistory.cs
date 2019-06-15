@@ -26,7 +26,7 @@ namespace ES3Types
 				{
 					
 					case "histories":
-					reader.SetPrivateField("histories", reader.Read<System.Collections.Generic.Dictionary<System.Int32, System.Int32>>(), instance);
+					reader.SetPrivateField("histories", reader.Read<System.Collections.Generic.Dictionary<System.Int32, HK.AutoAnt.UserControllers.GenerateCellEventHistory.CellEvent>>(), instance);
 					break;
 					default:
 						reader.Skip();

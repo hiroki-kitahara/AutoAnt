@@ -79,6 +79,7 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             this.LevelUp(this.gameSystem);
             this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
+            this.gameSystem.User.GenerateCellEventHistory.AddHistory(this.Id, this.Level - 1);
         }
     }
 }
