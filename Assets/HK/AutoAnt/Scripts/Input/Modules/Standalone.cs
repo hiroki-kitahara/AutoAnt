@@ -17,13 +17,9 @@ namespace HK.AutoAnt.InputControllers.Modules
         public Standalone()
         {
             Observable.EveryUpdate()
-                .Subscribe(_ =>
+                .SubscribeWithState(this, (_, _this) =>
                 {
-                    var amount = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
-                    if (amount != 0f)
-                    {
-                        Input.Current.Broker.Publish(Events.Scroll.Get(Events.ScrollData.Get(amount)));
-                    }
+                    _this.UpdateScroll();
                 });
         }
 
@@ -50,6 +46,15 @@ namespace HK.AutoAnt.InputControllers.Modules
         public IObservable<Events.Scroll> ScrollAsObservable()
         {
             return Broker.Receive<Events.Scroll>();
+        }
+
+        private void UpdateScroll()
+        {
+            var amount = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
+            if (amount != 0f)
+            {
+                Input.Current.Broker.Publish(Events.Scroll.Get(Events.ScrollData.Get(amount)));
+            }
         }
     }
 }
