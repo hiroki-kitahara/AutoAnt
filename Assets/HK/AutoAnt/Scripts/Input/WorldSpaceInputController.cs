@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 namespace HK.AutoAnt.InputControllers
 {
     /// <summary>
-    /// 
+    /// ワールド空間の入力を制御するクラス
     /// </summary>
     public sealed class WorldSpaceInputController :
         MonoBehaviour,
