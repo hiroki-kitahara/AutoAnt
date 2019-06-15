@@ -35,10 +35,14 @@ namespace HK.AutoAnt.UserControllers
             Broker.Global.Publish(AddedGenerateCellEventHistory.Get(this, cellEventRecordId));
         }
 
+        /// <summary>
+        /// アンロック可能か返す
+        /// </summary>
         public bool IsEnough(MasterDataUnlockCellEvent.Record.NeedCellEvent[] needs)
         {
             foreach (var n in needs)
             {
+                // そもそも生成履歴に存在しない場合はアンロック出来ない
                 if (!histories.ContainsKey(n.CellEventRecordId))
                 {
                     return false;
@@ -75,8 +79,12 @@ namespace HK.AutoAnt.UserControllers
                 this.numbers[level]++;
             }
 
+            /// <summary>
+            /// アンロック可能か返す
+            /// </summary>
             public bool IsEnough(MasterDataUnlockCellEvent.Record.NeedCellEvent need)
             {
+                // 指定されたレベルを一度も生成したことが無い場合はアンロック出来ない
                 if(this.numbers.Count < need.Level)
                 {
                     return false;
