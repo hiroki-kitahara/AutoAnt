@@ -12,5 +12,7 @@ namespace HK.AutoAnt.SaveData.Serializables
         public SerializableWallet Wallet { get; set; }
 
         public Inventory Inventory { get; set; }
+
+        public GenerateCellEventHistory GenerateCellEventHistory { get; set; }
     }
 }
