@@ -24,8 +24,8 @@ double money;
 public double Money { get {return money; } set { money = value;} }
 
 [SerializeField]
-string[] items = new string[0];
-public string[] Items { get {return items; } set { items = value;} }
+string items;
+public string Items { get {return items; } set { items = value;} }
 
     }
 }
