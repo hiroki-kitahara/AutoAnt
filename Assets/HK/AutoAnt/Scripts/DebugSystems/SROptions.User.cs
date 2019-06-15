@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 using HK.AutoAnt.Systems;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -33,6 +34,16 @@ public partial class SROptions
         foreach(var record in masterData.Records)
         {
             GameSystem.Instance.User.Inventory.AddItem(record, 10);
+        }
+    }
+
+    [Category(UserCategory)]
+    [DisplayName("建設履歴を表示する")]
+    public void PrintGenerateCellEventHistories()
+    {
+        foreach(var h in GameSystem.Instance.User.GenerateCellEventHistory.Histories)
+        {
+            Debug.Log($"CellEventRecordId = {h.Key}, numbers = {string.Join(",", h.Value.Numbers.Select(n => n.ToString()))}");
         }
     }
 }
