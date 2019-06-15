@@ -34,5 +34,5 @@ MonoBehaviour:
   - type: 1
     name: Items
     isEnable: 0
-    isArray: 1
+    isArray: 0
   AccessCode: 

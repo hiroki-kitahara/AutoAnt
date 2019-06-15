@@ -7,6 +7,7 @@ using HK.AutoAnt.UserControllers;
 using HK.Framework.Text;
 using UnityEngine;
 using UnityEngine.Assertions;
+using System.Linq;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -30,23 +31,22 @@ namespace HK.AutoAnt.CellControllers
         /// 必要なアイテムリスト
         /// </summary>
         [SerializeField]
-        private List<NeedItem> needItems = new List<NeedItem>();
+        private NeedItem[] needItems = new NeedItem[0];
 
 #if UNITY_EDITOR
         public LevelUpCost(Database.SpreadSheetData.LevelUpCostData data)
         {
             this.money = data.Money;
-            this.needItems = new List<NeedItem>();
-            for (var i = 0; i < data.Items.Length; i+=2)
+            if(string.IsNullOrEmpty(data.Items))
             {
-                var itemName = data.Items[i];
-                int amount;
-                if(!int.TryParse(data.Items[i + 1], out amount))
-                {
-                    Debug.LogError($"Id = {data.Id}, Level = {data.Level}の{typeof(NeedItem).Name}への変換に失敗しました. {data.Items[i + 1]}はintに変換出来ません");
-                }
-
-                this.needItems.Add(new NeedItem(itemName, amount));
+                this.needItems = new NeedItem[0];
+            }
+            else
+            {
+                var json = JsonUtility.FromJson<NeedItem.RawData.Json>(data.Items);
+                this.needItems = json
+                    .NeedItems
+                    .Select(x => new NeedItem(x.ItemName, x.Amount)).ToArray();
             }
         }
 #endif
@@ -61,7 +61,7 @@ namespace HK.AutoAnt.CellControllers
                 return false;
             }
 
-            return this.needItems.FindIndex(n => !n.IsEnough(user.Inventory, masterData)) == -1;
+            return Array.FindIndex(this.needItems, (n => !n.IsEnough(user.Inventory, masterData))) == -1;
         }
 
         /// <summary>
@@ -128,6 +128,18 @@ namespace HK.AutoAnt.CellControllers
                 var record = masterData.Records.Get(this.itemName.Get);
 
                 inventory.AddItem(record, -this.amount);
+            }
+
+            [Serializable]
+            public class RawData
+            {
+                public string ItemName;
+                public int Amount;
+
+                public class Json
+                {
+                    public RawData[] NeedItems;
+                }
             }
         }
     }

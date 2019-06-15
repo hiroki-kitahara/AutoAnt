@@ -1,6 +1,7 @@
 ﻿using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.SaveData;
 using HK.AutoAnt.SaveData.Serializables;
+using HK.AutoAnt.Systems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -33,12 +34,22 @@ namespace HK.AutoAnt.UserControllers
         private Town town = null;
         public Town Town => this.town;
 
+        [SerializeField]
+        private GenerateCellEventHistory generateCellEventHistory = null;
+        public GenerateCellEventHistory GenerateCellEventHistory => this.generateCellEventHistory;
+
+        [SerializeField]
+        private UnlockCellEvents unlockCellEvents = null;
+        public UnlockCellEvents UnlockCellEvents => this.unlockCellEvents;
+
         public SerializableUser GetSerializable()
         {
             return new SerializableUser()
             {
                 Wallet = this.Wallet.GetSerializable(),
-                Inventory = this.Inventory
+                Inventory = this.Inventory,
+                GenerateCellEventHistory = this.GenerateCellEventHistory,
+                UnlockCellEvents = this.UnlockCellEvents
             };
         }
 
@@ -50,7 +61,11 @@ namespace HK.AutoAnt.UserControllers
                 var serializableData = saveData.Load();
                 this.wallet.Deserialize(serializableData.Wallet);
                 this.inventory = serializableData.Inventory;
+                this.generateCellEventHistory = serializableData.GenerateCellEventHistory;
+                this.unlockCellEvents = serializableData.UnlockCellEvents;
             }
+
+            this.unlockCellEvents.StartObserve(GameSystem.Instance);
         }
 
         void ISavable.Save()
