@@ -14,6 +14,19 @@ namespace HK.AutoAnt.InputControllers.Modules
 
         public int MainPointerId => -1;
 
+        public Standalone()
+        {
+            Observable.EveryUpdate()
+                .Subscribe(_ =>
+                {
+                    var amount = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
+                    if (amount != 0f)
+                    {
+                        Input.Current.Broker.Publish(Events.Scroll.Get(Events.ScrollData.Get(amount)));
+                    }
+                });
+        }
+
         public IObservable<Events.Click> ClickAsObservable()
         {
             return Broker.Receive<Events.Click>();
