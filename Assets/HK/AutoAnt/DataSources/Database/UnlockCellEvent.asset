@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: UnlockCellEvent
   m_EditorClassIdentifier: 
   records:
-  - id: 100000
-    unlockCellEventRecordId: 100000
+  - id: 1
+    unlockCellEventRecordId: 101000
     needCellEvents:
     - CellEventRecordId: 100000
       Level: 1

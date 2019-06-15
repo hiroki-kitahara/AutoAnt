@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.Framework.EventSystems;
 using UnityEngine;
@@ -34,6 +35,24 @@ namespace HK.AutoAnt.UserControllers
             Broker.Global.Publish(AddedGenerateCellEventHistory.Get(this, cellEventRecordId));
         }
 
+        public bool IsEnough(MasterDataUnlockCellEvent.Record.NeedCellEvent[] needs)
+        {
+            foreach (var n in needs)
+            {
+                if (!histories.ContainsKey(n.CellEventRecordId))
+                {
+                    return false;
+                }
+
+                if(!histories[n.CellEventRecordId].IsEnough(n))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public class CellEvent
         {
             /// <summary>
@@ -54,6 +73,16 @@ namespace HK.AutoAnt.UserControllers
                 }
 
                 this.numbers[level]++;
+            }
+
+            public bool IsEnough(MasterDataUnlockCellEvent.Record.NeedCellEvent need)
+            {
+                if(this.numbers.Count < need.Level)
+                {
+                    return false;
+                }
+
+                return this.numbers[need.Level - 1] >= need.Number;
             }
         }
     }
