@@ -40,7 +40,6 @@ namespace HK.AutoAnt.UserControllers
                         if(histories.IsEnough(i.NeedCellEvents))
                         {
                             _this.cellEvents.Add(i.UnlockCellEventRecordId);
-                            Debug.Log($"Unlock! CellEventRecordId = {i.UnlockCellEventRecordId}");
                         }
                     }
 
