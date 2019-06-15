@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("Wallet", "Inventory", "GenerateCellEventHistory", "UnlockCellEvents")]
+	[ES3PropertiesAttribute("Wallet", "Inventory", "History", "UnlockCellEvents")]
 	public class ES3Type_SerializableUser : ES3ObjectType
 	{
 		public static ES3Type Instance = null;
@@ -16,7 +16,7 @@ namespace ES3Types
 			
 			writer.WriteProperty("Wallet", instance.Wallet, ES3Type_SerializableWallet.Instance);
 			writer.WriteProperty("Inventory", instance.Inventory, ES3Type_Inventory.Instance);
-			writer.WriteProperty("GenerateCellEventHistory", instance.GenerateCellEventHistory, ES3Type_GenerateCellEventHistory.Instance);
+			writer.WriteProperty("History", instance.History, ES3Type_History.Instance);
 			writer.WriteProperty("UnlockCellEvents", instance.UnlockCellEvents, ES3Type_UnlockCellEvents.Instance);
 		}
 
@@ -34,8 +34,8 @@ namespace ES3Types
 					case "Inventory":
 						instance.Inventory = reader.Read<HK.AutoAnt.UserControllers.Inventory>(ES3Type_Inventory.Instance);
 						break;
-					case "GenerateCellEventHistory":
-						instance.GenerateCellEventHistory = reader.Read<HK.AutoAnt.UserControllers.GenerateCellEventHistory>(ES3Type_GenerateCellEventHistory.Instance);
+					case "History":
+						instance.History = reader.Read<HK.AutoAnt.UserControllers.History>(ES3Type_History.Instance);
 						break;
 					case "UnlockCellEvents":
 						instance.UnlockCellEvents = reader.Read<HK.AutoAnt.UserControllers.UnlockCellEvents>(ES3Type_UnlockCellEvents.Instance);

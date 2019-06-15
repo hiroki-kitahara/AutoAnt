@@ -10,27 +10,27 @@ using UnityEngine.Assertions;
 namespace HK.AutoAnt.UserControllers
 {
     /// <summary>
-    /// セルイベントを生成した履歴
+    /// ユーザーの行動履歴
     /// </summary>
     [Serializable]
-    public sealed class GenerateCellEventHistory
+    public sealed class History
     {
         /// <summary>
         /// 生成履歴
         /// key = cellEventRecordId
         /// value = 生成した数
         /// </summary>
-        public IReadOnlyDictionary<int, CellEvent> Histories => this.histories;
-        private Dictionary<int, CellEvent> histories = new Dictionary<int, CellEvent>();
+        public IReadOnlyDictionary<int, CellEvent> GenerateCellEvent => this.generateCellEvent;
+        private Dictionary<int, CellEvent> generateCellEvent = new Dictionary<int, CellEvent>();
 
         public void AddHistory(int cellEventRecordId, int level)
         {
-            if(!this.histories.ContainsKey(cellEventRecordId))
+            if(!this.generateCellEvent.ContainsKey(cellEventRecordId))
             {
-                this.histories.Add(cellEventRecordId, new CellEvent());
+                this.generateCellEvent.Add(cellEventRecordId, new CellEvent());
             }
 
-            this.histories[cellEventRecordId].Add(level);
+            this.generateCellEvent[cellEventRecordId].Add(level);
 
             Broker.Global.Publish(AddedGenerateCellEventHistory.Get(this, cellEventRecordId));
         }
@@ -43,12 +43,12 @@ namespace HK.AutoAnt.UserControllers
             foreach (var n in needs)
             {
                 // そもそも生成履歴に存在しない場合はアンロック出来ない
-                if (!histories.ContainsKey(n.CellEventRecordId))
+                if (!generateCellEvent.ContainsKey(n.CellEventRecordId))
                 {
                     return false;
                 }
 
-                if(!histories[n.CellEventRecordId].IsEnough(n))
+                if(!generateCellEvent[n.CellEventRecordId].IsEnough(n))
                 {
                     return false;
                 }
