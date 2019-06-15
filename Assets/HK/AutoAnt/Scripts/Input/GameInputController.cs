@@ -29,7 +29,7 @@ namespace HK.AutoAnt.InputControllers
             this.inputActions = new ClickToClickableObjectActions(this.gameCameraController);
 
             inputModule.ClickDownAsObservable()
-                .Where(x => x.Data.ButtonId == 0)
+                .Where(x => x.Data.ButtonId == inputModule.MainPointerId)
                 .Where(_ => this.inputActions.ClickDownAction != null)
                 .SubscribeWithState(this, (x, _this) =>
                 {
@@ -38,7 +38,7 @@ namespace HK.AutoAnt.InputControllers
                 .AddTo(this);
 
             inputModule.ClickUpAsObservable()
-                .Where(x => x.Data.ButtonId == 0)
+                .Where(x => x.Data.ButtonId == inputModule.MainPointerId)
                 .Where(_ => this.inputActions.ClickUpAction != null)
                 .SubscribeWithState(this, (x, _this) =>
                 {

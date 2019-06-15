@@ -14,15 +14,15 @@ namespace HK.AutoAnt.InputControllers
 
         private IInputUpdater updater;
 
-        void Awake()
-        {
-            // TODO: プラットフォーム対応
-            this.updater = new Standalone(this.inputSpec);
-        }
+        // void Awake()
+        // {
+        //     // TODO: プラットフォーム対応
+        //     this.updater = new Standalone(this.inputSpec);
+        // }
 
-        void Update()
-        {
-            this.updater.Update();
-        }
+        // void Update()
+        // {
+        //     this.updater.Update();
+        // }
     }
 }

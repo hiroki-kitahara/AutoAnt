@@ -12,6 +12,8 @@ namespace HK.AutoAnt.InputControllers.Modules
     {
         IMessageBroker Broker { get; }
 
+        int MainPointerId { get; }
+
         IObservable<Events.Click> ClickAsObservable();
 
         IObservable<Events.ClickUp> ClickUpAsObservable();
