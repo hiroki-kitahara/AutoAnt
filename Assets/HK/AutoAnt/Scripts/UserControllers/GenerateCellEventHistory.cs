@@ -30,13 +30,19 @@ namespace HK.AutoAnt.UserControllers
             }
 
             this.histories[cellEventRecordId].Add(level);
-            Debug.Log($"recordId = {cellEventRecordId}, {string.Join(",", this.histories[cellEventRecordId].Numbers.Select(s => s.ToString()))}");
 
             Broker.Global.Publish(AddedGenerateCellEventHistory.Get(this, cellEventRecordId));
         }
 
         public class CellEvent
         {
+            /// <summary>
+            /// 建設した数
+            /// </summary>
+            /// <remarks>
+            /// レベルごとに建設した数を保持しています
+            /// [0]はレベル1の建設した数になります
+            /// </remarks>
             public IReadOnlyList<int> Numbers => this.numbers;
             private List<int> numbers = new List<int>();
 
