@@ -2,6 +2,7 @@
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.EventSystems;
 
 namespace HK.AutoAnt.InputControllers.Modules
 {
@@ -23,5 +24,11 @@ namespace HK.AutoAnt.InputControllers.Modules
         IObservable<Events.Drag> DragAsObservable();
 
         IObservable<Events.Scroll> ScrollAsObservable();
+
+        void OnDrag(PointerEventData eventData);
+
+        void OnPointerClick(PointerEventData eventData);
+        
+        void OnPointerDown(PointerEventData eventData);
     }
 }

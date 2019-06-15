@@ -2,6 +2,7 @@
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.EventSystems;
 
 namespace HK.AutoAnt.InputControllers.Modules
 {
@@ -55,6 +56,26 @@ namespace HK.AutoAnt.InputControllers.Modules
             {
                 Input.Current.Broker.Publish(Events.Scroll.Get(Events.ScrollData.Get(amount)));
             }
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            Input.Current.Broker.Publish(Events.Drag.Get(Events.DragData.Get(eventData.delta)));
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.dragging)
+            {
+                return;
+            }
+
+            Input.Current.Broker.Publish(Events.ClickUp.Get(Events.ClickData.Get(eventData.pointerId, UnityEngine.Input.mousePosition)));
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            Input.Current.Broker.Publish(Events.ClickDown.Get(Events.ClickData.Get(eventData.pointerId, UnityEngine.Input.mousePosition)));
         }
     }
 }
