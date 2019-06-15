@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("Wallet", "Inventory", "GenerateCellEventHistory")]
+	[ES3PropertiesAttribute("Wallet", "Inventory", "GenerateCellEventHistory", "UnlockCellEvents")]
 	public class ES3Type_SerializableUser : ES3ObjectType
 	{
 		public static ES3Type Instance = null;
@@ -17,6 +17,7 @@ namespace ES3Types
 			writer.WriteProperty("Wallet", instance.Wallet, ES3Type_SerializableWallet.Instance);
 			writer.WriteProperty("Inventory", instance.Inventory, ES3Type_Inventory.Instance);
 			writer.WriteProperty("GenerateCellEventHistory", instance.GenerateCellEventHistory, ES3Type_GenerateCellEventHistory.Instance);
+			writer.WriteProperty("UnlockCellEvents", instance.UnlockCellEvents, ES3Type_UnlockCellEvents.Instance);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -35,6 +36,9 @@ namespace ES3Types
 						break;
 					case "GenerateCellEventHistory":
 						instance.GenerateCellEventHistory = reader.Read<HK.AutoAnt.UserControllers.GenerateCellEventHistory>(ES3Type_GenerateCellEventHistory.Instance);
+						break;
+					case "UnlockCellEvents":
+						instance.UnlockCellEvents = reader.Read<HK.AutoAnt.UserControllers.UnlockCellEvents>(ES3Type_UnlockCellEvents.Instance);
 						break;
 					default:
 						reader.Skip();
