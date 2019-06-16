@@ -31,7 +31,6 @@ namespace HK.AutoAnt.GameControllers
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     _this.RegisterIntervalUpdate(x.GameSystem.User);
-                    Debug.Log("?");
                 })
                 .AddTo(this);
         }
