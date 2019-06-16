@@ -15,10 +15,10 @@ namespace HK.AutoAnt
         Dictionary<InputMode, string> modeLabels = new Dictionary<InputMode, string>();
 
         [SerializeField]
-        private Text buttonLabel;
+        private Text buttonLabel = null;
 
         [SerializeField]
-        private Button mySelf;
+        private Button mySelf = null;
 
         void Awake()
         {
