@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parameterUpdateInterval: 5
+  leftAloneProcessSeconds: 172800
 --- !u!114 &7500671137712836563
 MonoBehaviour:
   m_ObjectHideFlags: 0

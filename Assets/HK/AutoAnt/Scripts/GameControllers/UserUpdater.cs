@@ -23,6 +23,12 @@ namespace HK.AutoAnt.GameControllers
         private float parameterUpdateInterval = 1.0f;
 
         /// <summary>
+        /// 放置した時間の制限値
+        /// </summary>
+        [SerializeField]
+        private double leftAloneProcessSeconds = 100.0f;
+
+        /// <summary>
         /// 街の人口を加算する要素リスト
         /// </summary>
         private readonly List<IAddTownPopulation> addTownPopulations = new List<IAddTownPopulation>();
@@ -100,8 +106,8 @@ namespace HK.AutoAnt.GameControllers
                 return;
             }
 
-            var span = DateTime.Now - lastDateTime;
-            var updatableCount = Math.Floor(span.TotalSeconds / this.parameterUpdateInterval);
+            var span = Math.Min((DateTime.Now - lastDateTime).TotalSeconds, this.leftAloneProcessSeconds);
+            var updatableCount = Math.Floor(span / this.parameterUpdateInterval);
             for (var i = 0; i < updatableCount; i++)
             {
                 this.UpdateParameter(gameSystem);
