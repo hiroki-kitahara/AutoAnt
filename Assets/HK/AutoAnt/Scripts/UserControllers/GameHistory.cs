@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.UserControllers
@@ -12,5 +13,10 @@ namespace HK.AutoAnt.UserControllers
         /// プレイ時間
         /// </summary>
         public double Time { get; set; }
+
+        /// <summary>
+        /// 最後にゲームを終了した時間
+        /// </summary>
+        public DateTime LastDateTime { get; set; }
     }
 }
