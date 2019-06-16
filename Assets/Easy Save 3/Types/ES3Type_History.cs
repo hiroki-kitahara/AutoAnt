@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("generateCellEvent")]
+	[ES3PropertiesAttribute("game", "generateCellEvent")]
 	public class ES3Type_History : ES3ObjectType
 	{
 		public static ES3Type Instance = null;
@@ -14,6 +14,7 @@ namespace ES3Types
 		{
 			var instance = (HK.AutoAnt.UserControllers.History)obj;
 			
+			writer.WritePrivateField("game", instance);
 			writer.WritePrivateField("generateCellEvent", instance);
 		}
 
@@ -25,6 +26,9 @@ namespace ES3Types
 				switch(propertyName)
 				{
 					
+					case "game":
+					reader.SetPrivateField("game", reader.Read<HK.AutoAnt.UserControllers.GameHistory>(), instance);
+					break;
 					case "generateCellEvent":
 					reader.SetPrivateField("generateCellEvent", reader.Read<HK.AutoAnt.UserControllers.GenerateCellEventHistory>(), instance);
 					break;
