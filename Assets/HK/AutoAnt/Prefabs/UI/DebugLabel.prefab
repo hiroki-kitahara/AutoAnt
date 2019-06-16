@@ -306,6 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonLabel: {fileID: 6510496758140863375}
+  mySelf: {fileID: 3653970486349395846}
 --- !u!1 &4777216100905985302
 GameObject:
   m_ObjectHideFlags: 0

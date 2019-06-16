@@ -17,8 +17,16 @@ namespace HK.AutoAnt
         [SerializeField]
         private Text buttonLabel;
 
+        [SerializeField]
+        private Button mySelf;
+
         void Awake()
         {
+
+            mySelf.onClick.AddListener(() =>
+            {
+                Broker.Global.Publish(RequestChangeInput.Get());
+            });
 
             LabelInitialize();
 
@@ -28,11 +36,6 @@ namespace HK.AutoAnt
                     buttonLabel.text = modeLabels[x.InputMode];
                 })
                 .AddTo(this);
-        }
-
-        public void publishClickEvent()
-        {
-            Broker.Global.Publish(RequestChangeInput.Get());
         }
 
         private void LabelInitialize()
