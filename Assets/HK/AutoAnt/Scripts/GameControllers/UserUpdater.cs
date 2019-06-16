@@ -5,6 +5,7 @@ using HK.AutoAnt.Systems;
 using HK.AutoAnt.UserControllers;
 using HK.Framework.EventSystems;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -22,6 +23,12 @@ namespace HK.AutoAnt.GameControllers
         private float parameterUpdateInterval = 1.0f;
 
         /// <summary>
+        /// 放置した時間の制限値
+        /// </summary>
+        [SerializeField]
+        private double leftAloneProcessSeconds = 100.0f;
+
+        /// <summary>
         /// 街の人口を加算する要素リスト
         /// </summary>
         private readonly List<IAddTownPopulation> addTownPopulations = new List<IAddTownPopulation>();
@@ -32,7 +39,16 @@ namespace HK.AutoAnt.GameControllers
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     _this.RegisterIntervalUpdate(x.GameSystem);
+                    _this.RegisterUpdate(x.GameSystem);
                     _this.StartObserveUnlockCellEvents(x.GameSystem);
+                    _this.OnLeftAlone(x.GameSystem);
+                })
+                .AddTo(this);
+
+            Broker.Global.Receive<GameEnd>()
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    x.GameSystem.User.History.Game.LastDateTime = DateTime.Now;
                 })
                 .AddTo(this);
 
@@ -53,22 +69,65 @@ namespace HK.AutoAnt.GameControllers
                 .AddTo(this);
         }
 
+        /// <summary>
+        /// パラメータ更新処理
+        /// </summary>
         private void RegisterIntervalUpdate(GameSystem gameSystem)
         {
             Observable.Interval(TimeSpan.FromSeconds(this.parameterUpdateInterval))
                 .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
                 {
-                    // 税金徴収
-                    // FIXME: 税金計算を実装する
-                    _gameSystem.User.Wallet.AddMoney(_gameSystem.User.Town.Population.Value * 10);
-
-                    // 街の人口の増加
-                    foreach (var a in _this.addTownPopulations)
-                    {
-                        a.Add(_gameSystem);
-                    }
+                    _this.UpdateParameter(_gameSystem);
                 })
                 .AddTo(this);
+        }
+
+        /// <summary>
+        /// 毎フレーム実行される更新処理
+        /// </summary>
+        private void RegisterUpdate(GameSystem gameSystem)
+        {
+            this.UpdateAsObservable()
+                .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
+                {
+                    _gameSystem.User.History.Game.Time += Time.deltaTime;
+                })
+                .AddTo(this);
+        }
+
+        /// <summary>
+        /// 放置されていた時間分の処理を行う
+        /// </summary>
+        private void OnLeftAlone(GameSystem gameSystem)
+        {
+            var lastDateTime = gameSystem.User.History.Game.LastDateTime;
+            if(DateTime.MinValue == lastDateTime)
+            {
+                return;
+            }
+
+            var span = Math.Min((DateTime.Now - lastDateTime).TotalSeconds, this.leftAloneProcessSeconds);
+            var updatableCount = Math.Floor(span / this.parameterUpdateInterval);
+            for (var i = 0; i < updatableCount; i++)
+            {
+                this.UpdateParameter(gameSystem);
+            }
+        }
+
+        /// <summary>
+        /// パラメータを更新する
+        /// </summary>
+        private void UpdateParameter(GameSystem gameSystem)
+        {
+            // 税金徴収
+            // FIXME: 税金計算を実装する
+            gameSystem.User.Wallet.AddMoney(gameSystem.User.Town.Population.Value * 10);
+
+            // 街の人口の増加
+            foreach (var a in this.addTownPopulations)
+            {
+                a.Add(gameSystem);
+            }
         }
 
         private void StartObserveUnlockCellEvents(GameSystem gameSystem)
@@ -84,7 +143,7 @@ namespace HK.AutoAnt.GameControllers
                         {
                             continue;
                         }
-                        var histories = _gameSystem.User.GenerateCellEventHistory;
+                        var histories = _gameSystem.User.History.GenerateCellEvent;
                         if (histories.IsEnough(i.NeedCellEvents))
                         {
                             elements.Add(i.UnlockCellEventRecordId);

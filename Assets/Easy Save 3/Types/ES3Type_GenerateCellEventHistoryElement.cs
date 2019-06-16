@@ -4,22 +4,22 @@ using UnityEngine;
 namespace ES3Types
 {
 	[ES3PropertiesAttribute("numbers")]
-	public class ES3Type_CellEvent : ES3ObjectType
+	public class ES3Type_GenerateCellEventHistoryElement : ES3ObjectType
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_CellEvent() : base(typeof(HK.AutoAnt.UserControllers.GenerateCellEventHistory.CellEvent)){ Instance = this; }
+		public ES3Type_GenerateCellEventHistoryElement() : base(typeof(HK.AutoAnt.UserControllers.GenerateCellEventHistoryElement)){ Instance = this; }
 
 		protected override void WriteObject(object obj, ES3Writer writer)
 		{
-			var instance = (HK.AutoAnt.UserControllers.GenerateCellEventHistory.CellEvent)obj;
+			var instance = (HK.AutoAnt.UserControllers.GenerateCellEventHistoryElement)obj;
 			
 			writer.WritePrivateField("numbers", instance);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
 		{
-			var instance = (HK.AutoAnt.UserControllers.GenerateCellEventHistory.CellEvent)obj;
+			var instance = (HK.AutoAnt.UserControllers.GenerateCellEventHistoryElement)obj;
 			foreach(string propertyName in reader.Properties)
 			{
 				switch(propertyName)
@@ -37,17 +37,17 @@ namespace ES3Types
 
 		protected override object ReadObject<T>(ES3Reader reader)
 		{
-			var instance = new HK.AutoAnt.UserControllers.GenerateCellEventHistory.CellEvent();
+			var instance = new HK.AutoAnt.UserControllers.GenerateCellEventHistoryElement();
 			ReadObject<T>(reader, instance);
 			return instance;
 		}
 	}
 
-	public class ES3Type_CellEventArray : ES3ArrayType
+	public class ES3Type_GenerateCellEventHistoryElementArray : ES3ArrayType
 	{
 		public static ES3Type Instance;
 
-		public ES3Type_CellEventArray() : base(typeof(HK.AutoAnt.UserControllers.GenerateCellEventHistory.CellEvent[]), ES3Type_CellEvent.Instance)
+		public ES3Type_GenerateCellEventHistoryElementArray() : base(typeof(HK.AutoAnt.UserControllers.GenerateCellEventHistoryElement[]), ES3Type_GenerateCellEventHistoryElement.Instance)
 		{
 			Instance = this;
 		}

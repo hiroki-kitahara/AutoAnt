@@ -13,7 +13,7 @@ namespace HK.AutoAnt.SaveData.Serializables
 
         public Inventory Inventory { get; set; }
 
-        public GenerateCellEventHistory GenerateCellEventHistory { get; set; }
+        public History History { get; set; }
 
         public UnlockCellEvent UnlockCellEvent { get; set; }
     }
