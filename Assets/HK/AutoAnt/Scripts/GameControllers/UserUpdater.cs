@@ -32,6 +32,8 @@ namespace HK.AutoAnt.GameControllers
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     _this.RegisterIntervalUpdate(x.GameSystem);
+
+                    x.GameSystem.User.UnlockCellEvents.StartObserve(x.GameSystem);
                 })
                 .AddTo(this);
 
