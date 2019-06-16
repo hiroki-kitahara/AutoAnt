@@ -52,7 +52,7 @@ namespace HK.AutoAnt.CellControllers
             cellEventInstance.Initialize(cell.Position, this.gameSystem, isInitializingGame);
             cellMapper.Add(cellEventInstance);
 
-            this.gameSystem.User.GenerateCellEventHistory.AddHistory(cellEventRecordId, 0);
+            this.gameSystem.User.History.GenerateCellEvent.Add(cellEventRecordId, 0);
         }
 
         public void GenerateOnDeserialize(CellEvent instance)

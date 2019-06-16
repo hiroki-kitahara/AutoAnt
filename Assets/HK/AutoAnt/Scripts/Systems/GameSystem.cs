@@ -50,15 +50,15 @@ namespace HK.AutoAnt.Systems
         {
             Assert.IsNull(instance);
             instance = this;
-
-            foreach(var savable in this.Savables)
-            {
-                savable.Initialize();
-            }
         }
 
         void Start()
         {
+            foreach (var savable in this.Savables)
+            {
+                savable.Initialize();
+            }
+            
             Broker.Global.Publish(GameStart.Get(this));
         }
 
@@ -70,6 +70,8 @@ namespace HK.AutoAnt.Systems
 
         void OnApplicationQuit()
         {
+            Broker.Global.Publish(GameEnd.Get(this));
+
             foreach(var savable in this.Savables)
             {
                 savable.Save();

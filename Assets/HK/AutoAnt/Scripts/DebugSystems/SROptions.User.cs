@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using HK.AutoAnt.Systems;
 using UnityEngine;
@@ -41,7 +42,7 @@ public partial class SROptions
     [DisplayName("建設履歴を表示する")]
     public void PrintGenerateCellEventHistories()
     {
-        foreach (var h in GameSystem.Instance.User.GenerateCellEventHistory.Histories)
+        foreach (var h in GameSystem.Instance.User.History.GenerateCellEvent.Elements)
         {
             Debug.Log($"CellEventRecordId = {h.Key}, numbers = {string.Join(",", h.Value.Numbers.Select(n => n.ToString()))}");
         }
@@ -52,6 +53,14 @@ public partial class SROptions
     public void PrintUnlockCellEvent()
     {
         Debug.Log($"{string.Join(",", GameSystem.Instance.User.UnlockCellEvents.Elements.Select(x => x.ToString()))}");
+    }
+
+    [Category(UserCategory)]
+    [DisplayName("プレイ時間を表示する")]
+    public void PrintGameTime()
+    {
+        var gameTime = GameSystem.Instance.User.History.Game.Time;
+        Debug.Log($"{gameTime}");
     }
 }
 #endif
