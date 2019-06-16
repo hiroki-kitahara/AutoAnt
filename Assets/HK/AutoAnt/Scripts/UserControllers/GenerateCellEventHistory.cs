@@ -2,8 +2,6 @@
 using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.Framework.EventSystems;
-using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.UserControllers
 {
@@ -20,7 +18,7 @@ namespace HK.AutoAnt.UserControllers
         public IReadOnlyDictionary<int, GenerateCellEventHistoryElement> Elements => this.elements;
         private Dictionary<int, GenerateCellEventHistoryElement> elements = new Dictionary<int, GenerateCellEventHistoryElement>();
 
-        public void AddHistory(int cellEventRecordId, int level)
+        public void Add(int cellEventRecordId, int level)
         {
             if (!this.elements.ContainsKey(cellEventRecordId))
             {
