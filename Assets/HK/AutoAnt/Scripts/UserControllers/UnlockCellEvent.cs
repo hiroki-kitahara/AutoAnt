@@ -13,7 +13,7 @@ namespace HK.AutoAnt.UserControllers
     /// 生成可能なセルイベントを管理するクラス
     /// </summary>
     [Serializable]
-    public sealed class UnlockCellEvents
+    public sealed class UnlockCellEvent
     {
         /// <summary>
         /// 生成可能なセルイベントリスト

@@ -52,7 +52,7 @@ public partial class SROptions
     [DisplayName("アンロックを表示する")]
     public void PrintUnlockCellEvent()
     {
-        Debug.Log($"{string.Join(",", GameSystem.Instance.User.UnlockCellEvents.Elements.Select(x => x.ToString()))}");
+        Debug.Log($"{string.Join(",", GameSystem.Instance.User.UnlockCellEvent.Elements.Select(x => x.ToString()))}");
     }
 
     [Category(UserCategory)]

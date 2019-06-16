@@ -8,18 +8,18 @@ namespace ES3Types
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_UnlockCellEvents() : base(typeof(HK.AutoAnt.UserControllers.UnlockCellEvents)){ Instance = this; }
+		public ES3Type_UnlockCellEvents() : base(typeof(HK.AutoAnt.UserControllers.UnlockCellEvent)){ Instance = this; }
 
 		protected override void WriteObject(object obj, ES3Writer writer)
 		{
-			var instance = (HK.AutoAnt.UserControllers.UnlockCellEvents)obj;
+			var instance = (HK.AutoAnt.UserControllers.UnlockCellEvent)obj;
 			
 			writer.WritePrivateProperty("Elements", instance);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
 		{
-			var instance = (HK.AutoAnt.UserControllers.UnlockCellEvents)obj;
+			var instance = (HK.AutoAnt.UserControllers.UnlockCellEvent)obj;
 			foreach(string propertyName in reader.Properties)
 			{
 				switch(propertyName)
@@ -37,7 +37,7 @@ namespace ES3Types
 
 		protected override object ReadObject<T>(ES3Reader reader)
 		{
-			var instance = new HK.AutoAnt.UserControllers.UnlockCellEvents();
+			var instance = new HK.AutoAnt.UserControllers.UnlockCellEvent();
 			ReadObject<T>(reader, instance);
 			return instance;
 		}
@@ -47,7 +47,7 @@ namespace ES3Types
 	{
 		public static ES3Type Instance;
 
-		public ES3Type_UnlockCellEventsArray() : base(typeof(HK.AutoAnt.UserControllers.UnlockCellEvents[]), ES3Type_UnlockCellEvents.Instance)
+		public ES3Type_UnlockCellEventsArray() : base(typeof(HK.AutoAnt.UserControllers.UnlockCellEvent[]), ES3Type_UnlockCellEvents.Instance)
 		{
 			Instance = this;
 		}
