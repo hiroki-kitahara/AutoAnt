@@ -4,9 +4,13 @@ using HK.AutoAnt.Events;
 using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.Systems;
 using HK.Framework.EventSystems;
+using HK.AutoAnt.Constants;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using System;
+using System.Collections.Generic;
+
 
 namespace HK.AutoAnt.InputControllers
 {
@@ -23,8 +27,26 @@ namespace HK.AutoAnt.InputControllers
 
         private InputActions inputActions;
 
+        private InputMode currentMode = InputMode.clickMode;
+
+        private Dictionary<InputMode, InputMode> modeRotation = new Dictionary<InputMode, InputMode>();
+        private Dictionary<InputMode, Action> modeActions = new Dictionary<InputMode, Action>();
+
         void Awake()
         {
+
+            ModeRotationInitialize();
+            ModeActionInitialize();
+
+            Broker.Global.Receive<RequestChangeInput>()
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    currentMode = modeRotation[currentMode];
+                    modeActions[currentMode]();
+                    Broker.Global.Publish(ChangedInput.Get(currentMode));
+                })
+                .AddTo(this);
+
             var inputModule = InputControllers.Input.Current;
             this.inputActions = new ClickToClickableObjectActions(this.gameCameraController);
 
@@ -75,7 +97,8 @@ namespace HK.AutoAnt.InputControllers
                 GameSystem.Instance.CellManager.EventGenerator.RecordId = 101000;
                 Broker.Global.Publish(RequestNotification.Get($"建設するID = {GameSystem.Instance.CellManager.EventGenerator.RecordId}"));
             }
-
+            
+            /*
             if (UnityEngine.Input.GetKeyDown(KeyCode.Q))
             {
                 this.inputActions = new ClickToClickableObjectActions(this.gameCameraController);
@@ -105,6 +128,57 @@ namespace HK.AutoAnt.InputControllers
 
                 Broker.Global.Publish(RequestNotification.Get("開拓モード"));
             }
+            */
+        }
+
+        private void ModeRotationInitialize()
+        {
+            // モード切替用テーブル
+            modeRotation[InputMode.clickMode] = InputMode.buildMode;
+            modeRotation[InputMode.buildMode] = InputMode.dismantleMode;
+            modeRotation[InputMode.dismantleMode] = InputMode.exploringMode;
+            modeRotation[InputMode.exploringMode] = InputMode.clickMode;
+        }
+
+        private void ModeActionInitialize()
+        {
+
+            // クリックモード時の挙動
+            modeActions[InputMode.clickMode] = () =>
+            {
+                this.inputActions = new ClickToClickableObjectActions(this.gameCameraController);
+                Broker.Global.Publish(RequestNotification.Get("クリックモード"));
+            };
+
+            // 建設モード時の挙動
+            modeActions[InputMode.buildMode] = () =>
+            {
+                this.inputActions = new GenerateCellEventActions(this.cellManager.EventGenerator, this.gameCameraController);
+                Broker.Global.Publish(RequestNotification.Get("建設モード"));
+            };
+
+            // 解体モード時の挙動
+            modeActions[InputMode.dismantleMode] = () =>
+            {
+                this.inputActions = new EraseCellEventActions(this.cellManager.EventGenerator, this.cellManager.Mapper, this.gameCameraController);
+                Broker.Global.Publish(RequestNotification.Get("解体モード"));
+            };
+
+            // 開拓モード時の挙動
+            modeActions[InputMode.exploringMode] = () =>
+            {
+                this.inputActions = new DevelopCellActions(
+                    GameSystem.Instance,
+                    this.cellManager.CellGenerator,
+                    this.cellManager.Mapper,
+                    100100,
+                    100000,
+                    1,
+                    this.gameCameraController
+                    );
+
+                Broker.Global.Publish(RequestNotification.Get("開拓モード"));
+            };
         }
     }
 }
