@@ -1,9 +1,11 @@
 ﻿using HK.AutoAnt.CameraControllers;
 using HK.AutoAnt.CellControllers;
 using HK.AutoAnt.Database;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.SaveData;
 using HK.AutoAnt.UserControllers;
+using HK.Framework.EventSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -59,6 +61,8 @@ namespace HK.AutoAnt.Systems
             {
                 savable.Initialize();
             }
+
+            Broker.Global.Publish(GameStart.Get(this));
         }
 
         void OnDestroy()
