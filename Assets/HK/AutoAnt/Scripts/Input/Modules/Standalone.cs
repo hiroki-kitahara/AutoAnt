@@ -2,6 +2,7 @@
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.EventSystems;
 
 namespace HK.AutoAnt.InputControllers.Modules
 {
@@ -11,6 +12,17 @@ namespace HK.AutoAnt.InputControllers.Modules
     public sealed class Standalone : IInputModule
     {
         public IMessageBroker Broker => HK.Framework.EventSystems.Broker.Global;
+
+        public int MainPointerId => -1;
+
+        public Standalone()
+        {
+            Observable.EveryUpdate()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.UpdateScroll();
+                });
+        }
 
         public IObservable<Events.Click> ClickAsObservable()
         {
@@ -35,6 +47,35 @@ namespace HK.AutoAnt.InputControllers.Modules
         public IObservable<Events.Scroll> ScrollAsObservable()
         {
             return Broker.Receive<Events.Scroll>();
+        }
+
+        private void UpdateScroll()
+        {
+            var amount = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
+            if (amount != 0f)
+            {
+                Input.Current.Broker.Publish(Events.Scroll.Get(Events.ScrollData.Get(amount)));
+            }
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            Input.Current.Broker.Publish(Events.Drag.Get(Events.DragData.Get(eventData.delta)));
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.dragging)
+            {
+                return;
+            }
+
+            Input.Current.Broker.Publish(Events.ClickUp.Get(Events.ClickData.Get(eventData.pointerId, UnityEngine.Input.mousePosition)));
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            Input.Current.Broker.Publish(Events.ClickDown.Get(Events.ClickData.Get(eventData.pointerId, UnityEngine.Input.mousePosition)));
         }
     }
 }
