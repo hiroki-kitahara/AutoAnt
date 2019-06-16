@@ -77,7 +77,6 @@ namespace HK.AutoAnt.GameControllers
             Observable.Interval(TimeSpan.FromSeconds(this.parameterUpdateInterval))
                 .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
                 {
-                    _this.UpdateParameter(_gameSystem);
                 })
                 .AddTo(this);
         }
@@ -91,6 +90,7 @@ namespace HK.AutoAnt.GameControllers
                 .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
                 {
                     _gameSystem.User.History.Game.Time += Time.deltaTime;
+                    _this.UpdateParameter(_gameSystem);
                 })
                 .AddTo(this);
         }
@@ -120,13 +120,12 @@ namespace HK.AutoAnt.GameControllers
         private void UpdateParameter(GameSystem gameSystem)
         {
             // 税金徴収
-            // FIXME: 税金計算を実装する
-            gameSystem.User.Wallet.AddMoney(gameSystem.User.Town.Population.Value * 10);
+            gameSystem.User.Wallet.AddMoney(Calculator.Tax(gameSystem.User.Town.Population.Value, Time.deltaTime));
 
             // 街の人口の増加
             foreach (var a in this.addTownPopulations)
             {
-                a.Add(gameSystem);
+                a.Add(gameSystem, Time.deltaTime);
             }
         }
 
