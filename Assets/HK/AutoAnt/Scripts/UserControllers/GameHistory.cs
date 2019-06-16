@@ -17,6 +17,6 @@ namespace HK.AutoAnt.UserControllers
         /// <summary>
         /// 最後にゲームを終了した時間
         /// </summary>
-        public DateTime LastDateTime { get; set; }
+        public DateTime LastDateTime { get; set; } = DateTime.MinValue;
     }
 }

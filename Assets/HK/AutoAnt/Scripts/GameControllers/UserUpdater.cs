@@ -94,8 +94,14 @@ namespace HK.AutoAnt.GameControllers
         /// </summary>
         private void OnLeftAlone(GameSystem gameSystem)
         {
-            var span = DateTime.Now - gameSystem.User.History.Game.LastDateTime;
-            var updatableCount = Mathf.FloorToInt(span.Seconds / this.parameterUpdateInterval);
+            var lastDateTime = gameSystem.User.History.Game.LastDateTime;
+            if(DateTime.MinValue == lastDateTime)
+            {
+                return;
+            }
+
+            var span = DateTime.Now - lastDateTime;
+            var updatableCount = Math.Floor(span.TotalSeconds / this.parameterUpdateInterval);
             for (var i = 0; i < updatableCount; i++)
             {
                 this.UpdateParameter(gameSystem);
