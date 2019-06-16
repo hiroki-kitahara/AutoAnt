@@ -19,7 +19,7 @@ namespace HK.AutoAnt.Extensions
         /// 単位：k, m, b, t, A, B, C, ... Z, AA, AB, AC, ...
         /// https://blog.naichilab.com/entry/double-unit-string
         /// </summary>
-        public static string ToReadableString(this double d)
+        public static string ToReadableString(this double d, string format)
         {
             //マイナスは扱う気無し
             if (d <= 0) return "0";
@@ -27,13 +27,13 @@ namespace HK.AutoAnt.Extensions
             if (d <= 1000) return ((int)d).ToString();
 
             //有効桁数３桁＋指数表記で文字列化
-            var s = d.ToString("0.00E000");
+            var s = d.ToString("0.0000E000");
 
             //有効数字
-            float f = float.Parse(s.Substring(0, 4));
+            float f = float.Parse(s.Substring(0, 6));
 
             //10の指数
-            var e = int.Parse(s.Substring(5, 3));
+            var e = int.Parse(s.Substring(7, 3));
 
             //中途半端な指数は数値に掛け合わせておく
             for (var i = 0; i < e % 3; i++)
@@ -41,7 +41,7 @@ namespace HK.AutoAnt.Extensions
                 f *= 10;
             }
 
-            return f.ToString("###.##") + LevelToSuffix(e / 3);
+            return f.ToString(format) + LevelToSuffix(e / 3);
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace HK.AutoAnt.UI
             GameSystem.Instance.User.Town.Population
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.value.text = _this.format.Format(x.ToReadableString());
+                    _this.value.text = _this.format.Format(x.ToReadableString("###.00"));
                 })
                 .AddTo(this);
         }

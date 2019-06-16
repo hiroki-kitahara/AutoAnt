@@ -24,7 +24,7 @@ namespace HK.AutoAnt.UI
             GameSystem.Instance.User.Wallet.MoneyAsObservable
                 .SubscribeWithState(this, (money, _this) =>
                 {
-                    _this.value.text = _this.format.Format(money.ToReadableString());
+                    _this.value.text = _this.format.Format(money.ToReadableString("###.00"));
                 })
                 .AddTo(this);
         }
