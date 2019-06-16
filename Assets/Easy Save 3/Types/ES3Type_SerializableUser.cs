@@ -16,8 +16,8 @@ namespace ES3Types
 			
 			writer.WriteProperty("Wallet", instance.Wallet, ES3Type_SerializableWallet.Instance);
 			writer.WriteProperty("Inventory", instance.Inventory, ES3Type_Inventory.Instance);
-			writer.WriteProperty("History", instance.History, ES3Type_History.Instance);
-			writer.WriteProperty("UnlockCellEvents", instance.UnlockCellEvents, ES3Type_UnlockCellEvents.Instance);
+            writer.WriteProperty("History", instance.History, ES3Type_History.Instance);
+            writer.WriteProperty("UnlockCellEvent", instance.UnlockCellEvent);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -37,8 +37,8 @@ namespace ES3Types
 					case "History":
 						instance.History = reader.Read<HK.AutoAnt.UserControllers.History>(ES3Type_History.Instance);
 						break;
-					case "UnlockCellEvents":
-						instance.UnlockCellEvents = reader.Read<HK.AutoAnt.UserControllers.UnlockCellEvents>(ES3Type_UnlockCellEvents.Instance);
+					case "UnlockCellEvent":
+						instance.UnlockCellEvent = reader.Read<HK.AutoAnt.UserControllers.UnlockCellEvent>();
 						break;
 					default:
 						reader.Skip();

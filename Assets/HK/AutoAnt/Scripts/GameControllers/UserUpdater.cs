@@ -135,7 +135,7 @@ namespace HK.AutoAnt.GameControllers
             Broker.Global.Receive<AddedGenerateCellEventHistory>()
                 .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
                 {
-                    var elements = _gameSystem.User.UnlockCellEvents.Elements;
+                    var elements = _gameSystem.User.UnlockCellEvent.Elements;
                     foreach (var i in _gameSystem.MasterData.UnlockCellEvent.Records)
                     {
                         // 既にアンロック済みならなにもしない
