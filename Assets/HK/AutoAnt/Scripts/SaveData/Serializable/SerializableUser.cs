@@ -15,6 +15,6 @@ namespace HK.AutoAnt.SaveData.Serializables
 
         public GenerateCellEventHistory GenerateCellEventHistory { get; set; }
 
-        public UnlockCellEvents UnlockCellEvents { get; set; }
+        public UnlockCellEvent UnlockCellEvent { get; set; }
     }
 }
