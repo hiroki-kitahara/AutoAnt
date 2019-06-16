@@ -51,7 +51,6 @@ namespace HK.AutoAnt.CellControllers.Events
             base.Initialize(position, gameSystem, isInitializingGame);
             this.gameSystem = gameSystem;
             this.gameSystem.User.Town.AddPopulation(this.CurrentPopulation);
-            this.gameSystem.UserUpdater.AddTownPopulations.Add(this);
             this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
         }
 

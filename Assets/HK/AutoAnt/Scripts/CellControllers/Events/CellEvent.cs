@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.EffectSystems;
+using HK.Framework.EventSystems;
+using HK.AutoAnt.Events;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -76,6 +78,8 @@ namespace HK.AutoAnt.CellControllers.Events
                 effect.transform.position = this.gimmick.transform.position;
                 effect.transform.localScale = Vector3.one * record.EventData.size;
             }
+
+            Broker.Global.Publish(AddedCellEvent.Get(this));
         }
 
         public virtual void Remove(GameSystem gameSystem)
@@ -93,6 +97,8 @@ namespace HK.AutoAnt.CellControllers.Events
             var effect = record.EventData.destructionEffect.Rent();
             effect.transform.position = this.gimmick.transform.position;
             effect.transform.localScale = Vector3.one * record.EventData.size;
+
+            Broker.Global.Publish(ReleasedCellEvent.Get(this));
 
             Destroy(this.gimmick.gameObject);
         }

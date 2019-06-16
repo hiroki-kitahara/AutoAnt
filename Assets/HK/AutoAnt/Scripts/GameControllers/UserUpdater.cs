@@ -33,6 +33,22 @@ namespace HK.AutoAnt.GameControllers
                     _this.RegisterIntervalUpdate(x.GameSystem.User);
                 })
                 .AddTo(this);
+
+            Broker.Global.Receive<AddedCellEvent>()
+                .Where(x => x.CellEvent is IAddTownPopulation)
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    _this.AddTownPopulations.Add(x.CellEvent as IAddTownPopulation);
+                })
+                .AddTo(this);
+
+            Broker.Global.Receive<ReleasedCellEvent>()
+                .Where(x => x.CellEvent is IAddTownPopulation)
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    _this.AddTownPopulations.Remove(x.CellEvent as IAddTownPopulation);
+                })
+                .AddTo(this);
         }
 
         private void RegisterIntervalUpdate(User user)
