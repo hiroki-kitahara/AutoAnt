@@ -25,25 +25,25 @@ namespace HK.AutoAnt
 
             mySelf.onClick.AddListener(() =>
             {
-                Broker.Global.Publish(RequestChangeInput.Get());
+                Broker.Global.Publish(RequestChangeInputMode.Get());
             });
 
             LabelInitialize();
 
-            Broker.Global.Receive<ChangedInput>()
+            Broker.Global.Receive<ChangedInputMode>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    buttonLabel.text = modeLabels[x.InputMode];
+                    _this.buttonLabel.text = _this.modeLabels[x.InputMode];
                 })
                 .AddTo(this);
         }
 
         private void LabelInitialize()
         {
-            modeLabels[InputMode.clickMode] = "クリックモード";
-            modeLabels[InputMode.buildMode] = "建築モード";
-            modeLabels[InputMode.dismantleMode] = "解体モード";
-            modeLabels[InputMode.exploringMode] = "開拓モード";
+            modeLabels[InputMode.ClickMode] = "クリックモード";
+            modeLabels[InputMode.BuildMode] = "建築モード";
+            modeLabels[InputMode.DismantleMode] = "解体モード";
+            modeLabels[InputMode.ExploringMode] = "開拓モード";
         }
     }
 }

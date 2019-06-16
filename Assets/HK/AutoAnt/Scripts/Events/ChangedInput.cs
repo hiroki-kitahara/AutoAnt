@@ -8,7 +8,7 @@ namespace HK.AutoAnt.Events
     /// <summary>
     /// InputModeが切り替えられたときのイベント
     /// </summary>
-    public sealed class ChangedInput : Message<ChangedInput, InputMode>
+    public sealed class ChangedInputMode : Message<ChangedInputMode, InputMode>
     {
         public InputMode InputMode => this.param1;
     }

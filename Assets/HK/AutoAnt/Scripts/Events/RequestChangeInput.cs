@@ -5,9 +5,9 @@ using UnityEngine.Assertions;
 namespace HK.AutoAnt.Events
 {
     /// <summary>
-    /// InputModeを切り替えるボタンが押されたときのイベント
+    /// InputModeを切り替えようとしたときのイベント
     /// </summary>
-    public sealed class RequestChangeInput : Message<RequestChangeInput>
+    public sealed class RequestChangeInputMode : Message<RequestChangeInputMode>
     {
 
     }

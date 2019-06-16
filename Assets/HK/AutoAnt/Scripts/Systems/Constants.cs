@@ -24,21 +24,21 @@ namespace HK.AutoAnt.Constants
         /// <summary>
         /// クリックモード
         /// </summary>
-        clickMode,
+        ClickMode,
 
         /// <summary>
         /// 建築モード
         /// </summary>
-        buildMode,
+        BuildMode,
 
         /// <summary>
         /// 解体モード
         /// </summary>
-        dismantleMode,
+        DismantleMode,
 
         /// <summary>
         /// 開拓モード
         /// </summary>
-        exploringMode,
+        ExploringMode,
     }
 }
