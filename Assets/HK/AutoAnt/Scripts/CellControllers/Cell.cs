@@ -27,8 +27,6 @@ namespace HK.AutoAnt.CellControllers
 
         public CellType Type { get; private set; }
 
-        private readonly IMessageBroker Broker = new MessageBroker();
-
         private CellMapper cellMapper;
 
         public Transform CachedTransform{ get; private set; }
@@ -79,11 +77,6 @@ namespace HK.AutoAnt.CellControllers
             }
 
             this.cellMapper.CellEvent.Map[this.Position].OnClick(this);
-        }
-
-        public IObservable<RemovedCellEvent> ReleasedCellEventAsObservable()
-        {
-            return this.Broker.Receive<RemovedCellEvent>();
         }
 
         private void DestroyGimmickController()
