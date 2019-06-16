@@ -41,7 +41,7 @@ public partial class SROptions
     [DisplayName("建設履歴を表示する")]
     public void PrintGenerateCellEventHistories()
     {
-        foreach (var h in GameSystem.Instance.User.History.GenerateCellEvent)
+        foreach (var h in GameSystem.Instance.User.History.GenerateCellEvent.Elements)
         {
             Debug.Log($"CellEventRecordId = {h.Key}, numbers = {string.Join(",", h.Value.Numbers.Select(n => n.ToString()))}");
         }

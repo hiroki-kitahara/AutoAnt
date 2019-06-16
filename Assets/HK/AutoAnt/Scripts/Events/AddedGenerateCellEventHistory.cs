@@ -9,12 +9,12 @@ namespace HK.AutoAnt.Events
     /// <summary>
     /// セルイベント生成の履歴が追加された際のイベント
     /// </summary>
-    public sealed class AddedGenerateCellEventHistory : Message<AddedGenerateCellEventHistory, History, int>
+    public sealed class AddedGenerateCellEventHistory : Message<AddedGenerateCellEventHistory, GenerateCellEventHistory, int>
     {
         /// <summary>
         /// 追加された<see cref="History"/>
         /// </summary>
-        public History History => this.param1;
+        public GenerateCellEventHistory History => this.param1;
 
         /// <summary>
         /// 追加されたセルイベントのレコードID

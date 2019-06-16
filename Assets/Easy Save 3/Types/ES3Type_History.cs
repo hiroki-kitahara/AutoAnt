@@ -26,7 +26,7 @@ namespace ES3Types
 				{
 					
 					case "generateCellEvent":
-					reader.SetPrivateField("generateCellEvent", reader.Read<System.Collections.Generic.Dictionary<System.Int32, HK.AutoAnt.UserControllers.History.CellEvent>>(), instance);
+					reader.SetPrivateField("generateCellEvent", reader.Read<HK.AutoAnt.UserControllers.GenerateCellEventHistory>(), instance);
 					break;
 					default:
 						reader.Skip();

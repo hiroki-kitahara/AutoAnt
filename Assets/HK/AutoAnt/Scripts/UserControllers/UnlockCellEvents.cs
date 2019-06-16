@@ -36,7 +36,7 @@ namespace HK.AutoAnt.UserControllers
                         {
                             continue;
                         }
-                        var histories = _gameSystem.User.History;
+                        var histories = _gameSystem.User.History.GenerateCellEvent;
                         if(histories.IsEnough(i.NeedCellEvents))
                         {
                             _this.cellEvents.Add(i.UnlockCellEventRecordId);
