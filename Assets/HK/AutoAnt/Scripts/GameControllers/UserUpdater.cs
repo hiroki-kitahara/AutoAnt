@@ -24,7 +24,7 @@ namespace HK.AutoAnt.GameControllers
         /// <summary>
         /// 街の人口を加算する要素リスト
         /// </summary>
-        public readonly List<IAddTownPopulation> AddTownPopulations = new List<IAddTownPopulation>();
+        private readonly List<IAddTownPopulation> addTownPopulations = new List<IAddTownPopulation>();
 
         void Awake()
         {
@@ -39,7 +39,7 @@ namespace HK.AutoAnt.GameControllers
                 .Where(x => x.CellEvent is IAddTownPopulation)
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.AddTownPopulations.Add(x.CellEvent as IAddTownPopulation);
+                    _this.addTownPopulations.Add(x.CellEvent as IAddTownPopulation);
                 })
                 .AddTo(this);
 
@@ -47,7 +47,7 @@ namespace HK.AutoAnt.GameControllers
                 .Where(x => x.CellEvent is IAddTownPopulation)
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.AddTownPopulations.Remove(x.CellEvent as IAddTownPopulation);
+                    _this.addTownPopulations.Remove(x.CellEvent as IAddTownPopulation);
                 })
                 .AddTo(this);
         }
@@ -62,7 +62,7 @@ namespace HK.AutoAnt.GameControllers
                     _gameSystem.User.Wallet.AddMoney(_gameSystem.User.Town.Population.Value * 10);
 
                     // 街の人口の増加
-                    foreach (var a in _this.AddTownPopulations)
+                    foreach (var a in _this.addTownPopulations)
                     {
                         a.Add(_gameSystem);
                     }
