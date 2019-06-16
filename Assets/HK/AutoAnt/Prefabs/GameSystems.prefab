@@ -57,7 +57,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 11400000, guid: cfc42a290af704639ab53da3a4bd51ca, type: 2}
-  userUpdater: {fileID: 1619589008271743420}
   masterData: {fileID: 11400000, guid: bcc32b98e556a446c8a2ae4ef6a4d42f, type: 2}
   constants: {fileID: 11400000, guid: f976e0165098b4820a8fb3ff10fc0bd6, type: 2}
   cellManager: {fileID: 7500671137712836563}
@@ -635,7 +634,7 @@ MonoBehaviour:
     - {fileID: 5138232443284177900, guid: fbc270a4fca37450692f3c0470b64450, type: 3}
     - {fileID: 2100000, guid: c4ca4c1fa6824408e9af78a8e62da892, type: 2}
     - {fileID: 11400000, guid: cfc42a290af704639ab53da3a4bd51ca, type: 2}
-    - {fileID: 11400000, guid: 503e47b04a0e14e4781499d4178e9eb1, type: 2}
+    - {fileID: 0}
     - {fileID: 11400000, guid: 76ec690736641484397c596d778da882, type: 2}
     - {fileID: 11400000, guid: ffcb09c5910564999bcc7a50f2ac8c77, type: 2}
     - {fileID: 11400000, guid: e716878cc8f4b49e8bb8c2d426359025, type: 2}

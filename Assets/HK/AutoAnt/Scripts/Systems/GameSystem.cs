@@ -25,10 +25,6 @@ namespace HK.AutoAnt.Systems
         public User User => this.instanceUser = this.instanceUser ?? Instantiate(this.user);
 
         [SerializeField]
-        private UserUpdater userUpdater = null;
-        public UserUpdater UserUpdater => this.userUpdater;
-
-        [SerializeField]
         private MasterData masterData = null;
         public MasterData MasterData => this.masterData;
 

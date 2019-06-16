@@ -1,6 +1,4 @@
-﻿using HK.AutoAnt.UserControllers;
-using UnityEngine;
-using UnityEngine.Assertions;
+﻿using HK.AutoAnt.Systems;
 
 namespace HK.AutoAnt.GameControllers
 {
@@ -12,6 +10,6 @@ namespace HK.AutoAnt.GameControllers
         /// <summary>
         /// 人口を加算する
         /// </summary>
-        void Add(Town town);
+        void Add(GameSystem gameSystem);
     }
 }
