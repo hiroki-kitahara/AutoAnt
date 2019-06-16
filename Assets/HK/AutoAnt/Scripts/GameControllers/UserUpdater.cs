@@ -34,6 +34,7 @@ namespace HK.AutoAnt.GameControllers
                 {
                     _this.RegisterIntervalUpdate(x.GameSystem);
                     _this.RegisterUpdate(x.GameSystem);
+                    _this.OnLeftAlone(x.GameSystem);
                 })
                 .AddTo(this);
 
@@ -69,15 +70,7 @@ namespace HK.AutoAnt.GameControllers
             Observable.Interval(TimeSpan.FromSeconds(this.parameterUpdateInterval))
                 .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
                 {
-                    // 税金徴収
-                    // FIXME: 税金計算を実装する
-                    _gameSystem.User.Wallet.AddMoney(_gameSystem.User.Town.Population.Value * 10);
-
-                    // 街の人口の増加
-                    foreach (var a in _this.addTownPopulations)
-                    {
-                        a.Add(_gameSystem);
-                    }
+                    _this.UpdateParameter(_gameSystem);
                 })
                 .AddTo(this);
         }
@@ -93,6 +86,35 @@ namespace HK.AutoAnt.GameControllers
                     _gameSystem.User.History.Game.Time += Time.deltaTime;
                 })
                 .AddTo(this);
+        }
+
+        /// <summary>
+        /// 放置されていた時間分の処理を行う
+        /// </summary>
+        private void OnLeftAlone(GameSystem gameSystem)
+        {
+            var span = DateTime.Now - gameSystem.User.History.Game.LastDateTime;
+            var updatableCount = Mathf.FloorToInt(span.Seconds / this.parameterUpdateInterval);
+            for (var i = 0; i < updatableCount; i++)
+            {
+                this.UpdateParameter(gameSystem);
+            }
+        }
+
+        /// <summary>
+        /// パラメータを更新する
+        /// </summary>
+        private void UpdateParameter(GameSystem gameSystem)
+        {
+            // 税金徴収
+            // FIXME: 税金計算を実装する
+            gameSystem.User.Wallet.AddMoney(gameSystem.User.Town.Population.Value * 10);
+
+            // 街の人口の増加
+            foreach (var a in this.addTownPopulations)
+            {
+                a.Add(gameSystem);
+            }
         }
     }
 }
