@@ -5,6 +5,7 @@ using HK.AutoAnt.Systems;
 using HK.AutoAnt.UserControllers;
 using HK.Framework.EventSystems;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -32,6 +33,7 @@ namespace HK.AutoAnt.GameControllers
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     _this.RegisterIntervalUpdate(x.GameSystem);
+                    _this.RegisterUpdate(x.GameSystem);
                 })
                 .AddTo(this);
 
@@ -52,6 +54,9 @@ namespace HK.AutoAnt.GameControllers
                 .AddTo(this);
         }
 
+        /// <summary>
+        /// パラメータ更新処理
+        /// </summary>
         private void RegisterIntervalUpdate(GameSystem gameSystem)
         {
             Observable.Interval(TimeSpan.FromSeconds(this.parameterUpdateInterval))
@@ -66,6 +71,19 @@ namespace HK.AutoAnt.GameControllers
                     {
                         a.Add(_gameSystem);
                     }
+                })
+                .AddTo(this);
+        }
+
+        /// <summary>
+        /// 毎フレーム実行される更新処理
+        /// </summary>
+        private void RegisterUpdate(GameSystem gameSystem)
+        {
+            this.UpdateAsObservable()
+                .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
+                {
+                    _gameSystem.User.History.Game.Time += Time.deltaTime;
                 })
                 .AddTo(this);
         }
