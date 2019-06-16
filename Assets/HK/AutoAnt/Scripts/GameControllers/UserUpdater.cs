@@ -32,8 +32,7 @@ namespace HK.AutoAnt.GameControllers
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     _this.RegisterIntervalUpdate(x.GameSystem);
-
-                    x.GameSystem.User.UnlockCellEvents.StartObserve(x.GameSystem);
+                    _this.StartObserveUnlockCellEvents(x.GameSystem);
                 })
                 .AddTo(this);
 
@@ -70,6 +69,30 @@ namespace HK.AutoAnt.GameControllers
                     }
                 })
                 .AddTo(this);
+        }
+
+        private void StartObserveUnlockCellEvents(GameSystem gameSystem)
+        {
+            Broker.Global.Receive<AddedGenerateCellEventHistory>()
+                .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
+                {
+                    var elements = _gameSystem.User.UnlockCellEvents.Elements;
+                    foreach (var i in _gameSystem.MasterData.UnlockCellEvent.Records)
+                    {
+                        // 既にアンロック済みならなにもしない
+                        if (elements.Contains(i.UnlockCellEventRecordId))
+                        {
+                            continue;
+                        }
+                        var histories = _gameSystem.User.GenerateCellEventHistory;
+                        if (histories.IsEnough(i.NeedCellEvents))
+                        {
+                            elements.Add(i.UnlockCellEventRecordId);
+                            Broker.Global.Publish(UnlockedCellEvent.Get(i.UnlockCellEventRecordId));
+                        }
+                    }
+                })
+                .AddTo(gameSystem);
         }
     }
 }
