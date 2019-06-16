@@ -39,8 +39,8 @@ namespace HK.AutoAnt.UserControllers
         public GenerateCellEventHistory GenerateCellEventHistory => this.generateCellEventHistory;
 
         [SerializeField]
-        private UnlockCellEvent unlockCellEvent = null;
-        public UnlockCellEvent UnlockCellEvent => this.unlockCellEvent;
+        private UnlockCellEvents unlockCellEvents = null;
+        public UnlockCellEvents UnlockCellEvents => this.unlockCellEvents;
 
         public SerializableUser GetSerializable()
         {
@@ -49,7 +49,7 @@ namespace HK.AutoAnt.UserControllers
                 Wallet = this.Wallet.GetSerializable(),
                 Inventory = this.Inventory,
                 GenerateCellEventHistory = this.GenerateCellEventHistory,
-                UnlockCellEvent = this.UnlockCellEvent
+                UnlockCellEvents = this.UnlockCellEvents
             };
         }
 
@@ -62,10 +62,8 @@ namespace HK.AutoAnt.UserControllers
                 this.wallet.Deserialize(serializableData.Wallet);
                 this.inventory = serializableData.Inventory;
                 this.generateCellEventHistory = serializableData.GenerateCellEventHistory;
-                this.unlockCellEvent = serializableData.UnlockCellEvent;
+                this.unlockCellEvents = serializableData.UnlockCellEvents;
             }
-
-            this.unlockCellEvent.StartObserve(GameSystem.Instance);
         }
 
         void ISavable.Save()

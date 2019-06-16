@@ -18,33 +18,6 @@ namespace HK.AutoAnt.UserControllers
         /// <summary>
         /// 生成可能なセルイベントリスト
         /// </summary>
-        public IReadOnlyList<int> CellEvents => this.cellEvents;
-        private List<int> cellEvents = new List<int>();
-
-        /// <summary>
-        /// 生成履歴の監視を開始する
-        /// </summary>
-        public void StartObserve(GameSystem gameSystem)
-        {
-            Broker.Global.Receive<AddedGenerateCellEventHistory>()
-                .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
-                {
-                    foreach(var i in _gameSystem.MasterData.UnlockCellEvent.Records)
-                    {
-                        // 既にアンロック済みならなにもしない
-                        if(_this.cellEvents.Contains(i.UnlockCellEventRecordId))
-                        {
-                            continue;
-                        }
-                        var histories = _gameSystem.User.GenerateCellEventHistory;
-                        if(histories.IsEnough(i.NeedCellEvents))
-                        {
-                            _this.cellEvents.Add(i.UnlockCellEventRecordId);
-                            Broker.Global.Publish(UnlockedCellEvent.Get(i.UnlockCellEventRecordId));
-                        }
-                    }
-                })
-                .AddTo(gameSystem);
-        }
+        public List<int> Elements { get; private set; } = new List<int>();
     }
 }
