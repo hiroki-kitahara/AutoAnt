@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using HK.AutoAnt.Events;
+using HK.AutoAnt.Systems;
 using HK.AutoAnt.UserControllers;
 using HK.Framework.EventSystems;
 using UniRx;
@@ -30,7 +31,7 @@ namespace HK.AutoAnt.GameControllers
             Broker.Global.Receive<GameStart>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.RegisterIntervalUpdate(x.GameSystem.User);
+                    _this.RegisterIntervalUpdate(x.GameSystem);
                 })
                 .AddTo(this);
 
@@ -51,19 +52,19 @@ namespace HK.AutoAnt.GameControllers
                 .AddTo(this);
         }
 
-        private void RegisterIntervalUpdate(User user)
+        private void RegisterIntervalUpdate(GameSystem gameSystem)
         {
             Observable.Interval(TimeSpan.FromSeconds(this.parameterUpdateInterval))
-                .SubscribeWithState2(this, user, (_, _this, _user) =>
+                .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
                 {
                     // 税金徴収
                     // FIXME: 税金計算を実装する
-                    _user.Wallet.AddMoney(_user.Town.Population.Value * 10);
+                    _gameSystem.User.Wallet.AddMoney(_gameSystem.User.Town.Population.Value * 10);
 
                     // 街の人口の増加
                     foreach (var a in _this.AddTownPopulations)
                     {
-                        a.Add(_user.Town);
+                        a.Add(_gameSystem);
                     }
                 })
                 .AddTo(this);
