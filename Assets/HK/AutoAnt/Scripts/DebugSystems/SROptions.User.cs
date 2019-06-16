@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using HK.AutoAnt.Systems;
 using UnityEngine;
@@ -52,6 +53,14 @@ public partial class SROptions
     public void PrintUnlockCellEvent()
     {
         Debug.Log($"{string.Join(",", GameSystem.Instance.User.UnlockCellEvents.CellEvents.Select(x => x.ToString()))}");
+    }
+
+    [Category(UserCategory)]
+    [DisplayName("プレイ時間を表示する")]
+    public void PrintGameTime()
+    {
+        var gameTime = GameSystem.Instance.User.History.Game.Time;
+        Debug.Log($"{gameTime}");
     }
 }
 #endif
