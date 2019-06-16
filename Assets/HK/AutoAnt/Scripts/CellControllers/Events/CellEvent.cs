@@ -98,7 +98,7 @@ namespace HK.AutoAnt.CellControllers.Events
             effect.transform.position = this.gimmick.transform.position;
             effect.transform.localScale = Vector3.one * record.EventData.size;
 
-            Broker.Global.Publish(ReleasedCellEvent.Get(this));
+            Broker.Global.Publish(RemovedCellEvent.Get(this));
 
             Destroy(this.gimmick.gameObject);
         }

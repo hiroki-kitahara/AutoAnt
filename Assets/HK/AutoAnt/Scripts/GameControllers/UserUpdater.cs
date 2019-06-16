@@ -42,7 +42,7 @@ namespace HK.AutoAnt.GameControllers
                 })
                 .AddTo(this);
 
-            Broker.Global.Receive<ReleasedCellEvent>()
+            Broker.Global.Receive<RemovedCellEvent>()
                 .Where(x => x.CellEvent is IAddTownPopulation)
                 .SubscribeWithState(this, (x, _this) =>
                 {

@@ -81,9 +81,9 @@ namespace HK.AutoAnt.CellControllers
             this.cellMapper.CellEvent.Map[this.Position].OnClick(this);
         }
 
-        public IObservable<ReleasedCellEvent> ReleasedCellEventAsObservable()
+        public IObservable<RemovedCellEvent> ReleasedCellEventAsObservable()
         {
-            return this.Broker.Receive<ReleasedCellEvent>();
+            return this.Broker.Receive<RemovedCellEvent>();
         }
 
         private void DestroyGimmickController()

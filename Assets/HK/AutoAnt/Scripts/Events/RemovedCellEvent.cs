@@ -7,9 +7,9 @@ using HK.AutoAnt.CellControllers.Events;
 namespace HK.AutoAnt.Events
 {
     /// <summary>
-    /// セルのイベントが解放された際のイベント
+    /// セルのイベントが削除された際のイベント
     /// </summary>
-    public sealed class ReleasedCellEvent : Message<ReleasedCellEvent, ICellEvent>
+    public sealed class RemovedCellEvent : Message<RemovedCellEvent, ICellEvent>
     {
         public ICellEvent CellEvent => this.param1;
     }
