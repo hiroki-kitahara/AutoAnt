@@ -16,6 +16,12 @@ namespace HK.AutoAnt.UserControllers
     public sealed class History
     {
         /// <summary>
+        /// ゲーム関連の履歴
+        /// </summary>
+        public GameHistory Game => this.game;
+        private GameHistory game = new GameHistory();
+
+        /// <summary>
         /// セルイベントの生成履歴
         /// </summary>
         public GenerateCellEventHistory GenerateCellEvent => this.generateCellEvent;
