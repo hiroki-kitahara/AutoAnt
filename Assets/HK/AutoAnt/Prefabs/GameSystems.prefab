@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7500671137712836588}
   - component: {fileID: 1507591049520222701}
+  - component: {fileID: 1619589008271743420}
   - component: {fileID: 7500671137712836563}
   - component: {fileID: 7500671137712836589}
   - component: {fileID: 6158404924586126944}
@@ -56,11 +57,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 11400000, guid: cfc42a290af704639ab53da3a4bd51ca, type: 2}
-  userUpdater: {fileID: 11400000, guid: 503e47b04a0e14e4781499d4178e9eb1, type: 2}
+  userUpdater: {fileID: 1619589008271743420}
   masterData: {fileID: 11400000, guid: bcc32b98e556a446c8a2ae4ef6a4d42f, type: 2}
   constants: {fileID: 11400000, guid: f976e0165098b4820a8fb3ff10fc0bd6, type: 2}
   cellManager: {fileID: 7500671137712836563}
   cameraman: {fileID: 3645794083007513962}
+--- !u!114 &1619589008271743420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500671137712836562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baf28c7d3935b4fdb81813efd8758226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parameterUpdateInterval: 5
 --- !u!114 &7500671137712836563
 MonoBehaviour:
   m_ObjectHideFlags: 0
