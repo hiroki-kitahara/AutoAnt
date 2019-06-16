@@ -70,6 +70,8 @@ namespace HK.AutoAnt.Systems
 
         void OnApplicationQuit()
         {
+            Broker.Global.Publish(GameEnd.Get(this));
+            
             foreach(var savable in this.Savables)
             {
                 savable.Save();
