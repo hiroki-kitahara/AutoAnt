@@ -55,13 +55,14 @@ namespace HK.AutoAnt.Systems
             Assert.IsNull(instance);
             instance = this;
 
-            this.userUpdater.Initialize(this.User, this.gameObject);
-
             foreach(var savable in this.Savables)
             {
                 savable.Initialize();
             }
+        }
 
+        void Start()
+        {
             Broker.Global.Publish(GameStart.Get(this));
         }
 
