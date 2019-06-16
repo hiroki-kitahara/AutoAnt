@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("cellEvents")]
+	[ES3PropertiesAttribute("Elements")]
 	public class ES3Type_UnlockCellEvents : ES3ObjectType
 	{
 		public static ES3Type Instance = null;
@@ -14,7 +14,7 @@ namespace ES3Types
 		{
 			var instance = (HK.AutoAnt.UserControllers.UnlockCellEvents)obj;
 			
-			writer.WritePrivateField("cellEvents", instance);
+			writer.WritePrivateProperty("Elements", instance);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -25,8 +25,8 @@ namespace ES3Types
 				switch(propertyName)
 				{
 					
-					case "cellEvents":
-					reader.SetPrivateField("cellEvents", reader.Read<System.Collections.Generic.List<System.Int32>>(), instance);
+					case "Elements":
+					reader.SetPrivateProperty("Elements", reader.Read<System.Collections.Generic.List<System.Int32>>(), instance);
 					break;
 					default:
 						reader.Skip();
