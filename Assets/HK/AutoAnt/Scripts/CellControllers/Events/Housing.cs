@@ -37,12 +37,12 @@ namespace HK.AutoAnt.CellControllers.Events
 
         private MasterDataHousingLevelParameter.Record levelParameter;
 
-        void IAddTownPopulation.Add(GameSystem gameSystem)
+        void IAddTownPopulation.Add(GameSystem gameSystem, float deltaTime)
         {
             Assert.IsNotNull(this.levelParameter);
             var popularityRate = gameSystem.Constants.Housing.PopularityRate;
             var town = gameSystem.User.Town;
-            var result = Calculator.AddPopulation(this.levelParameter.Population, town.Popularity.Value, popularityRate);
+            var result = Calculator.AddPopulation(this.levelParameter.Population, town.Popularity.Value, popularityRate, deltaTime);
             this.CurrentPopulation += result;
             town.AddPopulation(result);
         }
