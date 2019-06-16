@@ -64,8 +64,6 @@ namespace HK.AutoAnt.UserControllers
                 this.generateCellEventHistory = serializableData.GenerateCellEventHistory;
                 this.unlockCellEvents = serializableData.UnlockCellEvents;
             }
-
-            this.unlockCellEvents.StartObserve(GameSystem.Instance);
         }
 
         void ISavable.Save()

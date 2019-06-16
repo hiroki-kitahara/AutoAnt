@@ -37,10 +37,11 @@ namespace HK.AutoAnt.CellControllers.Events
 
         private MasterDataHousingLevelParameter.Record levelParameter;
 
-        void IAddTownPopulation.Add(Town town)
+        void IAddTownPopulation.Add(GameSystem gameSystem)
         {
             Assert.IsNotNull(this.levelParameter);
-            var popularityRate = this.gameSystem.Constants.Housing.PopularityRate;
+            var popularityRate = gameSystem.Constants.Housing.PopularityRate;
+            var town = gameSystem.User.Town;
             var result = Calculator.AddPopulation(this.levelParameter.Population, town.Popularity.Value, popularityRate);
             this.CurrentPopulation += result;
             town.AddPopulation(result);
@@ -51,14 +52,12 @@ namespace HK.AutoAnt.CellControllers.Events
             base.Initialize(position, gameSystem, isInitializingGame);
             this.gameSystem = gameSystem;
             this.gameSystem.User.Town.AddPopulation(this.CurrentPopulation);
-            this.gameSystem.UserUpdater.AddTownPopulations.Add(this);
             this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
         }
 
         public override void Remove(GameSystem gameSystem)
         {
             base.Remove(gameSystem);
-            gameSystem.UserUpdater.AddTownPopulations.Remove(this);
             gameSystem.User.Town.AddPopulation(-this.CurrentPopulation);
         }
 
