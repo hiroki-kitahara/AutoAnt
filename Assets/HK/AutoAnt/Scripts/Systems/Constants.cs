@@ -18,4 +18,27 @@ namespace HK.AutoAnt.Constants
         /// </summary>
         Grassland,
     }
+
+    public enum InputMode
+    {
+        /// <summary>
+        /// クリックモード
+        /// </summary>
+        ClickMode,
+
+        /// <summary>
+        /// 建築モード
+        /// </summary>
+        BuildMode,
+
+        /// <summary>
+        /// 解体モード
+        /// </summary>
+        DismantleMode,
+
+        /// <summary>
+        /// 開拓モード
+        /// </summary>
+        ExploringMode,
+    }
 }
