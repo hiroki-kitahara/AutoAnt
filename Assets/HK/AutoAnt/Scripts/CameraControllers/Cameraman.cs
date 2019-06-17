@@ -94,8 +94,9 @@ namespace HK.AutoAnt.CameraControllers
             var t = this.Camera.transform;
             var forward = Vector3.Scale(t.forward, new Vector3(1.0f, 0.0f, 1.0f)).normalized;
             var right = t.right;
+            var forwardRate = 1.0f + (1.0f - (t.rotation.eulerAngles.x / 90.0f));
 
-            return (forward * forwardVelocity) + (right * rightVelocity);
+            return (forward * forwardVelocity * forwardRate) + (right * rightVelocity);
         }
     }
 }
