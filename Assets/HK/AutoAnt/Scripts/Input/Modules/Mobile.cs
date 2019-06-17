@@ -7,15 +7,15 @@ using UnityEngine.EventSystems;
 namespace HK.AutoAnt.InputControllers.Modules
 {
     /// <summary>
-    /// スタンドアローンの入力制御クラス
+    /// モバイルの入力制御クラス
     /// </summary>
-    public sealed class Standalone : IInputModule
+    public sealed class Mobile : IInputModule
     {
         public IMessageBroker Broker => HK.Framework.EventSystems.Broker.Global;
 
-        public int MainPointerId => -1;
+        public int MainPointerId => -0;
 
-        public Standalone()
+        public Mobile()
         {
             Observable.EveryUpdate()
                 .SubscribeWithState(this, (_, _this) =>
