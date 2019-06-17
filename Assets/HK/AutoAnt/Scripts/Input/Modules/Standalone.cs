@@ -70,12 +70,12 @@ namespace HK.AutoAnt.InputControllers.Modules
                 return;
             }
 
-            Input.Current.Broker.Publish(Events.ClickUp.Get(Events.ClickData.Get(eventData.pointerId, UnityEngine.Input.mousePosition)));
+            Input.Current.Broker.Publish(Events.ClickUp.Get(Events.ClickData.Get(eventData.pointerId, eventData.position)));
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            Input.Current.Broker.Publish(Events.ClickDown.Get(Events.ClickData.Get(eventData.pointerId, UnityEngine.Input.mousePosition)));
+            Input.Current.Broker.Publish(Events.ClickDown.Get(Events.ClickData.Get(eventData.pointerId, eventData.position)));
         }
     }
 }
