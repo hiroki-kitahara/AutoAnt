@@ -16,8 +16,11 @@ namespace HK.AutoAnt.InputControllers
             {
                 if(module == null)
                 {
-                    // TODO: プラットフォーム対応
+#if UNITY_ANDROID || UNITY_IOS
+                    module = new Mobile();
+#else
                     module = new Standalone();
+#endif
                 }
 
                 return module;
