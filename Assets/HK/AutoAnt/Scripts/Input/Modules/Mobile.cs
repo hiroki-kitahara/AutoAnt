@@ -13,7 +13,7 @@ namespace HK.AutoAnt.InputControllers.Modules
     {
         public IMessageBroker Broker => HK.Framework.EventSystems.Broker.Global;
 
-        public int MainPointerId => -0;
+        public int MainPointerId => 0;
 
         public Mobile()
         {
