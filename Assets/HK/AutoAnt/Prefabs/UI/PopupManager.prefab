@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4951016851456237671}
   - component: {fileID: 7100650387790010105}
+  - component: {fileID: 5400521245052010898}
   m_Layer: 5
   m_Name: PopupController
   m_TagString: Untagged
@@ -44,3 +45,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2330542581429522256}
   m_CullTransparentMesh: 0
+--- !u!114 &5400521245052010898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2330542581429522256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a83fdd83c0234018b6d926bb821d8c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
