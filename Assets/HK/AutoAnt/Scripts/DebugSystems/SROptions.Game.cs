@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.UI;
 using UnityEngine;
@@ -30,7 +31,7 @@ public partial class SROptions
     {
         PopupManager.RequestSimplePopup()
             .Initialize("やっほー", "OK", "CANCEL")
-            .Open();
+            .ResponseToClose();
     }
 }
 // #endif

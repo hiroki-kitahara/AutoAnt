@@ -28,6 +28,7 @@ namespace HK.AutoAnt.UI
         public static T Request<T>(T prefab) where T : Popup
         {
             var popup = Instantiate(prefab, instance.transform, false);
+            popup.Open();
 
             return popup;
         }
