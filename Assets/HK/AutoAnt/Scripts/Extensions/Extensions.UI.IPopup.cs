@@ -16,7 +16,7 @@ namespace HK.AutoAnt.Extensions
         public static T ResponseToClose<T>(this T self) where T : IPopup
         {
             self.ResponseAsObservable()
-                .Take(1)
+                .TakeUntil(self.CloseAsObservable())
                 .SubscribeWithState(self, (_, _self) =>
                 {
                     _self.Close();
