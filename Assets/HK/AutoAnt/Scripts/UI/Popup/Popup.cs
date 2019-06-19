@@ -10,8 +10,10 @@ namespace HK.AutoAnt.UI
     /// </summary>
     public abstract class Popup : MonoBehaviour, IPopup
     {
-        protected Subject<int> response = new Subject<int>();
-        
+        protected readonly Subject<int> response = new Subject<int>();
+
+        protected readonly Subject<Unit> close = new Subject<Unit>();
+
         /// <summary>
         /// 開く
         /// </summary>
@@ -26,6 +28,8 @@ namespace HK.AutoAnt.UI
         public virtual void Close()
         {
             this.gameObject.SetActive(false);
+
+            this.close.OnNext(Unit.Default);
         }
 
         /// <summary>
@@ -34,6 +38,14 @@ namespace HK.AutoAnt.UI
         public virtual IObservable<int> ResponseAsObservable()
         {
             return this.response;
+        }
+
+        /// <summary>
+        /// 閉じた際のイベント
+        /// </summary>
+        public IObservable<Unit> CloseAsObservable()
+        {
+            return this.close;
         }
     }
 }

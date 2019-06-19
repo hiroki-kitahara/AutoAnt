@@ -1,4 +1,5 @@
 ﻿using System;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -23,5 +24,10 @@ namespace HK.AutoAnt.UI
         /// ポップアップのレスポンスを返す
         /// </summary>
         IObservable<int> ResponseAsObservable();
+
+        /// <summary>
+        /// 閉じた際のイベント
+        /// </summary>
+        IObservable<Unit> CloseAsObservable();
     }
 }

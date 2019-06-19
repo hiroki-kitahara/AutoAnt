@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.UI
@@ -9,7 +10,7 @@ namespace HK.AutoAnt.UI
     public sealed class PopupManager : MonoBehaviour
     {
         [SerializeField]
-        private SimplePopup simplePopup;
+        private SimplePopup simplePopup = null;
 
         private static PopupManager instance;
 
@@ -29,6 +30,12 @@ namespace HK.AutoAnt.UI
         {
             var popup = Instantiate(prefab, instance.transform, false);
             popup.Open();
+            popup.CloseAsObservable()
+                .SubscribeWithState(popup, (_, _popup) =>
+                {
+                    Destroy(_popup.gameObject);
+                })
+                .AddTo(popup);
 
             return popup;
         }

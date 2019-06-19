@@ -13,13 +13,13 @@ namespace HK.AutoAnt.UI
     public sealed class SimplePopup : Popup
     {
         [SerializeField]
-        private TextMeshProUGUI message;
+        private TextMeshProUGUI message = null;
 
         [SerializeField]
-        private ButtonElement decide;
+        private ButtonElement decide = null;
 
         [SerializeField]
-        private ButtonElement cancel;
+        private ButtonElement cancel = null;
 
         private int decideValue = 1;
 
