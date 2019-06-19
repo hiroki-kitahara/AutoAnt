@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel;
+using HK.AutoAnt.Events;
+using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
+using HK.AutoAnt.UI;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UniRx;
 
-#if AA_DEBUG
+// #if AA_DEBUG
 /// <summary>
 /// ゲームに関するデバッグをまとめるクラス
 /// </summary>
@@ -22,5 +26,17 @@ public partial class SROptions
             GameSystem.Instance.CellManager.EventGenerator.RecordId = value;
         }
     }
+
+    [Category("Game")]
+    [DisplayName("ポップアップテスト")]
+    public void SimplePopupText()
+    {
+        var popup = PopupManager.RequestSimplePopup()
+            .Initialize("やっほー", "OK", "CANCEL")
+            .ResponseToClose();
+
+        popup.Broker.Receive<PopupEvents.Response>()
+            .Subscribe(x => Debug.Log(x.Result));
+    }
 }
-#endif
+// #endif
