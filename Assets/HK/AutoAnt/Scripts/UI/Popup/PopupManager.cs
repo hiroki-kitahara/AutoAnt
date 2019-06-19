@@ -8,6 +8,9 @@ namespace HK.AutoAnt.UI
     /// </summary>
     public sealed class PopupManager : MonoBehaviour
     {
+        [SerializeField]
+        private SimplePopup simplePopup;
+
         private static PopupManager instance;
 
         void Awake()
@@ -27,6 +30,11 @@ namespace HK.AutoAnt.UI
             var popup = Instantiate(prefab, instance.transform, false);
 
             return popup;
+        }
+
+        public static SimplePopup RequestSimplePopup()
+        {
+            return Request(instance.simplePopup);
         }
     }
 }

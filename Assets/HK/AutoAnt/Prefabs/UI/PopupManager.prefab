@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7100650387790010105}
   - component: {fileID: 5400521245052010898}
   m_Layer: 5
-  m_Name: PopupController
+  m_Name: PopupManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,3 +57,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a83fdd83c0234018b6d926bb821d8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  simplePopup: {fileID: 857513669064895084, guid: af2323dcf1694416dacdd01a0048af9f,
+    type: 3}

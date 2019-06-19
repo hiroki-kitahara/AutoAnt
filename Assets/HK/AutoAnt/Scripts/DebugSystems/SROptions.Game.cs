@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel;
 using HK.AutoAnt.Systems;
+using HK.AutoAnt.UI;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-#if AA_DEBUG
+// #if AA_DEBUG
 /// <summary>
 /// ゲームに関するデバッグをまとめるクラス
 /// </summary>
@@ -22,5 +23,14 @@ public partial class SROptions
             GameSystem.Instance.CellManager.EventGenerator.RecordId = value;
         }
     }
+
+    [Category("Game")]
+    [DisplayName("ポップアップテスト")]
+    public void SimplePopupText()
+    {
+        PopupManager.RequestSimplePopup()
+            .Initialize("やっほー", "OK", "CANCEL")
+            .Open();
+    }
 }
-#endif
+// #endif

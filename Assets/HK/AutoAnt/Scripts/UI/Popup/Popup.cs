@@ -1,4 +1,5 @@
 ﻿using System;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -9,6 +10,8 @@ namespace HK.AutoAnt.UI
     /// </summary>
     public abstract class Popup : MonoBehaviour, IPopup
     {
+        protected Subject<int> response = new Subject<int>();
+        
         /// <summary>
         /// 開く
         /// </summary>
@@ -28,6 +31,9 @@ namespace HK.AutoAnt.UI
         /// <summary>
         /// ポップアップのレスポンスを返す
         /// </summary>
-        public abstract IObservable<int> ResponseAsObservable();
+        public virtual IObservable<int> ResponseAsObservable()
+        {
+            return this.response;
+        }
     }
 }
