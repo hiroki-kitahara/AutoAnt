@@ -12,7 +12,7 @@ namespace HK.AutoAnt.Extensions
     public static partial class Extensions
     {
         /// <summary>
-        /// ポップアップのレスポンスが返ってきたらポップアップを閉じる
+        /// レスポンスが返ってきたらポップアップを閉じる
         /// </summary>
         public static T ResponseToClose<T>(this T self) where T : IPopup
         {
