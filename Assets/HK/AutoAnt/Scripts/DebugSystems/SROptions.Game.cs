@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.UI;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UniRx;
 
 // #if AA_DEBUG
 /// <summary>
@@ -29,9 +31,12 @@ public partial class SROptions
     [DisplayName("ポップアップテスト")]
     public void SimplePopupText()
     {
-        PopupManager.RequestSimplePopup()
+        var popup = PopupManager.RequestSimplePopup()
             .Initialize("やっほー", "OK", "CANCEL")
             .ResponseToClose();
+
+        popup.Broker.Receive<PopupEvents.Response>()
+            .Subscribe(x => Debug.Log(x.Result));
     }
 }
 // #endif

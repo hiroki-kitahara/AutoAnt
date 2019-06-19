@@ -1,4 +1,5 @@
 ﻿using System;
+using HK.AutoAnt.Events;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -10,9 +11,9 @@ namespace HK.AutoAnt.UI
     /// </summary>
     public abstract class Popup : MonoBehaviour, IPopup
     {
-        protected readonly Subject<int> response = new Subject<int>();
+        protected readonly MessageBroker broker = new MessageBroker();
 
-        protected readonly Subject<Unit> close = new Subject<Unit>();
+        public IMessageBroker Broker => this.broker;
 
         /// <summary>
         /// 開く
@@ -20,6 +21,13 @@ namespace HK.AutoAnt.UI
         public virtual void Open()
         {
             this.gameObject.SetActive(true);
+
+            this.Broker.Receive<PopupEvents.CompleteClose>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.broker.Dispose();
+                })
+                .AddTo(this);
         }
 
         /// <summary>
@@ -27,25 +35,11 @@ namespace HK.AutoAnt.UI
         /// </summary>
         public virtual void Close()
         {
+            this.Broker.Publish(PopupEvents.StartClose.Get());
+
             this.gameObject.SetActive(false);
 
-            this.close.OnNext(Unit.Default);
-        }
-
-        /// <summary>
-        /// ポップアップのレスポンスを返す
-        /// </summary>
-        public virtual IObservable<int> ResponseAsObservable()
-        {
-            return this.response;
-        }
-
-        /// <summary>
-        /// 閉じた際のイベント
-        /// </summary>
-        public IObservable<Unit> CloseAsObservable()
-        {
-            return this.close;
+            this.Broker.Publish(PopupEvents.CompleteClose.Get());
         }
     }
 }

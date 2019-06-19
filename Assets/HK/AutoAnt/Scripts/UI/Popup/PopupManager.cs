@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using HK.AutoAnt.Events;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -30,7 +31,7 @@ namespace HK.AutoAnt.UI
         {
             var popup = Instantiate(prefab, instance.transform, false);
             popup.Open();
-            popup.CloseAsObservable()
+            popup.Broker.Receive<PopupEvents.CompleteClose>()
                 .SubscribeWithState(popup, (_, _popup) =>
                 {
                     Destroy(_popup.gameObject);

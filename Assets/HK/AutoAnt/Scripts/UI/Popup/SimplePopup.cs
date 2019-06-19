@@ -1,4 +1,5 @@
 ﻿using System;
+using HK.AutoAnt.Events;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -34,14 +35,14 @@ namespace HK.AutoAnt.UI
             this.decide.Button.OnClickAsObservable()
                 .SubscribeWithState(this, (_, _this) =>
                 {
-                    _this.response.OnNext(_this.decideValue);
+                    _this.Broker.Publish(PopupEvents.Response.Get(_this.decideValue));
                 })
                 .AddTo(this);
 
             this.cancel.Button.OnClickAsObservable()
                 .SubscribeWithState(this, (_, _this) =>
                 {
-                    _this.response.OnNext(_this.cancelValue);
+                    _this.Broker.Publish(PopupEvents.Response.Get(_this.cancelValue));
                 })
                 .AddTo(this);
 

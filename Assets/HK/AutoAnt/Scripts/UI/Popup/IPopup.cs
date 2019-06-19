@@ -11,6 +11,12 @@ namespace HK.AutoAnt.UI
     public interface IPopup
     {
         /// <summary>
+        /// ポップアップのイベントを通知するブローカー
+        /// </summary>
+        /// <value></value>
+        IMessageBroker Broker { get; }
+
+        /// <summary>
         /// 開く
         /// </summary>
         void Open();
@@ -19,15 +25,5 @@ namespace HK.AutoAnt.UI
         /// 閉じる
         /// </summary>
         void Close();
-
-        /// <summary>
-        /// ポップアップのレスポンスを返す
-        /// </summary>
-        IObservable<int> ResponseAsObservable();
-
-        /// <summary>
-        /// 閉じた際のイベント
-        /// </summary>
-        IObservable<Unit> CloseAsObservable();
     }
 }
