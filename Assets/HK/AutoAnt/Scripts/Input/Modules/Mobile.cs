@@ -13,15 +13,10 @@ namespace HK.AutoAnt.InputControllers.Modules
     {
         public IMessageBroker Broker => HK.Framework.EventSystems.Broker.Global;
 
-        public int MainPointerId => -0;
+        public int MainPointerId => 0;
 
         public Mobile()
         {
-            Observable.EveryUpdate()
-                .SubscribeWithState(this, (_, _this) =>
-                {
-                    _this.UpdateScroll();
-                });
         }
 
         public IObservable<Events.Click> ClickAsObservable()
@@ -47,15 +42,6 @@ namespace HK.AutoAnt.InputControllers.Modules
         public IObservable<Events.Scroll> ScrollAsObservable()
         {
             return Broker.Receive<Events.Scroll>();
-        }
-
-        private void UpdateScroll()
-        {
-            var amount = UnityEngine.Input.GetAxis("Mouse ScrollWheel");
-            if (amount != 0f)
-            {
-                Input.Current.Broker.Publish(Events.Scroll.Get(Events.ScrollData.Get(amount)));
-            }
         }
 
         public void OnDrag(PointerEventData eventData)
