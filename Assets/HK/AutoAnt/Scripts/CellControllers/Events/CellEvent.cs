@@ -21,6 +21,10 @@ namespace HK.AutoAnt.CellControllers.Events
     public abstract class CellEvent : ScriptableObject, ICellEvent
     {
         [SerializeField]
+        protected Constants.CellEventCategory category;
+        public Constants.CellEventCategory Category => this.category;
+        
+        [SerializeField]
         protected CellEventGenerateCondition condition = null;
 
         [SerializeField]
