@@ -16,7 +16,7 @@ namespace HK.AutoAnt.InputControllers
             {
                 if(module == null)
                 {
-#if UNITY_ANDROID || UNITY_IOS
+#if !UNITY_EDITOR && (UNITY_ANDROID || UNITY_IOS)
                     module = new Mobile();
 #else
                     module = new Standalone();
