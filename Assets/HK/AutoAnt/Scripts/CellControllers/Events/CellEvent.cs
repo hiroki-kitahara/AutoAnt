@@ -168,6 +168,7 @@ namespace HK.AutoAnt.CellControllers.Events
             }
 
             result.ApplyProperty(data);
+            EditorUtility.SetDirty(result);
 
             return result;
         } 
