@@ -4,9 +4,9 @@ using UnityEngine.Assertions;
 namespace HK.AutoAnt.CellControllers.Gimmicks
 {
     /// <summary>
-    /// セルギミックの抽象クラス
+    /// セルギミックの3D空間上に存在するオブジェクトを制御するクラス
     /// </summary>
-    public abstract class CellGimmickController : MonoBehaviour
+    public class CellEventGameObject : MonoBehaviour
     {
     }
 }

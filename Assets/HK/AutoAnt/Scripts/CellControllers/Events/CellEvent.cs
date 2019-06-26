@@ -48,9 +48,9 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         protected readonly CompositeDisposable instanceEvents = new CompositeDisposable();
 
-        protected CellGimmickController gimmick;
+        protected CellEventGameObject gimmick;
 
-        public abstract CellGimmickController CreateGimmickController(Vector2Int origin);
+        public abstract CellEventGameObject CreateGimmickController(Vector2Int origin);
 
 #if UNITY_EDITOR
         protected virtual void OnValidate()

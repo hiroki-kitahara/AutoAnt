@@ -21,7 +21,7 @@ namespace HK.AutoAnt.CellControllers.Events
         [SerializeField]
         protected Blank gimmickPrefab = null;
 
-        public override CellGimmickController CreateGimmickController(Vector2Int origin)
+        public override CellEventGameObject CreateGimmickController(Vector2Int origin)
         {
             var gimmick = Instantiate(this.gimmickPrefab);
             var constants = GameSystem.Instance.Constants.Cell;
