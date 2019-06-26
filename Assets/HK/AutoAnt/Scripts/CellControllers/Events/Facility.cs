@@ -23,7 +23,7 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - アイテムの生産
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Facility")]
-    public sealed class Facility : CellEventBlankGimmick, ILevelUpEvent
+    public sealed class Facility : CellEvent, ILevelUpEvent
     {
         /// <summary>
         /// レベル
