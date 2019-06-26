@@ -39,6 +39,9 @@ namespace HK.AutoAnt.CellControllers.Events
         [SerializeField]
         protected PoolableEffect destructionEffect = null;
 
+        [SerializeField]
+        protected CellEventGameObject cellEventGameObject = null;
+
         public int Id => int.Parse(this.name);
 
         public Vector2Int Origin { get; protected set; }
@@ -50,7 +53,19 @@ namespace HK.AutoAnt.CellControllers.Events
 
         protected CellEventGameObject gimmick;
 
-        public abstract CellEventGameObject CreateGimmickController(Vector2Int origin);
+        public virtual CellEventGameObject CreateGimmickController(Vector2Int origin)
+        {
+            var gimmick = Instantiate(this.cellEventGameObject);
+            var constants = GameSystem.Instance.Constants.Cell;
+            var position = new Vector3(origin.x * (constants.Scale.x + constants.Interval), 0.0f, origin.y * (constants.Scale.z + constants.Interval));
+            var fixedSize = this.size - 1;
+            position += new Vector3((constants.Scale.x / 2.0f) * fixedSize, 0.0f, (constants.Scale.z / 2.0f) * fixedSize);
+            position += new Vector3(constants.Interval * fixedSize, constants.Scale.y, constants.Interval * fixedSize);
+            gimmick.transform.position = position;
+            gimmick.transform.localScale = constants.EffectScale * this.size + (Vector3.one * (constants.Interval * fixedSize));
+
+            return gimmick;
+        }
 
 #if UNITY_EDITOR
         protected virtual void OnValidate()
