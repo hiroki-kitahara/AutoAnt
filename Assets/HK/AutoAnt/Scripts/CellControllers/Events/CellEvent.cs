@@ -21,6 +21,10 @@ namespace HK.AutoAnt.CellControllers.Events
     public abstract class CellEvent : ScriptableObject, ICellEvent
     {
         [SerializeField]
+        protected Constants.CellEventCategory category;
+        public Constants.CellEventCategory Category => this.category;
+
+        [SerializeField]
         protected CellEventGenerateCondition condition = null;
 
         [SerializeField]
@@ -154,14 +158,14 @@ namespace HK.AutoAnt.CellControllers.Events
 #if UNITY_EDITOR
         public static CellEvent GetOrCreateAsset(Database.SpreadSheetData.CellEventData data)
         {
-            switch(data.Celleventtype)
+            switch(data.Classname)
             {
                 case "Housing":
                     return CellEvent.InternalGetOrCreateAsset<Housing>(data);
                 case "Facility":
                     return CellEvent.InternalGetOrCreateAsset<Facility>(data);
                 default:
-                    Debug.LogError($"CellEventType = {data.Celleventtype}は未対応の値です");
+                    Debug.LogError($"CellEventType = {data.Classname}は未対応の値です");
                     return null;
             }
         }
@@ -169,7 +173,7 @@ namespace HK.AutoAnt.CellControllers.Events
         protected static T InternalGetOrCreateAsset<T>(Database.SpreadSheetData.CellEventData data)
             where T : CellEvent
         {
-            var path = $"Assets/HK/AutoAnt/DataSources/CellEvents/{data.Celleventtype}/{data.Id}.asset";
+            var path = $"Assets/HK/AutoAnt/DataSources/CellEvents/{data.Classname}/{data.Id}.asset";
             var result = AssetDatabase.LoadAssetAtPath<T>(path);
             if (result == null)
             {
@@ -179,12 +183,14 @@ namespace HK.AutoAnt.CellControllers.Events
             }
 
             result.ApplyProperty(data);
+            EditorUtility.SetDirty(result);
 
             return result;
         } 
 
         protected virtual void ApplyProperty(Database.SpreadSheetData.CellEventData data)
         {
+            this.category = (Constants.CellEventCategory)Enum.Parse(typeof(Constants.CellEventCategory), data.Category);
             this.condition = AssetDatabase.LoadAssetAtPath<CellEventGenerateCondition>($"Assets/HK/AutoAnt/DataSources/CellEvents/Conditions/{data.Condition}.asset");
             this.size = data.Size;
             this.constructionSE = AssetDatabase.LoadAssetAtPath<AudioClip>($"Assets/HK/AutoAnt/DataSources/SE/{data.Constructionse}.mp3");
