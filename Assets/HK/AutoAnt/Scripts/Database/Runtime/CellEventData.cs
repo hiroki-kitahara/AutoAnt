@@ -16,8 +16,12 @@ int id;
 public int Id { get {return id; } set { id = value;} }
 
 [SerializeField]
-string celleventtype;
-public string Celleventtype { get {return celleventtype; } set { celleventtype = value;} }
+string classname;
+public string Classname { get {return classname; } set { classname = value;} }
+
+[SerializeField]
+string category;
+public string Category { get {return category; } set { category = value;} }
 
 [SerializeField]
 string condition;

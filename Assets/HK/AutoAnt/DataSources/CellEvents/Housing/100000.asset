@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f516f9fbb86244f0fa699dfa4100160a, type: 3}
   m_Name: 100000
   m_EditorClassIdentifier: 
+  category: 0
   condition: {fileID: 11400000, guid: 4c0900e2970f54676923b8814d79aff7, type: 2}
   size: 1
   constructionSE: {fileID: 8300000, guid: 0468cadb0012c46d2a975df3af8b8038, type: 3}
@@ -22,5 +23,4 @@ MonoBehaviour:
     type: 3}
   gimmickPrefab: {fileID: 1696405967700200454, guid: 81339a340327d4660946cc3c5dee835b,
     type: 3}
-  BasePopulationAmount: 10
   CurrentPopulation: 0
