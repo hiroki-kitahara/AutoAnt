@@ -13,6 +13,7 @@ using UniRx;
 /// </summary>
 public partial class SROptions
 {
+    [Sort(1000)]
     [Category("Game")]
     [DisplayName("生成する建設物のID")]
     public int ChangeCellEventGenerator
@@ -27,6 +28,7 @@ public partial class SROptions
         }
     }
 
+    [Sort(1000)]
     [Category("Game")]
     [DisplayName("ポップアップテスト")]
     public void SimplePopupText()
@@ -37,6 +39,34 @@ public partial class SROptions
 
         popup.Broker.Receive<PopupEvents.Response>()
             .Subscribe(x => Debug.Log(x.Result));
+    }
+
+    private int addCellRange = 5;
+    [Sort(1000)]
+    [Category("Game/Cell")]
+    [DisplayName("追加するセル範囲")]
+    public int AddCellRange { get { return this.addCellRange; } set { this.addCellRange = value; } }
+
+    [Sort(1001)]
+    [Category("Game/Cell")]
+    [DisplayName("セル追加")]
+    public void InvokeAddCellRange()
+    {
+        const int grasslandId = 100100;
+        var cellManager = GameSystem.Instance.CellManager;
+        cellManager.Mapper.GetRange(Vector2Int.zero, this.addCellRange, (id) =>
+        {
+            if(cellManager.Mapper.Cell.Map.ContainsKey(id))
+            {
+                cellManager.CellGenerator.Replace(grasslandId, id);
+            }
+            else
+            {
+                cellManager.CellGenerator.Generate(grasslandId, id);
+            }
+
+            return true;
+        });
     }
 }
 // #endif
