@@ -56,7 +56,7 @@ public partial class SROptions
         var cellManager = GameSystem.Instance.CellManager;
         cellManager.Mapper.GetRange(Vector2Int.zero, this.addCellRange, (id) =>
         {
-            if(cellManager.Mapper.Cell.Map.ContainsKey(id))
+            if (cellManager.Mapper.Cell.Map.ContainsKey(id))
             {
                 cellManager.CellGenerator.Replace(grasslandId, id);
             }
@@ -68,5 +68,28 @@ public partial class SROptions
             return true;
         });
     }
+
+    [Sort(1002)]
+    [Category("Game/Cell")]
+    [DisplayName("住宅追加")]
+    public void InvokeAddCellEventHousing()
+    {
+        const int housingId = 100000;
+        var cellManager = GameSystem.Instance.CellManager;
+        cellManager.Mapper.GetRange(Vector2Int.zero, this.addCellRange, (id) =>
+        {
+            var cell = cellManager.Mapper.Cell.Map[id];
+            if (cellManager.Mapper.CellEvent.Map.ContainsKey(id))
+            {
+                cellManager.EventGenerator.Erase(cell);
+            }
+
+            cellManager.EventGenerator.Generate(cell, housingId, false);
+
+            return true;
+        });
+    }
+
+
 }
 // #endif
