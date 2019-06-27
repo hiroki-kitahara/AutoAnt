@@ -9,7 +9,7 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
     /// <remarks>
     /// このクラスは特になにもやらないけどセルイベントと対の存在になるイメージで作成しています
     /// </remarks>
-    public class CellEventGameObject : MonoBehaviour
+    public class CellEventGimmick : MonoBehaviour
     {
     }
 }

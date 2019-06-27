@@ -40,7 +40,7 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// <see cref="CellGimmickController"/>を生成する
         /// </summary>
-        CellEventGameObject CreateGimmickController(Vector2Int origin);
+        CellEventGimmick CreateGimmickController(Vector2Int origin);
 
         /// <summary>
         /// 作成可能か返す
