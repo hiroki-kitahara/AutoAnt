@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HK.AutoAnt.CellControllers.Gimmicks;
 using HK.AutoAnt.Database;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.Systems;
@@ -58,6 +59,7 @@ namespace HK.AutoAnt.CellControllers.Events
                     if(_this.productTimer >= _this.levelParameter.NeedProductTime)
                     {
                         _this.products.Add(_this.levelParameter.ProductName);
+                        _this.Broker.Publish(AddedFacilityProduct.Get(_this));
                         _this.productTimer = 0.0f;
                     }
                 })
