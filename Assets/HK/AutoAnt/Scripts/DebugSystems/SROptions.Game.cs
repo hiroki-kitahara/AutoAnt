@@ -90,6 +90,27 @@ public partial class SROptions
         });
     }
 
+    [Sort(1003)]
+    [Category("Game/Cell")]
+    [DisplayName("商業追加")]
+    public void InvokeAddCellEventFacility()
+    {
+        const int facilityId = 101000;
+        var cellManager = GameSystem.Instance.CellManager;
+        cellManager.Mapper.GetRange(Vector2Int.zero, this.addCellRange, (id) =>
+        {
+            var cell = cellManager.Mapper.Cell.Map[id];
+            if (cellManager.Mapper.CellEvent.Map.ContainsKey(id))
+            {
+                cellManager.EventGenerator.Erase(cell);
+            }
+
+            cellManager.EventGenerator.Generate(cell, facilityId, false);
+
+            return true;
+        });
+    }
+
 
 }
 // #endif
