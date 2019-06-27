@@ -50,6 +50,8 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public Vector2Int Origin { get; protected set; }
 
+        public readonly IMessageBroker Broker = new MessageBroker();
+
         /// <summary>
         /// 実体が持つイベント
         /// </summary>
@@ -98,7 +100,7 @@ namespace HK.AutoAnt.CellControllers.Events
                 effect.transform.localScale = Vector3.one * record.EventData.size;
             }
 
-            Broker.Global.Publish(AddedCellEvent.Get(this));
+            Framework.EventSystems.Broker.Global.Publish(AddedCellEvent.Get(this));
         }
 
         public virtual void Remove(GameSystem gameSystem)
@@ -117,7 +119,7 @@ namespace HK.AutoAnt.CellControllers.Events
             effect.transform.position = this.gimmick.transform.position;
             effect.transform.localScale = Vector3.one * record.EventData.size;
 
-            Broker.Global.Publish(RemovedCellEvent.Get(this));
+            Framework.EventSystems.Broker.Global.Publish(RemovedCellEvent.Get(this));
 
             Destroy(this.gimmick.gameObject);
         }
