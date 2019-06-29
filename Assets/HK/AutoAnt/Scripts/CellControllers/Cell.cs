@@ -31,8 +31,6 @@ namespace HK.AutoAnt.CellControllers
 
         public Transform CachedTransform{ get; private set; }
 
-        private CellGimmickController gimmickController;
-
         void Awake()
         {
             this.CachedTransform = this.transform;
@@ -77,17 +75,6 @@ namespace HK.AutoAnt.CellControllers
             }
 
             this.cellMapper.CellEvent.Map[this.Position].OnClick(this);
-        }
-
-        private void DestroyGimmickController()
-        {
-            if(this.gimmickController == null)
-            {
-                return;
-            }
-
-            Destroy(this.gimmickController.gameObject);
-            this.gimmickController = null;
         }
     }
 }
