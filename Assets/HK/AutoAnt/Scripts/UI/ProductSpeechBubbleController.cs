@@ -13,7 +13,10 @@ namespace HK.AutoAnt.UI
     public sealed class ProductSpeechBubbleController : MonoBehaviour
     {
         [SerializeField]
-        private ProductSpeechBubbleElement elementPrefab;
+        private ProductSpeechBubbleElement elementPrefab = null;
+
+        [SerializeField]
+        private Canvas canvas = null;
 
         void Awake()
         {
@@ -21,7 +24,7 @@ namespace HK.AutoAnt.UI
                 .Where(x => x.CellEvent is Facility)
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    Instantiate(_this.elementPrefab, _this.transform, false).Initialize(x.CellEvent as Facility);
+                    Instantiate(_this.elementPrefab, _this.transform, false).Initialize(x.CellEvent as Facility, this, this.canvas);
                 })
                 .AddTo(this);
         }

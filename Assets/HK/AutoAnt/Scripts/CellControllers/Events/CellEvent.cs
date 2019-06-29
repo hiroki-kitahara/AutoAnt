@@ -57,7 +57,7 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         protected readonly CompositeDisposable instanceEvents = new CompositeDisposable();
 
-        protected GameObject gimmick;
+        public GameObject Gimmick { get; protected set; }
 
         public virtual GameObject CreateGimmickController(Vector2Int origin)
         {
@@ -87,9 +87,9 @@ namespace HK.AutoAnt.CellControllers.Events
             // 自分自身のマスターデータを取得してデータを参照している
             // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
             var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
-            this.gimmick = record.EventData.CreateGimmickController(this.Origin);
+            this.Gimmick = record.EventData.CreateGimmickController(this.Origin);
 
-            foreach(var g in this.gimmick.GetComponentsInChildren<ICellEventGimmick>())
+            foreach(var g in this.Gimmick.GetComponentsInChildren<ICellEventGimmick>())
             {
                 g.Attach(this);
             }
@@ -101,7 +101,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
                 Assert.IsNotNull(record.EventData.constructionEffect, $"Id = {this.Id}の建設時のエフェクト生成に失敗しました");
                 var effect = record.EventData.constructionEffect.Rent();
-                effect.transform.position = this.gimmick.transform.position;
+                effect.transform.position = this.Gimmick.transform.position;
                 effect.transform.localScale = Vector3.one * record.EventData.size;
             }
 
@@ -121,12 +121,12 @@ namespace HK.AutoAnt.CellControllers.Events
 
             Assert.IsNotNull(record.EventData.destructionEffect, $"Id = {this.Id}の破壊時のエフェクト生成に失敗しました");
             var effect = record.EventData.destructionEffect.Rent();
-            effect.transform.position = this.gimmick.transform.position;
+            effect.transform.position = this.Gimmick.transform.position;
             effect.transform.localScale = Vector3.one * record.EventData.size;
 
             Framework.EventSystems.Broker.Global.Publish(RemovedCellEvent.Get(this));
 
-            Destroy(this.gimmick.gameObject);
+            Destroy(this.Gimmick.gameObject);
         }
 
         public bool CanGenerate(Cell origin, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper)
