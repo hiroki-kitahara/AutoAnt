@@ -16,6 +16,11 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
 
         public void Attach(CellEvent cellEvent)
         {
+            var productHolder = cellEvent as IProductHolder;
+            Assert.IsNotNull(productHolder);
+
+            this.target.SetActive(productHolder.Products.Count > 0);
+
             cellEvent.Broker.Receive<AddedFacilityProduct>()
                 .SubscribeWithState(this, (_, _this) =>
                 {
@@ -29,8 +34,6 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
                     _this.target.SetActive(false);
                 })
                 .AddTo(this);
-
-            this.target.SetActive(false);
         }
     }
 }
