@@ -89,6 +89,11 @@ namespace HK.AutoAnt.CellControllers.Events
             var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
             this.gimmick = record.EventData.CreateGimmickController(this.Origin);
 
+            foreach(var g in this.gimmick.GetComponentsInChildren<ICellEventGimmick>())
+            {
+                g.Attach(this);
+            }
+
             if(!isInitializingGame)
             {
                 Assert.IsNotNull(record.EventData.constructionSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");

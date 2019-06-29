@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using HK.AutoAnt.CellControllers.Events;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.CellControllers.Gimmicks
@@ -8,5 +9,9 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
     /// </summary>
     public interface ICellEventGimmick
     {
+        /// <summary>
+        /// 自分自身がセルイベントにアタッチされた際の処理
+        /// </summary>
+        void Attach(CellEvent cellEvent);
     }
 }
