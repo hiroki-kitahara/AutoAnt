@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using HK.AutoAnt.Database;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.UI
@@ -12,7 +13,7 @@ namespace HK.AutoAnt.UI
         private GameObject root = null;
 
         [SerializeField]
-        private GameObject selectBuilding = null;
+        private FooterSelectBuildingController selectBuilding = null;
 
         void Awake()
         {
@@ -25,16 +26,17 @@ namespace HK.AutoAnt.UI
             this.root.SetActive(true);
         }
 
-        public void ShowSelectBuilding()
+        public void ShowSelectBuilding(MasterDataCellEvent.Record[] records)
         {
             this.AllHide();
-            this.selectBuilding.SetActive(true);
+            this.selectBuilding.gameObject.SetActive(true);
+            this.selectBuilding.SetData(records);
         }
 
         private void AllHide()
         {
             this.root.SetActive(false);
-            this.selectBuilding.SetActive(false);
+            this.selectBuilding.gameObject.SetActive(false);
         }
     }
 }

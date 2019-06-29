@@ -1,4 +1,7 @@
-﻿using UniRx;
+﻿using System.Linq;
+using HK.AutoAnt.Extensions;
+using HK.AutoAnt.Systems;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
@@ -11,20 +14,25 @@ namespace HK.AutoAnt.UI
     public sealed class FooterShowSelectBuildingButtonController : MonoBehaviour
     {
         [SerializeField]
-        private Button button;
+        private Button button = null;
 
         [SerializeField]
-        private FooterController footerController;
+        private FooterController footerController = null;
 
         [SerializeField]
-        private Constants.CellEventCategory showCategory;
+        private Constants.CellEventCategory showCategory = Constants.CellEventCategory.Housing;
 
         void Awake()
         {
             this.button.OnClickAsObservable()
                 .SubscribeWithState(this, (_, _this) =>
                 {
-                    _this.footerController.ShowSelectBuilding();
+                    var records = GameSystem.Instance.User.UnlockCellEvent.Elements
+                        .Select(id => GameSystem.Instance.MasterData.CellEvent.Records.Get(id))
+                        .Where(r => r.EventData.Category == this.showCategory)
+                        .ToArray();
+
+                    _this.footerController.ShowSelectBuilding(records);
                 })
                 .AddTo(this);
         }
