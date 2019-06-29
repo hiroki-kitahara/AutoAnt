@@ -32,8 +32,28 @@ namespace HK.AutoAnt.InputControllers
         private Dictionary<InputMode, InputMode> modeRotation = new Dictionary<InputMode, InputMode>();
         private Dictionary<InputMode, Action> modeActions = new Dictionary<InputMode, Action>();
 
+        private ClickToClickableObjectActions cachedClickToClickableObjectActions;
+
+        private GenerateCellEventActions cachedGenerateCellEventActions;
+
+        private EraseCellEventActions cachedEraseCellEventActions;
+
+        private DevelopCellActions cachedDevelopCellActions;
+
         void Awake()
         {
+            this.cachedClickToClickableObjectActions = new ClickToClickableObjectActions(this.gameCameraController);
+            this.cachedGenerateCellEventActions = new GenerateCellEventActions(this.cellManager.EventGenerator, this.gameCameraController);
+            this.cachedEraseCellEventActions = new EraseCellEventActions(this.cellManager.EventGenerator, this.cellManager.Mapper, this.gameCameraController);
+            this.cachedDevelopCellActions = new DevelopCellActions(
+                GameSystem.Instance,
+                this.cellManager.CellGenerator,
+                this.cellManager.Mapper,
+                100100,
+                100000,
+                1,
+                this.gameCameraController
+                );
 
             ModeRotationInitialize();
             ModeActionInitialize();
@@ -50,7 +70,7 @@ namespace HK.AutoAnt.InputControllers
             Broker.Global.Receive<RequestBuildingMode>()
                 .SubscribeWithState(this, (_, _this) =>
                 {
-                    this.inputActions = new GenerateCellEventActions(this.cellManager.EventGenerator, this.gameCameraController);
+                    _this.inputActions = _this.cachedGenerateCellEventActions;
                 })
                 .AddTo(this);
 
@@ -153,34 +173,25 @@ namespace HK.AutoAnt.InputControllers
             // クリックモード時の挙動
             modeActions[InputMode.ClickMode] = () =>
             {
-                this.inputActions = new ClickToClickableObjectActions(this.gameCameraController);
+                this.inputActions = this.cachedClickToClickableObjectActions;
             };
 
             // 建設モード時の挙動
             modeActions[InputMode.BuildMode] = () =>
             {
-                this.inputActions = new GenerateCellEventActions(this.cellManager.EventGenerator, this.gameCameraController);
+                this.inputActions = this.cachedGenerateCellEventActions;
             };
 
             // 解体モード時の挙動
             modeActions[InputMode.DismantleMode] = () =>
             {
-                this.inputActions = new EraseCellEventActions(this.cellManager.EventGenerator, this.cellManager.Mapper, this.gameCameraController);
+                this.inputActions = this.cachedEraseCellEventActions;
             };
 
             // 開拓モード時の挙動
             modeActions[InputMode.ExploringMode] = () =>
             {
-                this.inputActions = new DevelopCellActions(
-                    GameSystem.Instance,
-                    this.cellManager.CellGenerator,
-                    this.cellManager.Mapper,
-                    100100,
-                    100000,
-                    1,
-                    this.gameCameraController
-                    );
-
+                this.inputActions = this.cachedDevelopCellActions;
             };
         }
     }
