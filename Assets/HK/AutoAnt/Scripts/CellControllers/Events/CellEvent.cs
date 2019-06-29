@@ -44,7 +44,7 @@ namespace HK.AutoAnt.CellControllers.Events
         protected PoolableEffect destructionEffect = null;
 
         [SerializeField]
-        protected CellEventGimmick gimmickPrefab = null;
+        protected GameObject gimmickPrefab = null;
 
         public int Id => int.Parse(this.name);
 
@@ -57,9 +57,9 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         protected readonly CompositeDisposable instanceEvents = new CompositeDisposable();
 
-        protected CellEventGimmick gimmick;
+        protected GameObject gimmick;
 
-        public virtual CellEventGimmick CreateGimmickController(Vector2Int origin)
+        public virtual GameObject CreateGimmickController(Vector2Int origin)
         {
             var gimmick = Instantiate(this.gimmickPrefab);
             var constants = GameSystem.Instance.Constants.Cell;
@@ -199,7 +199,7 @@ namespace HK.AutoAnt.CellControllers.Events
             this.destructionSE = AssetDatabase.LoadAssetAtPath<AudioClip>($"Assets/HK/AutoAnt/DataSources/SE/{data.Destructionse}.mp3");
             this.constructionEffect = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Effects/{data.Constructioneffect}.prefab").GetComponent<PoolableEffect>();
             this.destructionEffect = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Effects/{data.Destructioneffect}.prefab").GetComponent<PoolableEffect>();
-            this.gimmickPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/CellEvent/{data.Gimmickprefab}.prefab").GetComponent<CellEventGimmick>();
+            this.gimmickPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/CellEvent/{data.Gimmickprefab}.prefab");
         }
 #endif
     }

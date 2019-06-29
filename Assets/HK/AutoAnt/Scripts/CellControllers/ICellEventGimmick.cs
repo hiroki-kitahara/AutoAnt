@@ -4,12 +4,9 @@ using UnityEngine.Assertions;
 namespace HK.AutoAnt.CellControllers.Gimmicks
 {
     /// <summary>
-    /// セルイベントの3D空間上に存在するオブジェクトを制御するクラス
+    /// セルイベントの3D空間上に存在するオブジェクトで各イベントに対して色々処理を行うインターフェイス
     /// </summary>
-    /// <remarks>
-    /// このクラスは特になにもやらないけどセルイベントと対の存在になるイメージで作成しています
-    /// </remarks>
-    public sealed class CellEventGimmick : MonoBehaviour
+    public interface ICellEventGimmick
     {
     }
 }
