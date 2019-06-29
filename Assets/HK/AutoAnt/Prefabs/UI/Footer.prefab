@@ -298,6 +298,21 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4638717542655331933, guid: 588310625aafc4f0db6db4133aec6ae0,
+        type: 3}
+      propertyPath: footerController
+      value: 
+      objectReference: {fileID: 6857379899369204853}
+    - target: {fileID: 6235744141743347196, guid: 588310625aafc4f0db6db4133aec6ae0,
+        type: 3}
+      propertyPath: footerController
+      value: 
+      objectReference: {fileID: 6857379899369204853}
+    - target: {fileID: 7979755187499174012, guid: 588310625aafc4f0db6db4133aec6ae0,
+        type: 3}
+      propertyPath: footerController
+      value: 
+      objectReference: {fileID: 6857379899369204853}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 588310625aafc4f0db6db4133aec6ae0, type: 3}
 --- !u!1 &4123329706413053605 stripped
@@ -482,7 +497,7 @@ PrefabInstance:
     - target: {fileID: 813983863355073640, guid: 2cea81e929532413a9c899e51322ffce,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000022894481
+      value: -0.000026505259
       objectReference: {fileID: 0}
     - target: {fileID: 4574756797562042660, guid: 2cea81e929532413a9c899e51322ffce,
         type: 3}

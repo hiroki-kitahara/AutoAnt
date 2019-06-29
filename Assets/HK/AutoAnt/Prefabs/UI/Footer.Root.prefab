@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 8700694815452463471}
   - component: {fileID: 3220853669209379110}
   - component: {fileID: 7682171216256123329}
+  - component: {fileID: 4638717542655331933}
   m_Layer: 5
   m_Name: HousingButton
   m_TagString: Untagged
@@ -279,6 +280,21 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &4638717542655331933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264225072044516442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65f97649a8c04725ba346d7f27fe6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 7682171216256123329}
+  footerController: {fileID: 0}
+  showCategory: 0
 --- !u!1 &1318519600491797578
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,6 +307,7 @@ GameObject:
   - component: {fileID: 398774630514336222}
   - component: {fileID: 7429516295377676129}
   - component: {fileID: 6261627620820364918}
+  - component: {fileID: 6235744141743347196}
   m_Layer: 5
   m_Name: FarmButton
   m_TagString: Untagged
@@ -397,6 +414,21 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &6235744141743347196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318519600491797578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65f97649a8c04725ba346d7f27fe6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 6261627620820364918}
+  footerController: {fileID: 0}
+  showCategory: 1
 --- !u!1 &1884983733868643331
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +541,7 @@ GameObject:
   - component: {fileID: 1354957479773121000}
   - component: {fileID: 5427295929237463053}
   m_Layer: 5
-  m_Name: Footer
+  m_Name: Footer.Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -555,6 +587,7 @@ GameObject:
   - component: {fileID: 230202818826428943}
   - component: {fileID: 5966007197278307577}
   - component: {fileID: 4922229650381289045}
+  - component: {fileID: 7979755187499174012}
   m_Layer: 5
   m_Name: FactoryButton
   m_TagString: Untagged
@@ -661,6 +694,21 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &7979755187499174012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3943656817852621780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65f97649a8c04725ba346d7f27fe6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 4922229650381289045}
+  footerController: {fileID: 0}
+  showCategory: 2
 --- !u!1 &4288851788281237823
 GameObject:
   m_ObjectHideFlags: 0
