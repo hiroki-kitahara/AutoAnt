@@ -10,7 +10,7 @@ namespace HK.AutoAnt.CellControllers.Events
     /// クリックでお金を取得するセルイベント
     /// </summary>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/AcquireMoneyOnClick")]
-    public sealed class AcquireMoneyOnClick : CellEventBlankGimmick
+    public sealed class AcquireMoneyOnClick : CellEvent
     {
         /// <summary>
         /// 取得できる量
