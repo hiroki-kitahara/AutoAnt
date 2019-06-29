@@ -23,6 +23,13 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
                 })
                 .AddTo(this);
 
+            cellEvent.Broker.Receive<AcquiredFacilityProduct>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.target.SetActive(false);
+                })
+                .AddTo(this);
+
             this.target.SetActive(false);
         }
     }
