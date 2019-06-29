@@ -48,6 +48,7 @@ namespace HK.AutoAnt.UI
             clone.pool = pool;
 
             clone.text.text = record.Id.ToString();
+            clone.record = record;
 
             return clone;
         }
