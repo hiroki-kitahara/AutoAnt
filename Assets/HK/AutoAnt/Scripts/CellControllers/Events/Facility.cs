@@ -53,7 +53,7 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// 生産したアイテムのリスト
         /// </summary>
-        public readonly List<string> Products = new List<string>();
+        public List<string> Products { get; private set; } = new List<string>();
 
         public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
         {
