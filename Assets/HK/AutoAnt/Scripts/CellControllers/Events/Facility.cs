@@ -150,6 +150,8 @@ namespace HK.AutoAnt.CellControllers.Events
             }
 
             this.Products.Clear();
+
+            this.Broker.Publish(AcquiredFacilityProduct.Get(this));
         }
     }
 }
