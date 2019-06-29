@@ -6,9 +6,9 @@ using UnityEngine.UI;
 namespace HK.AutoAnt.UI
 {
     /// <summary>
-    /// フッターメニューの住宅ボタンを制御するクラス
+    /// フッターメニューの建設ボタンを制御するクラス
     /// </summary>
-    public sealed class SelectBuildingButtonController : MonoBehaviour
+    public sealed class FooterShowSelectBuildingButtonController : MonoBehaviour
     {
         [SerializeField]
         private Button button;
