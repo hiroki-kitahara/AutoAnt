@@ -3,6 +3,10 @@ using HK.Framework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UniRx;
+using UnityEngine.UI;
+using HK.Framework.EventSystems;
+using HK.AutoAnt.Events;
 
 namespace HK.AutoAnt.UI
 {
@@ -13,10 +17,29 @@ namespace HK.AutoAnt.UI
     {
         [SerializeField]
         private TextMeshProUGUI text = null;
-        
+
+        [SerializeField]
+        private Button button = null;
+
         private readonly ObjectPoolBundle<FooterSelectBuildingElement> pools = new ObjectPoolBundle<FooterSelectBuildingElement>();
 
         private ObjectPool<FooterSelectBuildingElement> pool;
+
+        private MasterDataCellEvent.Record record;
+
+        void Awake()
+        {
+            Assert.IsNotNull(this.button);
+
+            this.button.OnClickAsObservable()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    Assert.IsNotNull(_this.record);
+
+                    Broker.Global.Publish(RequestBuildingMode.Get(_this.record.Id));
+                })
+                .AddTo(this);
+        }
 
         public FooterSelectBuildingElement Clone(MasterDataCellEvent.Record record)
         {
