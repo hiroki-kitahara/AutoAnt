@@ -42,19 +42,6 @@ namespace HK.AutoAnt.InputControllers
 
         void Awake()
         {
-            this.cachedClickToClickableObjectActions = new ClickToClickableObjectActions(this.gameCameraController);
-            this.cachedGenerateCellEventActions = new GenerateCellEventActions(this.cellManager.EventGenerator, this.gameCameraController);
-            this.cachedEraseCellEventActions = new EraseCellEventActions(this.cellManager.EventGenerator, this.cellManager.Mapper, this.gameCameraController);
-            this.cachedDevelopCellActions = new DevelopCellActions(
-                GameSystem.Instance,
-                this.cellManager.CellGenerator,
-                this.cellManager.Mapper,
-                100100,
-                100000,
-                1,
-                this.gameCameraController
-                );
-
             ModeRotationInitialize();
             ModeActionInitialize();
 
@@ -71,6 +58,13 @@ namespace HK.AutoAnt.InputControllers
                 .SubscribeWithState(this, (_, _this) =>
                 {
                     _this.inputActions = _this.cachedGenerateCellEventActions;
+                })
+                .AddTo(this);
+
+            Broker.Global.Receive<RequestClickMode>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.inputActions = _this.cachedClickToClickableObjectActions;
                 })
                 .AddTo(this);
 
@@ -110,6 +104,22 @@ namespace HK.AutoAnt.InputControllers
                     _this.inputActions.ScrollAction.Do(x.Data);
                 })
                 .AddTo(this);
+        }
+
+        void Start()
+        {
+            this.cachedClickToClickableObjectActions = new ClickToClickableObjectActions(this.gameCameraController);
+            this.cachedGenerateCellEventActions = new GenerateCellEventActions(this.cellManager.EventGenerator, this.gameCameraController);
+            this.cachedEraseCellEventActions = new EraseCellEventActions(this.cellManager.EventGenerator, this.cellManager.Mapper, this.gameCameraController);
+            this.cachedDevelopCellActions = new DevelopCellActions(
+                GameSystem.Instance,
+                this.cellManager.CellGenerator,
+                this.cellManager.Mapper,
+                100100,
+                100000,
+                1,
+                this.gameCameraController
+                );
         }
 
         void Update()

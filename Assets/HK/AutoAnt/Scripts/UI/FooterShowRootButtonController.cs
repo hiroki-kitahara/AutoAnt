@@ -1,4 +1,6 @@
-﻿using UniRx;
+﻿using HK.AutoAnt.Events;
+using HK.Framework.EventSystems;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
@@ -22,6 +24,7 @@ namespace HK.AutoAnt.UI
                 .SubscribeWithState(this, (_, _this) =>
                 {
                     _this.footerController.ShowRoot();
+                    Broker.Global.Publish(RequestClickMode.Get());
                 })
                 .AddTo(this);
         }
