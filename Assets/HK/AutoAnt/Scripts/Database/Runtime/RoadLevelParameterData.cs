@@ -24,8 +24,8 @@ int impactrange;
 public int Impactrange { get {return impactrange; } set { impactrange = value;} }
 
 [SerializeField]
-float effectrate;
-public float Effectrate { get {return effectrate; } set { effectrate = value;} }
+float addbuff;
+public float Addbuff { get {return addbuff; } set { addbuff = value;} }
 
     }
 }

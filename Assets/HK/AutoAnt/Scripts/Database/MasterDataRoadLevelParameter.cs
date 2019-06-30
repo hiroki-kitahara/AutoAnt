@@ -38,8 +38,8 @@ namespace HK.AutoAnt.Database
             /// バフの倍率
             /// </summary>
             [SerializeField]
-            private float effectRate = 0.0f;
-            public float EffectRate => this.effectRate;
+            private float addBuff = 0.0f;
+            public float AddBuff => this.addBuff;
 
 #if UNITY_EDITOR
             public Record(SpreadSheetData.RoadLevelParameterData data)
@@ -47,7 +47,7 @@ namespace HK.AutoAnt.Database
                 this.id = data.Id;
                 this.level = data.Level;
                 this.impactRange = data.Impactrange;
-                this.effectRate = data.Effectrate;
+                this.addBuff = data.Addbuff;
             }
 #endif
         }
