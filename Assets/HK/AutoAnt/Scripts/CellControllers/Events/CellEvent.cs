@@ -43,18 +43,35 @@ namespace HK.AutoAnt.CellControllers.Events
         [SerializeField]
         protected PoolableEffect destructionEffect = null;
 
+        [SerializeField]
+        protected GameObject gimmickPrefab = null;
+
         public int Id => int.Parse(this.name);
 
         public Vector2Int Origin { get; protected set; }
+
+        public readonly IMessageBroker Broker = new MessageBroker();
 
         /// <summary>
         /// 実体が持つイベント
         /// </summary>
         protected readonly CompositeDisposable instanceEvents = new CompositeDisposable();
 
-        protected CellGimmickController gimmick;
+        protected GameObject gimmick;
 
-        public abstract CellGimmickController CreateGimmickController(Vector2Int origin);
+        public virtual GameObject CreateGimmickController(Vector2Int origin)
+        {
+            var gimmick = Instantiate(this.gimmickPrefab);
+            var constants = GameSystem.Instance.Constants.Cell;
+            var position = new Vector3(origin.x * (constants.Scale.x + constants.Interval), 0.0f, origin.y * (constants.Scale.z + constants.Interval));
+            var fixedSize = this.size - 1;
+            position += new Vector3((constants.Scale.x / 2.0f) * fixedSize, 0.0f, (constants.Scale.z / 2.0f) * fixedSize);
+            position += new Vector3(constants.Interval * fixedSize, constants.Scale.y, constants.Interval * fixedSize);
+            gimmick.transform.position = position;
+            gimmick.transform.localScale = constants.EffectScale * this.size + (Vector3.one * (constants.Interval * fixedSize));
+
+            return gimmick;
+        }
 
 #if UNITY_EDITOR
         protected virtual void OnValidate()
@@ -72,6 +89,11 @@ namespace HK.AutoAnt.CellControllers.Events
             var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
             this.gimmick = record.EventData.CreateGimmickController(this.Origin);
 
+            foreach(var g in this.gimmick.GetComponentsInChildren<ICellEventGimmick>())
+            {
+                g.Attach(this);
+            }
+
             if(!isInitializingGame)
             {
                 Assert.IsNotNull(record.EventData.constructionSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
@@ -83,7 +105,7 @@ namespace HK.AutoAnt.CellControllers.Events
                 effect.transform.localScale = Vector3.one * record.EventData.size;
             }
 
-            Broker.Global.Publish(AddedCellEvent.Get(this));
+            Framework.EventSystems.Broker.Global.Publish(AddedCellEvent.Get(this));
         }
 
         public virtual void Remove(GameSystem gameSystem)
@@ -102,7 +124,7 @@ namespace HK.AutoAnt.CellControllers.Events
             effect.transform.position = this.gimmick.transform.position;
             effect.transform.localScale = Vector3.one * record.EventData.size;
 
-            Broker.Global.Publish(RemovedCellEvent.Get(this));
+            Framework.EventSystems.Broker.Global.Publish(RemovedCellEvent.Get(this));
 
             Destroy(this.gimmick.gameObject);
         }
@@ -182,6 +204,7 @@ namespace HK.AutoAnt.CellControllers.Events
             this.destructionSE = AssetDatabase.LoadAssetAtPath<AudioClip>($"Assets/HK/AutoAnt/DataSources/SE/{data.Destructionse}.mp3");
             this.constructionEffect = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Effects/{data.Constructioneffect}.prefab").GetComponent<PoolableEffect>();
             this.destructionEffect = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Effects/{data.Destructioneffect}.prefab").GetComponent<PoolableEffect>();
+            this.gimmickPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/CellEvent/{data.Gimmickprefab}.prefab");
         }
 #endif
     }
