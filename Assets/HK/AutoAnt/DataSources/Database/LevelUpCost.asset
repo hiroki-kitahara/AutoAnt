@@ -32,17 +32,17 @@ MonoBehaviour:
     level: 3
     cost:
       money: 250
+      needItems: []
+  - id: 100000
+    level: 4
+    cost:
+      money: 300
       needItems:
       - itemName:
           target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
           value: "\u30A2\u30A4\u30C6\u30E01"
           guid: 2529d8c5-7d90-4263-bf83-5488875c491f
         amount: 20
-  - id: 100000
-    level: 4
-    cost:
-      money: 300
-      needItems: []
   - id: 101000
     level: 0
     cost:
@@ -64,6 +64,56 @@ MonoBehaviour:
       money: 250
       needItems: []
   - id: 101000
+    level: 4
+    cost:
+      money: 300
+      needItems: []
+  - id: 102000
+    level: 0
+    cost:
+      money: 100
+      needItems: []
+  - id: 102000
+    level: 1
+    cost:
+      money: 150
+      needItems: []
+  - id: 102000
+    level: 2
+    cost:
+      money: 200
+      needItems: []
+  - id: 102000
+    level: 3
+    cost:
+      money: 250
+      needItems: []
+  - id: 102000
+    level: 4
+    cost:
+      money: 300
+      needItems: []
+  - id: 103000
+    level: 0
+    cost:
+      money: 100
+      needItems: []
+  - id: 103000
+    level: 1
+    cost:
+      money: 150
+      needItems: []
+  - id: 103000
+    level: 2
+    cost:
+      money: 200
+      needItems: []
+  - id: 103000
+    level: 3
+    cost:
+      money: 250
+      needItems: []
+  - id: 103000
     level: 4
     cost:
       money: 300
