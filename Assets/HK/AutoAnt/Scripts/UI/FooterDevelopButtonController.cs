@@ -11,7 +11,7 @@ namespace HK.AutoAnt.UI
     /// <summary>
     /// フッターメニューの開拓ボタンを制御するクラス
     /// </summary>
-    public sealed class FooterDevelopmentButtonController : MonoBehaviour
+    public sealed class FooterDevelopButtonController : MonoBehaviour
     {
         [SerializeField]
         private Button button = null;
