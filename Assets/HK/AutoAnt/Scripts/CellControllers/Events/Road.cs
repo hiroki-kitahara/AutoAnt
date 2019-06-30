@@ -17,7 +17,7 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - 周りのセルイベントの効果を上昇させる
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Road")]
-    public sealed class Road : CellEventBlankGimmick, ILevelUpEvent
+    public sealed class Road : CellEvent, ILevelUpEvent
     {
         /// <summary>
         /// レベル
@@ -32,6 +32,7 @@ namespace HK.AutoAnt.CellControllers.Events
         public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
         {
             base.Initialize(position, gameSystem, isInitializingGame);
+            this.gameSystem = gameSystem;
         }
 
         public override void Remove(GameSystem gameSystem)

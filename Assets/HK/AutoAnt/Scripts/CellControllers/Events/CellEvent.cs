@@ -171,6 +171,8 @@ namespace HK.AutoAnt.CellControllers.Events
                     return CellEvent.InternalGetOrCreateAsset<Housing>(data);
                 case "Facility":
                     return CellEvent.InternalGetOrCreateAsset<Facility>(data);
+                case "Road":
+                    return CellEvent.InternalGetOrCreateAsset<Road>(data);
                 default:
                     Debug.LogError($"CellEventType = {data.Classname}は未対応の値です");
                     return null;

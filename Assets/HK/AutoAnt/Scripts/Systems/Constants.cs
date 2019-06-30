@@ -58,5 +58,10 @@ namespace HK.AutoAnt.Constants
         /// 工場
         /// </summary>
         Factory,
+
+        /// <summary>
+        /// 道路
+        /// </summary>
+        Road,
     }
 }
