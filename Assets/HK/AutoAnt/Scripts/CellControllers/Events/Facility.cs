@@ -24,7 +24,7 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - アイテムの生産
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Facility")]
-    public sealed class Facility : CellEvent, ILevelUpEvent
+    public sealed class Facility : CellEvent, ILevelUpEvent, IReceiveBuff
     {
         /// <summary>
         /// レベル
@@ -54,6 +54,10 @@ namespace HK.AutoAnt.CellControllers.Events
         /// 生産したアイテムのリスト
         /// </summary>
         public List<string> Products { get; private set; } = new List<string>();
+
+        public float Buff { get; private set; } = 0.0f;
+
+        private double Popularity => this.LevelParameter.Popularity * (1.0f + this.Buff);
 
         public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
         {
@@ -102,7 +106,7 @@ namespace HK.AutoAnt.CellControllers.Events
         public void LevelUp()
         {
             // レベルアップ前の人気度を減算する
-            var oldPopularity = this.LevelParameter.Popularity;
+            var oldPopularity = this.Popularity;
             this.gameSystem.User.Town.AddPopularity(-oldPopularity);
 
             this.LevelUp(this.gameSystem);
@@ -110,7 +114,7 @@ namespace HK.AutoAnt.CellControllers.Events
             this.LevelParameter = this.gameSystem.MasterData.FacilityLevelParameter.Records.Get(this.Id, this.Level);
 
             // レベルアップ後の人気度を加算する
-            var newPopularity = this.LevelParameter.Popularity;
+            var newPopularity = this.Popularity;
             this.gameSystem.User.Town.AddPopularity(newPopularity);
         }
 
@@ -150,6 +154,21 @@ namespace HK.AutoAnt.CellControllers.Events
             }
 
             this.Products.Clear();
+        }
+
+        void IReceiveBuff.AddBuff(float value)
+        {
+            var oldPopularity = this.Popularity;
+            this.gameSystem.User.Town.AddPopularity(-oldPopularity);
+
+            this.Buff += value;
+            if (this.Buff < 0.0f)
+            {
+                this.Buff = 0.0f;
+            }
+
+            var newPopularity = this.Popularity;
+            this.gameSystem.User.Town.AddPopularity(newPopularity);
         }
     }
 }
