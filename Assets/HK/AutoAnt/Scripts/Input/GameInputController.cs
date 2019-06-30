@@ -97,7 +97,17 @@ namespace HK.AutoAnt.InputControllers
                 GameSystem.Instance.CellManager.EventGenerator.RecordId = 101000;
                 Broker.Global.Publish(RequestNotification.Get($"建設するID = {GameSystem.Instance.CellManager.EventGenerator.RecordId}"));
             }
-            
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                GameSystem.Instance.CellManager.EventGenerator.RecordId = 102000;
+                Broker.Global.Publish(RequestNotification.Get($"建設するID = {GameSystem.Instance.CellManager.EventGenerator.RecordId}"));
+            }
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                GameSystem.Instance.CellManager.EventGenerator.RecordId = 103000;
+                Broker.Global.Publish(RequestNotification.Get($"建設するID = {GameSystem.Instance.CellManager.EventGenerator.RecordId}"));
+            }
+
             /*
             if (UnityEngine.Input.GetKeyDown(KeyCode.Q))
             {
