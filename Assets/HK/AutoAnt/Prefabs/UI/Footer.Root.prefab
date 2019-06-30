@@ -1044,6 +1044,7 @@ GameObject:
   - component: {fileID: 8817184853377642447}
   - component: {fileID: 8914431076791829424}
   - component: {fileID: 8599565946307558296}
+  - component: {fileID: 445438808411481290}
   m_Layer: 5
   m_Name: DevelopButton
   m_TagString: Untagged
@@ -1150,6 +1151,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &445438808411481290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5809245453933254627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de08224df59324624927f133dac5074c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 8599565946307558296}
+  footerController: {fileID: 0}
 --- !u!1 &8530495280410969216
 GameObject:
   m_ObjectHideFlags: 0
