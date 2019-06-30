@@ -8,6 +8,7 @@ using HK.AutoAnt.Extensions;
 using HK.AutoAnt.EffectSystems;
 using HK.Framework.EventSystems;
 using HK.AutoAnt.Events;
+using HK.AutoAnt.Database;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -150,6 +151,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
             // コストが満たしていない場合は生成できない
             var masterData = gameSystem.MasterData.LevelUpCost.Records.Get(cellEventRecordId, 0);
+            Assert.IsNotNull(masterData, $"CellEventRecordId = {cellEventRecordId}の{typeof(MasterDataLevelUpCost.Record)}がありませんでした");
             if(!masterData.Cost.IsEnough(gameSystem.User, gameSystem.MasterData.Item))
             {
                 return false;
