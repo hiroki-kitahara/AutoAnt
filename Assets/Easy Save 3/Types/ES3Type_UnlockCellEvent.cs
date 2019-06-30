@@ -3,18 +3,18 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("Elements")]
-	public class ES3Type_UnlockCellEvents : ES3ObjectType
+	[ES3PropertiesAttribute("elements")]
+	public class ES3Type_UnlockCellEvent : ES3ObjectType
 	{
 		public static ES3Type Instance = null;
 
-		public ES3Type_UnlockCellEvents() : base(typeof(HK.AutoAnt.UserControllers.UnlockCellEvent)){ Instance = this; }
+		public ES3Type_UnlockCellEvent() : base(typeof(HK.AutoAnt.UserControllers.UnlockCellEvent)){ Instance = this; }
 
 		protected override void WriteObject(object obj, ES3Writer writer)
 		{
 			var instance = (HK.AutoAnt.UserControllers.UnlockCellEvent)obj;
 			
-			writer.WritePrivateProperty("Elements", instance);
+			writer.WritePrivateField("elements", instance);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -25,8 +25,8 @@ namespace ES3Types
 				switch(propertyName)
 				{
 					
-					case "Elements":
-					reader.SetPrivateProperty("Elements", reader.Read<System.Collections.Generic.List<System.Int32>>(), instance);
+					case "elements":
+					reader.SetPrivateField("elements", reader.Read<System.Collections.Generic.List<System.Int32>>(), instance);
 					break;
 					default:
 						reader.Skip();
@@ -43,11 +43,11 @@ namespace ES3Types
 		}
 	}
 
-	public class ES3Type_UnlockCellEventsArray : ES3ArrayType
+	public class ES3Type_UnlockCellEventArray : ES3ArrayType
 	{
 		public static ES3Type Instance;
 
-		public ES3Type_UnlockCellEventsArray() : base(typeof(HK.AutoAnt.UserControllers.UnlockCellEvent[]), ES3Type_UnlockCellEvents.Instance)
+		public ES3Type_UnlockCellEventArray() : base(typeof(HK.AutoAnt.UserControllers.UnlockCellEvent[]), ES3Type_UnlockCellEvent.Instance)
 		{
 			Instance = this;
 		}

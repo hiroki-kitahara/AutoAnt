@@ -18,6 +18,8 @@ namespace HK.AutoAnt.UserControllers
         /// <summary>
         /// 生成可能なセルイベントリスト
         /// </summary>
-        public List<int> Elements { get; private set; } = new List<int>();
+        [SerializeField]
+        private List<int> elements = new List<int>();
+        public List<int> Elements => this.elements;
     }
 }

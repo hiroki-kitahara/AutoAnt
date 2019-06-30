@@ -529,6 +529,7 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   scriptingDefineSymbols:
+    4: AA_DEBUG
     13: AA_DEBUG
   platformArchitecture: {}
   scriptingBackend: {}
