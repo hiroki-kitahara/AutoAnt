@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
+using HK.Framework.EventSystems;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -24,6 +26,8 @@ namespace HK.AutoAnt.UI
             this.button.OnClickAsObservable()
                 .SubscribeWithState(this, (_, _this) =>
                 {
+                    _this.footerController.ShowCancel();
+                    Broker.Global.Publish(RequestDevelopMode.Get());
                 })
                 .AddTo(this);
         }

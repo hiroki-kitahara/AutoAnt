@@ -16,7 +16,7 @@ namespace HK.AutoAnt.UI
         private FooterSelectBuildingController selectBuilding = null;
 
         [SerializeField]
-        private GameObject cancel;
+        private GameObject cancel = null;
 
         void Awake()
         {
