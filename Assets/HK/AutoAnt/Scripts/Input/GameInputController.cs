@@ -68,6 +68,13 @@ namespace HK.AutoAnt.InputControllers
                 })
                 .AddTo(this);
 
+            Broker.Global.Receive<RequestDevelopMode>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.inputActions = _this.cachedDevelopCellActions;
+                })
+                .AddTo(this);
+
             var inputModule = InputControllers.Input.Current;
             this.inputActions = new ClickToClickableObjectActions(this.gameCameraController);
 
