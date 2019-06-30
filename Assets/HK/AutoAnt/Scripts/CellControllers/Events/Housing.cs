@@ -17,7 +17,7 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - 人口を増やす
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Housing")]
-    public sealed class Housing : CellEvent, IAddTownPopulation, ILevelUpEvent
+    public sealed class Housing : CellEvent, IAddTownPopulation, ILevelUpEvent, IReceiveBuff
     {
         /// <summary>
         /// 保持している人口
@@ -33,6 +33,8 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </remarks>
         public int Level { get; set; } = 1;
 
+        public float Buff { get; private set; } = 0.0f;
+
         private GameSystem gameSystem;
 
         private MasterDataHousingLevelParameter.Record levelParameter;
@@ -42,7 +44,7 @@ namespace HK.AutoAnt.CellControllers.Events
             Assert.IsNotNull(this.levelParameter);
             var popularityRate = gameSystem.Constants.Housing.PopularityRate;
             var town = gameSystem.User.Town;
-            var result = Calculator.AddPopulation(this.levelParameter.Population, town.Popularity.Value, popularityRate, deltaTime);
+            var result = Calculator.AddPopulation(this.levelParameter.Population, town.Popularity.Value, popularityRate, 1.0f + this.Buff, deltaTime);
             this.CurrentPopulation += result;
             town.AddPopulation(result);
         }
@@ -79,6 +81,15 @@ namespace HK.AutoAnt.CellControllers.Events
             this.LevelUp(this.gameSystem);
             this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
             this.gameSystem.User.History.GenerateCellEvent.Add(this.Id, this.Level - 1);
+        }
+
+        void IReceiveBuff.AddBuff(float value)
+        {
+            this.Buff += value;
+            if(this.Buff < 0.0f)
+            {
+                this.Buff = 0.0f;
+            }
         }
     }
 }
