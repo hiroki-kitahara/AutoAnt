@@ -116,6 +116,11 @@ namespace HK.AutoAnt.CellControllers.Events
             // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
             var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
 
+            foreach (var g in this.gimmick.GetComponentsInChildren<ICellEventGimmick>())
+            {
+                g.Detach(this);
+            }
+
             Assert.IsNotNull(record.EventData.destructionSE, $"Id = {this.Id}の破壊時のSE再生に失敗しました");
             AutoAntSystem.Audio.SE.Play(record.EventData.destructionSE);
 

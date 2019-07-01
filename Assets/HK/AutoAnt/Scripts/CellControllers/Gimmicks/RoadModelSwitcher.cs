@@ -69,6 +69,11 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.right);
         }
 
+        public void Detach(CellEvent cellEvent)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void UpdateModel(CellEvent cellEvent)
         {
             var cellMapper = GameSystem.Instance.CellManager.Mapper;
