@@ -62,6 +62,10 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             this.LevelUp(this.gameSystem);
             this.gameSystem.User.History.GenerateCellEvent.Add(this.Id, this.Level - 1);
+            
+            var oldBuffValue = this.levelParameter.AddBuff;
+            this.levelParameter = this.gameSystem.MasterData.RoadLevelParameter.Records.Get(this.Id, this.Level);
+            this.ApplyBuff(this.levelParameter.AddBuff - oldBuffValue);
         }
 
         private void ApplyBuff(float addValue)
