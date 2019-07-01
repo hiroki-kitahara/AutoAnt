@@ -46,6 +46,7 @@ namespace HK.AutoAnt.CellControllers.Events
         public override void Remove(GameSystem gameSystem)
         {
             base.Remove(gameSystem);
+            this.ApplyBuff(-this.levelParameter.AddBuff);
         }
 
         public override void OnClick(Cell owner)
