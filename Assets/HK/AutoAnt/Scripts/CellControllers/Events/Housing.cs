@@ -17,7 +17,7 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - 人口を増やす
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Housing")]
-    public sealed class Housing : CellEventBlankGimmick, IAddTownPopulation, ILevelUpEvent
+    public sealed class Housing : CellEvent, IAddTownPopulation, ILevelUpEvent
     {
         /// <summary>
         /// 保持している人口
