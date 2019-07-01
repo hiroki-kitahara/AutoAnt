@@ -23,15 +23,27 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             public const int Right = (1 << 3);
         }
 
+        /// <summary>
+        /// 直進モデル
+        /// </summary>
         [SerializeField]
         private PoolableObject straight = null;
 
+        /// <summary>
+        /// 90度に曲がる道路モデル
+        /// </summary>
         [SerializeField]
         private PoolableObject turn = null;
 
+        /// <summary>
+        /// T字路モデル
+        /// </summary>
         [SerializeField]
         private PoolableObject junctionT = null;
 
+        /// <summary>
+        /// 十字路モデル
+        /// </summary>
         [SerializeField]
         private PoolableObject crossroads = null;
 
@@ -69,9 +81,13 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
         public void Detach(CellEvent cellEvent)
         {
             this.PublishRequestUpdateRoadModelCross(cellEvent);
-            this.ReleaseModel();
+            this.ReturnToPoolModel();
         }
 
+        /// <summary>
+        /// 周囲の道路状況から自分自身の道路モデルを設定する
+        /// </summary>
+        /// <param name="cellEvent"></param>
         private void UpdateModel(CellEvent cellEvent)
         {
             var cellMapper = GameSystem.Instance.CellManager.Mapper;
@@ -82,9 +98,11 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             bit |= this.ExistsRoad(cellMapper, cellEvent, Vector2Int.right) ? Direction.Right : 0;
             Assert.IsTrue(this.modelMapper.Map.ContainsKey(bit), $"Origin = {cellEvent.Origin}, bit = {bit}の道路マップがありませんでした");
             var modelParameter = this.modelMapper.Map[bit];
+
+            // モデルが違った場合のみ切り替える
             if(modelParameter.ModelPrefab != this.currentPrefab)
             {
-                this.ReleaseModel();
+                this.ReturnToPoolModel();
                 this.currentPool = pools.Get(modelParameter.ModelPrefab);
                 this.currentModel = this.currentPool.Rent();
                 this.currentModel.transform.SetParent(this.transform);
@@ -95,21 +113,10 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             this.currentModel.transform.localEulerAngles = Vector3.up * modelParameter.Rotation;
         }
 
-        private bool CanUpdate(CellEvent owner, ICellEvent target)
-        {
-            if(!(target is IRoad))
-            {
-                return false;
-            }
-
-            return
-                (owner.Origin + Vector2Int.up) == target.Origin &&
-                (owner.Origin + Vector2Int.down) == target.Origin &&
-                (owner.Origin + Vector2Int.left) == target.Origin &&
-                (owner.Origin + Vector2Int.right) == target.Origin;
-        }
-
-        private void ReleaseModel()
+        /// <summary>
+        /// モデルを解放する
+        /// </summary>
+        private void ReturnToPoolModel()
         {
             if(this.currentModel == null)
             {
@@ -120,6 +127,9 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             this.currentModel.transform.SetParent(null);
         }
 
+        /// <summary>
+        /// <paramref name="direction"/>方向にある道路のモデル設定をリクエストする
+        /// </summary>
         private void PublishRequestUpdateRoadModel(CellEvent owner, Vector2Int direction)
         {
             var cellEventMap = GameSystem.Instance.CellManager.Mapper.CellEvent.Map;
@@ -132,6 +142,9 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             cellEventMap[position].Broker.Publish(RequestUpdateRoadModel.Get());
         }
 
+        /// <summary>
+        /// 上下左右にある道路のモデル設定をリクエストする
+        /// </summary>
         private void PublishRequestUpdateRoadModelCross(CellEvent cellEvent)
         {
             this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.up);
@@ -140,6 +153,9 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.right);
         }
 
+        /// <summary>
+        /// <paramref name="direction"/>方向に道路があるか返す
+        /// </summary>
         private bool ExistsRoad(CellMapper mapper, CellEvent owner, Vector2Int direction)
         {
             var position = owner.Origin + direction;
@@ -151,6 +167,9 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             return mapper.CellEvent.Map[position] is IRoad;
         }
 
+        /// <summary>
+        /// 各状況に応じた道路モデルのマッピングを担うクラス
+        /// </summary>
         public class ModelMapper
         {
             public readonly Dictionary<int, ModelParameter> Map = new Dictionary<int, ModelParameter>();
@@ -162,6 +181,8 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
                 PoolableObject crossroads
             )
             {
+                // 全ての状況を網羅してマッピング
+
                 this.Map.Add(0, new ModelParameter(straight, 0.0f));
 
                 this.Map.Add(Direction.Up, new ModelParameter(straight, 0.0f));
@@ -186,10 +207,19 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             }
         }
 
+        /// <summary>
+        /// モデル生成に必要なパラメータ
+        /// </summary>
         public class ModelParameter
         {
+            /// <summary>
+            /// モデルプレハブ
+            /// </summary>
             public readonly PoolableObject ModelPrefab;
 
+            /// <summary>
+            /// モデルの回転値
+            /// </summary>
             public readonly float Rotation;
 
             public ModelParameter(PoolableObject model, float rotate)
