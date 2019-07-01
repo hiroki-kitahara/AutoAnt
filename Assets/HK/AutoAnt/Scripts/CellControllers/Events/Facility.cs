@@ -64,7 +64,7 @@ namespace HK.AutoAnt.CellControllers.Events
             base.Initialize(position, gameSystem, isInitializingGame);
             this.gameSystem = gameSystem;
             this.LevelParameter = this.gameSystem.MasterData.FacilityLevelParameter.Records.Get(this.Id, this.Level);
-            gameSystem.User.Town.AddPopularity(this.LevelParameter.Popularity);
+            gameSystem.User.Town.AddPopularity(this.Popularity);
             this.gameSystem.UpdateAsObservable()
                 .Where(_ => this.CanProduce)
                 .SubscribeWithState(this, (_, _this) =>
@@ -83,7 +83,7 @@ namespace HK.AutoAnt.CellControllers.Events
         public override void Remove(GameSystem gameSystem)
         {
             base.Remove(gameSystem);
-            gameSystem.User.Town.AddPopularity(-this.LevelParameter.Popularity);
+            gameSystem.User.Town.AddPopularity(-this.Popularity);
         }
 
         public override void OnClick(Cell owner)
