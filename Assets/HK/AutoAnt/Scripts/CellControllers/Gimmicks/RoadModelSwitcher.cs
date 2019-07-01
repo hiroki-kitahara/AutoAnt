@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using HK.AutoAnt.CellControllers.Events;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.Systems;
 using HK.Framework;
 using HK.Framework.EventSystems;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -53,6 +55,18 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             );
 
             this.UpdateModel(cellEvent);
+
+            cellEvent.Broker.Receive<RequestUpdateRoadModel>()
+                .SubscribeWithState2(this, cellEvent, (_, _this, _cellEvent) =>
+                {
+                    _this.UpdateModel(_cellEvent);
+                })
+                .AddTo(this);
+
+            this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.up);
+            this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.down);
+            this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.left);
+            this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.right);
         }
 
         private void UpdateModel(CellEvent cellEvent)
@@ -77,6 +91,20 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             this.currentModel.transform.localEulerAngles = Vector3.up * modelParameter.Rotation;
         }
 
+        private bool CanUpdate(CellEvent owner, ICellEvent target)
+        {
+            if(!(target is IRoad))
+            {
+                return false;
+            }
+
+            return
+                (owner.Origin + Vector2Int.up) == target.Origin &&
+                (owner.Origin + Vector2Int.down) == target.Origin &&
+                (owner.Origin + Vector2Int.left) == target.Origin &&
+                (owner.Origin + Vector2Int.right) == target.Origin;
+        }
+
         private void ReleaseModel()
         {
             if(this.currentModel == null)
@@ -86,6 +114,18 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
 
             this.currentPool.Return(this.currentModel);
             this.currentModel.transform.SetParent(null);
+        }
+
+        private void PublishRequestUpdateRoadModel(CellEvent owner, Vector2Int direction)
+        {
+            var cellEventMap = GameSystem.Instance.CellManager.Mapper.CellEvent.Map;
+            var position = owner.Origin + direction;
+            if(!cellEventMap.ContainsKey(position))
+            {
+                return;
+            }
+
+            cellEventMap[position].Broker.Publish(RequestUpdateRoadModel.Get());
         }
 
         private bool ExistsRoad(CellMapper mapper, CellEvent owner, Vector2Int direction)
