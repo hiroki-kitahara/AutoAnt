@@ -69,6 +69,7 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
         public void Detach(CellEvent cellEvent)
         {
             this.PublishRequestUpdateRoadModelCross(cellEvent);
+            this.ReleaseModel();
         }
 
         private void UpdateModel(CellEvent cellEvent)
@@ -167,7 +168,7 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
                 this.Map.Add(Direction.Down, new ModelParameter(straight, 0.0f));
                 this.Map.Add(Direction.Left, new ModelParameter(straight, 90.0f));
                 this.Map.Add(Direction.Right, new ModelParameter(straight, 90.0f));
-                
+
                 this.Map.Add(Direction.Up | Direction.Down, new ModelParameter(straight, 0.0f));
                 this.Map.Add(Direction.Left | Direction.Right, new ModelParameter(straight, 90.0f));
 
