@@ -63,15 +63,12 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
                 })
                 .AddTo(this);
 
-            this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.up);
-            this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.down);
-            this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.left);
-            this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.right);
+            this.PublishRequestUpdateRoadModelCross(cellEvent);
         }
 
         public void Detach(CellEvent cellEvent)
         {
-            throw new System.NotImplementedException();
+            this.PublishRequestUpdateRoadModelCross(cellEvent);
         }
 
         private void UpdateModel(CellEvent cellEvent)
@@ -82,6 +79,7 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             bit |= this.ExistsRoad(cellMapper, cellEvent, Vector2Int.down) ? Direction.Down : 0;
             bit |= this.ExistsRoad(cellMapper, cellEvent, Vector2Int.left) ? Direction.Left : 0;
             bit |= this.ExistsRoad(cellMapper, cellEvent, Vector2Int.right) ? Direction.Right : 0;
+            Assert.IsTrue(this.modelMapper.Map.ContainsKey(bit), $"Origin = {cellEvent.Origin}, bit = {bit}の道路マップがありませんでした");
             var modelParameter = this.modelMapper.Map[bit];
             if(modelParameter.ModelPrefab != this.currentPrefab)
             {
@@ -131,6 +129,14 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             }
 
             cellEventMap[position].Broker.Publish(RequestUpdateRoadModel.Get());
+        }
+
+        private void PublishRequestUpdateRoadModelCross(CellEvent cellEvent)
+        {
+            this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.up);
+            this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.down);
+            this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.left);
+            this.PublishRequestUpdateRoadModel(cellEvent, Vector2Int.right);
         }
 
         private bool ExistsRoad(CellMapper mapper, CellEvent owner, Vector2Int direction)
