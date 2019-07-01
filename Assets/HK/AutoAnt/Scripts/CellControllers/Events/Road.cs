@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using HK.AutoAnt.EffectSystems;
 using System.Collections.Generic;
+using HK.AutoAnt.Events;
+using UniRx;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -38,6 +40,7 @@ namespace HK.AutoAnt.CellControllers.Events
             this.gameSystem = gameSystem;
             this.levelParameter = this.gameSystem.MasterData.RoadLevelParameter.Records.Get(this.Id, this.Level);
             this.ApplyBuff(this.levelParameter.AddBuff);
+            this.ObserveAddReceiveBuff();
         }
 
         public override void Remove(GameSystem gameSystem)
@@ -101,6 +104,22 @@ namespace HK.AutoAnt.CellControllers.Events
             {
                 b.AddBuff(addValue);
             }
+        }
+
+        /// <summary>
+        /// <see cref="IReceiveBuff"/>が追加されるのを監視する
+        /// </summary>
+        private void ObserveAddReceiveBuff()
+        {
+            // 追加されたIReceiveBuffに対してバフを与える
+            HK.Framework.EventSystems.Broker.Global.Receive<AddedCellEvent>()
+                .Where(x => x.CellEvent is IReceiveBuff)
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    var receiveBuff = x.CellEvent as IReceiveBuff;
+                    receiveBuff.AddBuff(_this.levelParameter.AddBuff);
+                })
+                .AddTo(this.instanceEvents);
         }
     }
 }
