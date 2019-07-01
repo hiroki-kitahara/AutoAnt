@@ -20,7 +20,7 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - 周りのセルイベントの効果を上昇させる
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Road")]
-    public sealed class Road : CellEvent, ILevelUpEvent
+    public sealed class Road : CellEvent, ILevelUpEvent, IRoad
     {
         /// <summary>
         /// レベル
