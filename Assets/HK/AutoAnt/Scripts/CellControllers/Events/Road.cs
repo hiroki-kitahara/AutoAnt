@@ -66,9 +66,14 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             this.LevelUp(this.gameSystem);
 
+            // 範囲が広がることを考慮して一旦バフを解除する
             var oldBuffValue = this.levelParameter.AddBuff;
+            this.ApplyBuff(-this.levelParameter.AddBuff);
+
             this.levelParameter = this.gameSystem.MasterData.RoadLevelParameter.Records.Get(this.Id, this.Level);
-            this.ApplyBuff(this.levelParameter.AddBuff - oldBuffValue);
+
+            // 新しいパラメータでバフを付与する
+            this.ApplyBuff(this.levelParameter.AddBuff);
         }
 
         /// <summary>
