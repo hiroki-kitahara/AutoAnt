@@ -23,11 +23,10 @@ namespace HK.AutoAnt.CellControllers
             this.cell.Add(cell.Position, cell);
         }
 
-        public void Add(ICellEvent cellEvent)
+        public void Add(ICellEvent cellEvent, Vector2Int position)
         {
             this.cellEvent.AddListOnly(cellEvent);
 
-            var position = cellEvent.Origin;
             Assert.IsTrue(this.cell.Map.ContainsKey(position), $"position = {position}にセルが無いのにイベントが登録されました");
 
             for (var y = 0; y < cellEvent.Size; y++)
