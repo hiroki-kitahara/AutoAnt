@@ -37,6 +37,7 @@ namespace HK.AutoAnt.CellControllers.Events
             base.Initialize(position, gameSystem, isInitializingGame);
             this.gameSystem = gameSystem;
             this.levelParameter = this.gameSystem.MasterData.RoadLevelParameter.Records.Get(this.Id, this.Level);
+            this.ApplyBuff(this.levelParameter.AddBuff);
         }
 
         public override void Remove(GameSystem gameSystem)
@@ -61,6 +62,39 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             this.LevelUp(this.gameSystem);
             this.gameSystem.User.History.GenerateCellEvent.Add(this.Id, this.Level - 1);
+        }
+
+        private void ApplyBuff(float addValue)
+        {
+            var receiveBuffs = new List<IReceiveBuff>();
+            Vector2IntUtility.GetRange(this.Origin, this.levelParameter.ImpactRange, (pos) =>
+            {
+                var cellEventMap = this.gameSystem.CellManager.Mapper.CellEvent.Map;
+                if (!cellEventMap.ContainsKey(pos))
+                {
+                    return false;
+                }
+
+                var receiveBuff = cellEventMap[pos] as IReceiveBuff;
+                if (receiveBuff == null)
+                {
+                    return false;
+                }
+
+                if (receiveBuffs.Contains(receiveBuff))
+                {
+                    return false;
+                }
+
+                receiveBuffs.Add(receiveBuff);
+
+                return true;
+            });
+
+            foreach (var b in receiveBuffs)
+            {
+                b.AddBuff(addValue);
+            }
         }
     }
 }
