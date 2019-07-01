@@ -51,7 +51,8 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public Vector2Int Origin { get; protected set; }
 
-        public readonly IMessageBroker Broker = new MessageBroker();
+        private readonly IMessageBroker broker = new MessageBroker();
+        public IMessageBroker Broker => this.broker;
 
         /// <summary>
         /// 実体が持つイベント
