@@ -67,88 +67,12 @@ namespace HK.AutoAnt.CellControllers
         }
 
         /// <summary>
-        /// <paramref name="origin"/>を原点とした範囲の座標を評価する
-        /// </summary>
-        /// <remarks>
-        /// <paramref name="range"/>が<c>1</c>の場合は以下の範囲を評価する
-        /// o = origin
-        /// x = range
-        /// xxx
-        /// xox
-        /// xxx
-        /// <paramref name="range"/>が<c>2</c>の場合は以下の範囲を評価する
-        /// o = origin
-        /// x = range
-        /// xxxxx
-        /// xxxxx
-        /// xxoxx
-        /// xxxxx
-        /// xxxxx
-        /// </remarks>
-        public Vector2Int[] GetRange(Vector2Int origin, int range, Func<Vector2Int, bool> selector)
-        {
-            Assert.IsTrue(range > 0);
-
-            var result = new List<Vector2Int>();
-
-            for (var y = -range; y <= range; y++)
-            {
-                for (var x = -range; x <= range; x++)
-                {
-                    var position = origin + new Vector2Int(x, y);
-                    if(!selector(position))
-                    {
-                        continue;
-                    }
-
-                    result.Add(position);
-                }
-            }
-
-            return result.ToArray();
-        }
-
-        /// <summary>
-        /// <paramref name="origin"/>を原点とした範囲の座標を評価する
-        /// </summary>
-        /// <remarks>
-        /// <paramref name="size"/>が<c>(2, 2)</c>の場合は以下の範囲を評価する
-        /// o = origin
-        /// x = range
-        /// xx
-        /// ox
-        /// </remarks>
-        public Vector2Int[] GetRange(Vector2Int origin, Vector2Int size, Func<Vector2Int, bool> selector)
-        {
-            Assert.IsTrue(size.x >= 0);
-            Assert.IsTrue(size.y >= 0);
-
-            var result = new List<Vector2Int>();
-
-            for (var y = 0; y < size.y; y++)
-            {
-                for (var x = 0; x < size.x; x++)
-                {
-                    var position = origin + new Vector2Int(x, y);
-                    if (!selector(position))
-                    {
-                        continue;
-                    }
-
-                    result.Add(position);
-                }
-            }
-
-            return result.ToArray();
-        }
-
-        /// <summary>
         /// <paramref name="positions"/>に存在する全てのセルを返す
         /// </summary>
-        public Cell[] GetCells(Vector2Int[] positions)
+        public Cell[] GetCells(List<Vector2Int> positions)
         {
-            var result = new Cell[positions.Length];
-            for (var i = 0; i < positions.Length; i++)
+            var result = new Cell[positions.Count];
+            for (var i = 0; i < positions.Count; i++)
             {
                 var position = positions[i];
                 Assert.IsTrue(this.Cell.Map.ContainsKey(position));
@@ -163,7 +87,7 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public Vector2Int[] GetEmptyPositions(Vector2Int origin, int range)
         {
-            return this.GetRange(origin, range, (p) => !this.cell.Map.ContainsKey(p));
+            return Vector2IntUtility.GetRange(origin, range, (p) => !this.cell.Map.ContainsKey(p)).ToArray();
         }
 
         public SerializableCellMapper GetSerializable()
