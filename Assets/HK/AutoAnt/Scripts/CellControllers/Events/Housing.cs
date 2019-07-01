@@ -80,7 +80,6 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             this.LevelUp(this.gameSystem);
             this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
-            this.gameSystem.User.History.GenerateCellEvent.Add(this.Id, this.Level - 1);
         }
 
         void IReceiveBuff.AddBuff(float value)
