@@ -114,13 +114,50 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             // 追加されたIReceiveBuffに対してバフを与える
             HK.Framework.EventSystems.Broker.Global.Receive<AddedCellEvent>()
-                .Where(x => x.CellEvent is IReceiveBuff)
+                .Where(x => this.CanApplyBuff(x.CellEvent))
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     var receiveBuff = x.CellEvent as IReceiveBuff;
                     receiveBuff.AddBuff(_this.levelParameter.AddBuff);
                 })
                 .AddTo(this.instanceEvents);
+        }
+
+        /// <summary>
+        /// <paramref name="target"/>にバフを適用出来るか返す
+        /// </summary>
+        private bool CanApplyBuff(ICellEvent target)
+        {
+            // そもそもIReceiveBuffを継承していない場合はなにもしない
+            if(!(target is IReceiveBuff))
+            {
+                return false;
+            }
+
+            // 範囲内に存在するかチェック
+            var impactRange = this.levelParameter.ImpactRange;
+            var range = new RectInt(
+                this.Origin.x - impactRange,
+                this.Origin.y - impactRange,
+                impactRange * 2,
+                impactRange * 2
+            );
+            for (var y = 0; y < target.Size; y++)
+            {
+                for (var x = 0; x < target.Size; x++)
+                {
+                    var position = target.Origin + new Vector2Int(x, y);
+                    if(
+                        range.xMin <= position.x && position.x <= range.xMax &&
+                        range.yMin <= position.y && position.y <= range.yMax
+                    )
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }
