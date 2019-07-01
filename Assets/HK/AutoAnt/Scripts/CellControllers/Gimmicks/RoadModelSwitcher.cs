@@ -162,19 +162,25 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             )
             {
                 this.Map.Add(0, new ModelParameter(straight, 0.0f));
+
                 this.Map.Add(Direction.Up, new ModelParameter(straight, 0.0f));
                 this.Map.Add(Direction.Down, new ModelParameter(straight, 0.0f));
                 this.Map.Add(Direction.Left, new ModelParameter(straight, 90.0f));
                 this.Map.Add(Direction.Right, new ModelParameter(straight, 90.0f));
+                
                 this.Map.Add(Direction.Up | Direction.Down, new ModelParameter(straight, 0.0f));
+                this.Map.Add(Direction.Left | Direction.Right, new ModelParameter(straight, 90.0f));
+
                 this.Map.Add(Direction.Up | Direction.Left, new ModelParameter(turn, 0.0f));
                 this.Map.Add(Direction.Up | Direction.Right, new ModelParameter(turn, 90.0f));
                 this.Map.Add(Direction.Down | Direction.Right, new ModelParameter(turn, 180.0f));
                 this.Map.Add(Direction.Down | Direction.Left, new ModelParameter(turn, 270.0f));
+
                 this.Map.Add(Direction.Up | Direction.Down | Direction.Left, new ModelParameter(junctionT, 0.0f));
                 this.Map.Add(Direction.Up | Direction.Left | Direction.Right, new ModelParameter(junctionT, 90.0f));
                 this.Map.Add(Direction.Up | Direction.Down | Direction.Right, new ModelParameter(junctionT, 180.0f));
                 this.Map.Add(Direction.Down | Direction.Left | Direction.Right, new ModelParameter(junctionT, 270.0f));
+
                 this.Map.Add(Direction.Up | Direction.Down | Direction.Left | Direction.Right, new ModelParameter(crossroads, 0.0f));
             }
         }
