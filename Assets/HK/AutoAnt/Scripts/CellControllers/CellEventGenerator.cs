@@ -63,6 +63,8 @@ namespace HK.AutoAnt.CellControllers
         {
             instance.Initialize(instance.Origin, this.gameSystem, true);
             this.cellMapper.Add(instance);
+
+            Broker.Global.Publish(AddedCellEvent.Get(instance));
         }
 
         public void Erase(Cell cell)
