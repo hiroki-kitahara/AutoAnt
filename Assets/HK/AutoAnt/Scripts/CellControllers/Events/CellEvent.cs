@@ -105,8 +105,6 @@ namespace HK.AutoAnt.CellControllers.Events
                 effect.transform.position = this.gimmick.transform.position;
                 effect.transform.localScale = Vector3.one * record.EventData.size;
             }
-
-            Framework.EventSystems.Broker.Global.Publish(AddedCellEvent.Get(this));
         }
 
         public virtual void Remove(GameSystem gameSystem)
@@ -124,8 +122,6 @@ namespace HK.AutoAnt.CellControllers.Events
             var effect = record.EventData.destructionEffect.Rent();
             effect.transform.position = this.gimmick.transform.position;
             effect.transform.localScale = Vector3.one * record.EventData.size;
-
-            Framework.EventSystems.Broker.Global.Publish(RemovedCellEvent.Get(this));
 
             Destroy(this.gimmick.gameObject);
         }

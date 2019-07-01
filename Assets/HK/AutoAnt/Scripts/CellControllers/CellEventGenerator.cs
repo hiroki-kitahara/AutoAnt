@@ -1,8 +1,10 @@
 ﻿using System;
 using HK.AutoAnt.CellControllers.Events;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.Systems;
+using HK.Framework.EventSystems;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -53,6 +55,8 @@ namespace HK.AutoAnt.CellControllers
             cellMapper.Add(cellEventInstance);
 
             this.gameSystem.User.History.GenerateCellEvent.Add(cellEventRecordId, 0);
+
+            Broker.Global.Publish(AddedCellEvent.Get(cellEventInstance));
         }
 
         public void GenerateOnDeserialize(CellEvent instance)
@@ -67,6 +71,8 @@ namespace HK.AutoAnt.CellControllers
             var cellEvent = this.cellMapper.CellEvent.Map[cell.Position];
             this.cellMapper.Remove(cellEvent);
             cellEvent.Remove(this.gameSystem);
+
+            Broker.Global.Publish(RemovedCellEvent.Get(cellEvent));
         }
 
         /// <summary>
