@@ -6,6 +6,7 @@ using HK.AutoAnt.UserControllers;
 using UnityEngine;
 using UnityEngine.Assertions;
 using HK.AutoAnt.EffectSystems;
+using System.Collections.Generic;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -29,10 +30,13 @@ namespace HK.AutoAnt.CellControllers.Events
 
         private GameSystem gameSystem;
 
+        private MasterDataRoadLevelParameter.Record levelParameter;
+
         public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
         {
             base.Initialize(position, gameSystem, isInitializingGame);
             this.gameSystem = gameSystem;
+            this.levelParameter = this.gameSystem.MasterData.RoadLevelParameter.Records.Get(this.Id, this.Level);
         }
 
         public override void Remove(GameSystem gameSystem)
