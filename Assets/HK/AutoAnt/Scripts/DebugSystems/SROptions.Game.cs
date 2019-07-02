@@ -35,6 +35,14 @@ public partial class SROptions
     {
         var popup = PopupManager.RequestSimplePopup()
             .Initialize("やっほー", "OK", "CANCEL");
+
+        popup.DecideButton.OnClickAsObservable()
+            .SubscribeWithState(popup, (_, p) => p.Close())
+            .AddTo(popup);
+            
+        popup.CancelButton.OnClickAsObservable()
+            .SubscribeWithState(popup, (_, p) => p.Close())
+            .AddTo(popup);
     }
 
     private int addCellRange = 5;

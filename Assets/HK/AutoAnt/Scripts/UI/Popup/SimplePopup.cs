@@ -18,9 +18,11 @@ namespace HK.AutoAnt.UI
 
         [SerializeField]
         private ButtonElement decide = null;
+        public Button DecideButton => this.decide.Button;
 
         [SerializeField]
         private ButtonElement cancel = null;
+        public Button CancelButton => this.cancel.Button;
 
         /// <summary>
         /// 初期化
