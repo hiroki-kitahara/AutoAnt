@@ -1,8 +1,10 @@
 ﻿using System;
 using HK.AutoAnt.CellControllers.Events;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.Systems;
+using HK.Framework.EventSystems;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -30,6 +32,13 @@ namespace HK.AutoAnt.CellControllers
         {
             this.gameSystem = gameSystem;
             this.cellMapper = cellMapper;
+
+            Broker.Global.Receive<RequestBuildingMode>()
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    _this.RecordId = x.BuildingCellEventRecordId;
+                })
+                .AddTo(gameSystem);
         }
 
         public void Generate(Cell cell, int cellEventRecordId, bool isInitializingGame)
