@@ -22,13 +22,5 @@ namespace HK.AutoAnt.Events
         public class CompleteClose : Message<CompleteClose>
         {
         }
-
-        /// <summary>
-        /// ポップアップのレスポンスが返ってくるイベント
-        /// </summary>
-        public class Response : Message<Response, int>
-        {
-            public int Result => this.param1;
-        }
     }
 }
