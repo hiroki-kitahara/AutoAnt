@@ -15,6 +15,9 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private FooterSelectBuildingController selectBuilding = null;
 
+        [SerializeField]
+        private GameObject cancel = null;
+
         void Awake()
         {
             this.ShowRoot();
@@ -33,10 +36,17 @@ namespace HK.AutoAnt.UI
             this.selectBuilding.SetData(records);
         }
 
+        public void ShowCancel()
+        {
+            this.AllHide();
+            this.cancel.SetActive(true);
+        }
+
         private void AllHide()
         {
             this.root.SetActive(false);
             this.selectBuilding.gameObject.SetActive(false);
+            this.cancel.SetActive(false);
         }
     }
 }
