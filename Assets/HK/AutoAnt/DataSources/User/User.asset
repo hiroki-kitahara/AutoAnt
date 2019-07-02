@@ -20,3 +20,5 @@ MonoBehaviour:
       value: 0
     popularity:
       value: 1000
+  unlockCellEvent:
+    elements: a0860100

@@ -21,6 +21,7 @@ namespace HK.AutoAnt
             this.cachedTransform = this.transform;
 
             this.LateUpdateAsObservable()
+                .Take(1)
                 .SubscribeWithState(this, (_, _this) =>
                 {
                     var forward = -GameSystem.Instance.Cameraman.Camera.transform.forward;

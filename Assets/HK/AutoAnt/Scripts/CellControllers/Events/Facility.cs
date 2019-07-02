@@ -24,7 +24,7 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - アイテムの生産
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Facility")]
-    public sealed class Facility : CellEvent, ILevelUpEvent, IReceiveBuff
+    public sealed class Facility : CellEvent, ILevelUpEvent, IReceiveBuff, IProductHolder
     {
         /// <summary>
         /// レベル
@@ -154,6 +154,8 @@ namespace HK.AutoAnt.CellControllers.Events
             }
 
             this.Products.Clear();
+
+            this.Broker.Publish(AcquiredFacilityProduct.Get(this));
         }
 
         void IReceiveBuff.AddBuff(float value)

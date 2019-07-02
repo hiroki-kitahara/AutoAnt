@@ -32,6 +32,13 @@ namespace HK.AutoAnt.CellControllers
         {
             this.gameSystem = gameSystem;
             this.cellMapper = cellMapper;
+
+            Broker.Global.Receive<RequestBuildingMode>()
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    _this.RecordId = x.BuildingCellEventRecordId;
+                })
+                .AddTo(gameSystem);
         }
 
         public void Generate(Cell cell, int cellEventRecordId, bool isInitializingGame)
@@ -41,11 +48,6 @@ namespace HK.AutoAnt.CellControllers
             var cellEventRecord = this.gameSystem.MasterData.CellEvent.Records.Get(cellEventRecordId);
             Assert.IsNotNull(cellEventRecord);
             Assert.IsNotNull(cellEventRecord.EventData);
-
-            var levelUpCostRecord = this.gameSystem.MasterData.LevelUpCost.Records.Get(cellEventRecordId, 0);
-            Assert.IsNotNull(levelUpCostRecord);
-
-            levelUpCostRecord.Cost.Consume(this.gameSystem.User, this.gameSystem.MasterData.Item);
 
             var cellEventInstance = UnityEngine.Object.Instantiate(cellEventRecord.EventData);
 

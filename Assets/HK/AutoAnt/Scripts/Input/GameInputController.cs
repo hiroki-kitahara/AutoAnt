@@ -32,9 +32,16 @@ namespace HK.AutoAnt.InputControllers
         private Dictionary<InputMode, InputMode> modeRotation = new Dictionary<InputMode, InputMode>();
         private Dictionary<InputMode, Action> modeActions = new Dictionary<InputMode, Action>();
 
+        private ClickToClickableObjectActions cachedClickToClickableObjectActions;
+
+        private GenerateCellEventActions cachedGenerateCellEventActions;
+
+        private EraseCellEventActions cachedEraseCellEventActions;
+
+        private DevelopCellActions cachedDevelopCellActions;
+
         void Awake()
         {
-
             ModeRotationInitialize();
             ModeActionInitialize();
 
@@ -44,6 +51,27 @@ namespace HK.AutoAnt.InputControllers
                     currentMode = modeRotation[currentMode];
                     modeActions[currentMode]();
                     Broker.Global.Publish(ChangedInputMode.Get(currentMode));
+                })
+                .AddTo(this);
+
+            Broker.Global.Receive<RequestBuildingMode>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.inputActions = _this.cachedGenerateCellEventActions;
+                })
+                .AddTo(this);
+
+            Broker.Global.Receive<RequestClickMode>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.inputActions = _this.cachedClickToClickableObjectActions;
+                })
+                .AddTo(this);
+
+            Broker.Global.Receive<RequestDevelopMode>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.inputActions = _this.cachedDevelopCellActions;
                 })
                 .AddTo(this);
 
@@ -83,6 +111,22 @@ namespace HK.AutoAnt.InputControllers
                     _this.inputActions.ScrollAction.Do(x.Data);
                 })
                 .AddTo(this);
+        }
+
+        void Start()
+        {
+            this.cachedClickToClickableObjectActions = new ClickToClickableObjectActions(this.gameCameraController);
+            this.cachedGenerateCellEventActions = new GenerateCellEventActions(this.cellManager.EventGenerator, this.gameCameraController);
+            this.cachedEraseCellEventActions = new EraseCellEventActions(this.cellManager.EventGenerator, this.cellManager.Mapper, this.gameCameraController);
+            this.cachedDevelopCellActions = new DevelopCellActions(
+                GameSystem.Instance,
+                this.cellManager.CellGenerator,
+                this.cellManager.Mapper,
+                100100,
+                100000,
+                1,
+                this.gameCameraController
+                );
         }
 
         void Update()
@@ -156,34 +200,25 @@ namespace HK.AutoAnt.InputControllers
             // クリックモード時の挙動
             modeActions[InputMode.ClickMode] = () =>
             {
-                this.inputActions = new ClickToClickableObjectActions(this.gameCameraController);
+                this.inputActions = this.cachedClickToClickableObjectActions;
             };
 
             // 建設モード時の挙動
             modeActions[InputMode.BuildMode] = () =>
             {
-                this.inputActions = new GenerateCellEventActions(this.cellManager.EventGenerator, this.gameCameraController);
+                this.inputActions = this.cachedGenerateCellEventActions;
             };
 
             // 解体モード時の挙動
             modeActions[InputMode.DismantleMode] = () =>
             {
-                this.inputActions = new EraseCellEventActions(this.cellManager.EventGenerator, this.cellManager.Mapper, this.gameCameraController);
+                this.inputActions = this.cachedEraseCellEventActions;
             };
 
             // 開拓モード時の挙動
             modeActions[InputMode.ExploringMode] = () =>
             {
-                this.inputActions = new DevelopCellActions(
-                    GameSystem.Instance,
-                    this.cellManager.CellGenerator,
-                    this.cellManager.Mapper,
-                    100100,
-                    100000,
-                    1,
-                    this.gameCameraController
-                    );
-
+                this.inputActions = this.cachedDevelopCellActions;
             };
         }
     }
