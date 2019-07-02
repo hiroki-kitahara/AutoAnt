@@ -35,5 +35,9 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
                 })
                 .AddTo(this);
         }
+
+        public void Detach(CellEvent cellEvent)
+        {
+        }
     }
 }
