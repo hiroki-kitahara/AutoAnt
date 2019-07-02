@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HK.AutoAnt.CellControllers.Gimmicks;
 using HK.AutoAnt.Database;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.Systems;
@@ -23,7 +24,7 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - アイテムの生産
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Facility")]
-    public sealed class Facility : CellEventBlankGimmick, ILevelUpEvent
+    public sealed class Facility : CellEvent, ILevelUpEvent, IProductHolder
     {
         /// <summary>
         /// レベル
@@ -32,33 +33,44 @@ namespace HK.AutoAnt.CellControllers.Events
 
         private GameSystem gameSystem;
 
-        private MasterDataFacilityLevelParameter.Record levelParameter;
+        public MasterDataFacilityLevelParameter.Record LevelParameter { get; private set; }
 
         /// <summary>
         /// 生産物を生産するタイマー
         /// </summary>
-        private float productTimer = 0.0f;
+        public float ProductTimer { get; private set; } = 0.0f;
+
+        /// <summary>
+        /// 生産されるまでの残り時間のパーセンテージ
+        /// </summary>
+        public float RemainProductTimePercent => this.ProductTimer / this.LevelParameter.NeedProductTime;
+
+        /// <summary>
+        /// 生産されるまでの残り時間
+        /// </summary>
+        public float RemainProductTime => this.LevelParameter.NeedProductTime - this.ProductTimer;
 
         /// <summary>
         /// 生産したアイテムのリスト
         /// </summary>
-        private List<string> products = new List<string>();
+        public List<string> Products { get; private set; } = new List<string>();
 
         public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
         {
             base.Initialize(position, gameSystem, isInitializingGame);
             this.gameSystem = gameSystem;
-            this.levelParameter = this.gameSystem.MasterData.FacilityLevelParameter.Records.Get(this.Id, this.Level);
-            gameSystem.User.Town.AddPopularity(this.levelParameter.Popularity);
+            this.LevelParameter = this.gameSystem.MasterData.FacilityLevelParameter.Records.Get(this.Id, this.Level);
+            gameSystem.User.Town.AddPopularity(this.LevelParameter.Popularity);
             this.gameSystem.UpdateAsObservable()
                 .Where(_ => this.CanProduce)
                 .SubscribeWithState(this, (_, _this) =>
                 {
-                    _this.productTimer += UnityEngine.Time.deltaTime;
-                    if(_this.productTimer >= _this.levelParameter.NeedProductTime)
+                    _this.ProductTimer += UnityEngine.Time.deltaTime;
+                    if(_this.ProductTimer >= _this.LevelParameter.NeedProductTime)
                     {
-                        _this.products.Add(_this.levelParameter.ProductName);
-                        _this.productTimer = 0.0f;
+                        _this.Products.Add(_this.LevelParameter.ProductName);
+                        _this.Broker.Publish(AddedFacilityProduct.Get(_this));
+                        _this.ProductTimer = 0.0f;
                     }
                 })
                 .AddTo(this.instanceEvents);
@@ -67,7 +79,7 @@ namespace HK.AutoAnt.CellControllers.Events
         public override void Remove(GameSystem gameSystem)
         {
             base.Remove(gameSystem);
-            gameSystem.User.Town.AddPopularity(-this.levelParameter.Popularity);
+            gameSystem.User.Town.AddPopularity(-this.LevelParameter.Popularity);
         }
 
         public override void OnClick(Cell owner)
@@ -90,27 +102,27 @@ namespace HK.AutoAnt.CellControllers.Events
         public void LevelUp()
         {
             // レベルアップ前の人気度を減算する
-            var oldPopularity = this.levelParameter.Popularity;
+            var oldPopularity = this.LevelParameter.Popularity;
             this.gameSystem.User.Town.AddPopularity(-oldPopularity);
 
             this.LevelUp(this.gameSystem);
 
-            this.levelParameter = this.gameSystem.MasterData.FacilityLevelParameter.Records.Get(this.Id, this.Level);
+            this.LevelParameter = this.gameSystem.MasterData.FacilityLevelParameter.Records.Get(this.Id, this.Level);
 
             // レベルアップ後の人気度を加算する
-            var newPopularity = this.levelParameter.Popularity;
+            var newPopularity = this.LevelParameter.Popularity;
             this.gameSystem.User.Town.AddPopularity(newPopularity);
         }
 
         /// <summary>
         /// 生産物を生産可能か返す
         /// </summary>
-        private bool CanProduce => this.products.Count < this.levelParameter.ProductSlot;
+        private bool CanProduce => this.Products.Count < this.LevelParameter.ProductSlot;
 
         /// <summary>
         /// 生産物を回収可能か返す
         /// </summary>
-        private bool CanCollectionProducts => this.products.Count > 0;
+        private bool CanCollectionProducts => this.Products.Count > 0;
 
         /// <summary>
         /// 生産物をインベントリに追加する
@@ -120,7 +132,7 @@ namespace HK.AutoAnt.CellControllers.Events
             Assert.IsTrue(this.CanCollectionProducts);
 
             var itemRecords = new Dictionary<MasterDataItem.Record, int>();
-            foreach (var p in this.products)
+            foreach (var p in this.Products)
             {
                 var itemRecord = this.gameSystem.MasterData.Item.Records.Get(p);
                 if(itemRecords.ContainsKey(itemRecord))
@@ -137,7 +149,9 @@ namespace HK.AutoAnt.CellControllers.Events
                 this.gameSystem.User.Inventory.AddItem(i.Key, i.Value);
             }
 
-            this.products.Clear();
+            this.Products.Clear();
+
+            this.Broker.Publish(AcquiredFacilityProduct.Get(this));
         }
     }
 }
