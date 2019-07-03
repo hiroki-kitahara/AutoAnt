@@ -11,7 +11,7 @@ namespace HK.AutoAnt.UI
     /// <summary>
     /// セルイベントの詳細を表示するポップアップ
     /// </summary>
-    public sealed class CellEventDetailsPopup : MonoBehaviour
+    public sealed class CellEventDetailsPopup : Popup
     {
         [SerializeField]
         private TextMeshProUGUI title = null;
