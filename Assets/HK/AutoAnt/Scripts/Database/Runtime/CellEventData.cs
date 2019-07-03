@@ -20,6 +20,10 @@ string classname;
 public string Classname { get {return classname; } set { classname = value;} }
 
 [SerializeField]
+string name;
+public string Name { get {return name; } set { name = value;} }
+
+[SerializeField]
 string category;
 public string Category { get {return category; } set { category = value;} }
 
