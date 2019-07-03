@@ -11,6 +11,11 @@ namespace HK.AutoAnt.CellControllers.Events
     public interface ICellEvent
     {
         /// <summary>
+        /// セルイベントの名前
+        /// </summary>
+        string EventName { get; }
+
+        /// <summary>
         /// 原点座標
         /// </summary>
         Vector2Int Origin { get; }
