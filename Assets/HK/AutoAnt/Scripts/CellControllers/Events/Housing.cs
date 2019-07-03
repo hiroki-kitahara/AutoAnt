@@ -6,6 +6,8 @@ using HK.AutoAnt.UserControllers;
 using UnityEngine;
 using UnityEngine.Assertions;
 using HK.AutoAnt.EffectSystems;
+using HK.Framework.EventSystems;
+using HK.AutoAnt.Events;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -63,10 +65,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public override void OnClick(Cell owner)
         {
-            if(this.CanLevelUp())
-            {
-                this.LevelUp();
-            }
+            Framework.EventSystems.Broker.Global.Publish(RequestShowCellEventDetailsPopup.Get(this));
         }
 
         public bool CanLevelUp()
