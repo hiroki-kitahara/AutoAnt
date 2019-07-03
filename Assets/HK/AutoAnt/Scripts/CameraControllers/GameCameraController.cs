@@ -9,26 +9,6 @@ namespace HK.AutoAnt.CameraControllers
     /// </summary>
     public sealed class GameCameraController : MonoBehaviour
     {
-        void Update()
-        {
-            float vector = 0.1f;
-            if (Input.GetKey(KeyCode.W))
-            {
-                this.Move(new Vector2(0.0f, vector));
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                this.Move(new Vector2(0.0f, -vector));
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                this.Move(new Vector2(-vector, 0.0f));
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                this.Move(new Vector2(vector, 0.0f));
-            }
-        }
         public void Move(Vector2 deltaPosition)
         {
             var cameraman = GameSystem.Instance.Cameraman;
