@@ -733,15 +733,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: {fileID: 6963554141159076153}
   resource:
+    root: {fileID: 7900775995971019590}
     prefix: {fileID: 2588025977886712509}
     value: {fileID: 7711104119169833472}
   addPopulation:
+    root: {fileID: 6354237373689370803}
     prefix: {fileID: 228659755757428095}
     value: {fileID: 3341893672712395844}
   product:
+    root: {fileID: 2667231263172685843}
     prefix: {fileID: 1393075857501079661}
     value: {fileID: 1959503439352380242}
   levelUpCost:
+    root: {fileID: 6422985295363000565}
     prefix: {fileID: 1412337096748937247}
     value: {fileID: 6439230460365154857}
   levelUpButton: {fileID: 4860838003630268265}

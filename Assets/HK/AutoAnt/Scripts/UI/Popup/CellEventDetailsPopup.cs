@@ -49,6 +49,12 @@ namespace HK.AutoAnt.UI
         {
             this.SelectCellEvent = cellEvent;
             this.ApplyTitle(cellEvent);
+
+            // TODO
+            this.resource.SetActive(false);
+            this.addPopulation.SetActive(false);
+            this.product.SetActive(false);
+            this.levelUpCost.SetActive(false);
         }
 
         public void UpdateProperties()
@@ -78,10 +84,18 @@ namespace HK.AutoAnt.UI
         public class ResourceElement
         {
             [SerializeField]
+            private GameObject root;
+
+            [SerializeField]
             private TextMeshProUGUI prefix;
 
             [SerializeField]
             private TextMeshProUGUI value;
+
+            public void SetActive(bool isActive)
+            {
+                this.root.SetActive(isActive);
+            }
 
             public void Apply(string prefix, string value)
             {
