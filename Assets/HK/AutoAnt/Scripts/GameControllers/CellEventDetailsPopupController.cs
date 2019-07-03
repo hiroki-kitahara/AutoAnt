@@ -30,12 +30,17 @@ namespace HK.AutoAnt.GameControllers
         {
             var popup = PopupManager.Request(this.popup);
             popup.Initialize(cellEvent);
-            popup.CloseButton.OnClickAsObservable()
+
+            Observable.Merge(
+                popup.CloseButton.OnClickAsObservable(),
+                InputControllers.Input.Current.DragAsObservable().AsUnitObservable()
+            )
                 .SubscribeWithState(popup, (_, p) =>
                 {
                     p.Close();
                 })
                 .AddTo(popup);
+
             popup.Open();
         }
     }
