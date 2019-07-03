@@ -31,6 +31,10 @@ namespace HK.AutoAnt.GameControllers
             var popup = PopupManager.Request(this.popup);
             popup.Initialize(cellEvent);
 
+            // MEMO: ポップアップが閉じる条件
+            // 閉じるボタンが押されたとき
+            // カメラのドラッグ操作が開始したとき
+            // 他のポップアップが開いたとき
             Observable.Merge(
                 popup.CloseButton.OnClickAsObservable(),
                 InputControllers.Input.Current.DragAsObservable().AsUnitObservable(),
