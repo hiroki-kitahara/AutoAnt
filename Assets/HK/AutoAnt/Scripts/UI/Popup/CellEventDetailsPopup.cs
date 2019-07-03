@@ -51,6 +51,16 @@ namespace HK.AutoAnt.UI
             this.ApplyTitle(cellEvent);
         }
 
+        public void UpdateProperties()
+        {
+            this.ApplyTitle(this.SelectCellEvent);
+        }
+
+        public void SetActiveLevelUpButton(bool isActive)
+        {
+            this.LevelUpButton.gameObject.SetActive(isActive);
+        }
+
         private void ApplyTitle(CellEvent cellEvent)
         {
             if(cellEvent is ILevelUpEvent)

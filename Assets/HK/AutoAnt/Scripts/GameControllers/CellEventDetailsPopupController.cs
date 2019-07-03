@@ -31,6 +31,21 @@ namespace HK.AutoAnt.GameControllers
             var popup = PopupManager.Request(this.popup);
             popup.Initialize(cellEvent);
 
+            var levelUpEvent = cellEvent as ILevelUpEvent;
+            var existsLevelUpEvent = levelUpEvent != null;
+            popup.SetActiveLevelUpButton(existsLevelUpEvent);
+            if(existsLevelUpEvent)
+            {
+                popup.LevelUpButton.OnClickAsObservable()
+                    .Where(_ => levelUpEvent.CanLevelUp())
+                    .SubscribeWithState2(popup, levelUpEvent, (_, p, _levelUpEvelt) =>
+                    {
+                        _levelUpEvelt.LevelUp();
+                        popup.UpdateProperties();
+                    })
+                    .AddTo(popup);
+            }
+
             // MEMO: ポップアップが閉じる条件
             // 閉じるボタンが押されたとき
             // カメラのドラッグ操作が開始したとき
