@@ -29,15 +29,17 @@ namespace HK.AutoAnt.Events
         /// <summary>
         /// 閉じる処理が開始した際のイベント
         /// </summary>
-        public class StartClose : Message<StartClose>
+        public class StartClose : Message<StartClose, Popup>
         {
+            public Popup Popup => this.param1;
         }
 
         /// <summary>
         /// 閉じる処理が完了した際のイベント
         /// </summary>
-        public class CompleteClose : Message<CompleteClose>
+        public class CompleteClose : Message<CompleteClose, Popup>
         {
+            public Popup Popup => this.param1;
         }
     }
 }
