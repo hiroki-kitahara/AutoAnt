@@ -41,6 +41,20 @@ namespace HK.AutoAnt.UI
 
         public void Initialize(CellEvent cellEvent)
         {
+            this.ApplyTitle(cellEvent);
+        }
+
+        private void ApplyTitle(CellEvent cellEvent)
+        {
+            if(cellEvent is ILevelUpEvent)
+            {
+                var levelUpEvent = cellEvent as ILevelUpEvent;
+                this.title.text = this.cellEventNameAndLevelFormat.Format(cellEvent.EventName, levelUpEvent.Level);
+            }
+            else
+            {
+                this.title.text = cellEvent.EventName;
+            }
         }
 
         [Serializable]
