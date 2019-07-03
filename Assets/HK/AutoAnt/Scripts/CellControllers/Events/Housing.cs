@@ -8,6 +8,7 @@ using UnityEngine.Assertions;
 using HK.AutoAnt.EffectSystems;
 using HK.Framework.EventSystems;
 using HK.AutoAnt.Events;
+using HK.AutoAnt.UI;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -78,6 +79,10 @@ namespace HK.AutoAnt.CellControllers.Events
             this.LevelUp(this.gameSystem);
             this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
             this.gameSystem.User.History.GenerateCellEvent.Add(this.Id, this.Level - 1);
+        }
+
+        public override void ApplyDetailsPopup(CellEventDetailsPopup popup)
+        {
         }
     }
 }

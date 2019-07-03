@@ -1,6 +1,8 @@
 ﻿using HK.AutoAnt.CellControllers.Gimmicks;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
+using HK.AutoAnt.UI;
 using HK.Framework.Text;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -30,6 +32,11 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         [SerializeField]
         private int max = 0;
+
+        public override void ApplyDetailsPopup(CellEventDetailsPopup popup)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public override void OnClick(Cell owner)
         {

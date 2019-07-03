@@ -1,6 +1,8 @@
 ﻿using System;
 using HK.AutoAnt.CellControllers.Gimmicks;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.Systems;
+using HK.AutoAnt.UI;
 using HK.Framework.Text;
 using UniRx;
 using UnityEngine;
@@ -25,6 +27,11 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         [SerializeField]
         private int amount = 0;
+
+        public override void ApplyDetailsPopup(CellEventDetailsPopup popup)
+        {
+            throw new NotImplementedException();
+        }
 
         public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
         {

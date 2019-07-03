@@ -6,6 +6,7 @@ using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.Systems;
+using HK.AutoAnt.UI;
 using HK.AutoAnt.UserControllers;
 using HK.Framework.Text;
 using UniRx;
@@ -152,6 +153,11 @@ namespace HK.AutoAnt.CellControllers.Events
             this.Products.Clear();
 
             this.Broker.Publish(AcquiredFacilityProduct.Get(this));
+        }
+
+        public override void ApplyDetailsPopup(CellEventDetailsPopup popup)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using HK.AutoAnt.CellControllers.Gimmicks;
 using HK.AutoAnt.Systems;
+using HK.AutoAnt.UI;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -46,6 +47,11 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <see cref="CellGimmickController"/>を生成する
         /// </summary>
         GameObject CreateGimmickController(Vector2Int origin);
+
+        /// <summary>
+        /// <see cref="CellEventDetailsPopup"/>に自分自身の情報を適用する
+        /// </summary>
+        void ApplyDetailsPopup(CellEventDetailsPopup popup);
 
         /// <summary>
         /// 作成可能か返す

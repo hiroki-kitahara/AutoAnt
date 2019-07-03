@@ -15,18 +15,23 @@ namespace HK.AutoAnt.UI
     {
         [SerializeField]
         private TextMeshProUGUI title = null;
+        public TextMeshProUGUI Title => this.title;
 
         [SerializeField]
         private ResourceElement resource = null;
+        public ResourceElement Resource => this.resource;
 
         [SerializeField]
         private ResourceElement addPopulation = null;
+        public ResourceElement AddPopulation => this.addPopulation;
 
         [SerializeField]
         private ResourceElement product = null;
+        public ResourceElement Product => this.product;
 
         [SerializeField]
         private ResourceElement levelUpCost = null;
+        public ResourceElement LevelUpCost => this.levelUpCost;
 
         [SerializeField]
         private Button levelUpButton = null;
@@ -42,6 +47,7 @@ namespace HK.AutoAnt.UI
 
         [SerializeField]
         private StringAsset.Finder cellEventNameAndLevelFormat;
+        public StringAsset.Finder CellEventNameAdnLevelFormat => this.cellEventNameAndLevelFormat;
 
         public CellEvent SelectCellEvent { get; private set; }
 
