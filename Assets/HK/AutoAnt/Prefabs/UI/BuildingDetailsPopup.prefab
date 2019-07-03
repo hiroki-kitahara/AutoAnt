@@ -1388,7 +1388,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "\u79D2\u9593\u5897\u3048\u308B\u4EBA\u53E3\u91CF"
+  m_text: "\u30D9\u30FC\u30B9\u4EBA\u53E3\u5897\u52A0\u91CF"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3000f372b7ba5a9419c51c28a99ca55a, type: 2}
   m_sharedMaterial: {fileID: 21076451342146514, guid: 3000f372b7ba5a9419c51c28a99ca55a,
