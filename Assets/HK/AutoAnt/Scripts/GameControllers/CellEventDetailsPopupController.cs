@@ -17,7 +17,7 @@ namespace HK.AutoAnt.GameControllers
         
         void Awake()
         {
-            Broker.Global.Receive<RequestShowCellEventDetailsPopup>()
+            Broker.Global.Receive<RequestOpenCellEventDetailsPopup>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     popup = PopupManager.Request(_this.popup);

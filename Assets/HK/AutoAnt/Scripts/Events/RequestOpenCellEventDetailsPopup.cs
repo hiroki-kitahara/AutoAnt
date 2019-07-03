@@ -8,7 +8,7 @@ namespace HK.AutoAnt.Events
     /// <summary>
     /// セルイベント詳細ポップアップの表示をリクエストするイベント
     /// </summary>
-    public sealed class RequestShowCellEventDetailsPopup : Message<RequestShowCellEventDetailsPopup, CellEvent>
+    public sealed class RequestOpenCellEventDetailsPopup : Message<RequestOpenCellEventDetailsPopup, CellEvent>
     {
         /// <summary>
         /// 表示したいセルイベント

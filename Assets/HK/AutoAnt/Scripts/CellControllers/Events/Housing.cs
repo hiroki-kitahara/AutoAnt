@@ -65,7 +65,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public override void OnClick(Cell owner)
         {
-            Framework.EventSystems.Broker.Global.Publish(RequestShowCellEventDetailsPopup.Get(this));
+            Framework.EventSystems.Broker.Global.Publish(RequestOpenCellEventDetailsPopup.Get(this));
         }
 
         public bool CanLevelUp()
