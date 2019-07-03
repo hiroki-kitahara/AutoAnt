@@ -654,8 +654,9 @@ GameObject:
   - component: {fileID: 2650150241927803477}
   - component: {fileID: 8086330265485298730}
   - component: {fileID: 8736304874014697082}
+  - component: {fileID: 6066678644542588228}
   m_Layer: 5
-  m_Name: BuildingDetailsPopup
+  m_Name: CellEventDetailsPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -718,6 +719,37 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &6066678644542588228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235473494157796992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9768f1a798c4e35ac7e7b61f2cfd52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 6963554141159076153}
+  resource:
+    prefix: {fileID: 2588025977886712509}
+    value: {fileID: 7711104119169833472}
+  addPopulation:
+    prefix: {fileID: 228659755757428095}
+    value: {fileID: 3341893672712395844}
+  product:
+    prefix: {fileID: 1393075857501079661}
+    value: {fileID: 1959503439352380242}
+  levelUpCost:
+    prefix: {fileID: 1412337096748937247}
+    value: {fileID: 6439230460365154857}
+  levelUpButton: {fileID: 4860838003630268265}
+  removeButton: {fileID: 2528869687287205943}
+  cellEventNameAndLevelFormat:
+    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
+    value: '{0} Lv.{1}'
+    guid: f1b8c63c-3630-4bc0-85fc-abde75502d3c
 --- !u!1 &1512319647142688110
 GameObject:
   m_ObjectHideFlags: 0

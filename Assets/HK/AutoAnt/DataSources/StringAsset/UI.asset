@@ -29,3 +29,7 @@ MonoBehaviour:
       ja: '{0}pt'
       en: 
     guid: 48b7a4c7-dd43-43d3-84ee-34ef1db7aae9
+  - value:
+      ja: '{0} Lv.{1}'
+      en: 
+    guid: f1b8c63c-3630-4bc0-85fc-abde75502d3c
