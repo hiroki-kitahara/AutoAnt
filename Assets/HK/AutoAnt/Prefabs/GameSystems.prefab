@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb610fa9a1534a8897ef959f6ed0b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offsetCellEventDetailsPopupFocus: 2
 --- !u!114 &5924256291655382808
 MonoBehaviour:
   m_ObjectHideFlags: 0

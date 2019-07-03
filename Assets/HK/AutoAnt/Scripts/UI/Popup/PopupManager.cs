@@ -31,7 +31,6 @@ namespace HK.AutoAnt.UI
         public static T Request<T>(T prefab) where T : Popup
         {
             var popup = Instantiate(prefab, instance.transform, false);
-            popup.Open();
             Broker.Global.Receive<PopupEvents.CompleteClose>()
                 .Where(x => x.Popup == popup)
                 .SubscribeWithState(popup, (_, _popup) =>

@@ -22,6 +22,7 @@ namespace HK.AutoAnt.GameControllers
                 {
                     popup = PopupManager.Request(_this.popup);
                     popup.Initialize(x.CellEvent);
+                    popup.Open();
                 })
                 .AddTo(this);
         }

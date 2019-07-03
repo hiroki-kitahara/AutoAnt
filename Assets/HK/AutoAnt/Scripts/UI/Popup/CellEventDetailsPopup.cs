@@ -39,8 +39,11 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private StringAsset.Finder cellEventNameAndLevelFormat;
 
+        public CellEvent SelectCellEvent { get; private set; }
+
         public void Initialize(CellEvent cellEvent)
         {
+            this.SelectCellEvent = cellEvent;
             this.ApplyTitle(cellEvent);
         }
 
