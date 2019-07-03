@@ -20,7 +20,7 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - 人口を増やす
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Housing")]
-    public sealed class Housing : CellEvent, IAddTownPopulation, ILevelUpEvent
+    public sealed class Housing : CellEvent, IAddTownPopulation, ILevelUpEvent, IHousing
     {
         /// <summary>
         /// 保持している人口
@@ -35,6 +35,10 @@ namespace HK.AutoAnt.CellControllers.Events
         /// 人口増加の変動に利用しています
         /// </remarks>
         public int Level { get; set; } = 1;
+
+        double IHousing.CurrentPopulation => this.CurrentPopulation;
+
+        double IHousing.BasePopulation => this.levelParameter.Population;
 
         private GameSystem gameSystem;
 
