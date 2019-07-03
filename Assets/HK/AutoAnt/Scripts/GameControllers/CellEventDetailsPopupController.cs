@@ -6,7 +6,7 @@ namespace HK.AutoAnt.GameControllers
     /// <summary>
     /// 
     /// </summary>
-    public sealed class CellEventDetailsPopupSpawner : MonoBehaviour
+    public sealed class CellEventDetailsPopupController : MonoBehaviour
     {
     }
 }
