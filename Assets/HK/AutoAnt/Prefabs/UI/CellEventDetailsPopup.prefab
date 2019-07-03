@@ -746,6 +746,7 @@ MonoBehaviour:
     value: {fileID: 6439230460365154857}
   levelUpButton: {fileID: 4860838003630268265}
   removeButton: {fileID: 2528869687287205943}
+  closeButton: {fileID: 5818133176571211977}
   cellEventNameAndLevelFormat:
     target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
     value: '{0} Lv.{1}'
@@ -1691,7 +1692,7 @@ GameObject:
   - component: {fileID: 6976977458249838036}
   - component: {fileID: 5818133176571211977}
   m_Layer: 5
-  m_Name: RemoveButton
+  m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

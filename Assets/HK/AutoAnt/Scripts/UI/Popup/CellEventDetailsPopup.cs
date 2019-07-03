@@ -37,6 +37,10 @@ namespace HK.AutoAnt.UI
         public Button RemoveButton => this.removeButton;
 
         [SerializeField]
+        private Button closeButton = null;
+        public Button CloseButton => this.closeButton;
+
+        [SerializeField]
         private StringAsset.Finder cellEventNameAndLevelFormat;
 
         public CellEvent SelectCellEvent { get; private set; }

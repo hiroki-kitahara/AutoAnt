@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.Events;
+﻿using HK.AutoAnt.CellControllers.Events;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.UI;
 using HK.Framework.EventSystems;
 using UniRx;
@@ -20,11 +21,22 @@ namespace HK.AutoAnt.GameControllers
             Broker.Global.Receive<RequestOpenCellEventDetailsPopup>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    popup = PopupManager.Request(_this.popup);
-                    popup.Initialize(x.CellEvent);
-                    popup.Open();
+                    _this.CreatePopup(x.CellEvent);
                 })
                 .AddTo(this);
+        }
+
+        private void CreatePopup(CellEvent cellEvent)
+        {
+            var popup = PopupManager.Request(this.popup);
+            popup.Initialize(cellEvent);
+            popup.CloseButton.OnClickAsObservable()
+                .SubscribeWithState(popup, (_, p) =>
+                {
+                    p.Close();
+                })
+                .AddTo(popup);
+            popup.Open();
         }
     }
 }
