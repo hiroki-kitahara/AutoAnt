@@ -157,7 +157,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public override void ApplyDetailsPopup(CellEventDetailsPopup popup)
         {
-            throw new NotImplementedException();
+            popup.ApplyTitle(this.EventName, this.Level);
         }
     }
 }

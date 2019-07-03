@@ -87,6 +87,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public override void ApplyDetailsPopup(CellEventDetailsPopup popup)
         {
+            popup.ApplyTitle(this.EventName, this.Level);
         }
     }
 }

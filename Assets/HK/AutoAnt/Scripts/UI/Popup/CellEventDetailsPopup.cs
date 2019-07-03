@@ -54,7 +54,7 @@ namespace HK.AutoAnt.UI
         public void Initialize(CellEvent cellEvent)
         {
             this.SelectCellEvent = cellEvent;
-            this.ApplyTitle(cellEvent);
+            this.UpdateProperties();
 
             // TODO
             this.resource.SetActive(false);
@@ -65,7 +65,7 @@ namespace HK.AutoAnt.UI
 
         public void UpdateProperties()
         {
-            this.ApplyTitle(this.SelectCellEvent);
+            this.SelectCellEvent.ApplyDetailsPopup(this);
         }
 
         public void SetActiveLevelUpButton(bool isActive)
@@ -73,17 +73,14 @@ namespace HK.AutoAnt.UI
             this.LevelUpButton.gameObject.SetActive(isActive);
         }
 
-        private void ApplyTitle(CellEvent cellEvent)
+        public void ApplyTitle(string name, int level)
         {
-            if(cellEvent is ILevelUpEvent)
-            {
-                var levelUpEvent = cellEvent as ILevelUpEvent;
-                this.title.text = this.cellEventNameAndLevelFormat.Format(cellEvent.EventName, levelUpEvent.Level);
-            }
-            else
-            {
-                this.title.text = cellEvent.EventName;
-            }
+            this.title.text = this.cellEventNameAndLevelFormat.Format(name, level);
+        }
+
+        public void ApplyTitle(string name)
+        {
+            this.title.text = name;
         }
 
         [Serializable]
