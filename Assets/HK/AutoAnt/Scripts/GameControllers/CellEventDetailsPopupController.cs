@@ -10,7 +10,7 @@ using UnityEngine.Assertions;
 namespace HK.AutoAnt.GameControllers
 {
     /// <summary>
-    /// 
+    /// <see cref="CellEventDetailsPopup"/>に様々な処理を仕込むクラス
     /// </summary>
     public sealed class CellEventDetailsPopupController : MonoBehaviour
     {
