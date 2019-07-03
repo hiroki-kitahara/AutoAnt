@@ -1,5 +1,6 @@
 ﻿using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Events;
+using HK.AutoAnt.Systems;
 using HK.AutoAnt.UI;
 using HK.Framework.EventSystems;
 using UniRx;
@@ -31,6 +32,7 @@ namespace HK.AutoAnt.GameControllers
             var popup = PopupManager.Request(this.popup);
             popup.Initialize(cellEvent);
 
+            // レベルアップボタンの適用
             var levelUpEvent = cellEvent as ILevelUpEvent;
             var existsLevelUpEvent = levelUpEvent != null;
             popup.SetActiveLevelUpButton(existsLevelUpEvent);
@@ -45,6 +47,16 @@ namespace HK.AutoAnt.GameControllers
                     })
                     .AddTo(popup);
             }
+
+            // 解体ボタンの適用
+            popup.RemoveButton.OnClickAsObservable()
+                .SubscribeWithState2(popup, cellEvent, (_, p, _cellEvent) =>
+                {
+                    var cellManager = GameSystem.Instance.CellManager;
+                    cellManager.EventGenerator.Erase(_cellEvent);
+                    p.Close();
+                })
+                .AddTo(popup);
 
             // MEMO: ポップアップが閉じる条件
             // 閉じるボタンが押されたとき
