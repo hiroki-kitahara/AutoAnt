@@ -171,6 +171,9 @@ namespace HK.AutoAnt.CellControllers.Events
         public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
         {
             popup.ApplyTitle(this.EventName, this.Level);
+            popup.UpdateProperties();
+            popup.ClearLevelUpCosts();
+            this.AttachDetailsPopup(popup, this.gameSystem);
         }
     }
 }

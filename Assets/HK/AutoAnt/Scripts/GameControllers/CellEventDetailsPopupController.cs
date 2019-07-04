@@ -43,7 +43,7 @@ namespace HK.AutoAnt.GameControllers
                     .SubscribeWithState2(popup, levelUpEvent, (_, p, _levelUpEvelt) =>
                     {
                         _levelUpEvelt.LevelUp();
-                        popup.UpdateProperties();
+                        popup.UpdateElement();
                     })
                     .AddTo(popup);
             }

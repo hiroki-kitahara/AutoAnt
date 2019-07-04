@@ -73,18 +73,37 @@ namespace HK.AutoAnt.UI
 
         private readonly List<CellEventDetailsPopupProperty> properties = new List<CellEventDetailsPopupProperty>();
 
+        private readonly List<CellEventDetailsPopupProperty> levelUpCosts = new List<CellEventDetailsPopupProperty>();
+
         public CellEvent SelectCellEvent { get; private set; }
 
         public void Initialize(CellEvent cellEvent)
         {
             this.SelectCellEvent = cellEvent;
             this.SelectCellEvent.AttachDetailsPopup(this);
-            this.UpdateProperties();
+            this.UpdateElement();
+        }
+
+        public void UpdateElement()
+        {
+            this.SelectCellEvent.UpdateDetailsPopup(this);
         }
 
         public void UpdateProperties()
         {
-            this.SelectCellEvent.UpdateDetailsPopup(this);
+            foreach(var p in this.properties)
+            {
+                p.UpdateProperty();
+            }
+        }
+
+        public void ClearLevelUpCosts()
+        {
+            foreach(var l in this.levelUpCosts)
+            {
+                Destroy(l.gameObject);
+            }
+            this.levelUpCosts.Clear();
         }
 
         public void SetActiveLevelUpButton(bool isActive)
@@ -104,19 +123,18 @@ namespace HK.AutoAnt.UI
 
         public CellEventDetailsPopupProperty AddProperty(Action<CellEventDetailsPopupProperty> updateAction)
         {
-            return this.InternalAddProperty(updateAction, this.propertyParent);
+            var property = Instantiate(this.propertyPrefab, this.propertyParent);
+            property.Initialize(updateAction);
+            this.properties.Add(property);
+
+            return property;
         }
 
         public CellEventDetailsPopupProperty AddLevelUpCost(Action<CellEventDetailsPopupProperty> updateAction)
         {
-            return this.InternalAddProperty(updateAction, this.levelUpCostParent);
-        }
-
-        private CellEventDetailsPopupProperty InternalAddProperty(Action<CellEventDetailsPopupProperty> updateAction, Transform parent)
-        {
-            var property = Instantiate(this.propertyPrefab, parent);
+            var property = Instantiate(this.propertyPrefab, this.levelUpCostParent);
             property.Initialize(updateAction);
-            this.properties.Add(property);
+            this.levelUpCosts.Add(property);
 
             return property;
         }
