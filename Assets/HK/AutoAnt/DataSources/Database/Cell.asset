@@ -15,9 +15,9 @@ MonoBehaviour:
   records:
   - id: 100000
     cellType: 0
-    prefab: {fileID: 1087446381315328015, guid: 06d1595d0416942858f0e5a4983e79ec,
+    prefab: {fileID: 6873462393922075449, guid: 6719eec623a82476b849d79d2747d38d,
       type: 3}
   - id: 100100
     cellType: 1
-    prefab: {fileID: 1087446381315328015, guid: 0c5dbbdf4c3d649a4b60b2739640fbd0,
+    prefab: {fileID: 6873462393922075449, guid: ab50fdd512b5b42c5a647366b6689809,
       type: 3}
