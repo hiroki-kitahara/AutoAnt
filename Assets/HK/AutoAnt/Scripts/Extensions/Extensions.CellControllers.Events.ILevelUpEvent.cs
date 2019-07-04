@@ -55,6 +55,11 @@ namespace HK.AutoAnt.Extensions
         public static void AttachDetailsPopup(this ILevelUpEvent self, CellEventDetailsPopup popup, GameSystem gameSystem)
         {
             var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(self.Id, self.Level);
+            if(levelUpCostRecord == null)
+            {
+                return;
+            }
+            
             popup.AddLevelUpCost(property =>
             {
                 property.Prefix.text = popup.Money.Get;
