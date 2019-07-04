@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using HK.AutoAnt.CellControllers.Events;
 using HK.Framework.Text;
 using TMPro;
@@ -18,22 +19,6 @@ namespace HK.AutoAnt.UI
         public TextMeshProUGUI Title => this.title;
 
         [SerializeField]
-        private ResourceElement resource = null;
-        public ResourceElement Resource => this.resource;
-
-        [SerializeField]
-        private ResourceElement addPopulation = null;
-        public ResourceElement AddPopulation => this.addPopulation;
-
-        [SerializeField]
-        private ResourceElement product = null;
-        public ResourceElement Product => this.product;
-
-        [SerializeField]
-        private ResourceElement levelUpCost = null;
-        public ResourceElement LevelUpCost => this.levelUpCost;
-
-        [SerializeField]
         private Button levelUpButton = null;
         public Button LevelUpButton => this.levelUpButton;
 
@@ -46,8 +31,16 @@ namespace HK.AutoAnt.UI
         public Button CloseButton => this.closeButton;
 
         [SerializeField]
+        private Transform propertyParent;
+
+        [SerializeField]
+        private CellEventDetailsPopupProperty propertyPrefab;
+
+        [SerializeField]
         private StringAsset.Finder cellEventNameAndLevelFormat;
         public StringAsset.Finder CellEventNameAdnLevelFormat => this.cellEventNameAndLevelFormat;
+
+        private readonly List<CellEventDetailsPopupProperty> properties = new List<CellEventDetailsPopupProperty>();
 
         public CellEvent SelectCellEvent { get; private set; }
 
@@ -55,12 +48,6 @@ namespace HK.AutoAnt.UI
         {
             this.SelectCellEvent = cellEvent;
             this.UpdateProperties();
-
-            // TODO
-            this.resource.SetActive(false);
-            this.addPopulation.SetActive(false);
-            this.product.SetActive(false);
-            this.levelUpCost.SetActive(false);
         }
 
         public void UpdateProperties()
@@ -83,28 +70,11 @@ namespace HK.AutoAnt.UI
             this.title.text = name;
         }
 
-        [Serializable]
-        public class ResourceElement
+        public void AddProperty(Action<CellEventDetailsPopupProperty> updateAction)
         {
-            [SerializeField]
-            private GameObject root;
-
-            [SerializeField]
-            private TextMeshProUGUI prefix;
-
-            [SerializeField]
-            private TextMeshProUGUI value;
-
-            public void SetActive(bool isActive)
-            {
-                this.root.SetActive(isActive);
-            }
-
-            public void Apply(string prefix, string value)
-            {
-                this.prefix.text = prefix;
-                this.value.text = value;
-            }
+            var property = Instantiate(this.propertyPrefab, this.propertyParent);
+            property.Initialize(updateAction);
+            this.properties.Add(property);
         }
     }
 }
