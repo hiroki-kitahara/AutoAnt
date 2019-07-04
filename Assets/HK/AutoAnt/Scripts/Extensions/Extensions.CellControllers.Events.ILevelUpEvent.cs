@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
@@ -68,8 +69,10 @@ namespace HK.AutoAnt.Extensions
             properties.Add(
                 popup.AddLevelUpCost(property =>
                 {
+                    var stringBuilder = new StringBuilder();
+                    var color = (gameSystem.User.Wallet.Money >= levelUpCostRecord.Cost.Money) ? popup.EnoughLevelUpCostColor : popup.NotEnoughLevelUpCostColor;
                     property.Prefix.text = popup.Money.Get;
-                    property.Value.text = levelUpCostRecord.Cost.Money.ToReadableString("###");
+                    property.Value.text = stringBuilder.AppendColorCode(color, levelUpCostRecord.Cost.Money.ToReadableString("###")).ToString();
                 })
             );
 
@@ -82,8 +85,10 @@ namespace HK.AutoAnt.Extensions
                         var inventoryItem = gameSystem.User.Inventory.Items;
                         var itemRecord = gameSystem.MasterData.Item.Records.Get(n.ItemName);
                         var possessionItemAmount = inventoryItem.ContainsKey(itemRecord.Id) ? inventoryItem[itemRecord.Id] : 0;
+                        var stringBuilder = new StringBuilder();
+                        var color = (possessionItemAmount >= n.Amount) ? popup.EnoughLevelUpCostColor : popup.NotEnoughLevelUpCostColor;
                         property.Prefix.text = n.ItemName;
-                        property.Value.text = popup.NeedItemValue.Format(possessionItemAmount, n.Amount);
+                        property.Value.text = stringBuilder.AppendColorCode(color, popup.NeedItemValue.Format(possessionItemAmount, n.Amount)).ToString();
                     })
                 );
             }

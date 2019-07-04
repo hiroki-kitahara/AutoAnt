@@ -71,6 +71,14 @@ namespace HK.AutoAnt.UI
         private StringAsset.Finder needItemValue;
         public StringAsset.Finder NeedItemValue => this.needItemValue;
 
+        [SerializeField]
+        private Color enoughLevelUpCostColor;
+        public Color EnoughLevelUpCostColor => enoughLevelUpCostColor;
+
+        [SerializeField]
+        private Color notEnoughLevelUpCostColor;
+        public Color NotEnoughLevelUpCostColor => notEnoughLevelUpCostColor;
+
         private readonly List<CellEventDetailsPopupProperty> properties = new List<CellEventDetailsPopupProperty>();
 
         private readonly List<CellEventDetailsPopupProperty> levelUpCosts = new List<CellEventDetailsPopupProperty>();

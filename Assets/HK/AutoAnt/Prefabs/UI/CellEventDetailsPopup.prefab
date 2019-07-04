@@ -502,6 +502,8 @@ MonoBehaviour:
     target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
     value: '{0}/{1}'
     guid: 251b88ff-6b21-4ea1-bea7-5e0eb1ff9559
+  enoughLevelUpCostColor: {r: 1, g: 1, b: 1, a: 1}
+  notEnoughLevelUpCostColor: {r: 1, g: 0.4198113, b: 0.4198113, a: 1}
 --- !u!1 &1708266307402540515
 GameObject:
   m_ObjectHideFlags: 0
