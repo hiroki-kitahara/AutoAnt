@@ -34,6 +34,9 @@ namespace HK.AutoAnt.UI
         private Transform propertyParent;
 
         [SerializeField]
+        private Transform levelUpCostParent;
+
+        [SerializeField]
         private CellEventDetailsPopupProperty propertyPrefab;
 
         [SerializeField]
@@ -93,7 +96,17 @@ namespace HK.AutoAnt.UI
 
         public CellEventDetailsPopupProperty AddProperty(Action<CellEventDetailsPopupProperty> updateAction)
         {
-            var property = Instantiate(this.propertyPrefab, this.propertyParent);
+            return this.InternalAddProperty(updateAction, this.propertyParent);
+        }
+
+        public CellEventDetailsPopupProperty AddLevelUpCost(Action<CellEventDetailsPopupProperty> updateAction)
+        {
+            return this.InternalAddProperty(updateAction, this.levelUpCostParent);
+        }
+
+        private CellEventDetailsPopupProperty InternalAddProperty(Action<CellEventDetailsPopupProperty> updateAction, Transform parent)
+        {
+            var property = Instantiate(this.propertyPrefab, parent);
             property.Initialize(updateAction);
             this.properties.Add(property);
 
