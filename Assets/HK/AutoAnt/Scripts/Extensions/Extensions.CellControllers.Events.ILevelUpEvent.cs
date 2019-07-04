@@ -7,6 +7,8 @@ using HK.AutoAnt.Systems;
 using HK.AutoAnt.UI;
 using HK.AutoAnt.UserControllers;
 using HK.Framework.EventSystems;
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -55,27 +57,46 @@ namespace HK.AutoAnt.Extensions
         public static void AttachDetailsPopup(this ILevelUpEvent self, CellEventDetailsPopup popup, GameSystem gameSystem)
         {
             var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(self.Id, self.Level);
-            if(levelUpCostRecord == null)
+            if (levelUpCostRecord == null)
             {
                 return;
             }
-            
-            popup.AddLevelUpCost(property =>
-            {
-                property.Prefix.text = popup.Money.Get;
-                property.Value.text = levelUpCostRecord.Cost.Money.ToReadableString("###");
-            });
-            foreach(var n in levelUpCostRecord.Cost.NeedItems)
-            {
+
+            var properties = new List<CellEventDetailsPopupProperty>();
+
+            // お金を表示
+            properties.Add(
                 popup.AddLevelUpCost(property =>
                 {
-                    var inventoryItem = gameSystem.User.Inventory.Items;
-                    var itemRecord = gameSystem.MasterData.Item.Records.Get(n.ItemName);
-                    var possessionItemAmount = inventoryItem.ContainsKey(itemRecord.Id) ? inventoryItem[itemRecord.Id] : 0;
-                    property.Prefix.text = n.ItemName;
-                    property.Value.text = popup.NeedItemValue.Format(possessionItemAmount, n.Amount);
-                });
+                    property.Prefix.text = popup.Money.Get;
+                    property.Value.text = levelUpCostRecord.Cost.Money.ToReadableString("###");
+                })
+            );
+
+            // アイテムを表示
+            foreach(var n in levelUpCostRecord.Cost.NeedItems)
+            {
+                properties.Add(
+                    popup.AddLevelUpCost(property =>
+                    {
+                        var inventoryItem = gameSystem.User.Inventory.Items;
+                        var itemRecord = gameSystem.MasterData.Item.Records.Get(n.ItemName);
+                        var possessionItemAmount = inventoryItem.ContainsKey(itemRecord.Id) ? inventoryItem[itemRecord.Id] : 0;
+                        property.Prefix.text = n.ItemName;
+                        property.Value.text = popup.NeedItemValue.Format(possessionItemAmount, n.Amount);
+                    })
+                );
             }
+
+            // ポップアップを開いているときもお金やアイテムの所持数が更新されるのを考慮してプロパティも更新する
+            popup.UpdateAsObservable()
+                .SubscribeWithState(properties, (_, _properties) =>
+                {
+                    foreach(var p in _properties)
+                    {
+                        p.UpdateProperty();
+                    }
+                });
         }
     }
 }
