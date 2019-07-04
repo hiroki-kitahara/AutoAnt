@@ -155,7 +155,7 @@ namespace HK.AutoAnt.CellControllers.Events
             this.Broker.Publish(AcquiredFacilityProduct.Get(this));
         }
 
-        public override void ApplyDetailsPopup(CellEventDetailsPopup popup)
+        public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
         {
             popup.ApplyTitle(this.EventName, this.Level);
         }

@@ -51,7 +51,7 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// <see cref="CellEventDetailsPopup"/>に自分自身の情報を適用する
         /// </summary>
-        void ApplyDetailsPopup(CellEventDetailsPopup popup);
+        void UpdateDetailsPopup(CellEventDetailsPopup popup);
 
         /// <summary>
         /// 作成可能か返す

@@ -52,7 +52,7 @@ namespace HK.AutoAnt.UI
 
         public void UpdateProperties()
         {
-            this.SelectCellEvent.ApplyDetailsPopup(this);
+            this.SelectCellEvent.UpdateDetailsPopup(this);
         }
 
         public void SetActiveLevelUpButton(bool isActive)

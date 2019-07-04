@@ -85,7 +85,7 @@ namespace HK.AutoAnt.CellControllers.Events
             this.gameSystem.User.History.GenerateCellEvent.Add(this.Id, this.Level - 1);
         }
 
-        public override void ApplyDetailsPopup(CellEventDetailsPopup popup)
+        public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
         {
             popup.ApplyTitle(this.EventName, this.Level);
         }
