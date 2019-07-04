@@ -53,3 +53,11 @@ MonoBehaviour:
       ja: "{0}/{1}\u79D2"
       en: 
     guid: edc834e7-8dbf-4643-8543-9e60bc8fe4ea
+  - value:
+      ja: "\u91D1"
+      en: 
+    guid: fe41bbc7-1a2b-4cbd-ae9c-6fdcfb031c3a
+  - value:
+      ja: '{0}/{1}'
+      en: 
+    guid: 251b88ff-6b21-4ea1-bea7-5e0eb1ff9559

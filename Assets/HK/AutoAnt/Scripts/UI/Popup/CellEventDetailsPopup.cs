@@ -63,6 +63,14 @@ namespace HK.AutoAnt.UI
         private StringAsset.Finder productValue;
         public StringAsset.Finder ProductValue => this.productValue;
 
+        [SerializeField]
+        private StringAsset.Finder money;
+        public StringAsset.Finder Money => this.money;
+
+        [SerializeField]
+        private StringAsset.Finder needItemValue;
+        public StringAsset.Finder NeedItemValue => this.needItemValue;
+
         private readonly List<CellEventDetailsPopupProperty> properties = new List<CellEventDetailsPopupProperty>();
 
         public CellEvent SelectCellEvent { get; private set; }

@@ -4,6 +4,8 @@ using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Systems;
+using HK.AutoAnt.UI;
+using HK.AutoAnt.UserControllers;
 using HK.Framework.EventSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -48,6 +50,27 @@ namespace HK.AutoAnt.Extensions
 
             // FIXME: 不要になったら削除する
             Broker.Global.Publish(RequestNotification.Get($"レベルアップ！ {self.Level - 1} -> {self.Level}"));
+        }
+
+        public static void AttachDetailsPopup(this ILevelUpEvent self, CellEventDetailsPopup popup, GameSystem gameSystem)
+        {
+            var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(self.Id, self.Level);
+            popup.AddLevelUpCost(property =>
+            {
+                property.Prefix.text = popup.Money.Get;
+                property.Value.text = levelUpCostRecord.Cost.Money.ToReadableString("###");
+            });
+            foreach(var n in levelUpCostRecord.Cost.NeedItems)
+            {
+                popup.AddLevelUpCost(property =>
+                {
+                    var inventoryItem = gameSystem.User.Inventory.Items;
+                    var itemRecord = gameSystem.MasterData.Item.Records.Get(n.ItemName);
+                    var possessionItemAmount = inventoryItem.ContainsKey(itemRecord.Id) ? inventoryItem[itemRecord.Id] : 0;
+                    property.Prefix.text = n.ItemName;
+                    property.Value.text = popup.NeedItemValue.Format(possessionItemAmount, n.Amount);
+                });
+            }
         }
     }
 }

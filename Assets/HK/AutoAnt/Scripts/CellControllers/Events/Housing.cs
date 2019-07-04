@@ -107,6 +107,8 @@ namespace HK.AutoAnt.CellControllers.Events
                     _population.UpdateProperty();
                 })
                 .AddTo(popup);
+
+            this.AttachDetailsPopup(popup, this.gameSystem);
         }
 
         public override void UpdateDetailsPopup(CellEventDetailsPopup popup)

@@ -164,6 +164,8 @@ namespace HK.AutoAnt.CellControllers.Events
                 property.Prefix.text = popup.Product.Get;
                 property.Value.text = popup.ProductValue.Format(this.LevelParameter.ProductName, this.LevelParameter.NeedProductTime);
             });
+
+            this.AttachDetailsPopup(popup, this.gameSystem);
         }
 
         public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
