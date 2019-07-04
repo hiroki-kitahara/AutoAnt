@@ -69,6 +69,11 @@ namespace HK.AutoAnt.CellControllers
         {
             Assert.IsTrue(this.cellMapper.HasEvent(cell));
             var cellEvent = this.cellMapper.CellEvent.Map[cell.Position];
+            this.Erase(cellEvent);
+        }
+
+        public void Erase(ICellEvent cellEvent)
+        {
             this.cellMapper.Remove(cellEvent);
             cellEvent.Remove(this.gameSystem);
         }

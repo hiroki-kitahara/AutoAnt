@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using HK.AutoAnt.CellControllers.Gimmicks;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
-using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.Systems;
-using HK.AutoAnt.UserControllers;
-using HK.Framework.Text;
+using HK.AutoAnt.UI;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -88,9 +85,9 @@ namespace HK.AutoAnt.CellControllers.Events
             {
                 this.CollectionProducts();
             }
-            else if(this.CanLevelUp())
+            else
             {
-                this.LevelUp();
+                Framework.EventSystems.Broker.Global.Publish(RequestOpenCellEventDetailsPopup.Get(this));
             }
         }
 
@@ -152,6 +149,31 @@ namespace HK.AutoAnt.CellControllers.Events
             this.Products.Clear();
 
             this.Broker.Publish(AcquiredFacilityProduct.Get(this));
+        }
+
+        public override void AttachDetailsPopup(CellEventDetailsPopup popup)
+        {
+            popup.AddProperty(property =>
+            {
+                property.Prefix.text = popup.Popularity.Get;
+                property.Value.text = this.LevelParameter.Popularity.ToReadableString("###");
+            });
+
+            popup.AddProperty(property =>
+            {
+                property.Prefix.text = popup.Product.Get;
+                property.Value.text = popup.ProductValue.Format(this.LevelParameter.ProductName, this.LevelParameter.NeedProductTime);
+            });
+
+            this.AttachDetailsPopup(popup, this.gameSystem);
+        }
+
+        public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
+        {
+            popup.ApplyTitle(this.EventName, this.Level);
+            popup.UpdateProperties();
+            popup.ClearLevelUpCosts();
+            this.AttachDetailsPopup(popup, this.gameSystem);
         }
     }
 }

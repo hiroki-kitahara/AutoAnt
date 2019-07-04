@@ -6,6 +6,11 @@ using HK.AutoAnt.UserControllers;
 using UnityEngine;
 using UnityEngine.Assertions;
 using HK.AutoAnt.EffectSystems;
+using HK.Framework.EventSystems;
+using HK.AutoAnt.Events;
+using HK.AutoAnt.UI;
+using UniRx.Triggers;
+using UniRx;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -17,7 +22,7 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - 人口を増やす
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Housing")]
-    public sealed class Housing : CellEvent, IAddTownPopulation, ILevelUpEvent
+    public sealed class Housing : CellEvent, IAddTownPopulation, ILevelUpEvent, IHousing
     {
         /// <summary>
         /// 保持している人口
@@ -32,6 +37,10 @@ namespace HK.AutoAnt.CellControllers.Events
         /// 人口増加の変動に利用しています
         /// </remarks>
         public int Level { get; set; } = 1;
+
+        double IHousing.CurrentPopulation => this.CurrentPopulation;
+
+        double IHousing.BasePopulation => this.levelParameter.Population;
 
         private GameSystem gameSystem;
 
@@ -63,10 +72,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public override void OnClick(Cell owner)
         {
-            if(this.CanLevelUp())
-            {
-                this.LevelUp();
-            }
+            Framework.EventSystems.Broker.Global.Publish(RequestOpenCellEventDetailsPopup.Get(this));
         }
 
         public bool CanLevelUp()
@@ -79,6 +85,38 @@ namespace HK.AutoAnt.CellControllers.Events
             this.LevelUp(this.gameSystem);
             this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
             this.gameSystem.User.History.GenerateCellEvent.Add(this.Id, this.Level - 1);
+        }
+
+        public override void AttachDetailsPopup(CellEventDetailsPopup popup)
+        {
+            var population = popup.AddProperty(property =>
+            {
+                property.Prefix.text = popup.Population.Get;
+                property.Value.text = this.CurrentPopulation.ToReadableString("###");
+            });
+
+            popup.AddProperty(property =>
+            {
+                property.Prefix.text = popup.BasePopulation.Get;
+                property.Value.text = this.levelParameter.Population.ToReadableString("###");
+            });
+
+            popup.UpdateAsObservable()
+                .SubscribeWithState(population, (_, _population) =>
+                {
+                    _population.UpdateProperty();
+                })
+                .AddTo(popup);
+
+            this.AttachDetailsPopup(popup, this.gameSystem);
+        }
+
+        public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
+        {
+            popup.ApplyTitle(this.EventName, this.Level);
+            popup.UpdateProperties();
+            popup.ClearLevelUpCosts();
+            this.AttachDetailsPopup(popup, this.gameSystem);
         }
     }
 }

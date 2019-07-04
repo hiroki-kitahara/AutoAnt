@@ -1,5 +1,6 @@
 ﻿using System;
 using HK.AutoAnt.Events;
+using HK.Framework.EventSystems;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -11,23 +12,16 @@ namespace HK.AutoAnt.UI
     /// </summary>
     public abstract class Popup : MonoBehaviour, IPopup
     {
-        protected readonly MessageBroker broker = new MessageBroker();
-
-        public IMessageBroker Broker => this.broker;
-
         /// <summary>
         /// 開く
         /// </summary>
         public virtual void Open()
         {
+            Broker.Global.Publish(PopupEvents.StartOpen.Get(this));
+
             this.gameObject.SetActive(true);
 
-            this.Broker.Receive<PopupEvents.CompleteClose>()
-                .SubscribeWithState(this, (_, _this) =>
-                {
-                    _this.broker.Dispose();
-                })
-                .AddTo(this);
+            Broker.Global.Publish(PopupEvents.CompleteOpen.Get(this));
         }
 
         /// <summary>
@@ -35,11 +29,11 @@ namespace HK.AutoAnt.UI
         /// </summary>
         public virtual void Close()
         {
-            this.Broker.Publish(PopupEvents.StartClose.Get());
+            Broker.Global.Publish(PopupEvents.StartClose.Get(this));
 
             this.gameObject.SetActive(false);
 
-            this.Broker.Publish(PopupEvents.CompleteClose.Get());
+            Broker.Global.Publish(PopupEvents.CompleteClose.Get(this));
         }
     }
 }
