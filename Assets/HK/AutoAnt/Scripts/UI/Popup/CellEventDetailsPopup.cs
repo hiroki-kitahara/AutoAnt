@@ -31,52 +31,52 @@ namespace HK.AutoAnt.UI
         public Button CloseButton => this.closeButton;
 
         [SerializeField]
-        private Transform propertyParent;
+        private Transform propertyParent = null;
 
         [SerializeField]
-        private Transform levelUpCostParent;
+        private Transform levelUpCostParent = null;
 
         [SerializeField]
-        private CellEventDetailsPopupProperty propertyPrefab;
+        private CellEventDetailsPopupProperty propertyPrefab = null;
 
         [SerializeField]
-        private StringAsset.Finder cellEventNameAndLevelFormat;
+        private StringAsset.Finder cellEventNameAndLevelFormat = null;
         public StringAsset.Finder CellEventNameAdnLevelFormat => this.cellEventNameAndLevelFormat;
 
         [SerializeField]
-        private StringAsset.Finder population;
+        private StringAsset.Finder population = null;
         public StringAsset.Finder Population => this.population;
 
         [SerializeField]
-        private StringAsset.Finder popularity;
+        private StringAsset.Finder popularity = null;
         public StringAsset.Finder Popularity => this.popularity;
 
         [SerializeField]
-        private StringAsset.Finder basePopulation;
+        private StringAsset.Finder basePopulation = null;
         public StringAsset.Finder BasePopulation => this.basePopulation;
 
         [SerializeField]
-        private StringAsset.Finder product;
+        private StringAsset.Finder product = null;
         public StringAsset.Finder Product => this.product;
 
         [SerializeField]
-        private StringAsset.Finder productValue;
+        private StringAsset.Finder productValue = null;
         public StringAsset.Finder ProductValue => this.productValue;
 
         [SerializeField]
-        private StringAsset.Finder money;
+        private StringAsset.Finder money = null;
         public StringAsset.Finder Money => this.money;
 
         [SerializeField]
-        private StringAsset.Finder needItemValue;
+        private StringAsset.Finder needItemValue = null;
         public StringAsset.Finder NeedItemValue => this.needItemValue;
 
         [SerializeField]
-        private Color enoughLevelUpCostColor;
+        private Color enoughLevelUpCostColor = Color.white;
         public Color EnoughLevelUpCostColor => enoughLevelUpCostColor;
 
         [SerializeField]
-        private Color notEnoughLevelUpCostColor;
+        private Color notEnoughLevelUpCostColor = Color.white;
         public Color NotEnoughLevelUpCostColor => notEnoughLevelUpCostColor;
 
         private readonly List<CellEventDetailsPopupProperty> properties = new List<CellEventDetailsPopupProperty>();
