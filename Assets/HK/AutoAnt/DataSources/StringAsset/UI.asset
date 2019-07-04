@@ -33,3 +33,11 @@ MonoBehaviour:
       ja: '{0} Lv.{1}'
       en: 
     guid: f1b8c63c-3630-4bc0-85fc-abde75502d3c
+  - value:
+      ja: "\u4EBA\u53E3"
+      en: 
+    guid: dcf2b0a2-1352-4a78-867f-3cad5985b655
+  - value:
+      ja: "\u30D9\u30FC\u30B9\u4EBA\u53E3\u5897\u52A0\u91CF"
+      en: 
+    guid: acf5574c-4061-4f82-99df-1ee3d5dc97e0

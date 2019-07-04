@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using HK.AutoAnt.CellControllers.Gimmicks;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
-using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.UI;
-using HK.AutoAnt.UserControllers;
-using HK.Framework.Text;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -153,6 +149,11 @@ namespace HK.AutoAnt.CellControllers.Events
             this.Products.Clear();
 
             this.Broker.Publish(AcquiredFacilityProduct.Get(this));
+        }
+
+        public override void AttachDetailsPopup(CellEventDetailsPopup popup)
+        {
+            throw new NotImplementedException();
         }
 
         public override void UpdateDetailsPopup(CellEventDetailsPopup popup)

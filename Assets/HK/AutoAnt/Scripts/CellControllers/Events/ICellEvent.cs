@@ -49,7 +49,13 @@ namespace HK.AutoAnt.CellControllers.Events
         GameObject CreateGimmickController(Vector2Int origin);
 
         /// <summary>
-        /// <see cref="CellEventDetailsPopup"/>に自分自身の情報を適用する
+        /// <see cref="CellEventDetailsPopup"/>に自分自身をアタッチする
+        /// </summary>
+        /// <param name="popup"></param>
+        void AttachDetailsPopup(CellEventDetailsPopup popup);
+
+        /// <summary>
+        /// <see cref="CellEventDetailsPopup"/>に自分自身の情報を更新する
         /// </summary>
         void UpdateDetailsPopup(CellEventDetailsPopup popup);
 

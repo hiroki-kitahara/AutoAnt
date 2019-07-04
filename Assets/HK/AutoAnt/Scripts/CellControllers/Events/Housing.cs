@@ -9,6 +9,8 @@ using HK.AutoAnt.EffectSystems;
 using HK.Framework.EventSystems;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.UI;
+using UniRx.Triggers;
+using UniRx;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -83,6 +85,28 @@ namespace HK.AutoAnt.CellControllers.Events
             this.LevelUp(this.gameSystem);
             this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
             this.gameSystem.User.History.GenerateCellEvent.Add(this.Id, this.Level - 1);
+        }
+
+        public override void AttachDetailsPopup(CellEventDetailsPopup popup)
+        {
+            var population = popup.AddProperty(property =>
+            {
+                property.Prefix.text = popup.Population.Get;
+                property.Value.text = this.CurrentPopulation.ToReadableString("###");
+            });
+
+            popup.AddProperty(property =>
+            {
+                property.Prefix.text = popup.BasePopulation.Get;
+                property.Value.text = this.levelParameter.Population.ToReadableString("###");
+            });
+
+            popup.UpdateAsObservable()
+                .SubscribeWithState(population, (_, _population) =>
+                {
+                    _population.UpdateProperty();
+                })
+                .AddTo(popup);
         }
 
         public override void UpdateDetailsPopup(CellEventDetailsPopup popup)

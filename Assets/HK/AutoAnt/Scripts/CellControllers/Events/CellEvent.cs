@@ -82,6 +82,8 @@ namespace HK.AutoAnt.CellControllers.Events
             return gimmick;
         }
 
+        public abstract void AttachDetailsPopup(CellEventDetailsPopup popup);
+
         public abstract void UpdateDetailsPopup(CellEventDetailsPopup popup);
 
 #if UNITY_EDITOR

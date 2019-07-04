@@ -40,6 +40,14 @@ namespace HK.AutoAnt.UI
         private StringAsset.Finder cellEventNameAndLevelFormat;
         public StringAsset.Finder CellEventNameAdnLevelFormat => this.cellEventNameAndLevelFormat;
 
+        [SerializeField]
+        private StringAsset.Finder population;
+        public StringAsset.Finder Population => this.population;
+
+        [SerializeField]
+        private StringAsset.Finder basePopulation;
+        public StringAsset.Finder BasePopulation => this.basePopulation;
+
         private readonly List<CellEventDetailsPopupProperty> properties = new List<CellEventDetailsPopupProperty>();
 
         public CellEvent SelectCellEvent { get; private set; }
@@ -47,6 +55,7 @@ namespace HK.AutoAnt.UI
         public void Initialize(CellEvent cellEvent)
         {
             this.SelectCellEvent = cellEvent;
+            this.SelectCellEvent.AttachDetailsPopup(this);
             this.UpdateProperties();
         }
 
@@ -70,11 +79,13 @@ namespace HK.AutoAnt.UI
             this.title.text = name;
         }
 
-        public void AddProperty(Action<CellEventDetailsPopupProperty> updateAction)
+        public CellEventDetailsPopupProperty AddProperty(Action<CellEventDetailsPopupProperty> updateAction)
         {
             var property = Instantiate(this.propertyPrefab, this.propertyParent);
             property.Initialize(updateAction);
             this.properties.Add(property);
+
+            return property;
         }
     }
 }
