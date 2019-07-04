@@ -644,10 +644,22 @@ MonoBehaviour:
     target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
     value: "\u4EBA\u53E3"
     guid: dcf2b0a2-1352-4a78-867f-3cad5985b655
+  popularity:
+    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
+    value: "\u4EBA\u6C17\u5EA6"
+    guid: d1cf7321-7935-4773-91ed-99fdf74ecb6f
   basePopulation:
     target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
     value: "\u30D9\u30FC\u30B9\u4EBA\u53E3\u5897\u52A0\u91CF"
     guid: acf5574c-4061-4f82-99df-1ee3d5dc97e0
+  product:
+    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
+    value: "\u751F\u7523\u3067\u304D\u308B\u30A2\u30A4\u30C6\u30E0"
+    guid: 15364a9a-2e11-4f02-848f-53908124601f
+  productValue:
+    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
+    value: "{0}/{1}\u79D2"
+    guid: edc834e7-8dbf-4643-8543-9e60bc8fe4ea
 --- !u!1 &1512319647142688110
 GameObject:
   m_ObjectHideFlags: 0

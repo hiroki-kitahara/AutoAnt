@@ -153,7 +153,17 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public override void AttachDetailsPopup(CellEventDetailsPopup popup)
         {
-            throw new NotImplementedException();
+            popup.AddProperty(property =>
+            {
+                property.Prefix.text = popup.Popularity.Get;
+                property.Value.text = this.LevelParameter.Popularity.ToReadableString("###");
+            });
+
+            popup.AddProperty(property =>
+            {
+                property.Prefix.text = popup.Product.Get;
+                property.Value.text = popup.ProductValue.Format(this.LevelParameter.ProductName, this.LevelParameter.NeedProductTime);
+            });
         }
 
         public override void UpdateDetailsPopup(CellEventDetailsPopup popup)

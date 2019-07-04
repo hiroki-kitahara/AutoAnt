@@ -45,8 +45,20 @@ namespace HK.AutoAnt.UI
         public StringAsset.Finder Population => this.population;
 
         [SerializeField]
+        private StringAsset.Finder popularity;
+        public StringAsset.Finder Popularity => this.popularity;
+
+        [SerializeField]
         private StringAsset.Finder basePopulation;
         public StringAsset.Finder BasePopulation => this.basePopulation;
+
+        [SerializeField]
+        private StringAsset.Finder product;
+        public StringAsset.Finder Product => this.product;
+
+        [SerializeField]
+        private StringAsset.Finder productValue;
+        public StringAsset.Finder ProductValue => this.productValue;
 
         private readonly List<CellEventDetailsPopupProperty> properties = new List<CellEventDetailsPopupProperty>();
 
