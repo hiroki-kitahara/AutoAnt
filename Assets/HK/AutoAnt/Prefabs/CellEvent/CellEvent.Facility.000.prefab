@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 7891609510736089681, guid: dcc01edb0282447d1a87078a9f630d92,
         type: 3}
       propertyPath: m_Name
-      value: CellEventBase Variant
+      value: CellEvent.Facility.000
       objectReference: {fileID: 0}
     - target: {fileID: 2965059687189902045, guid: dcc01edb0282447d1a87078a9f630d92,
         type: 3}
@@ -67,11 +67,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7048272024673067177, guid: dcc01edb0282447d1a87078a9f630d92,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235730709998454177, guid: dcc01edb0282447d1a87078a9f630d92,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcc01edb0282447d1a87078a9f630d92, type: 3}
---- !u!4 &2946893797494575414 stripped
+--- !u!4 &6922881763514090306 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2965059687189902045, guid: dcc01edb0282447d1a87078a9f630d92,
+  m_CorrespondingSourceObject: {fileID: 7048272024673067177, guid: dcc01edb0282447d1a87078a9f630d92,
     type: 3}
   m_PrefabInstance: {fileID: 127079736475100139}
   m_PrefabAsset: {fileID: 0}
@@ -80,7 +90,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2946893797494575414}
+    m_TransformParent: {fileID: 6922881763514090306}
     m_Modifications:
     - target: {fileID: 1213795830858570, guid: 9a52ba64c3a0abf49ad9515917ade04b, type: 3}
       propertyPath: m_Name
@@ -149,7 +159,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2946893797494575414}
+    m_TransformParent: {fileID: 6922881763514090306}
     m_Modifications:
     - target: {fileID: 2677346430076866716, guid: 39e3babc6aa464142aca0121dafc0d97,
         type: 3}
