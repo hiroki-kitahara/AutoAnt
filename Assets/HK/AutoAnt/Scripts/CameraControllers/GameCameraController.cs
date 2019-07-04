@@ -14,7 +14,7 @@ namespace HK.AutoAnt.CameraControllers
     public sealed class GameCameraController : MonoBehaviour
     {
         [SerializeField]
-        private float offsetCellEventDetailsPopupFocus;
+        private float offsetCellEventDetailsPopupFocus = 0.0f;
 
         void Awake()
         {

@@ -15,7 +15,7 @@ namespace HK.AutoAnt.GameControllers
     public sealed class CellEventDetailsPopupController : MonoBehaviour
     {
         [SerializeField]
-        private CellEventDetailsPopup popup;
+        private CellEventDetailsPopup popup = null;
         
         void Awake()
         {
