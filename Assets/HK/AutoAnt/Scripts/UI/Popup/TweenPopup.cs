@@ -14,11 +14,18 @@ namespace HK.AutoAnt.UI
         private GameObject tweenAnimationHolder = null;
 
         private DOTweenAnimation[] tweenAnimations;
-        DOTweenAnimation[] ITweenPopup.TweenAnimations => throw new System.NotImplementedException();
-
-        protected virtual void Awake()
+        DOTweenAnimation[] ITweenPopup.TweenAnimations
         {
-            this.tweenAnimations = this.tweenAnimationHolder.GetComponentsInChildren<DOTweenAnimation>();
+            get
+            {
+                if(this.tweenAnimations == null)
+                {
+                    Assert.IsNotNull(this.tweenAnimationHolder);
+                    this.tweenAnimations = this.tweenAnimationHolder.GetComponentsInChildren<DOTweenAnimation>();
+                }
+
+                return this.tweenAnimations;
+            }
         }
 
         public override void Open()
