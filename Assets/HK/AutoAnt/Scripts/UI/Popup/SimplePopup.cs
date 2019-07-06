@@ -1,5 +1,7 @@
 ﻿using System;
+using DG.Tweening;
 using HK.AutoAnt.Events;
+using HK.AutoAnt.Extensions;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -11,7 +13,7 @@ namespace HK.AutoAnt.UI
     /// <summary>
     /// メッセージとボタンのみのポップアップを制御するクラス
     /// </summary>
-    public sealed class SimplePopup : Popup
+    public sealed class SimplePopup : Popup, ITweenPopup
     {
         [SerializeField]
         private TextMeshProUGUI message = null;
@@ -23,6 +25,17 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private ButtonElement cancel = null;
         public Button CancelButton => this.cancel.Button;
+
+        [SerializeField]
+        private GameObject tweenAnimationHolder = null;
+
+        private DOTweenAnimation[] tweenAnimations;
+        DOTweenAnimation[] ITweenPopup.TweenAnimations => this.tweenAnimations;
+
+        void Awake()
+        {
+            this.tweenAnimations = this.tweenAnimationHolder.GetComponentsInChildren<DOTweenAnimation>();
+        }
 
         /// <summary>
         /// 初期化
@@ -51,6 +64,16 @@ namespace HK.AutoAnt.UI
             this.cancel.Button.gameObject.SetActive(false);
 
             return this;
+        }
+
+        public override void Open()
+        {
+            this.StartTweeningOpen();
+        }
+
+        public override void Close()
+        {
+            this.StartTweeningClose();
         }
 
         [Serializable]
