@@ -33,7 +33,7 @@ namespace HK.AutoAnt.UI
                         return;
                     }
 
-                    this.cachedMoney = money;
+                    _this.cachedMoney = money;
                     _this.value.text = _this.format.Format(money.ToReadableString("###.00"));
                 })
                 .AddTo(this);
