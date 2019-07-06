@@ -43,6 +43,8 @@ public partial class SROptions
         popup.CancelButton.OnClickAsObservable()
             .SubscribeWithState(popup, (_, p) => p.Close())
             .AddTo(popup);
+
+        popup.Open();
     }
 
     private int addCellRange = 5;
