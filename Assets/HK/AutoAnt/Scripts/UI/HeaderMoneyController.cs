@@ -3,6 +3,7 @@ using HK.AutoAnt.Systems;
 using HK.Framework.Text;
 using TMPro;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -19,11 +20,20 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private StringAsset.Finder format = null;
 
-        void Start()
+        private double cachedMoney;
+
+        void Awake()
         {
-            GameSystem.Instance.User.Wallet.MoneyAsObservable
-                .SubscribeWithState(this, (money, _this) =>
+            GameSystem.Instance.UpdateAsObservable()
+                .SubscribeWithState(this, (_, _this) =>
                 {
+                    var money = GameSystem.Instance.User.Wallet.Money;
+                    if(_this.cachedMoney == money)
+                    {
+                        return;
+                    }
+
+                    this.cachedMoney = money;
                     _this.value.text = _this.format.Format(money.ToReadableString("###.00"));
                 })
                 .AddTo(this);
