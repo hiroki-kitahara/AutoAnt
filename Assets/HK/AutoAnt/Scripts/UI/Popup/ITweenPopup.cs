@@ -7,7 +7,7 @@ namespace HK.AutoAnt.UI
     /// <summary>
     /// ツイーンで表示と非表示を行えるポップアップのインターフェイス
     /// </summary>
-    public interface ITweenPopup
+    public interface ITweenPopup : IPopup
     {
         /// <summary>
         /// アニメーションリスト
