@@ -14,7 +14,7 @@ namespace HK.AutoAnt.UI
     /// <summary>
     /// セルイベントの詳細を表示するポップアップ
     /// </summary>
-    public sealed class CellEventDetailsPopup : Popup, ITweenPopup
+    public sealed class CellEventDetailsPopup : TweenPopup
     {
         [SerializeField]
         private TextMeshProUGUI title = null;
@@ -40,9 +40,6 @@ namespace HK.AutoAnt.UI
 
         [SerializeField]
         private CellEventDetailsPopupProperty propertyPrefab = null;
-
-        [SerializeField]
-        private GameObject tweenAnimationHolder = null;
 
         [SerializeField]
         private StringAsset.Finder cellEventNameAndLevelFormat = null;
@@ -84,35 +81,17 @@ namespace HK.AutoAnt.UI
         private Color notEnoughLevelUpCostColor = Color.white;
         public Color NotEnoughLevelUpCostColor => notEnoughLevelUpCostColor;
 
-        private DOTweenAnimation[] tweenAnimations;
-        DOTweenAnimation[] ITweenPopup.TweenAnimations => this.tweenAnimations;
-
         private readonly List<CellEventDetailsPopupProperty> properties = new List<CellEventDetailsPopupProperty>();
 
         private readonly List<CellEventDetailsPopupProperty> levelUpCosts = new List<CellEventDetailsPopupProperty>();
 
         public CellEvent SelectCellEvent { get; private set; }
 
-        void Awake()
-        {
-            this.tweenAnimations = this.tweenAnimationHolder.GetComponentsInChildren<DOTweenAnimation>();
-        }
-
         public void Initialize(CellEvent cellEvent)
         {
             this.SelectCellEvent = cellEvent;
             this.SelectCellEvent.AttachDetailsPopup(this);
             this.UpdateElement();
-        }
-
-        public override void Open()
-        {
-            this.StartTweeningOpen();
-        }
-
-        public override void Close()
-        {
-            this.StartTweeningClose();
         }
 
         public void UpdateElement()

@@ -327,6 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9768f1a798c4e35ac7e7b61f2cfd52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tweenAnimationHolder: {fileID: 7741109369741802313}
   title: {fileID: 6963554141159076153}
   levelUpButton: {fileID: 4860838003630268265}
   removeButton: {fileID: 2528869687287205943}
@@ -335,7 +336,6 @@ MonoBehaviour:
   levelUpCostParent: {fileID: 2416952652526190553}
   propertyPrefab: {fileID: 7101405806459015065, guid: 14968bf97089b448fa1177c79bb319c6,
     type: 3}
-  tweenAnimationHolder: {fileID: 7741109369741802313}
   cellEventNameAndLevelFormat:
     target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
     value: '{0} Lv.{1}'
