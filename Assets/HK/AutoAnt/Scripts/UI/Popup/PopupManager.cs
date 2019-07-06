@@ -1,4 +1,5 @@
 ﻿using HK.AutoAnt.Events;
+using HK.Framework.EventSystems;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -30,8 +31,8 @@ namespace HK.AutoAnt.UI
         public static T Request<T>(T prefab) where T : Popup
         {
             var popup = Instantiate(prefab, instance.transform, false);
-            popup.Open();
-            popup.Broker.Receive<PopupEvents.CompleteClose>()
+            Broker.Global.Receive<PopupEvents.CompleteClose>()
+                .Where(x => x.Popup == popup)
                 .SubscribeWithState(popup, (_, _popup) =>
                 {
                     Destroy(_popup.gameObject);

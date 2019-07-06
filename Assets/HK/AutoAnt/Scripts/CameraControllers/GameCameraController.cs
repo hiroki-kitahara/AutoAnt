@@ -1,4 +1,8 @@
-﻿using HK.AutoAnt.Systems;
+﻿using HK.AutoAnt.Events;
+using HK.AutoAnt.Systems;
+using HK.AutoAnt.UI;
+using HK.Framework.EventSystems;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -9,25 +13,25 @@ namespace HK.AutoAnt.CameraControllers
     /// </summary>
     public sealed class GameCameraController : MonoBehaviour
     {
-        void Update()
+        [SerializeField]
+        private float offsetCellEventDetailsPopupFocus = 0.0f;
+
+        void Awake()
         {
-            float vector = 0.1f;
-            if (Input.GetKey(KeyCode.W))
-            {
-                this.Move(new Vector2(0.0f, vector));
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                this.Move(new Vector2(0.0f, -vector));
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                this.Move(new Vector2(-vector, 0.0f));
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                this.Move(new Vector2(vector, 0.0f));
-            }
+            Broker.Global.Receive<PopupEvents.StartOpen>()
+                .Select(x => x.Popup as CellEventDetailsPopup)
+                .Where(x => x != null)
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    var position = x.SelectCellEvent.Origin;
+                    var cameraman = GameSystem.Instance.Cameraman;
+                    var camera = cameraman.Camera;
+                    var forward = Vector3.Scale(camera.transform.forward, new Vector3(1.0f, 0.0f, 1.0f)).normalized;
+                    var offset = forward * _this.offsetCellEventDetailsPopupFocus;
+
+                    cameraman.Position = new Vector3(position.x, 0.0f, position.y) + offset;
+                })
+                .AddTo(this);
         }
         public void Move(Vector2 deltaPosition)
         {
