@@ -1031,6 +1031,43 @@ MonoBehaviour:
     Button: {fileID: 1581885800044651048}
     Text: {fileID: 7200560267959043109}
   tweenAnimationHolder: {fileID: 2104112531458021771}
+--- !u!222 &7467472184238118905
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5272580634290218992}
+  m_CullTransparentMesh: 0
+--- !u!114 &1179412188780028697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5272580634290218992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
 --- !u!1 &8102941416039071896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,11 +1330,32 @@ PrefabInstance:
       propertyPath: hasOnComplete
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4033030717375905919, guid: 73ef3f381a00445bd91f13e16f37b58d,
+        type: 3}
+      propertyPath: targetType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033030717375905919, guid: 73ef3f381a00445bd91f13e16f37b58d,
+        type: 3}
+      propertyPath: forcedTargetType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033030717375905919, guid: 73ef3f381a00445bd91f13e16f37b58d,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1179412188780028697}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73ef3f381a00445bd91f13e16f37b58d, type: 3}
 --- !u!224 &77950724905861830 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7394942715256369016, guid: 73ef3f381a00445bd91f13e16f37b58d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7472864851745336766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5272580634290218992 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3359415785216838222, guid: 73ef3f381a00445bd91f13e16f37b58d,
     type: 3}
   m_PrefabInstance: {fileID: 7472864851745336766}
   m_PrefabAsset: {fileID: 0}
