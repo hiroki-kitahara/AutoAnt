@@ -485,27 +485,27 @@ namespace DG.Tweening
 
         public override void DOPlay()
         {
-            DOTween.Play(this.gameObject);
+            DOTween.Play(this.GetTweenGO());
         }
 
         public override void DOPlayBackwards()
         {
-            DOTween.PlayBackwards(this.gameObject);
+            DOTween.PlayBackwards(this.GetTweenGO());
         }
 
         public override void DOPlayForward()
         {
-            DOTween.PlayForward(this.gameObject);
+            DOTween.PlayForward(this.GetTweenGO());
         }
 
         public override void DOPause()
         {
-            DOTween.Pause(this.gameObject);
+            DOTween.Pause(this.GetTweenGO());
         }
 
         public override void DOTogglePause()
         {
-            DOTween.TogglePause(this.gameObject);
+            DOTween.TogglePause(this.GetTweenGO());
         }
 
         public override void DORewind()
@@ -537,17 +537,17 @@ namespace DG.Tweening
                 if (Debugger.logPriority > 1) Debugger.LogNullTween(tween); return;
             }
             if (fromHere && isRelative) ReEvaluateRelativeTween();
-            DOTween.Restart(this.gameObject);
+            DOTween.Restart(this.GetTweenGO());
         }
 
         public override void DOComplete()
         {
-            DOTween.Complete(this.gameObject);
+            DOTween.Complete(this.GetTweenGO());
         }
 
         public override void DOKill()
         {
-            DOTween.Kill(this.gameObject);
+            DOTween.Kill(this.GetTweenGO());
             tween = null;
         }
 
@@ -555,7 +555,7 @@ namespace DG.Tweening
 
         public void DOPlayById(string id)
         {
-            DOTween.Play(this.gameObject, id);
+            DOTween.Play(this.GetTweenGO(), id);
         }
         public void DOPlayAllById(string id)
         {
@@ -569,7 +569,7 @@ namespace DG.Tweening
 
         public void DOPlayBackwardsById(string id)
         {
-            DOTween.PlayBackwards(this.gameObject, id);
+            DOTween.PlayBackwards(this.GetTweenGO(), id);
         }
         public void DOPlayBackwardsAllById(string id)
         {
@@ -578,7 +578,7 @@ namespace DG.Tweening
 
         public void DOPlayForwardById(string id)
         {
-            DOTween.PlayForward(this.gameObject, id);
+            DOTween.PlayForward(this.GetTweenGO(), id);
         }
         public void DOPlayForwardAllById(string id)
         {

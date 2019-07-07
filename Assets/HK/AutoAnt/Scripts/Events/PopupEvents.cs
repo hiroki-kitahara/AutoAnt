@@ -13,33 +13,33 @@ namespace HK.AutoAnt.Events
         /// <summary>
         /// 表示処理が開始した際のイベント
         /// </summary>
-        public class StartOpen : Message<StartOpen, Popup>
+        public class StartOpen : Message<StartOpen, IPopup>
         {
-            public Popup Popup => this.param1;
+            public IPopup Popup => this.param1;
         }
 
         /// <summary>
         /// 表示処理が完了した際のイベント
         /// </summary>
-        public class CompleteOpen : Message<CompleteOpen, Popup>
+        public class CompleteOpen : Message<CompleteOpen, IPopup>
         {
-            public Popup Popup => this.param1;
+            public IPopup Popup => this.param1;
         }
 
         /// <summary>
         /// 閉じる処理が開始した際のイベント
         /// </summary>
-        public class StartClose : Message<StartClose, Popup>
+        public class StartClose : Message<StartClose, IPopup>
         {
-            public Popup Popup => this.param1;
+            public IPopup Popup => this.param1;
         }
 
         /// <summary>
         /// 閉じる処理が完了した際のイベント
         /// </summary>
-        public class CompleteClose : Message<CompleteClose, Popup>
+        public class CompleteClose : Message<CompleteClose, IPopup>
         {
-            public Popup Popup => this.param1;
+            public IPopup Popup => this.param1;
         }
     }
 }

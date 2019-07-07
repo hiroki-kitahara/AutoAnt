@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using HK.AutoAnt.CellControllers.Events;
+using HK.AutoAnt.Extensions;
 using HK.Framework.Text;
 using TMPro;
 using UnityEngine;
@@ -12,7 +14,7 @@ namespace HK.AutoAnt.UI
     /// <summary>
     /// セルイベントの詳細を表示するポップアップ
     /// </summary>
-    public sealed class CellEventDetailsPopup : Popup
+    public sealed class CellEventDetailsPopup : TweenPopup
     {
         [SerializeField]
         private TextMeshProUGUI title = null;

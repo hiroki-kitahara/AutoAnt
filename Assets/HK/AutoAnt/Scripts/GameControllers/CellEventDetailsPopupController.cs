@@ -65,7 +65,7 @@ namespace HK.AutoAnt.GameControllers
             Observable.Merge(
                 popup.CloseButton.OnClickAsObservable(),
                 InputControllers.Input.Current.DragAsObservable().AsUnitObservable(),
-                Broker.Global.Receive<PopupEvents.StartOpen>().Where(x => x.Popup != popup).AsUnitObservable()
+                Broker.Global.Receive<PopupEvents.StartOpen>().Where(x => !x.Popup.Equals(popup)).AsUnitObservable()
             )
                 .SubscribeWithState(popup, (_, p) =>
                 {

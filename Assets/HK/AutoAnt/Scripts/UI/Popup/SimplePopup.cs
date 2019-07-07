@@ -1,5 +1,7 @@
 ﻿using System;
+using DG.Tweening;
 using HK.AutoAnt.Events;
+using HK.AutoAnt.Extensions;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -11,7 +13,7 @@ namespace HK.AutoAnt.UI
     /// <summary>
     /// メッセージとボタンのみのポップアップを制御するクラス
     /// </summary>
-    public sealed class SimplePopup : Popup
+    public sealed class SimplePopup : TweenPopup
     {
         [SerializeField]
         private TextMeshProUGUI message = null;
