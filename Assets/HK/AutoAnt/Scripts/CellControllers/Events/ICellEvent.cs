@@ -1,5 +1,7 @@
 ﻿using HK.AutoAnt.CellControllers.Gimmicks;
 using HK.AutoAnt.Systems;
+using HK.AutoAnt.UI;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -10,6 +12,16 @@ namespace HK.AutoAnt.CellControllers.Events
     /// </summary>
     public interface ICellEvent
     {
+        /// <summary>
+        /// セルイベントの名前
+        /// </summary>
+        string EventName { get; }
+
+        /// <summary>
+        /// セルイベントに対して通知されるブローカー
+        /// </summary>
+        IMessageBroker Broker { get; }
+
         /// <summary>
         /// 原点座標
         /// </summary>
@@ -41,6 +53,17 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <see cref="CellGimmickController"/>を生成する
         /// </summary>
         GameObject CreateGimmickController(Vector2Int origin);
+
+        /// <summary>
+        /// <see cref="CellEventDetailsPopup"/>に自分自身をアタッチする
+        /// </summary>
+        /// <param name="popup"></param>
+        void AttachDetailsPopup(CellEventDetailsPopup popup);
+
+        /// <summary>
+        /// <see cref="CellEventDetailsPopup"/>に自分自身の情報を更新する
+        /// </summary>
+        void UpdateDetailsPopup(CellEventDetailsPopup popup);
 
         /// <summary>
         /// 作成可能か返す

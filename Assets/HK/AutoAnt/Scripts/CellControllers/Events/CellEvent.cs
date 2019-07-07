@@ -8,6 +8,9 @@ using HK.AutoAnt.Extensions;
 using HK.AutoAnt.EffectSystems;
 using HK.Framework.EventSystems;
 using HK.AutoAnt.Events;
+using HK.Framework.Text;
+using HK.AutoAnt.Database;
+using HK.AutoAnt.UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -20,6 +23,10 @@ namespace HK.AutoAnt.CellControllers.Events
     /// </summary>
     public abstract class CellEvent : ScriptableObject, ICellEvent
     {
+        [SerializeField]
+        private StringAsset.Finder eventName = null;
+        public string EventName => this.cachedRecord.EventData.eventName.Get;
+
         [SerializeField]
         protected Constants.CellEventCategory category;
         public Constants.CellEventCategory Category => this.category;
@@ -50,7 +57,8 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public Vector2Int Origin { get; protected set; }
 
-        public readonly IMessageBroker Broker = new MessageBroker();
+        private readonly IMessageBroker broker = new MessageBroker();
+        public IMessageBroker Broker => this.broker;
 
         /// <summary>
         /// 実体が持つイベント
@@ -58,6 +66,8 @@ namespace HK.AutoAnt.CellControllers.Events
         protected readonly CompositeDisposable instanceEvents = new CompositeDisposable();
 
         protected GameObject gimmick;
+
+        private MasterDataCellEvent.Record cachedRecord;
 
         public virtual GameObject CreateGimmickController(Vector2Int origin)
         {
@@ -73,6 +83,10 @@ namespace HK.AutoAnt.CellControllers.Events
             return gimmick;
         }
 
+        public abstract void AttachDetailsPopup(CellEventDetailsPopup popup);
+
+        public abstract void UpdateDetailsPopup(CellEventDetailsPopup popup);
+
 #if UNITY_EDITOR
         protected virtual void OnValidate()
         {
@@ -86,8 +100,8 @@ namespace HK.AutoAnt.CellControllers.Events
 
             // 自分自身のマスターデータを取得してデータを参照している
             // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
-            var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
-            this.gimmick = record.EventData.CreateGimmickController(this.Origin);
+            this.cachedRecord = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
+            this.gimmick = this.cachedRecord.EventData.CreateGimmickController(this.Origin);
 
             foreach(var g in this.gimmick.GetComponentsInChildren<ICellEventGimmick>())
             {
@@ -96,16 +110,14 @@ namespace HK.AutoAnt.CellControllers.Events
 
             if(!isInitializingGame)
             {
-                Assert.IsNotNull(record.EventData.constructionSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
-                AutoAntSystem.Audio.SE.Play(record.EventData.constructionSE);
+                Assert.IsNotNull(this.cachedRecord.EventData.constructionSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
+                AutoAntSystem.Audio.SE.Play(this.cachedRecord.EventData.constructionSE);
 
-                Assert.IsNotNull(record.EventData.constructionEffect, $"Id = {this.Id}の建設時のエフェクト生成に失敗しました");
-                var effect = record.EventData.constructionEffect.Rent();
+                Assert.IsNotNull(this.cachedRecord.EventData.constructionEffect, $"Id = {this.Id}の建設時のエフェクト生成に失敗しました");
+                var effect = this.cachedRecord.EventData.constructionEffect.Rent();
                 effect.transform.position = this.gimmick.transform.position;
-                effect.transform.localScale = Vector3.one * record.EventData.size;
+                effect.transform.localScale = Vector3.one * this.cachedRecord.EventData.size;
             }
-
-            Framework.EventSystems.Broker.Global.Publish(AddedCellEvent.Get(this));
         }
 
         public virtual void Remove(GameSystem gameSystem)
@@ -116,6 +128,11 @@ namespace HK.AutoAnt.CellControllers.Events
             // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
             var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
 
+            foreach (var g in this.gimmick.GetComponentsInChildren<ICellEventGimmick>())
+            {
+                g.Detach(this);
+            }
+
             Assert.IsNotNull(record.EventData.destructionSE, $"Id = {this.Id}の破壊時のSE再生に失敗しました");
             AutoAntSystem.Audio.SE.Play(record.EventData.destructionSE);
 
@@ -124,8 +141,6 @@ namespace HK.AutoAnt.CellControllers.Events
             effect.transform.position = this.gimmick.transform.position;
             effect.transform.localScale = Vector3.one * record.EventData.size;
 
-            Framework.EventSystems.Broker.Global.Publish(RemovedCellEvent.Get(this));
-
             Destroy(this.gimmick.gameObject);
         }
 
@@ -133,10 +148,10 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             Assert.IsNotNull(this.condition);
 
-            var cellPositions = cellMapper.GetRange(origin.Position, Vector2Int.one * this.size, p => cellMapper.Cell.Map.ContainsKey(p));
+            var cellPositions = Vector2IntUtility.GetRange(origin.Position, Vector2Int.one * this.size, p => cellMapper.Cell.Map.ContainsKey(p));
 
             // 配置したいところにセルがない場合は生成できない
-            if(cellPositions.Length != this.size * this.size)
+            if(cellPositions.Count != this.size * this.size)
             {
                 return false;
             }
@@ -150,6 +165,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
             // コストが満たしていない場合は生成できない
             var masterData = gameSystem.MasterData.LevelUpCost.Records.Get(cellEventRecordId, 0);
+            Assert.IsNotNull(masterData, $"CellEventRecordId = {cellEventRecordId}の{typeof(MasterDataLevelUpCost.Record)}がありませんでした");
             if(!masterData.Cost.IsEnough(gameSystem.User, gameSystem.MasterData.Item))
             {
                 return false;
@@ -171,6 +187,8 @@ namespace HK.AutoAnt.CellControllers.Events
                     return CellEvent.InternalGetOrCreateAsset<Housing>(data);
                 case "Facility":
                     return CellEvent.InternalGetOrCreateAsset<Facility>(data);
+                case "Road":
+                    return CellEvent.InternalGetOrCreateAsset<Road>(data);
                 default:
                     Debug.LogError($"CellEventType = {data.Classname}は未対応の値です");
                     return null;
@@ -197,6 +215,8 @@ namespace HK.AutoAnt.CellControllers.Events
 
         protected virtual void ApplyProperty(Database.SpreadSheetData.CellEventData data)
         {
+            var stringAsset = AssetDatabase.LoadAssetAtPath<StringAsset>("Assets/HK/AutoAnt/DataSources/StringAsset/CellEvent.asset");
+            this.eventName = stringAsset.CreateFinderSafe(data.Name);
             this.category = (Constants.CellEventCategory)Enum.Parse(typeof(Constants.CellEventCategory), data.Category);
             this.condition = AssetDatabase.LoadAssetAtPath<CellEventGenerateCondition>($"Assets/HK/AutoAnt/DataSources/CellEvents/Conditions/{data.Condition}.asset");
             this.size = data.Size;

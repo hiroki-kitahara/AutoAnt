@@ -27,12 +27,17 @@ namespace HK.AutoAnt.Database
             private StringAsset.Finder name = null;
             public string Name => this.name.Get;
 
+            [SerializeField]
+            private Texture2D icon = null;
+            public Texture2D Icon => this.icon;
+
 #if UNITY_EDITOR
             public Record(SpreadSheetData.ItemData data)
             {
                 this.id = data.Id;
                 var stringAsset = AssetDatabase.LoadAssetAtPath<StringAsset>("Assets/HK/AutoAnt/DataSources/StringAsset/Item.asset");
                 this.name = stringAsset.CreateFinderSafe(data.Name);
+                this.icon = AssetDatabase.LoadAssetAtPath<Texture2D>($"Assets/HK/AutoAnt/Textures/Icon/{data.Icon}.png");
             }
 #endif
         }

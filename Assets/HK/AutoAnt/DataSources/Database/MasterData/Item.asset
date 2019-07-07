@@ -18,23 +18,28 @@ MonoBehaviour:
       target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
       value: "\u30A2\u30A4\u30C6\u30E01"
       guid: 2529d8c5-7d90-4263-bf83-5488875c491f
+    icon: {fileID: 2800000, guid: c4ef9c9f24b1544f2bf3c9539769d98d, type: 3}
   - id: 100001
     name:
       target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
       value: "\u30A2\u30A4\u30C6\u30E02"
       guid: 63c07bd2-1816-41b6-b0e5-7e33272aeeb5
+    icon: {fileID: 2800000, guid: d289d4a871ca04b4b9ab7b7cba81c563, type: 3}
   - id: 100002
     name:
       target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
       value: "\u30A2\u30A4\u30C6\u30E03"
       guid: 941597eb-c587-45f4-b2aa-4efdf49bd3c1
+    icon: {fileID: 2800000, guid: cc1da6c0bf7e44b199723580d4999c9f, type: 3}
   - id: 100003
     name:
       target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
       value: "\u30A2\u30A4\u30C6\u30E04"
       guid: 6de363d9-a9b4-417c-8678-da8f9268ca1a
+    icon: {fileID: 2800000, guid: 96fbafec9239c4396b4f00f83861c93e, type: 3}
   - id: 100004
     name:
       target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
       value: "\u30A2\u30A4\u30C6\u30E05"
       guid: b9e955b7-363d-4e6f-84a2-b6956bb43691
+    icon: {fileID: 2800000, guid: 23dfe5af083784655818d66fcb7a1284, type: 3}
