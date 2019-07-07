@@ -19,5 +19,9 @@ public int Id { get {return id; } set { id = value;} }
 string name;
 public string Name { get {return name; } set { name = value;} }
 
+[SerializeField]
+string icon;
+public string Icon { get {return icon; } set { icon = value;} }
+
     }
 }

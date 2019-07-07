@@ -27,4 +27,8 @@ MonoBehaviour:
     name: Name
     isEnable: 0
     isArray: 0
+  - type: 0
+    name: Icon
+    isEnable: 0
+    isArray: 0
   AccessCode: 
