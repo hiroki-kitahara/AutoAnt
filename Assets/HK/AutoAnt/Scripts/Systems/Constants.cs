@@ -19,29 +19,6 @@ namespace HK.AutoAnt.Constants
         Grassland,
     }
 
-    public enum InputMode
-    {
-        /// <summary>
-        /// クリックモード
-        /// </summary>
-        ClickMode,
-
-        /// <summary>
-        /// 建築モード
-        /// </summary>
-        BuildMode,
-
-        /// <summary>
-        /// 解体モード
-        /// </summary>
-        DismantleMode,
-
-        /// <summary>
-        /// 開拓モード
-        /// </summary>
-        ExploringMode,
-    }
-
     public enum CellEventCategory
     {
         /// <summary>
@@ -58,5 +35,10 @@ namespace HK.AutoAnt.Constants
         /// 工場
         /// </summary>
         Factory,
+
+        /// <summary>
+        /// 道路
+        /// </summary>
+        Road,
     }
 }

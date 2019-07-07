@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f516f9fbb86244f0fa699dfa4100160a, type: 3}
   m_Name: 100000
   m_EditorClassIdentifier: 
+  eventName:
+    target: {fileID: 11400000, guid: 91438a7b93964415fb9a92e97780f6a0, type: 2}
+    value: "\u5BB61"
+    guid: 681b2f6d-3ac2-40c5-8a4f-a84cc1feeba9
   category: 0
   condition: {fileID: 11400000, guid: 4c0900e2970f54676923b8814d79aff7, type: 2}
   size: 1

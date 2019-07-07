@@ -13,5 +13,10 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
         /// 自分自身がセルイベントにアタッチされた際の処理
         /// </summary>
         void Attach(CellEvent cellEvent);
+
+        /// <summary>
+        /// 自分自身がセルイベントから離れた際の処理
+        /// </summary>
+        void Detach(CellEvent cellEvent);
     }
 }
