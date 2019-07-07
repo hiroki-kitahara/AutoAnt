@@ -1,5 +1,6 @@
 ﻿using HK.AutoAnt.CellControllers.Gimmicks;
 using HK.AutoAnt.Systems;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -14,6 +15,11 @@ namespace HK.AutoAnt.CellControllers.Events
         /// セルイベントの名前
         /// </summary>
         string EventName { get; }
+
+        /// <summary>
+        /// セルイベントに対して通知されるブローカー
+        /// </summary>
+        IMessageBroker Broker { get; }
 
         /// <summary>
         /// 原点座標

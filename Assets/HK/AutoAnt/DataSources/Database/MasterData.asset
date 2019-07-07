@@ -20,4 +20,5 @@ MonoBehaviour:
     type: 2}
   facilityLevelParameter: {fileID: 11400000, guid: 5e64f02039ca648e88608647a4d8176f,
     type: 2}
+  roadLevelParameter: {fileID: 11400000, guid: 2262987fa9cad4b4ea2e0ff404bd16e4, type: 2}
   unlockCellEvent: {fileID: 11400000, guid: 205009221d8ff40df9aba6922d9ba38c, type: 2}
