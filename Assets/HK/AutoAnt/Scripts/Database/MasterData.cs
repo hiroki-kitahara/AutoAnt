@@ -35,6 +35,10 @@ namespace HK.AutoAnt.Database
         public MasterDataFacilityLevelParameter FacilityLevelParameter => this.facilityLevelParameter;
 
         [SerializeField]
+        private MasterDataRoadLevelParameter roadLevelParameter = null;
+        public MasterDataRoadLevelParameter RoadLevelParameter => this.roadLevelParameter;
+
+        [SerializeField]
         private MasterDataUnlockCellEvent unlockCellEvent = null;
         public MasterDataUnlockCellEvent UnlockCellEvent => this.unlockCellEvent;
     }
