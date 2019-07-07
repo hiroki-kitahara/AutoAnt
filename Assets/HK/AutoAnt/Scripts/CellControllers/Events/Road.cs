@@ -9,6 +9,7 @@ using HK.AutoAnt.EffectSystems;
 using System.Collections.Generic;
 using HK.AutoAnt.Events;
 using UniRx;
+using HK.AutoAnt.UI;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -163,6 +164,16 @@ namespace HK.AutoAnt.CellControllers.Events
             }
 
             return false;
+        }
+
+        public override void AttachDetailsPopup(CellEventDetailsPopup popup)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

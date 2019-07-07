@@ -26,12 +26,14 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         [SerializeField]
         private double money = 0;
+        public double Money => this.money;
 
         /// <summary>
         /// 必要なアイテムリスト
         /// </summary>
         [SerializeField]
         private NeedItem[] needItems = new NeedItem[0];
+        public NeedItem[] NeedItems => this.needItems;
 
 #if UNITY_EDITOR
         public LevelUpCost(Database.SpreadSheetData.LevelUpCostData data)
@@ -89,12 +91,14 @@ namespace HK.AutoAnt.CellControllers
             /// </summary>
             [SerializeField]
             private StringAsset.Finder itemName = null;
+            public string ItemName => this.itemName.Get;
 
             /// <summary>
             /// 必要な量
             /// </summary>
             [SerializeField]
             private int amount = 0;
+            public int Amount => this.amount;
 
 #if UNITY_EDITOR
             public NeedItem(string itemName, int amount)

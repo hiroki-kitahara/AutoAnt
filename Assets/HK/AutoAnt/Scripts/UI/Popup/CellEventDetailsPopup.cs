@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using HK.AutoAnt.CellControllers.Events;
 using HK.Framework.Text;
 using TMPro;
@@ -15,18 +16,7 @@ namespace HK.AutoAnt.UI
     {
         [SerializeField]
         private TextMeshProUGUI title = null;
-
-        [SerializeField]
-        private ResourceElement resource = null;
-
-        [SerializeField]
-        private ResourceElement addPopulation = null;
-
-        [SerializeField]
-        private ResourceElement product = null;
-
-        [SerializeField]
-        private ResourceElement levelUpCost = null;
+        public TextMeshProUGUI Title => this.title;
 
         [SerializeField]
         private Button levelUpButton = null;
@@ -41,25 +31,87 @@ namespace HK.AutoAnt.UI
         public Button CloseButton => this.closeButton;
 
         [SerializeField]
-        private StringAsset.Finder cellEventNameAndLevelFormat;
+        private Transform propertyParent = null;
+
+        [SerializeField]
+        private Transform levelUpCostParent = null;
+
+        [SerializeField]
+        private CellEventDetailsPopupProperty propertyPrefab = null;
+
+        [SerializeField]
+        private StringAsset.Finder cellEventNameAndLevelFormat = null;
+        public StringAsset.Finder CellEventNameAdnLevelFormat => this.cellEventNameAndLevelFormat;
+
+        [SerializeField]
+        private StringAsset.Finder population = null;
+        public StringAsset.Finder Population => this.population;
+
+        [SerializeField]
+        private StringAsset.Finder popularity = null;
+        public StringAsset.Finder Popularity => this.popularity;
+
+        [SerializeField]
+        private StringAsset.Finder basePopulation = null;
+        public StringAsset.Finder BasePopulation => this.basePopulation;
+
+        [SerializeField]
+        private StringAsset.Finder product = null;
+        public StringAsset.Finder Product => this.product;
+
+        [SerializeField]
+        private StringAsset.Finder productValue = null;
+        public StringAsset.Finder ProductValue => this.productValue;
+
+        [SerializeField]
+        private StringAsset.Finder money = null;
+        public StringAsset.Finder Money => this.money;
+
+        [SerializeField]
+        private StringAsset.Finder needItemValue = null;
+        public StringAsset.Finder NeedItemValue => this.needItemValue;
+
+        [SerializeField]
+        private Color enoughLevelUpCostColor = Color.white;
+        public Color EnoughLevelUpCostColor => enoughLevelUpCostColor;
+
+        [SerializeField]
+        private Color notEnoughLevelUpCostColor = Color.white;
+        public Color NotEnoughLevelUpCostColor => notEnoughLevelUpCostColor;
+
+        private readonly List<CellEventDetailsPopupProperty> properties = new List<CellEventDetailsPopupProperty>();
+
+        private readonly List<CellEventDetailsPopupProperty> levelUpCosts = new List<CellEventDetailsPopupProperty>();
 
         public CellEvent SelectCellEvent { get; private set; }
 
         public void Initialize(CellEvent cellEvent)
         {
             this.SelectCellEvent = cellEvent;
-            this.ApplyTitle(cellEvent);
+            this.SelectCellEvent.AttachDetailsPopup(this);
+            this.UpdateElement();
+        }
 
-            // TODO
-            this.resource.SetActive(false);
-            this.addPopulation.SetActive(false);
-            this.product.SetActive(false);
-            this.levelUpCost.SetActive(false);
+        public void UpdateElement()
+        {
+            this.SelectCellEvent.UpdateDetailsPopup(this);
         }
 
         public void UpdateProperties()
         {
-            this.ApplyTitle(this.SelectCellEvent);
+            foreach(var p in this.properties)
+            {
+                p.UpdateProperty();
+            }
+        }
+
+        public void ClearLevelUpCosts()
+        {
+            foreach(var l in this.levelUpCosts)
+            {
+                Destroy(l.gameObject);
+            }
+            this.levelUpCosts.Clear();
         }
 
         public void SetActiveLevelUpButton(bool isActive)
@@ -67,41 +119,32 @@ namespace HK.AutoAnt.UI
             this.LevelUpButton.gameObject.SetActive(isActive);
         }
 
-        private void ApplyTitle(CellEvent cellEvent)
+        public void ApplyTitle(string name, int level)
         {
-            if(cellEvent is ILevelUpEvent)
-            {
-                var levelUpEvent = cellEvent as ILevelUpEvent;
-                this.title.text = this.cellEventNameAndLevelFormat.Format(cellEvent.EventName, levelUpEvent.Level);
-            }
-            else
-            {
-                this.title.text = cellEvent.EventName;
-            }
+            this.title.text = this.cellEventNameAndLevelFormat.Format(name, level);
         }
 
-        [Serializable]
-        public class ResourceElement
+        public void ApplyTitle(string name)
         {
-            [SerializeField]
-            private GameObject root;
+            this.title.text = name;
+        }
 
-            [SerializeField]
-            private TextMeshProUGUI prefix;
+        public CellEventDetailsPopupProperty AddProperty(Action<CellEventDetailsPopupProperty> updateAction)
+        {
+            var property = Instantiate(this.propertyPrefab, this.propertyParent);
+            property.Initialize(updateAction);
+            this.properties.Add(property);
 
-            [SerializeField]
-            private TextMeshProUGUI value;
+            return property;
+        }
 
-            public void SetActive(bool isActive)
-            {
-                this.root.SetActive(isActive);
-            }
+        public CellEventDetailsPopupProperty AddLevelUpCost(Action<CellEventDetailsPopupProperty> updateAction)
+        {
+            var property = Instantiate(this.propertyPrefab, this.levelUpCostParent);
+            property.Initialize(updateAction);
+            this.levelUpCosts.Add(property);
 
-            public void Apply(string prefix, string value)
-            {
-                this.prefix.text = prefix;
-                this.value.text = value;
-            }
+            return property;
         }
     }
 }
