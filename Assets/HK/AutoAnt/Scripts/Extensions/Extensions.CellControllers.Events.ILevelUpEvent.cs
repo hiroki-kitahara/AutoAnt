@@ -50,6 +50,7 @@ namespace HK.AutoAnt.Extensions
             levelUpCostRecord.Cost.Consume(gameSystem.User, gameSystem.MasterData.Item);
             self.Level++;
             var record = gameSystem.MasterData.CellEvent.Records.Get(self.Id);
+            gameSystem.User.History.GenerateCellEvent.Add(self.Id, self.Level - 1);
 
             // FIXME: 不要になったら削除する
             Broker.Global.Publish(RequestNotification.Get($"レベルアップ！ {self.Level - 1} -> {self.Level}"));

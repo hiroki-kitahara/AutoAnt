@@ -53,16 +53,20 @@ namespace HK.AutoAnt.CellControllers
 
             // (Clone)という文字列が要らないのでnameを代入する必要がある
             cellEventInstance.name = cellEventRecord.EventData.name;
+            cellMapper.Add(cellEventInstance, cell.Position);
             cellEventInstance.Initialize(cell.Position, this.gameSystem, isInitializingGame);
-            cellMapper.Add(cellEventInstance);
 
             this.gameSystem.User.History.GenerateCellEvent.Add(cellEventRecordId, 0);
+
+            Broker.Global.Publish(AddedCellEvent.Get(cellEventInstance));
         }
 
         public void GenerateOnDeserialize(CellEvent instance)
         {
+            this.cellMapper.Add(instance, instance.Origin);
             instance.Initialize(instance.Origin, this.gameSystem, true);
-            this.cellMapper.Add(instance);
+
+            Broker.Global.Publish(AddedCellEvent.Get(instance));
         }
 
         public void Erase(Cell cell)
@@ -76,6 +80,8 @@ namespace HK.AutoAnt.CellControllers
         {
             this.cellMapper.Remove(cellEvent);
             cellEvent.Remove(this.gameSystem);
+
+            Broker.Global.Publish(RemovedCellEvent.Get(cellEvent));
         }
 
         /// <summary>
