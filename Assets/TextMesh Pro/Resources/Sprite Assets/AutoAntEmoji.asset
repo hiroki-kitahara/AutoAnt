@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
-  m_Name: emoji
+  m_Name: AutoAntEmoji
   m_EditorClassIdentifier: 
   hashCode: 123227204
   material: {fileID: 21358211776481360}
@@ -22,10 +22,10 @@ MonoBehaviour:
     y: 516
     width: 256
     height: 256
-    xOffset: -128
-    yOffset: 128
+    xOffset: 0
+    yOffset: 178
     xAdvance: 256
-    scale: 1
+    scale: 1.75
     name: money
     hashCode: 132364592
     unicode: 0
@@ -36,10 +36,10 @@ MonoBehaviour:
     y: 258
     width: 256
     height: 256
-    xOffset: -128
-    yOffset: 128
+    xOffset: 0
+    yOffset: 178
     xAdvance: 256
-    scale: 1
+    scale: 1.75
     name: population
     hashCode: -1570077525
     unicode: 0
@@ -50,10 +50,10 @@ MonoBehaviour:
     y: 0
     width: 256
     height: 256
-    xOffset: -128
-    yOffset: 128
+    xOffset: 0
+    yOffset: 178
     xAdvance: 256
-    scale: 1
+    scale: 1.75
     name: popularity
     hashCode: -1569865663
     unicode: 0
