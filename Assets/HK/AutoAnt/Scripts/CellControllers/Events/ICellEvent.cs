@@ -12,6 +12,11 @@ namespace HK.AutoAnt.CellControllers.Events
     public interface ICellEvent
     {
         /// <summary>
+        /// セルイベントの名前
+        /// </summary>
+        string EventName { get; }
+
+        /// <summary>
         /// セルイベントに対して通知されるブローカー
         /// </summary>
         IMessageBroker Broker { get; }

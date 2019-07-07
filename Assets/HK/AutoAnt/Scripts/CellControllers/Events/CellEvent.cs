@@ -8,6 +8,7 @@ using HK.AutoAnt.Extensions;
 using HK.AutoAnt.EffectSystems;
 using HK.Framework.EventSystems;
 using HK.AutoAnt.Events;
+using HK.Framework.Text;
 using HK.AutoAnt.Database;
 
 #if UNITY_EDITOR
@@ -21,6 +22,10 @@ namespace HK.AutoAnt.CellControllers.Events
     /// </summary>
     public abstract class CellEvent : ScriptableObject, ICellEvent
     {
+        [SerializeField]
+        private StringAsset.Finder eventName = null;
+        public string EventName => this.eventName.Get;
+
         [SerializeField]
         protected Constants.CellEventCategory category;
         public Constants.CellEventCategory Category => this.category;
@@ -203,6 +208,8 @@ namespace HK.AutoAnt.CellControllers.Events
 
         protected virtual void ApplyProperty(Database.SpreadSheetData.CellEventData data)
         {
+            var stringAsset = AssetDatabase.LoadAssetAtPath<StringAsset>("Assets/HK/AutoAnt/DataSources/StringAsset/CellEvent.asset");
+            this.eventName = stringAsset.CreateFinderSafe(data.Name);
             this.category = (Constants.CellEventCategory)Enum.Parse(typeof(Constants.CellEventCategory), data.Category);
             this.condition = AssetDatabase.LoadAssetAtPath<CellEventGenerateCondition>($"Assets/HK/AutoAnt/DataSources/CellEvents/Conditions/{data.Condition}.asset");
             this.size = data.Size;
