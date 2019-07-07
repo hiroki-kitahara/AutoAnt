@@ -3,6 +3,7 @@ using HK.AutoAnt.Systems;
 using HK.Framework.Text;
 using TMPro;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -19,12 +20,21 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private StringAsset.Finder format = null;
 
+        private double cachedPopulation;
+
         void Start()
         {
-            GameSystem.Instance.User.Town.Population
-                .SubscribeWithState(this, (x, _this) =>
+            GameSystem.Instance.UpdateAsObservable()
+                .SubscribeWithState(this, (_, _this) =>
                 {
-                    _this.value.text = _this.format.Format(x.ToReadableString("###.00"));
+                    var population = GameSystem.Instance.User.Town.Population.Value;
+                    if(_this.cachedPopulation == population)
+                    {
+                        return;
+                    }
+
+                    _this.cachedPopulation = population;
+                    _this.value.text = _this.format.Format(population.ToReadableString("###.00"));
                 })
                 .AddTo(this);
         }
