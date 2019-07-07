@@ -11,12 +11,6 @@ namespace HK.AutoAnt.UI
     public interface IPopup
     {
         /// <summary>
-        /// ポップアップのイベントを通知するブローカー
-        /// </summary>
-        /// <value></value>
-        IMessageBroker Broker { get; }
-
-        /// <summary>
         /// 開く
         /// </summary>
         void Open();

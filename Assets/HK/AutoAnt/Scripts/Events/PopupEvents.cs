@@ -1,4 +1,5 @@
-﻿using HK.Framework.EventSystems;
+﻿using HK.AutoAnt.UI;
+using HK.Framework.EventSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -10,25 +11,35 @@ namespace HK.AutoAnt.Events
     public class PopupEvents
     {
         /// <summary>
+        /// 表示処理が開始した際のイベント
+        /// </summary>
+        public class StartOpen : Message<StartOpen, Popup>
+        {
+            public Popup Popup => this.param1;
+        }
+
+        /// <summary>
+        /// 表示処理が完了した際のイベント
+        /// </summary>
+        public class CompleteOpen : Message<CompleteOpen, Popup>
+        {
+            public Popup Popup => this.param1;
+        }
+
+        /// <summary>
         /// 閉じる処理が開始した際のイベント
         /// </summary>
-        public class StartClose : Message<StartClose>
+        public class StartClose : Message<StartClose, Popup>
         {
+            public Popup Popup => this.param1;
         }
 
         /// <summary>
         /// 閉じる処理が完了した際のイベント
         /// </summary>
-        public class CompleteClose : Message<CompleteClose>
+        public class CompleteClose : Message<CompleteClose, Popup>
         {
-        }
-
-        /// <summary>
-        /// ポップアップのレスポンスが返ってくるイベント
-        /// </summary>
-        public class Response : Message<Response, int>
-        {
-            public int Result => this.param1;
+            public Popup Popup => this.param1;
         }
     }
 }

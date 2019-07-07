@@ -23,9 +23,9 @@ namespace HK.AutoAnt.GameControllers
         /// <param name="basePopulation">ベースの増加量</param>
         /// <param name="popularity">人気度</param>
         /// <param name="popularityRate">人気度の係数</param>
-        public static double AddPopulation(double basePopulation, double popularity, float popularityRate, float deltaTime)
+        public static double AddPopulation(double basePopulation, double popularity, float popularityRate, float rate, float deltaTime)
         {
-            return (basePopulation * (popularity / popularityRate)) * deltaTime;
+            return ((basePopulation * (popularity / popularityRate)) * rate) * deltaTime;
         }
 
         /// <summary>

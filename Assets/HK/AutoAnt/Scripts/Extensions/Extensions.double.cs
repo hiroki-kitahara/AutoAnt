@@ -22,7 +22,7 @@ namespace HK.AutoAnt.Extensions
         public static string ToReadableString(this double d, string format)
         {
             //マイナスは扱う気無し
-            if (d <= 0) return "0";
+            if (d <= 0) return d.ToString(format);
             //表示上は整数として見せるので、suffix(kmbtABC等)がつかない場合は少数部を破棄
             if (d <= 1000) return ((int)d).ToString();
 
