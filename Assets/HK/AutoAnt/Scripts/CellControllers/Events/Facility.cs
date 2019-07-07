@@ -92,9 +92,9 @@ namespace HK.AutoAnt.CellControllers.Events
             {
                 this.CollectionProducts();
             }
-            else if(this.CanLevelUp())
+            else
             {
-                this.LevelUp();
+                Framework.EventSystems.Broker.Global.Publish(RequestOpenCellEventDetailsPopup.Get(this));
             }
         }
 
