@@ -6,6 +6,7 @@ using HK.AutoAnt.UI;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UniRx;
+using HK.AutoAnt;
 
 // #if AA_DEBUG
 /// <summary>
@@ -54,7 +55,7 @@ public partial class SROptions
     {
         const int grasslandId = 100100;
         var cellManager = GameSystem.Instance.CellManager;
-        cellManager.Mapper.GetRange(Vector2Int.zero, this.addCellRange, (id) =>
+        Vector2IntUtility.GetRange(Vector2Int.zero, this.addCellRange, (id) =>
         {
             if (cellManager.Mapper.Cell.Map.ContainsKey(id))
             {
@@ -76,7 +77,7 @@ public partial class SROptions
     {
         const int housingId = 100000;
         var cellManager = GameSystem.Instance.CellManager;
-        cellManager.Mapper.GetRange(Vector2Int.zero, this.addCellRange, (id) =>
+        Vector2IntUtility.GetRange(Vector2Int.zero, this.addCellRange, (id) =>
         {
             var cell = cellManager.Mapper.Cell.Map[id];
             if (cellManager.Mapper.CellEvent.Map.ContainsKey(id))
@@ -97,7 +98,7 @@ public partial class SROptions
     {
         const int facilityId = 101000;
         var cellManager = GameSystem.Instance.CellManager;
-        cellManager.Mapper.GetRange(Vector2Int.zero, this.addCellRange, (id) =>
+        Vector2IntUtility.GetRange(Vector2Int.zero, this.addCellRange, (id) =>
         {
             var cell = cellManager.Mapper.Cell.Map[id];
             if (cellManager.Mapper.CellEvent.Map.ContainsKey(id))
