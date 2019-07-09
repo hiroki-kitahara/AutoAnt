@@ -11,7 +11,7 @@ using UnityEngine.Events;
 namespace HK.AutoAnt
 {
     /// <summary>
-    /// 
+    /// <see cref="DOTweenAnimation"/>をアタッチするクラス
     /// </summary>
     public sealed class TweenAnimationAttacher : MonoBehaviour
     {
