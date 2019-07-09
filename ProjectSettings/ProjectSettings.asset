@@ -621,10 +621,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: df37264a-098d-4b65-ba14-622f019d1a6c
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: AutoAnt
+  organizationId: projectrabbit010
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
