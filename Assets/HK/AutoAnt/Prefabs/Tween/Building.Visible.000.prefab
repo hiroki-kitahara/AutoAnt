@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa21deb4f5827438d92ccdc5f2dcc268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animations: []
 --- !u!114 &1860271946096066320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +63,7 @@ MonoBehaviour:
   hasOnPlay: 0
   hasOnUpdate: 0
   hasOnStepComplete: 0
-  hasOnComplete: 0
+  hasOnComplete: 1
   hasOnTweenCreated: 0
   hasOnRewind: 0
   onStart:
@@ -157,7 +156,7 @@ MonoBehaviour:
   isFrom: 1
   isIndependentUpdate: 0
   autoKill: 0
-  isActive: 1
+  isActive: 0
   isValid: 1
   target: {fileID: 1958038076013634960}
   animationType: 5
@@ -201,7 +200,7 @@ MonoBehaviour:
   hasOnPlay: 0
   hasOnUpdate: 0
   hasOnStepComplete: 0
-  hasOnComplete: 0
+  hasOnComplete: 1
   hasOnTweenCreated: 0
   hasOnRewind: 0
   onStart:
@@ -239,7 +238,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  targetIsSelf: 0
+  targetIsSelf: 1
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
   delay: 0
@@ -294,9 +293,9 @@ MonoBehaviour:
   isFrom: 0
   isIndependentUpdate: 0
   autoKill: 1
-  isActive: 1
+  isActive: 0
   isValid: 1
-  target: {fileID: 0}
+  target: {fileID: 1958038076013634960}
   animationType: 2
   targetType: 11
   forcedTargetType: 0
