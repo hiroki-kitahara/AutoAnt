@@ -43,6 +43,7 @@ namespace HK.AutoAnt.Advertisements
                         showOptions.resultCallback = (showResult) =>
                         {
                             _observer.OnNext(showResult);
+                            _observer.OnCompleted();
                         };
 
                         Advertisement.Show(showOptions);
