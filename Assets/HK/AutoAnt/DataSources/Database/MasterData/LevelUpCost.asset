@@ -16,57 +16,72 @@ MonoBehaviour:
   - id: 100000
     level: 0
     cost:
-      money: 100
+      money: 1000
       needItems: []
   - id: 100000
     level: 1
     cost:
-      money: 150
-      needItems: []
-  - id: 100000
-    level: 2
-    cost:
-      money: 200
-      needItems: []
-  - id: 100000
-    level: 3
-    cost:
-      money: 250
-      needItems: []
-  - id: 100000
-    level: 4
-    cost:
-      money: 300
+      money: 1500
       needItems:
       - itemName:
           target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-          value: "\u30A2\u30A4\u30C6\u30E01"
-          guid: 2529d8c5-7d90-4263-bf83-5488875c491f
-        amount: 20
+          value: "\u85AA"
+          guid: 456e6773-1a7f-4c8c-92c0-08bd73b674ba
+        amount: 2
+  - id: 100000
+    level: 2
+    cost:
+      money: 2000
+      needItems:
+      - itemName:
+          target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
+          value: "\u85AA"
+          guid: 456e6773-1a7f-4c8c-92c0-08bd73b674ba
+        amount: 4
+  - id: 100000
+    level: 3
+    cost:
+      money: 2500
+      needItems:
+      - itemName:
+          target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
+          value: "\u85AA"
+          guid: 456e6773-1a7f-4c8c-92c0-08bd73b674ba
+        amount: 8
+  - id: 100000
+    level: 4
+    cost:
+      money: 3000
+      needItems:
+      - itemName:
+          target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
+          value: "\u85AA"
+          guid: 456e6773-1a7f-4c8c-92c0-08bd73b674ba
+        amount: 12
   - id: 101000
     level: 0
     cost:
-      money: 100
+      money: 10000
       needItems: []
   - id: 101000
     level: 1
     cost:
-      money: 150
+      money: 15000
       needItems: []
   - id: 101000
     level: 2
     cost:
-      money: 200
+      money: 20000
       needItems: []
   - id: 101000
     level: 3
     cost:
-      money: 250
+      money: 25000
       needItems: []
   - id: 101000
     level: 4
     cost:
-      money: 300
+      money: 30000
       needItems: []
   - id: 102000
     level: 0
