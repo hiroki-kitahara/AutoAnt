@@ -27,4 +27,6 @@ MonoBehaviour:
     type: 3}
   gimmickPrefab: {fileID: 8526093038232849724, guid: 81339a340327d4660946cc3c5dee835b,
     type: 3}
+  visibleAnimation: {fileID: 1401049183261498999, guid: 2c9200deec9874516bb2ab7b2679328f,
+    type: 3}
   CurrentPopulation: 0
