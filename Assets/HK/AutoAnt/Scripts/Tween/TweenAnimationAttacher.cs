@@ -13,15 +13,15 @@ namespace HK.AutoAnt
     /// <summary>
     /// 
     /// </summary>
-    public sealed class TweenAnimationManager : MonoBehaviour
+    public sealed class TweenAnimationAttacher : MonoBehaviour
     {
-        private static readonly ObjectPoolBundle<TweenAnimationManager> pools = new ObjectPoolBundle<TweenAnimationManager>();
+        private static readonly ObjectPoolBundle<TweenAnimationAttacher> pools = new ObjectPoolBundle<TweenAnimationAttacher>();
 
-        private ObjectPool<TweenAnimationManager> pool = null;
+        private ObjectPool<TweenAnimationAttacher> pool = null;
 
         public DOTweenAnimation[] Animations { get; private set; }
 
-        public TweenAnimationManager Rent(GameObject target)
+        public TweenAnimationAttacher Rent(GameObject target)
         {
             var pool = pools.Get(this);
             var clone = pool.Rent();
@@ -46,7 +46,7 @@ namespace HK.AutoAnt
         /// <summary>
         /// アニメーションが完了したらPoolされるよう仕込む
         /// </summary>
-        public TweenAnimationManager ReturnToPoolOnComplete()
+        public TweenAnimationAttacher ReturnToPoolOnComplete()
         {
             this.OnCompleteAsObservable()
                 .SubscribeWithState(this, (_, _this) =>

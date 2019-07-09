@@ -54,7 +54,7 @@ namespace HK.AutoAnt.CellControllers.Events
         protected GameObject gimmickPrefab = null;
 
         [SerializeField]
-        protected TweenAnimationManager visibleAnimation = null;
+        protected TweenAnimationAttacher visibleAnimation = null;
 
         public int Id => int.Parse(this.name);
 
@@ -233,7 +233,7 @@ namespace HK.AutoAnt.CellControllers.Events
             this.constructionEffect = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Effects/{data.Constructioneffect}.prefab").GetComponent<PoolableEffect>();
             this.destructionEffect = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Effects/{data.Destructioneffect}.prefab").GetComponent<PoolableEffect>();
             this.gimmickPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/CellEvent/{data.Gimmickprefab}.prefab");
-            this.visibleAnimation = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Tween/{data.Visibleanimation}.prefab").GetComponent<TweenAnimationManager>();
+            this.visibleAnimation = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Tween/{data.Visibleanimation}.prefab").GetComponent<TweenAnimationAttacher>();
         }
 #endif
     }
