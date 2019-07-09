@@ -30,7 +30,7 @@ namespace HK.AutoAnt.Advertisements
 #endif
         }
 
-        public static IObservable<ShowResult> Show()
+        public IObservable<ShowResult> Show()
         {
             return Observable.Create<ShowResult>(observer =>
             {

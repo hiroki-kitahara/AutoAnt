@@ -124,13 +124,11 @@ public partial class SROptions
     [DisplayName("広告表示")]
     public void ShowAds()
     {
-        if(!Advertisement.IsReady())
-        {
-            Debug.Log("広告の準備が完了していません");
-            return;
-        }
-
-        Advertisement.Show();
+        AutoAntSystem.Advertisement.Show()
+            .Subscribe(x =>
+            {
+                Debug.Log(x);
+            });
     }
 }
 // #endif
