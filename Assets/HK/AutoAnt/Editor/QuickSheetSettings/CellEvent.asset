@@ -63,4 +63,8 @@ MonoBehaviour:
     name: GimmickPrefab
     isEnable: 0
     isArray: 0
+  - type: 1
+    name: VisibleAnimation
+    isEnable: 0
+    isArray: 0
   AccessCode: 

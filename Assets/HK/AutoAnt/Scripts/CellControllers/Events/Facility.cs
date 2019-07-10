@@ -50,7 +50,7 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// 生産したアイテムのリスト
         /// </summary>
-        public List<string> Products { get; private set; } = new List<string>();
+        public List<int> Products { get; private set; } = new List<int>();
 
         public float Buff { get; private set; } = 0.0f;
 
@@ -69,7 +69,7 @@ namespace HK.AutoAnt.CellControllers.Events
                     _this.ProductTimer += UnityEngine.Time.deltaTime;
                     if(_this.ProductTimer >= _this.LevelParameter.NeedProductTime)
                     {
-                        _this.Products.Add(_this.LevelParameter.ProductName);
+                        _this.Products.Add(_this.LevelParameter.ProductId);
                         _this.Broker.Publish(AddedFacilityProduct.Get(_this));
                         _this.ProductTimer = 0.0f;
                     }
@@ -166,7 +166,7 @@ namespace HK.AutoAnt.CellControllers.Events
             popup.AddProperty(property =>
             {
                 property.Prefix.text = popup.Product.Get;
-                property.Value.text = popup.ProductValue.Format(this.LevelParameter.ProductName, this.LevelParameter.NeedProductTime);
+                property.Value.text = popup.ProductValue.Format(this.LevelParameter.ProductRecord.Name, this.LevelParameter.NeedProductTime);
             });
 
             this.AttachDetailsPopup(popup, this.gameSystem);

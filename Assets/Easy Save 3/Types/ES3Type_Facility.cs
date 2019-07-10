@@ -40,7 +40,7 @@ namespace ES3Types
 					reader.SetPrivateProperty("ProductTimer", reader.Read<System.Single>(), instance);
 					break;
 					case "Products":
-					reader.SetPrivateProperty("Products", reader.Read<System.Collections.Generic.List<System.String>>(), instance);
+					reader.SetPrivateProperty("Products", reader.Read<System.Collections.Generic.List<System.Int32>>(), instance);
 					break;
 					case "Origin":
 					reader.SetPrivateProperty("Origin", reader.Read<UnityEngine.Vector2Int>(), instance);

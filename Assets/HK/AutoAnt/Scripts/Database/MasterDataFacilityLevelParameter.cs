@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using HK.Framework.Text;
 using UnityEngine;
 using UnityEngine.Assertions;
+using HK.AutoAnt.Systems;
+using HK.AutoAnt.Extensions;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -38,8 +40,8 @@ namespace HK.AutoAnt.Database
             /// 生産できるアイテム名
             /// </summary>
             [SerializeField]
-            private StringAsset.Finder productName = null;
-            public string ProductName => this.productName.Get;
+            private int productId = 0;
+            public int ProductId => this.productId;
 
             /// <summary>
             /// 生産物を生産するのに必要な時間（秒）
@@ -55,6 +57,11 @@ namespace HK.AutoAnt.Database
             private double popularity = 0;
             public double Popularity => this.popularity;
 
+            /// <summary>
+            /// 生産出来るアイテムのレコード
+            /// </summary>
+            public MasterDataItem.Record ProductRecord => GameSystem.Instance.MasterData.Item.Records.Get(this.ProductId);
+
 #if UNITY_EDITOR
             public Record(SpreadSheetData.FacilityLevelParameterData data)
             {
@@ -62,7 +69,7 @@ namespace HK.AutoAnt.Database
                 this.level = data.Level;
                 this.productSlot = data.Productslot;
                 var stringAsset = AssetDatabase.LoadAssetAtPath<StringAsset>("Assets/HK/AutoAnt/DataSources/StringAsset/Item.asset");
-                this.productName = stringAsset.CreateFinder(data.Productname);
+                this.productId = data.Productid;
                 this.needProductTime = data.Needproducttime;
                 this.popularity = data.Popularity;
             }
