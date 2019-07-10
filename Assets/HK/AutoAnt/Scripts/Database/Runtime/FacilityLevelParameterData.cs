@@ -24,8 +24,8 @@ int productslot;
 public int Productslot { get {return productslot; } set { productslot = value;} }
 
 [SerializeField]
-string productname;
-public string Productname { get {return productname; } set { productname = value;} }
+int productid;
+public int Productid { get {return productid; } set { productid = value;} }
 
 [SerializeField]
 float needproducttime;
@@ -34,6 +34,7 @@ public float Needproducttime { get {return needproducttime; } set { needproductt
 [SerializeField]
 double popularity;
 public double Popularity { get {return popularity; } set { popularity = value;} }
+
 
     }
 }
