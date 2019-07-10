@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbcda13c00cae4f4087d84a149a1c70b, type: 3}
   m_Name: Google Data Settings
   m_EditorClassIdentifier: 
-  TemplatePath: QuickSheet/GDataPlugin/Templates
+  TemplatePath: HK/AutoAnt/Editor/QuickSheetTemplates/Id
   RuntimePath: HK/AutoAnt/Scripts/Database/Runtime
   EditorPath: HK/AutoAnt/Scripts/Database/Editor
   OAuth2Data:
