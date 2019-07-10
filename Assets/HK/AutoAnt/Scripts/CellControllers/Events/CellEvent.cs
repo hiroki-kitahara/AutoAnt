@@ -53,6 +53,9 @@ namespace HK.AutoAnt.CellControllers.Events
         [SerializeField]
         protected GameObject gimmickPrefab = null;
 
+        [SerializeField]
+        protected TweenAnimationAttacher visibleAnimation = null;
+
         public int Id => int.Parse(this.name);
 
         public Vector2Int Origin { get; protected set; }
@@ -65,7 +68,7 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         protected readonly CompositeDisposable instanceEvents = new CompositeDisposable();
 
-        protected GameObject gimmick;
+        public GameObject Gimmick { get; protected set; }
 
         private MasterDataCellEvent.Record cachedRecord;
 
@@ -101,9 +104,9 @@ namespace HK.AutoAnt.CellControllers.Events
             // 自分自身のマスターデータを取得してデータを参照している
             // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
             this.cachedRecord = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
-            this.gimmick = this.cachedRecord.EventData.CreateGimmickController(this.Origin);
+            this.Gimmick = this.cachedRecord.EventData.CreateGimmickController(this.Origin);
 
-            foreach(var g in this.gimmick.GetComponentsInChildren<ICellEventGimmick>())
+            foreach(var g in this.Gimmick.GetComponentsInChildren<ICellEventGimmick>())
             {
                 g.Attach(this);
             }
@@ -115,8 +118,13 @@ namespace HK.AutoAnt.CellControllers.Events
 
                 Assert.IsNotNull(this.cachedRecord.EventData.constructionEffect, $"Id = {this.Id}の建設時のエフェクト生成に失敗しました");
                 var effect = this.cachedRecord.EventData.constructionEffect.Rent();
-                effect.transform.position = this.gimmick.transform.position;
+                effect.transform.position = this.Gimmick.transform.position;
                 effect.transform.localScale = Vector3.one * this.cachedRecord.EventData.size;
+
+                this.visibleAnimation
+                    .Rent(this.Gimmick)
+                    .ReturnToPoolOnComplete()
+                    .Animations.ForEach(a => a.DOPlay());
             }
         }
 
@@ -128,7 +136,7 @@ namespace HK.AutoAnt.CellControllers.Events
             // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
             var record = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
 
-            foreach (var g in this.gimmick.GetComponentsInChildren<ICellEventGimmick>())
+            foreach (var g in this.Gimmick.GetComponentsInChildren<ICellEventGimmick>())
             {
                 g.Detach(this);
             }
@@ -138,10 +146,10 @@ namespace HK.AutoAnt.CellControllers.Events
 
             Assert.IsNotNull(record.EventData.destructionEffect, $"Id = {this.Id}の破壊時のエフェクト生成に失敗しました");
             var effect = record.EventData.destructionEffect.Rent();
-            effect.transform.position = this.gimmick.transform.position;
+            effect.transform.position = this.Gimmick.transform.position;
             effect.transform.localScale = Vector3.one * record.EventData.size;
 
-            Destroy(this.gimmick.gameObject);
+            Destroy(this.Gimmick.gameObject);
         }
 
         public bool CanGenerate(Cell origin, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper)
@@ -225,6 +233,7 @@ namespace HK.AutoAnt.CellControllers.Events
             this.constructionEffect = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Effects/{data.Constructioneffect}.prefab").GetComponent<PoolableEffect>();
             this.destructionEffect = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Effects/{data.Destructioneffect}.prefab").GetComponent<PoolableEffect>();
             this.gimmickPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/CellEvent/{data.Gimmickprefab}.prefab");
+            this.visibleAnimation = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Tween/{data.Visibleanimation}.prefab").GetComponent<TweenAnimationAttacher>();
         }
 #endif
     }

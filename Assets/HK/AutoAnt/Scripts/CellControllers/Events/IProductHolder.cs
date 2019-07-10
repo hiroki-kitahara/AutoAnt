@@ -12,6 +12,6 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// 生産物リスト
         /// </summary>
-        List<string> Products { get; }
+        List<int> Products { get; }
     }
 }

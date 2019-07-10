@@ -205,6 +205,11 @@ namespace UnityQuickSheet
         ///
         private void WriteMemberField(MemberFieldData field)
         {
+            if(field.type == CellType.Ignore)
+            {
+                return;
+            }
+            
             m_Writer.WriteLine (m_Indentation + "[SerializeField]");
 
             var fieldName = GetFieldNameForField(field);
@@ -227,6 +232,11 @@ namespace UnityQuickSheet
         ///
         private void WriteProperty(MemberFieldData field)
         {
+            if(field.type == CellType.Ignore)
+            {
+                return;
+            }
+
             string tmp = string.Empty;
             var propertyName = GetPropertyNameForField(field);
             var fieldName = GetFieldNameForField(field);

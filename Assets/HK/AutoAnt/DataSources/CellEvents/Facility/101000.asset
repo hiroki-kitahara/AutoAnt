@@ -27,3 +27,5 @@ MonoBehaviour:
     type: 3}
   gimmickPrefab: {fileID: 7802446020637061562, guid: c6dfb78c161aa4669837e113d5c41c8a,
     type: 3}
+  visibleAnimation: {fileID: 1401049183261498999, guid: 2c9200deec9874516bb2ab7b2679328f,
+    type: 3}
