@@ -53,6 +53,9 @@ namespace HK.AutoAnt.CellControllers.Events
         [SerializeField]
         protected GameObject gimmickPrefab = null;
 
+        [SerializeField]
+        protected TweenAnimationAttacher visibleAnimation = null;
+
         public int Id => int.Parse(this.name);
 
         public Vector2Int Origin { get; protected set; }
@@ -117,6 +120,11 @@ namespace HK.AutoAnt.CellControllers.Events
                 var effect = this.cachedRecord.EventData.constructionEffect.Rent();
                 effect.transform.position = this.Gimmick.transform.position;
                 effect.transform.localScale = Vector3.one * this.cachedRecord.EventData.size;
+
+                this.visibleAnimation
+                    .Rent(this.gimmick)
+                    .ReturnToPoolOnComplete()
+                    .Animations.ForEach(a => a.DOPlay());
             }
         }
 
@@ -225,6 +233,7 @@ namespace HK.AutoAnt.CellControllers.Events
             this.constructionEffect = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Effects/{data.Constructioneffect}.prefab").GetComponent<PoolableEffect>();
             this.destructionEffect = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Effects/{data.Destructioneffect}.prefab").GetComponent<PoolableEffect>();
             this.gimmickPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/CellEvent/{data.Gimmickprefab}.prefab");
+            this.visibleAnimation = AssetDatabase.LoadAssetAtPath<GameObject>($"Assets/HK/AutoAnt/Prefabs/Tween/{data.Visibleanimation}.prefab").GetComponent<TweenAnimationAttacher>();
         }
 #endif
     }

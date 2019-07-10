@@ -55,5 +55,9 @@ public string Destructioneffect { get {return destructioneffect; } set { destruc
 string gimmickprefab;
 public string Gimmickprefab { get {return gimmickprefab; } set { gimmickprefab = value;} }
 
+[SerializeField]
+string visibleanimation;
+public string Visibleanimation { get {return visibleanimation; } set { visibleanimation = value;} }
+
     }
 }
