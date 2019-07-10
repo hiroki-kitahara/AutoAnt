@@ -122,7 +122,7 @@ namespace HK.AutoAnt.CellControllers.Events
                 effect.transform.localScale = Vector3.one * this.cachedRecord.EventData.size;
 
                 this.visibleAnimation
-                    .Rent(this.gimmick)
+                    .Rent(this.Gimmick)
                     .ReturnToPoolOnComplete()
                     .Animations.ForEach(a => a.DOPlay());
             }
