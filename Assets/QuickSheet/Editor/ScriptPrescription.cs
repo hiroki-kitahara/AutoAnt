@@ -53,6 +53,7 @@ namespace UnityQuickSheet
         Double,
         Enum,
         Bool,
+        Ignore,
     }
 
     public class MemberFieldData
