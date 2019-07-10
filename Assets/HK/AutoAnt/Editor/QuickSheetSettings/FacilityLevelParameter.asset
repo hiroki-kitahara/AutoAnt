@@ -31,8 +31,8 @@ MonoBehaviour:
     name: ProductSlot
     isEnable: 0
     isArray: 0
-  - type: 1
-    name: ProductName
+  - type: 0
+    name: ProductId
     isEnable: 0
     isArray: 0
   - type: 5
@@ -41,6 +41,10 @@ MonoBehaviour:
     isArray: 0
   - type: 6
     name: Popularity
+    isEnable: 0
+    isArray: 0
+  - type: 0
+    name: "\u751F\u7523\u30A2\u30A4\u30C6\u30E0\u540D"
     isEnable: 0
     isArray: 0
   AccessCode: 
