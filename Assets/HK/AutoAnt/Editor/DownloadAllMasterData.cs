@@ -4,6 +4,7 @@ using UnityEngine.Assertions;
 using HK.AutoAnt.Database;
 using System;
 using HK.AutoAnt.Database.SpreadSheetData;
+using System.Collections.Generic;
 
 namespace HK.AutoAnt.Editor
 {
@@ -15,6 +16,25 @@ namespace HK.AutoAnt.Editor
         [MenuItem("AutoAnt/MasterData/Download All", false, 1)]
         private static void DownloadAll()
         {
+            var downloader = new Action<float>[]
+            {
+                (p) => Download(typeof(MasterDataItem), p, m => ItemEditor.Load(m.Item), false),
+                (p) => Download(typeof(MasterDataCell), p, m => CellEditor.Load(m.Cell), false),
+                (p) => Download(typeof(MasterDataCellEvent), p, m => CellEventEditor.Load(m.CellEvent), false),
+                (p) => Download(typeof(MasterDataLevelUpCost), p, m => LevelUpCostEditor.Load(m.LevelUpCost), false),
+                (p) => Download(typeof(MasterDataHousingLevelParameter), p, m => HousingLevelParameterEditor.Load(m.HousingLevelParameter), false),
+                (p) => Download(typeof(MasterDataFacilityLevelParameter), p, m => FacilityLevelParameterEditor.Load(m.FacilityLevelParameter), false),
+                (p) => Download(typeof(MasterDataRoadLevelParameter), p, m => RoadLevelParameterEditor.Load(m.RoadLevelParameter), false),
+                (p) => Download(typeof(MasterDataUnlockCellEvent), p, m => UnlockCellEventEditor.Load(m.UnlockCellEvent), false),
+            };
+
+            for (var i = 0; i < downloader.Length; i++)
+            {
+                var progress = (float)i / downloader.Length;
+                downloader[i](progress);
+            }
+
+            EditorUtility.ClearProgressBar();
         }
 
         [MenuItem("AutoAnt/MasterData/Download Item", false, 12)]
@@ -60,19 +80,22 @@ namespace HK.AutoAnt.Editor
         }
 
         [MenuItem("AutoAnt/MasterData/Download UnlockCellEvent", false, 19)]
-        private static void Download()
+        private static void DownloadUnlockCellEvent()
         {
             Download(typeof(MasterDataUnlockCellEvent), 1.0f, m => UnlockCellEventEditor.Load(m.UnlockCellEvent));
         }
 
-        private static void Download(Type masterDataType, float progress, Func<MasterData, bool> selector)
+        private static void Download(Type masterDataType, float progress, Func<MasterData, bool> selector, bool clearProgressBar = true)
         {
             EditorUtility.DisplayProgressBar("マスターデータダウンロード", masterDataType.Name, progress);
             if(!selector(GetMasterData()))
             {
                 Debug.LogError($"{masterDataType}のダウンロードに失敗しました");
             }
-            EditorUtility.ClearProgressBar();
+            if(clearProgressBar)
+            {
+                EditorUtility.ClearProgressBar();
+            }
         }
 
         private static MasterData GetMasterData()
