@@ -75,6 +75,8 @@ namespace HK.AutoAnt.UI
             this.text.text = message;
             this.background.color = this.GetColor(messageType);
 
+            this.StartVisibleAnimation();
+
             Observable.Timer(TimeSpan.FromSeconds(delayDestroy))
                 .SubscribeWithState(this, (_, _this) =>
                 {
