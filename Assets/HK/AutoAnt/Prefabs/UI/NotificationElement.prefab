@@ -370,9 +370,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 5623878423436314866}
   animationTarget: {fileID: 2623609205460792113}
+  animationCanvasGroup: {fileID: 7795742011122385527}
   background: {fileID: 2363961704167484883}
-  animationDuration: 0.3
-  animationEase: 27
+  visibleDuration: 0.3
+  visibleEase: 27
+  hiddenDuration: 0.5
+  hiddenPositionY: -10
+  hiddenEase: 1
   informationColor: {r: 0.4292453, g: 0.76863605, b: 1, a: 0.47058824}
   errorColor: {r: 1, g: 0.13679248, b: 0.13679248, a: 0.47058824}
 --- !u!1 &7625659845003915823
@@ -385,6 +389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2623609205460792113}
   - component: {fileID: 8530180464376601397}
+  - component: {fileID: 7795742011122385527}
   m_Layer: 5
   m_Name: Root
   m_TagString: Untagged
@@ -421,3 +426,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7625659845003915823}
   m_CullTransparentMesh: 0
+--- !u!225 &7795742011122385527
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7625659845003915823}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0

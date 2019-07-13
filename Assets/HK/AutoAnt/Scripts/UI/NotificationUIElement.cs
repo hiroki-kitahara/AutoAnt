@@ -30,13 +30,25 @@ namespace HK.AutoAnt.UI
         private RectTransform animationTarget = null;
 
         [SerializeField]
+        private CanvasGroup animationCanvasGroup = null;
+
+        [SerializeField]
         private Image background = null;
 
         [SerializeField]
-        private float animationDuration = 1.0f;
+        private float visibleDuration = 1.0f;
 
         [SerializeField]
-        private Ease animationEase = Ease.Linear;
+        private Ease visibleEase = Ease.Linear;
+
+        [SerializeField]
+        private float hiddenDuration = 1.0f;
+
+        [SerializeField]
+        private float hiddenPositionY = 0.0f;
+
+        [SerializeField]
+        private Ease hiddenEase = Ease.Linear;
 
         [SerializeField]
         private Color informationColor = Color.white;
@@ -69,18 +81,19 @@ namespace HK.AutoAnt.UI
         private NotificationUIElement Initialize(Transform parent, string message, MessageType messageType, float delayDestroy)
         {
             this.cachedTransform.SetParent(parent, false);
-            this.cachedTransform.SetAsFirstSibling();
+            this.cachedTransform.SetAsLastSibling();
             LayoutRebuilder.ForceRebuildLayoutImmediate(this.cachedTransform);
 
             this.text.text = message;
             this.background.color = this.GetColor(messageType);
+            this.animationCanvasGroup.alpha = 1.0f;
 
             this.StartVisibleAnimation();
 
             Observable.Timer(TimeSpan.FromSeconds(delayDestroy))
                 .SubscribeWithState(this, (_, _this) =>
                 {
-                    _this.pool.Return(_this);
+                    _this.StartHiddenAnimation();
                 })
                 .AddTo(this);
 
@@ -98,8 +111,20 @@ namespace HK.AutoAnt.UI
             this.animationTarget.anchoredPosition = p;
 
             this.animationTarget
-                .DOAnchorPosX(this.cachedTransform.anchoredPosition.x, this.animationDuration, true)
-                .SetEase(this.animationEase);
+                .DOAnchorPosX(this.cachedTransform.anchoredPosition.x, this.visibleDuration, true)
+                .SetEase(this.visibleEase);
+        }
+
+        private void StartHiddenAnimation()
+        {
+            this.animationTarget
+                .DOAnchorPosY(this.hiddenPositionY, this.hiddenDuration, true)
+                .SetEase(this.hiddenEase);
+
+            this.animationCanvasGroup
+                .DOFade(0.0f, this.hiddenDuration)
+                .SetEase(this.hiddenEase)
+                .OnComplete(() => this.pool.Return(this));
         }
 
         /// <summary>
