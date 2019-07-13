@@ -56,12 +56,18 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
         {
         }
 
+        /// <summary>
+        /// 生産物のアイコンを表示する
+        /// </summary>
         private void Apply(MasterDataItem.Record record)
         {
             this.target.SetActive(true);
             this.productRenderer.material.mainTexture = record.Icon;
         }
 
+        /// <summary>
+        /// 吹き出しを非表示にする
+        /// </summary>
         private void Hidden()
         {
             this.target.SetActive(false);
