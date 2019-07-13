@@ -14,6 +14,9 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
         [SerializeField]
         private GameObject target = null;
 
+        [SerializeField]
+        private Renderer productRenderer = null;
+
         public void Attach(CellEvent cellEvent)
         {
             var productHolder = cellEvent as IProductHolder;
@@ -22,9 +25,10 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             this.target.SetActive(productHolder.Products.Count > 0);
 
             cellEvent.Broker.Receive<AddedFacilityProduct>()
-                .SubscribeWithState(this, (_, _this) =>
+                .SubscribeWithState(this, (x, _this) =>
                 {
                     _this.target.SetActive(true);
+                    _this.productRenderer.material.mainTexture = x.Product.Icon;
                 })
                 .AddTo(this);
 
