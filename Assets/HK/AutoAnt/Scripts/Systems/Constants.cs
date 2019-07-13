@@ -41,4 +41,35 @@ namespace HK.AutoAnt.Constants
         /// </summary>
         Road,
     }
+
+    /// <summary>
+    /// セルイベントを生成可能かの評価タイプ
+    /// </summary>
+    public enum CellEventGenerateEvalute
+    {
+        /// <summary>
+        /// 建設可能
+        /// </summary>
+        Possible,
+
+        /// <summary>
+        /// セルが無い
+        /// </summary>
+        NotCell,
+
+        /// <summary>
+        /// 既に別のセルイベントがある
+        /// </summary>
+        AlreadyCellEvent,
+
+        /// <summary>
+        /// コストが足りない
+        /// </summary>
+        NotEnoughCost,
+
+        /// <summary>
+        /// セルイベントごとの条件を満たしていない
+        /// </summary>
+        NotEnoughCondition,
+    }
 }
