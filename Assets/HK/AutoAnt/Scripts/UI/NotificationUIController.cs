@@ -26,6 +26,7 @@ namespace HK.AutoAnt.UI
         void Awake()
         {
             Broker.Global.Receive<AddedItem>()
+                .Where(x => x.Amount > 0)
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     var message = _this.acquireItemFormat.Format(x.Item.Name, x.Amount, x.Inventory.Items[x.Item.Id]);
