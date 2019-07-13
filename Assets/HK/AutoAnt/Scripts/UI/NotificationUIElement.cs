@@ -1,6 +1,7 @@
 ﻿using System;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.UserControllers;
+using HK.Framework;
 using HK.Framework.Text;
 using TMPro;
 using UniRx;
@@ -17,14 +18,29 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private TextMeshProUGUI text = null;
 
-        public NotificationUIElement Initialize(string message, float delayDestroy)
+        private ObjectPool<NotificationUIElement> pool = null;
+
+        private static readonly ObjectPoolBundle<NotificationUIElement> pools = new ObjectPoolBundle<NotificationUIElement>();
+
+        public NotificationUIElement Rent(string message, float delayDestroy)
+        {
+            var pool = pools.Get(this);
+            var clone = pool.Rent();
+
+            clone.pool = pool;
+            clone.Initialize(message, delayDestroy);
+
+            return clone;
+        }
+
+        private NotificationUIElement Initialize(string message, float delayDestroy)
         {
             this.text.text = message;
 
             Observable.Timer(TimeSpan.FromSeconds(delayDestroy))
                 .SubscribeWithState(this, (_, _this) =>
                 {
-                    Destroy(_this.gameObject);
+                    _this.pool.Return(_this);
                 })
                 .AddTo(this);
 
