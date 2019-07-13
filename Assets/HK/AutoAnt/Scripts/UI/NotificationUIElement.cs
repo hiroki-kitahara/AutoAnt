@@ -75,15 +75,6 @@ namespace HK.AutoAnt.UI
             this.text.text = message;
             this.background.color = this.GetColor(messageType);
 
-            var p = this.cachedTransform.anchoredPosition;
-            p.x += this.cachedTransform.rect.width;
-            p.y = 0.0f;
-            this.animationTarget.anchoredPosition = p;
-
-            this.animationTarget
-                .DOAnchorPosX(this.cachedTransform.anchoredPosition.x, this.animationDuration, true)
-                .SetEase(this.animationEase);
-
             Observable.Timer(TimeSpan.FromSeconds(delayDestroy))
                 .SubscribeWithState(this, (_, _this) =>
                 {
@@ -94,6 +85,24 @@ namespace HK.AutoAnt.UI
             return this;
         }
 
+        /// <summary>
+        /// 表示アニメーションを開始する
+        /// </summary>
+        private void StartVisibleAnimation()
+        {
+            var p = this.cachedTransform.anchoredPosition;
+            p.x += this.cachedTransform.rect.width;
+            p.y = 0.0f;
+            this.animationTarget.anchoredPosition = p;
+
+            this.animationTarget
+                .DOAnchorPosX(this.cachedTransform.anchoredPosition.x, this.animationDuration, true)
+                .SetEase(this.animationEase);
+        }
+
+        /// <summary>
+        /// メッセージタイプから色を返す
+        /// </summary>
         private Color GetColor(MessageType messageType)
         {
             switch(messageType)
