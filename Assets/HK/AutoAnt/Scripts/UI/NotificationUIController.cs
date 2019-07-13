@@ -43,8 +43,7 @@ namespace HK.AutoAnt.UI
 
         private void CreateElement(string message)
         {
-            var element = this.elementPrefab.Rent(message, this.delayElementDestroy);
-            element.transform.SetParent(this.transform, false);
+            var element = this.elementPrefab.Rent(this.transform, message, this.delayElementDestroy);
         }
     }
 }

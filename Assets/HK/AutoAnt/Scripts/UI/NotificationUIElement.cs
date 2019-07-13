@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.UserControllers;
 using HK.Framework;
@@ -7,6 +8,7 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 
 namespace HK.AutoAnt.UI
 {
@@ -18,24 +20,53 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private TextMeshProUGUI text = null;
 
+        [SerializeField]
+        private RectTransform animationTarget = null;
+
+        [SerializeField]
+        private float animationDuration;
+
+        [SerializeField]
+        private Ease animationEase;
+
         private ObjectPool<NotificationUIElement> pool = null;
+
+        private RectTransform cachedTransform;
 
         private static readonly ObjectPoolBundle<NotificationUIElement> pools = new ObjectPoolBundle<NotificationUIElement>();
 
-        public NotificationUIElement Rent(string message, float delayDestroy)
+        void Awake()
+        {
+            this.cachedTransform = this.transform as RectTransform;
+        }
+
+        public NotificationUIElement Rent(Transform parent, string message, float delayDestroy)
         {
             var pool = pools.Get(this);
             var clone = pool.Rent();
 
             clone.pool = pool;
-            clone.Initialize(message, delayDestroy);
+            clone.Initialize(parent, message, delayDestroy);
 
             return clone;
         }
 
-        private NotificationUIElement Initialize(string message, float delayDestroy)
+        private NotificationUIElement Initialize(Transform parent, string message, float delayDestroy)
         {
+            this.cachedTransform.SetParent(parent, false);
+            this.cachedTransform.SetAsFirstSibling();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(this.cachedTransform);
+
             this.text.text = message;
+
+            var p = this.cachedTransform.anchoredPosition;
+            p.x += this.cachedTransform.rect.width;
+            p.y = 0.0f;
+            this.animationTarget.anchoredPosition = p;
+
+            this.animationTarget
+                .DOAnchorPosX(this.cachedTransform.anchoredPosition.x, this.animationDuration, true)
+                .SetEase(this.animationEase);
 
             Observable.Timer(TimeSpan.FromSeconds(delayDestroy))
                 .SubscribeWithState(this, (_, _this) =>
