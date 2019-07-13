@@ -29,7 +29,8 @@ namespace HK.AutoAnt.GameControllers
                 return;
             }
 
-            if(this.eventGenerator.CanGenerate(cell, this.eventGenerator.RecordId))
+            var evalute = this.eventGenerator.CanGenerate(cell, this.eventGenerator.RecordId);
+            if(evalute == Constants.CellEventGenerateEvalute.Possible)
             {
                 var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(this.eventGenerator.RecordId, 0);
                 Assert.IsNotNull(levelUpCostRecord);

@@ -152,7 +152,7 @@ namespace HK.AutoAnt.CellControllers.Events
             Destroy(this.Gimmick.gameObject);
         }
 
-        public bool CanGenerate(Cell origin, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper)
+        public Constants.CellEventGenerateEvalute CanGenerate(Cell origin, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper)
         {
             Assert.IsNotNull(this.condition);
 
@@ -161,14 +161,14 @@ namespace HK.AutoAnt.CellControllers.Events
             // 配置したいところにセルがない場合は生成できない
             if(cellPositions.Count != this.size * this.size)
             {
-                return false;
+                return Constants.CellEventGenerateEvalute.NotCell;
             }
 
             // 配置したいセルにイベントがあった場合は生成できない
             var cells = cellMapper.GetCells(cellPositions);
             if(Array.FindIndex(cells, c => cellMapper.HasEvent(c)) != -1)
             {
-                return false;
+                return Constants.CellEventGenerateEvalute.AlreadyCellEvent;
             }
 
             // コストが満たしていない場合は生成できない
@@ -176,10 +176,16 @@ namespace HK.AutoAnt.CellControllers.Events
             Assert.IsNotNull(masterData, $"CellEventRecordId = {cellEventRecordId}の{typeof(MasterDataLevelUpCost.Record)}がありませんでした");
             if(!masterData.Cost.IsEnough(gameSystem.User, gameSystem.MasterData.Item))
             {
-                return false;
+                return Constants.CellEventGenerateEvalute.NotEnoughCost;
             }
 
-            return this.condition.Evalute(cells);
+            // セルイベントごとの条件を満たしていない場合は生成できない
+            if(!this.condition.Evalute(cells))
+            {
+                return Constants.CellEventGenerateEvalute.NotEnoughCondition;
+            }
+
+            return Constants.CellEventGenerateEvalute.Possible;
         }
 
         public virtual void OnClick(Cell owner)
