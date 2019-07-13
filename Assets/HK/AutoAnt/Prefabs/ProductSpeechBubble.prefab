@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2677346430076866716}
+  productRenderer: {fileID: 2935609817227289098}
 --- !u!1 &5567632416223919428
 GameObject:
   m_ObjectHideFlags: 0
