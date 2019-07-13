@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using HK.AutoAnt.Events;
 using UniRx;
+using HK.AutoAnt.Database;
+using HK.AutoAnt.Systems;
+using HK.AutoAnt.Extensions;
 
 namespace HK.AutoAnt.CellControllers.Gimmicks
 {
@@ -22,26 +25,46 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             var productHolder = cellEvent as IProductHolder;
             Assert.IsNotNull(productHolder);
 
-            this.target.SetActive(productHolder.Products.Count > 0);
+            // 既に何か生産している場合は吹き出しを即座に表示する
+            if(productHolder.Products.Count > 0)
+            {
+                var productId = productHolder.Products[productHolder.Products.Count - 1];
+                var record = GameSystem.Instance.MasterData.Item.Records.Get(productId);
+                this.Apply(record);
+            }
+            else
+            {
+                this.Hidden();
+            }
 
             cellEvent.Broker.Receive<AddedFacilityProduct>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.target.SetActive(true);
-                    _this.productRenderer.material.mainTexture = x.Product.Icon;
+                    _this.Apply(x.Product);
                 })
                 .AddTo(this);
 
             cellEvent.Broker.Receive<AcquiredFacilityProduct>()
                 .SubscribeWithState(this, (_, _this) =>
                 {
-                    _this.target.SetActive(false);
+                    _this.Hidden();
                 })
                 .AddTo(this);
         }
 
         public void Detach(CellEvent cellEvent)
         {
+        }
+
+        private void Apply(MasterDataItem.Record record)
+        {
+            this.target.SetActive(true);
+            this.productRenderer.material.mainTexture = record.Icon;
+        }
+
+        private void Hidden()
+        {
+            this.target.SetActive(false);
         }
     }
 }
