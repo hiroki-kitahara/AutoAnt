@@ -17,6 +17,12 @@ namespace HK.AutoAnt.UI
     /// </summary>
     public sealed class NotificationUIElement : MonoBehaviour
     {
+        public enum MessageType
+        {
+            Information,
+            Error,
+        }
+
         [SerializeField]
         private TextMeshProUGUI text = null;
 
@@ -24,10 +30,19 @@ namespace HK.AutoAnt.UI
         private RectTransform animationTarget = null;
 
         [SerializeField]
-        private float animationDuration;
+        private Image background = null;
 
         [SerializeField]
-        private Ease animationEase;
+        private float animationDuration = 1.0f;
+
+        [SerializeField]
+        private Ease animationEase = Ease.Linear;
+
+        [SerializeField]
+        private Color informationColor = Color.white;
+
+        [SerializeField]
+        private Color errorColor = Color.white;
 
         private ObjectPool<NotificationUIElement> pool = null;
 
@@ -40,24 +55,25 @@ namespace HK.AutoAnt.UI
             this.cachedTransform = this.transform as RectTransform;
         }
 
-        public NotificationUIElement Rent(Transform parent, string message, float delayDestroy)
+        public NotificationUIElement Rent(Transform parent, string message, MessageType messageType, float delayDestroy)
         {
             var pool = pools.Get(this);
             var clone = pool.Rent();
 
             clone.pool = pool;
-            clone.Initialize(parent, message, delayDestroy);
+            clone.Initialize(parent, message, messageType, delayDestroy);
 
             return clone;
         }
 
-        private NotificationUIElement Initialize(Transform parent, string message, float delayDestroy)
+        private NotificationUIElement Initialize(Transform parent, string message, MessageType messageType, float delayDestroy)
         {
             this.cachedTransform.SetParent(parent, false);
             this.cachedTransform.SetAsFirstSibling();
             LayoutRebuilder.ForceRebuildLayoutImmediate(this.cachedTransform);
 
             this.text.text = message;
+            this.background.color = this.GetColor(messageType);
 
             var p = this.cachedTransform.anchoredPosition;
             p.x += this.cachedTransform.rect.width;
@@ -76,6 +92,20 @@ namespace HK.AutoAnt.UI
                 .AddTo(this);
 
             return this;
+        }
+
+        private Color GetColor(MessageType messageType)
+        {
+            switch(messageType)
+            {
+                case MessageType.Information:
+                    return this.informationColor;
+                case MessageType.Error:
+                    return this.errorColor;
+                default:
+                    Assert.IsTrue(false, $"{messageType}は未対応です");
+                    return this.errorColor;
+            }
         }
     }
 }

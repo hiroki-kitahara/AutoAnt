@@ -29,14 +29,14 @@ namespace HK.AutoAnt.Extensions
             if (levelUpCostRecord == null)
             {
                 // FIXME: 不要になったら削除する
-                Broker.Global.Publish(RequestNotification.Get($"最大レベルです！"));
+                Broker.Global.Publish(RequestNotification.Get($"最大レベルです！", NotificationUIElement.MessageType.Error));
                 return false;
             }
 
             if (!levelUpCostRecord.Cost.IsEnough(gameSystem.User, gameSystem.MasterData.Item))
             {
                 // FIXME: 不要になったら削除する
-                Broker.Global.Publish(RequestNotification.Get($"素材が足りません！"));
+                Broker.Global.Publish(RequestNotification.Get($"素材が足りません！", NotificationUIElement.MessageType.Error));
                 return false;
             }
 
@@ -53,7 +53,7 @@ namespace HK.AutoAnt.Extensions
             gameSystem.User.History.GenerateCellEvent.Add(self.Id, self.Level - 1);
 
             // FIXME: 不要になったら削除する
-            Broker.Global.Publish(RequestNotification.Get($"レベルアップ！ {self.Level - 1} -> {self.Level}"));
+            Broker.Global.Publish(RequestNotification.Get($"レベルアップ！ {self.Level - 1} -> {self.Level}", NotificationUIElement.MessageType.Information));
         }
 
         public static void AttachDetailsPopup(this ILevelUpEvent self, CellEventDetailsPopup popup, GameSystem gameSystem)

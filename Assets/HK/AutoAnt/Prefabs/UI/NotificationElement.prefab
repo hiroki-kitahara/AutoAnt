@@ -370,8 +370,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 5623878423436314866}
   animationTarget: {fileID: 2623609205460792113}
+  background: {fileID: 2363961704167484883}
   animationDuration: 0.3
   animationEase: 27
+  informationColor: {r: 0.4292453, g: 0.76863605, b: 1, a: 0.47058824}
+  errorColor: {r: 1, g: 0.13679248, b: 0.13679248, a: 0.47058824}
 --- !u!1 &7625659845003915823
 GameObject:
   m_ObjectHideFlags: 0
