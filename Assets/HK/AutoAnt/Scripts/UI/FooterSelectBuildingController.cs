@@ -24,7 +24,7 @@ namespace HK.AutoAnt.UI
 
             foreach(var r in records)
             {
-                var element = this.elementPrefab.Clone(r);
+                var element = this.elementPrefab.Rent(r);
                 element.transform.SetParent(this.listRoot, false);
                 this.elements.Add(element);
             }

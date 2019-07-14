@@ -41,7 +41,7 @@ namespace HK.AutoAnt.UI
                 .AddTo(this);
         }
 
-        public FooterSelectBuildingElement Clone(MasterDataCellEvent.Record record)
+        public FooterSelectBuildingElement Rent(MasterDataCellEvent.Record record)
         {
             var pool = pools.Get(this);
             var clone = pool.Rent();
