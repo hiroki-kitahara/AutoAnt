@@ -12,7 +12,7 @@ namespace HK.AutoAnt.UI
     /// <summary>
     /// フッターメニューの建設メニューを制御するクラス
     /// </summary>
-    public sealed class FooterSelectBuildingController : MonoBehaviour
+    public sealed class FooterSelectBuildingController : FooterElement
     {
         [SerializeField]
         private RectTransform listRoot = null;
@@ -26,6 +26,16 @@ namespace HK.AutoAnt.UI
         private GameObject currentGimmick = null;
 
         private readonly List<FooterSelectBuildingElement> elements = new List<FooterSelectBuildingElement>();
+
+        public override void Open()
+        {
+            this.gameObject.SetActive(true);
+        }
+
+        public override void Close()
+        {
+            this.gameObject.SetActive(false);
+        }
 
         void Awake()
         {

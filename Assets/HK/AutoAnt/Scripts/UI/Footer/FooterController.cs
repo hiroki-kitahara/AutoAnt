@@ -32,7 +32,7 @@ namespace HK.AutoAnt.UI
         public void ShowSelectBuilding(MasterDataCellEvent.Record[] records)
         {
             this.AllClose();
-            this.selectBuilding.gameObject.SetActive(true);
+            this.selectBuilding.Open();
             this.selectBuilding.SetData(records);
         }
 
@@ -45,7 +45,7 @@ namespace HK.AutoAnt.UI
         private void AllClose()
         {
             this.root.Close();
-            this.selectBuilding.gameObject.SetActive(false);
+            this.selectBuilding.Close();
             this.cancel.Close();
         }
     }
