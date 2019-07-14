@@ -69,8 +69,10 @@ namespace HK.AutoAnt.CellControllers.Events
                     _this.ProductTimer += UnityEngine.Time.deltaTime;
                     if(_this.ProductTimer >= _this.LevelParameter.NeedProductTime)
                     {
-                        _this.Products.Add(_this.LevelParameter.ProductId);
-                        _this.Broker.Publish(AddedFacilityProduct.Get(_this));
+                        var productId = _this.LevelParameter.ProductId;
+                        _this.Products.Add(productId);
+                        var product = _this.gameSystem.MasterData.Item.Records.Get(productId);
+                        _this.Broker.Publish(AddedFacilityProduct.Get(_this, product));
                         _this.ProductTimer = 0.0f;
                     }
                 })
