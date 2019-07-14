@@ -36,7 +36,7 @@ namespace HK.AutoAnt.CellControllers
             Broker.Global.Receive<RequestBuildingMode>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.RecordId = x.BuildingCellEventRecordId;
+                    _this.RecordId = x.BuildingCellEventRecord.Id;
                 })
                 .AddTo(gameSystem);
         }

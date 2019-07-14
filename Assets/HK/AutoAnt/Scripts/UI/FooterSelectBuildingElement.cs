@@ -36,7 +36,7 @@ namespace HK.AutoAnt.UI
                 {
                     Assert.IsNotNull(_this.record);
 
-                    Broker.Global.Publish(RequestBuildingMode.Get(_this.record.Id));
+                    Broker.Global.Publish(RequestBuildingMode.Get(_this.record));
                 })
                 .AddTo(this);
         }
