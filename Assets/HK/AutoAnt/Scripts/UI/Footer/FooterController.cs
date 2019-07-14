@@ -25,24 +25,24 @@ namespace HK.AutoAnt.UI
 
         public void ShowRoot()
         {
-            this.AllHide();
+            this.AllClose();
             this.root.Open();
         }
 
         public void ShowSelectBuilding(MasterDataCellEvent.Record[] records)
         {
-            this.AllHide();
+            this.AllClose();
             this.selectBuilding.gameObject.SetActive(true);
             this.selectBuilding.SetData(records);
         }
 
         public void ShowCancel()
         {
-            this.AllHide();
+            this.AllClose();
             this.cancel.Open();
         }
 
-        private void AllHide()
+        private void AllClose()
         {
             this.root.Close();
             this.selectBuilding.gameObject.SetActive(false);
