@@ -25,8 +25,7 @@ MonoBehaviour:
     type: 3}
   destructionEffect: {fileID: 4882643330991784199, guid: 7690216f0d35a464ea35df119652a19d,
     type: 3}
-  gimmickPrefab: {fileID: 8526093038232849724, guid: 81339a340327d4660946cc3c5dee835b,
-    type: 3}
+  gimmickPrefab: {fileID: 100000, guid: 6d7b272607e02b440bd3fe8998d86431, type: 3}
   visibleAnimation: {fileID: 1401049183261498999, guid: 2c9200deec9874516bb2ab7b2679328f,
     type: 3}
   CurrentPopulation: 0
