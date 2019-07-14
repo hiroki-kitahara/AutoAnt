@@ -60,7 +60,7 @@ namespace HK.AutoAnt.Constants
         /// <summary>
         /// 既に別のセルイベントがある
         /// </summary>
-        AlreadyCellEvent,
+        AlreadyExistsCellEvent,
 
         /// <summary>
         /// コストが足りない

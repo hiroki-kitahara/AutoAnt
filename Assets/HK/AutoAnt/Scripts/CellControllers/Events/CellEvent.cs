@@ -168,7 +168,7 @@ namespace HK.AutoAnt.CellControllers.Events
             var cells = cellMapper.GetCells(cellPositions);
             if(Array.FindIndex(cells, c => cellMapper.HasEvent(c)) != -1)
             {
-                return Constants.CellEventGenerateEvalute.AlreadyCellEvent;
+                return Constants.CellEventGenerateEvalute.AlreadyExistsCellEvent;
             }
 
             // コストが満たしていない場合は生成できない

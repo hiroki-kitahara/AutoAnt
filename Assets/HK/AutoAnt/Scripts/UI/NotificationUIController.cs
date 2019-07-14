@@ -36,7 +36,7 @@ namespace HK.AutoAnt.UI
         /// 既にセルイベントが存在するのにセルイベントを生成しようとした時のメッセージフォーマット
         /// </summary>
         [SerializeField]
-        private StringAsset.Finder alreadyExistCellEventFormat = null;
+        private StringAsset.Finder alreadyExistsCellEventFormat = null;
 
         /// <summary>
         /// コストが足りないのにセルイベントを生成しようとした時のメッセージフォーマット
@@ -88,8 +88,8 @@ namespace HK.AutoAnt.UI
             {
                 case Constants.CellEventGenerateEvalute.NotCell:
                     return this.notCell.Get;
-                case Constants.CellEventGenerateEvalute.AlreadyCellEvent:
-                    return this.alreadyExistCellEventFormat.Get;
+                case Constants.CellEventGenerateEvalute.AlreadyExistsCellEvent:
+                    return this.alreadyExistsCellEventFormat.Get;
                 case Constants.CellEventGenerateEvalute.NotEnoughCost:
                     return this.notEnoughCost.Get;
                 case Constants.CellEventGenerateEvalute.NotEnoughCondition:

@@ -69,7 +69,7 @@ MonoBehaviour:
     target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
     value: "\u571F\u5730\u304C\u3042\u308A\u307E\u305B\u3093\uFF01"
     guid: 9e8a0fcc-a657-40b7-b662-6065b22009c1
-  alreadyExistCellEventFormat:
+  alreadyExistsCellEventFormat:
     target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
     value: "\u4ED6\u306E\u5EFA\u7269\u304C\u3042\u308A\u307E\u3059\uFF01"
     guid: d120e9e2-72fa-4642-b776-27c4ff67ec08
