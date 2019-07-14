@@ -4,6 +4,7 @@ using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
 using HK.Framework.EventSystems;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -35,6 +36,7 @@ namespace HK.AutoAnt.UI
         public override void Close()
         {
             this.gameObject.SetActive(false);
+            this.DestroyGimmick();
         }
 
         void Awake()
