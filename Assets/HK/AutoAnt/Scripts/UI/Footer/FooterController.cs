@@ -16,7 +16,7 @@ namespace HK.AutoAnt.UI
         private FooterSelectBuildingController selectBuilding = null;
 
         [SerializeField]
-        private GameObject cancel = null;
+        private FooterCancelController cancel = null;
 
         void Awake()
         {
@@ -39,14 +39,14 @@ namespace HK.AutoAnt.UI
         public void ShowCancel()
         {
             this.AllHide();
-            this.cancel.SetActive(true);
+            this.cancel.Open();
         }
 
         private void AllHide()
         {
             this.root.Close();
             this.selectBuilding.gameObject.SetActive(false);
-            this.cancel.SetActive(false);
+            this.cancel.Close();
         }
     }
 }
