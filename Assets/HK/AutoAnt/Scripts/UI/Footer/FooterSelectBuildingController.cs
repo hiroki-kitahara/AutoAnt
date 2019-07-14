@@ -2,7 +2,10 @@
 using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
+using HK.AutoAnt.Systems;
 using HK.Framework.EventSystems;
+using HK.Framework.Text;
+using TMPro;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -23,6 +26,21 @@ namespace HK.AutoAnt.UI
 
         [SerializeField]
         private Transform gimmickParent = null;
+
+        [SerializeField]
+        private TextMeshProUGUI cellEventName = null;
+
+        [SerializeField]
+        private TextMeshProUGUI size = null;
+
+        [SerializeField]
+        private TextMeshProUGUI money = null;
+
+        [SerializeField]
+        private StringAsset.Finder sizeFormat = null;
+
+        [SerializeField]
+        private StringAsset.Finder moneyFormat = null;
 
         private GameObject currentGimmick = null;
 
@@ -45,14 +63,7 @@ namespace HK.AutoAnt.UI
                 .Where(_ => this.gameObject.activeInHierarchy)
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.DestroyGimmick();
-                    _this.currentGimmick = Instantiate(x.BuildingCellEventRecord.EventData.GimmickPrefab, _this.gimmickParent);
-                    var t = _this.currentGimmick.transform;
-                    t.localPosition = Vector3.zero;
-                    t.localRotation = Quaternion.identity;
-                    t.localScale = Vector3.one;
-                    
-                    _this.currentGimmick.SetLayerRecursive(Layers.Id.UI);
+                    _this.ApplySelectedBuilding(x.BuildingCellEventRecord);
                 })
                 .AddTo(this);
         }
@@ -87,6 +98,28 @@ namespace HK.AutoAnt.UI
             }
 
             this.elements.Clear();
+        }
+
+        private void ApplySelectedBuilding(MasterDataCellEvent.Record record)
+        {
+            this.CreateGimmick(record);
+
+            this.cellEventName.text = record.EventData.EventNameFromMasterData;
+            this.size.text = this.sizeFormat.Format(record.EventData.Size);
+            var levelParameter = GameSystem.Instance.MasterData.LevelUpCost.Records.Get(record.Id, 0);
+            this.money.text = this.moneyFormat.Format(levelParameter.Cost.Money.ToReadableString("###"));
+        }
+
+        private void CreateGimmick(MasterDataCellEvent.Record record)
+        {
+            this.DestroyGimmick();
+            this.currentGimmick = Instantiate(record.EventData.GimmickPrefab, this.gimmickParent);
+            var t = this.currentGimmick.transform;
+            t.localPosition = Vector3.zero;
+            t.localRotation = Quaternion.identity;
+            t.localScale = Vector3.one;
+
+            this.currentGimmick.SetLayerRecursive(Layers.Id.UI);
         }
     }
 }

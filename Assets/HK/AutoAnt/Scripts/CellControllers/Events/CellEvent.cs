@@ -26,6 +26,7 @@ namespace HK.AutoAnt.CellControllers.Events
         [SerializeField]
         private StringAsset.Finder eventName = null;
         public string EventName => this.cachedRecord.EventData.eventName.Get;
+        public string EventNameFromMasterData => this.eventName.Get;
 
         [SerializeField]
         protected Constants.CellEventCategory category;

@@ -69,3 +69,11 @@ MonoBehaviour:
       ja: OK
       en: 
     guid: 1beb83dc-5df1-49bc-9ae8-8270ab59a33b
+  - value:
+      ja: "{0}\xD7{0}"
+      en: 
+    guid: c8d4dd2e-7ca3-4e10-9cb7-b50bb0784086
+  - value:
+      ja: <sprite="AutoAntEmoji" name="money">{0}
+      en: 
+    guid: d869bf9e-515d-492f-a78e-8b9c7952e653
