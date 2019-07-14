@@ -52,6 +52,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
         [SerializeField]
         protected GameObject gimmickPrefab = null;
+        public GameObject GimmickPrefab => this.gimmickPrefab;
 
         [SerializeField]
         protected TweenAnimationAttacher visibleAnimation = null;
