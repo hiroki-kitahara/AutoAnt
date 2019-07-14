@@ -10,7 +10,7 @@ namespace HK.AutoAnt.UI
     public sealed class FooterController : MonoBehaviour
     {
         [SerializeField]
-        private GameObject root = null;
+        private FooterRootController root = null;
 
         [SerializeField]
         private FooterSelectBuildingController selectBuilding = null;
@@ -26,7 +26,7 @@ namespace HK.AutoAnt.UI
         public void ShowRoot()
         {
             this.AllHide();
-            this.root.SetActive(true);
+            this.root.Open();
         }
 
         public void ShowSelectBuilding(MasterDataCellEvent.Record[] records)
@@ -44,7 +44,7 @@ namespace HK.AutoAnt.UI
 
         private void AllHide()
         {
-            this.root.SetActive(false);
+            this.root.Close();
             this.selectBuilding.gameObject.SetActive(false);
             this.cancel.SetActive(false);
         }
