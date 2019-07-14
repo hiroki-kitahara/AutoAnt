@@ -26,24 +26,25 @@ namespace HK.AutoAnt.UI
         void Awake()
         {
             Broker.Global.Receive<AddedItem>()
+                .Where(x => x.Amount > 0)
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     var message = _this.acquireItemFormat.Format(x.Item.Name, x.Amount, x.Inventory.Items[x.Item.Id]);
-                    _this.CreateElement(message);
+                    _this.CreateElement(message, NotificationUIElement.MessageType.Information);
                 })
                 .AddTo(this);
 
             Broker.Global.Receive<RequestNotification>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.CreateElement(x.Message);
+                    _this.CreateElement(x.Message, x.MessageType);
                 })
                 .AddTo(this);
         }
 
-        private void CreateElement(string message)
+        private void CreateElement(string message, NotificationUIElement.MessageType messageType)
         {
-            Instantiate(this.elementPrefab, this.transform, false).Initialize(message, this.delayElementDestroy);
+            var element = this.elementPrefab.Rent(this.transform, message, messageType, this.delayElementDestroy);
         }
     }
 }
