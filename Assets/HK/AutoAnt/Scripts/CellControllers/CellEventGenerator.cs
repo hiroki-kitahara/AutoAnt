@@ -87,7 +87,7 @@ namespace HK.AutoAnt.CellControllers
         /// <summary>
         /// イベントが作成可能か返す
         /// </summary>
-        public bool CanGenerate(Cell cell, int cellEventRecordId)
+        public Constants.CellEventGenerateEvalute CanGenerate(Cell cell, int cellEventRecordId)
         {
             return this.GeneratableCellEvent.CanGenerate(cell, cellEventRecordId, this.gameSystem, this.cellMapper);
         }
