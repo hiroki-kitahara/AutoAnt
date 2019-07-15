@@ -25,6 +25,9 @@ namespace HK.AutoAnt.UI
         private FooterSelectBuildingElement elementPrefab = null;
 
         [SerializeField]
+        private GameObject selectedBuildingRoot = null;
+
+        [SerializeField]
         private Transform gimmickParent = null;
 
         [SerializeField]
@@ -54,6 +57,7 @@ namespace HK.AutoAnt.UI
         public override void Close()
         {
             this.gameObject.SetActive(false);
+            this.selectedBuildingRoot.SetActive(false);
             this.DestroyGimmick();
         }
 
@@ -102,6 +106,7 @@ namespace HK.AutoAnt.UI
 
         private void ApplySelectedBuilding(MasterDataCellEvent.Record record)
         {
+            this.selectedBuildingRoot.SetActive(true);
             this.CreateGimmick(record);
 
             this.cellEventName.text = record.EventData.EventNameFromMasterData;
