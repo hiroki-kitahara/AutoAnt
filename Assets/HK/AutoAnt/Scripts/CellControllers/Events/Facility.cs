@@ -196,5 +196,14 @@ namespace HK.AutoAnt.CellControllers.Events
             var newPopularity = this.Popularity;
             this.gameSystem.User.Town.AddPopularity(newPopularity);
         }
+
+        public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
+        {
+            this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
+        }
+
+        public override void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller)
+        {
+        }
     }
 }

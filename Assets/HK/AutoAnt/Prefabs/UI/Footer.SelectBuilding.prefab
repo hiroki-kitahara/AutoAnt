@@ -451,6 +451,9 @@ MonoBehaviour:
     type: 3}
   selectedBuildingRoot: {fileID: 5179256467662338792}
   gimmickParent: {fileID: 443321307634710054}
+  needItemParent: {fileID: 1138419776297616740}
+  propertyPrefab: {fileID: 4338704894907733223, guid: b5a0dcfd6f5494aacb879bd7f129068c,
+    type: 3}
   cellEventName: {fileID: 6345456250189077751}
   size: {fileID: 8479765261449018910}
   money: {fileID: 1081282949328204373}
@@ -462,6 +465,12 @@ MonoBehaviour:
     target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
     value: <sprite="AutoAntEmoji" name="money">{0}
     guid: d869bf9e-515d-492f-a78e-8b9c7952e653
+  needItemFormat:
+    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
+    value: '{0}/{1}'
+    guid: 251b88ff-6b21-4ea1-bea7-5e0eb1ff9559
+  enoughLevelUpCostColor: {r: 1, g: 1, b: 1, a: 1}
+  notEnoughLevelUpCostColor: {r: 1, g: 0.4198113, b: 0.4198113, a: 1}
 --- !u!1 &3864785248341404070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,7 +1498,7 @@ GameObject:
   - component: {fileID: 1138419776297616740}
   - component: {fileID: 3830407821299685550}
   m_Layer: 5
-  m_Name: Properties
+  m_Name: NeedItems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

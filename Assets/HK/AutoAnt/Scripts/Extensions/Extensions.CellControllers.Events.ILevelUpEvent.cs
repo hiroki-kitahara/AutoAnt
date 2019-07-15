@@ -104,5 +104,44 @@ namespace HK.AutoAnt.Extensions
                     }
                 });
         }
+
+        public static void AttachFooterSelectCellEvent(this ILevelUpEvent self, FooterSelectBuildingController controller, GameSystem gameSystem)
+        {
+            var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(self.Id, 0);
+            controller.CellEventName.text = self.EventName;
+            controller.Size.text = controller.SizeFormat.Format(self.Size);
+            controller.Money.text = controller.MoneyFormat.Format(levelUpCostRecord.Cost.Money);
+            controller.CreateGimmick(self.GimmickPrefab);
+
+            var properties = new List<FooterSelectedBuildingProperty>();
+
+            // アイテムを表示
+            foreach (var n in levelUpCostRecord.Cost.NeedItems)
+            {
+                properties.Add(
+                    controller.AddProperty(property =>
+                    {
+                        var inventoryItem = gameSystem.User.Inventory.Items;
+                        var itemRecord = gameSystem.MasterData.Item.Records.Get(n.ItemName);
+                        var possessionItemAmount = inventoryItem.ContainsKey(itemRecord.Id) ? inventoryItem[itemRecord.Id] : 0;
+                        var stringBuilder = new StringBuilder();
+                        var color = (possessionItemAmount >= n.Amount) ? controller.EnoughLevelUpCostColor : controller.NotEnoughLevelUpCostColor;
+                        property.Prefix.text = n.ItemName;
+                        property.Value.text = stringBuilder.AppendColorCode(color, controller.NeedItemFormat.Format(possessionItemAmount, n.Amount)).ToString();
+                    })
+                );
+            }
+
+            // フッターを開いているときもお金やアイテムの所持数が更新されるのを考慮してプロパティも更新する
+            controller.UpdateAsObservable()
+                .TakeUntilDisable(controller)
+                .SubscribeWithState(properties, (_, _properties) =>
+                {
+                    foreach (var p in _properties)
+                    {
+                        p.UpdateProperty();
+                    }
+                });
+        }
     }
 }
