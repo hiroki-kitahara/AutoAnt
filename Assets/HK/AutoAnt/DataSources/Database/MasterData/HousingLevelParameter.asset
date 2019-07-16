@@ -28,3 +28,18 @@ MonoBehaviour:
   - id: 100000
     level: 5
     population: 10
+  - id: 100001
+    level: 1
+    population: 10
+  - id: 100001
+    level: 2
+    population: 20
+  - id: 100001
+    level: 3
+    population: 30
+  - id: 100001
+    level: 4
+    population: 40
+  - id: 100001
+    level: 5
+    population: 100
