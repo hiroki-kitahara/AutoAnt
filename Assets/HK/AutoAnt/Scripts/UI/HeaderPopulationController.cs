@@ -43,7 +43,7 @@ namespace HK.AutoAnt.UI
 
         private void UpdateValue(double value)
         {
-            this.value.text = this.format.Format(value.ToReadableString("##0.##"));
+            this.value.text = this.format.Format(value.ToReadableString("###.00"));
         }
     }
 }
