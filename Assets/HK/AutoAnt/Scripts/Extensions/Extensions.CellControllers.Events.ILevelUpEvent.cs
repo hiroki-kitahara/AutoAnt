@@ -128,7 +128,7 @@ namespace HK.AutoAnt.Extensions
                         var itemRecord = gameSystem.MasterData.Item.Records.Get(n.ItemName);
                         var possessionItemAmount = inventoryItem.ContainsKey(itemRecord.Id) ? inventoryItem[itemRecord.Id] : 0;
                         stringBuilder.Clear();
-                        var color = (possessionItemAmount >= n.Amount) ? controller.EnoughLevelUpCostColor : controller.NotEnoughLevelUpCostColor;
+                        var color = controller.GetConditionColor(possessionItemAmount >= n.Amount);
                         property.Prefix.text = n.ItemName;
                         property.Value.text = stringBuilder.AppendColorCode(color, controller.NeedItemFormat.Format(possessionItemAmount, n.Amount)).ToString();
                     })
@@ -158,7 +158,6 @@ namespace HK.AutoAnt.Extensions
                 .TakeUntilDisable(controller)
                 .SubscribeWithState3(properties, stringBuilder, gameSystem, (_, _properties, _stringBuilder, _gameSystem) =>
                 {
-
                     foreach (var p in _properties)
                     {
                         p.UpdateProperty();
