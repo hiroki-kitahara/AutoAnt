@@ -22,8 +22,12 @@ namespace HK.AutoAnt.Database.SpreadSheetData
         private const string SpreadSheetName = "AutoAnt";
 
         public override bool Load()
-        {        
-            var targetData = target as MasterDataRoadLevelParameter;
+        {
+            return Load(target as MasterDataRoadLevelParameter);
+        }
+
+        public static bool Load(MasterDataRoadLevelParameter target)
+        {
             var client = new DatabaseClient("", "");
             var error = string.Empty;
             var db = client.GetDatabase(SpreadSheetName, ref error);	
@@ -38,9 +42,9 @@ namespace HK.AutoAnt.Database.SpreadSheetData
                 myDataList.Add(new MasterDataRoadLevelParameter.Record(data));
             }
                     
-            targetData.Records = myDataList.ToArray();
+            target.Records = myDataList.ToArray();
             
-            EditorUtility.SetDirty(targetData);
+            EditorUtility.SetDirty(target);
             AssetDatabase.SaveAssets();
             
             return true;
