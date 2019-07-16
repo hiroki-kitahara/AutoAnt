@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
@@ -134,6 +135,18 @@ namespace HK.AutoAnt.UI
             }
 
             this.elements.Clear();
+        }
+
+        public void SetMoney(StringBuilder stringBuilder, double currentMoney, double needMoney)
+        {
+            stringBuilder.Clear();
+            var color = this.GetConditionColor(currentMoney >= needMoney);
+            this.Money.text = stringBuilder.AppendColorCode(color, this.MoneyFormat.Format(needMoney.ToReadableString("###"))).ToString();
+        }
+
+        public Color GetConditionColor(bool isEnough)
+        {
+            return isEnough ? this.enoughLevelUpCostColor : this.notEnoughLevelUpCostColor;
         }
 
         public void CreateGimmick(GameObject gimmickPrefab)

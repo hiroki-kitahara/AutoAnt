@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HK.AutoAnt.CellControllers.Events;
@@ -110,7 +111,9 @@ namespace HK.AutoAnt.Extensions
             var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(self.Id, 0);
             controller.CellEventName.text = self.EventName;
             controller.Size.text = controller.SizeFormat.Format(self.Size);
-            controller.Money.text = controller.MoneyFormat.Format(levelUpCostRecord.Cost.Money);
+            var possessionMoney = gameSystem.User.Wallet.Money;
+            var stringBuilder = new StringBuilder();
+            controller.SetMoney(stringBuilder, gameSystem.User.Wallet.Money, levelUpCostRecord.Cost.Money);
             controller.CreateGimmick(self.GimmickPrefab);
 
             var properties = new List<FooterSelectedBuildingProperty>();
@@ -124,7 +127,7 @@ namespace HK.AutoAnt.Extensions
                         var inventoryItem = gameSystem.User.Inventory.Items;
                         var itemRecord = gameSystem.MasterData.Item.Records.Get(n.ItemName);
                         var possessionItemAmount = inventoryItem.ContainsKey(itemRecord.Id) ? inventoryItem[itemRecord.Id] : 0;
-                        var stringBuilder = new StringBuilder();
+                        stringBuilder.Clear();
                         var color = (possessionItemAmount >= n.Amount) ? controller.EnoughLevelUpCostColor : controller.NotEnoughLevelUpCostColor;
                         property.Prefix.text = n.ItemName;
                         property.Value.text = stringBuilder.AppendColorCode(color, controller.NeedItemFormat.Format(possessionItemAmount, n.Amount)).ToString();
@@ -132,11 +135,30 @@ namespace HK.AutoAnt.Extensions
                 );
             }
 
+            // お金を毎フレーム更新する
+            var t = new Tuple<StringBuilder, GameSystem, FooterSelectBuildingController, MasterDataLevelUpCost.Record>(
+                stringBuilder,
+                gameSystem,
+                controller,
+                levelUpCostRecord
+                );
+            controller.UpdateAsObservable()
+                .TakeUntilDisable(controller)
+                .SubscribeWithState(t, (_, _t) =>
+                {
+                    var _stringBuilder = _t.Item1;
+                    var _gameSystem = _t.Item2;
+                    var _controller = _t.Item3;
+                    var _levelUpCostRecord = _t.Item4;
+                    _controller.SetMoney(_stringBuilder, _gameSystem.User.Wallet.Money, _levelUpCostRecord.Cost.Money);
+                });
+
             // フッターを開いているときもお金やアイテムの所持数が更新されるのを考慮してプロパティも更新する
             controller.UpdateAsObservable()
                 .TakeUntilDisable(controller)
-                .SubscribeWithState(properties, (_, _properties) =>
+                .SubscribeWithState3(properties, stringBuilder, gameSystem, (_, _properties, _stringBuilder, _gameSystem) =>
                 {
+
                     foreach (var p in _properties)
                     {
                         p.UpdateProperty();
