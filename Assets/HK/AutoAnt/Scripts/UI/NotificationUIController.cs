@@ -20,8 +20,35 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private float delayElementDestroy = 0.0f;
 
+        /// <summary>
+        /// アイテムを取得した時のメッセージフォーマット
+        /// </summary>
         [SerializeField]
         private StringAsset.Finder acquireItemFormat = null;
+
+        /// <summary>
+        /// セルが無い時にセルイベントを生成しようとした時のメッセージフォーマット
+        /// </summary>
+        [SerializeField]
+        private StringAsset.Finder notCell = null;
+
+        /// <summary>
+        /// 既にセルイベントが存在するのにセルイベントを生成しようとした時のメッセージフォーマット
+        /// </summary>
+        [SerializeField]
+        private StringAsset.Finder alreadyExistsCellEventFormat = null;
+
+        /// <summary>
+        /// コストが足りないのにセルイベントを生成しようとした時のメッセージフォーマット
+        /// </summary>
+        [SerializeField]
+        private StringAsset.Finder notEnoughCost = null;
+
+        /// <summary>
+        /// セルイベントごとの条件を満たしていないのにセルイベントを生成しようとした時のメッセージフォーマット
+        /// </summary>
+        [SerializeField]
+        private StringAsset.Finder notEnoughCondition = null;
 
         void Awake()
         {
@@ -40,11 +67,37 @@ namespace HK.AutoAnt.UI
                     _this.CreateElement(x.Message, x.MessageType);
                 })
                 .AddTo(this);
+
+            Broker.Global.Receive<ProcessedGenerateCellEvent>()
+                .Where(x => x.Evalute != Constants.CellEventGenerateEvalute.Possible)
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    _this.CreateElement(_this.GetProcessedCellEventMessage(x.Evalute), NotificationUIElement.MessageType.Error);
+                })
+                .AddTo(this);
         }
 
         private void CreateElement(string message, NotificationUIElement.MessageType messageType)
         {
             var element = this.elementPrefab.Rent(this.transform, message, messageType, this.delayElementDestroy);
+        }
+
+        private string GetProcessedCellEventMessage(Constants.CellEventGenerateEvalute evalute)
+        {
+            switch(evalute)
+            {
+                case Constants.CellEventGenerateEvalute.NotCell:
+                    return this.notCell.Get;
+                case Constants.CellEventGenerateEvalute.AlreadyExistsCellEvent:
+                    return this.alreadyExistsCellEventFormat.Get;
+                case Constants.CellEventGenerateEvalute.NotEnoughCost:
+                    return this.notEnoughCost.Get;
+                case Constants.CellEventGenerateEvalute.NotEnoughCondition:
+                    return this.notEnoughCondition.Get;
+                default:
+                    Assert.IsTrue(false, $"{evalute}は未対応です");
+                    return null;
+            }
         }
     }
 }

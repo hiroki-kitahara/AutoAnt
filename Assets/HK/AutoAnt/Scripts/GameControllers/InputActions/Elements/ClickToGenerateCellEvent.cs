@@ -1,8 +1,10 @@
 ﻿using HK.AutoAnt.CameraControllers;
 using HK.AutoAnt.CellControllers;
+using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.InputControllers;
 using HK.AutoAnt.Systems;
+using HK.Framework.EventSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -29,7 +31,8 @@ namespace HK.AutoAnt.GameControllers
                 return;
             }
 
-            if(this.eventGenerator.CanGenerate(cell, this.eventGenerator.RecordId))
+            var evalute = this.eventGenerator.CanGenerate(cell, this.eventGenerator.RecordId);
+            if(evalute == Constants.CellEventGenerateEvalute.Possible)
             {
                 var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(this.eventGenerator.RecordId, 0);
                 Assert.IsNotNull(levelUpCostRecord);
@@ -38,6 +41,8 @@ namespace HK.AutoAnt.GameControllers
 
                 this.eventGenerator.Generate(cell, this.eventGenerator.RecordId, false);
             }
+
+            Broker.Global.Publish(ProcessedGenerateCellEvent.Get(evalute));
         }
     }
 }
