@@ -24,8 +24,18 @@ namespace HK.AutoAnt.Systems
 
 #endif
 
+        private static bool isInitialized = false;
+
         public LocalNotifiaction()
         {
+            if(isInitialized)
+            {
+                Assert.IsTrue(false, $"既に{typeof(LocalNotifiaction).Name}は初期化済みです");
+                return;
+            }
+            
+            isInitialized = true;
+
 #if UNITY_ANDROID && !UNITY_EDITOR
             AndroidNotificationCenter.RegisterNotificationChannel(new AndroidNotificationChannel
             {
