@@ -11,6 +11,10 @@ namespace HK.AutoAnt.Systems
     {
 #if UNITY_ANDROID && !UNITY_EDITOR
         private readonly string DefaultChannelId = "auto_ant";
+
+        private readonly string DefaultSmallIcon = "small_icon_0";
+
+        private readonly string DefaultLargeIcon = "large_icon_0";
 #elif UNITY_IOS && !UNITY_EDITOR
 
 #endif
@@ -30,7 +34,16 @@ namespace HK.AutoAnt.Systems
 #endif
         }
 
-        public void Register(string title, string message, string smallIcon, string largeIcon, double delaySeconds)
+        public void Register(string title, string message, double delaySeconds)
+        {
+#if UNITY_ANDROID && !UNITY_EDITOR
+            this.Register(title, message, delaySeconds, DefaultSmallIcon, DefaultLargeIcon);
+#elif UNITY_IOS && !UNITY_EDITOR
+            this.Register(title, message, delaySeconds, "", "");
+#endif
+        }
+
+        public void Register(string title, string message, double delaySeconds, string smallIcon, string largeIcon)
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
             AndroidNotificationCenter.SendNotification(
