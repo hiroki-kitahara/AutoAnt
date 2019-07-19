@@ -85,3 +85,11 @@ MonoBehaviour:
       ja: "\u3053\u3053\u306B\u5EFA\u7269\u3092\u5EFA\u3066\u3089\u308C\u307E\u305B\u3093\uFF01"
       en: 
     guid: c596e9ae-402c-4e86-a4f7-0a65f2b30fdd
+  - value:
+      ja: AutoAnt
+      en: 
+    guid: 3d7faeff-b87a-499c-ae14-8cf49c995e16
+  - value:
+      ja: "\u7A0E\u91D1\u304C\u8CAF\u307E\u308A\u307E\u3057\u305F\uFF01"
+      en: 
+    guid: 46e68196-a566-4df0-b917-ae2f15535d41
