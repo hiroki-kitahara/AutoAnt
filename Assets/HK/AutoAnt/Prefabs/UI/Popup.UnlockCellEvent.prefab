@@ -1175,7 +1175,8 @@ PrefabInstance:
       propertyPath: hasOnComplete
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4033030717375905919, guid: 73ef3f381a00445bd91f13e16f37b58d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 73ef3f381a00445bd91f13e16f37b58d, type: 3}
 --- !u!225 &3020477356348606745 stripped
 CanvasGroup:
