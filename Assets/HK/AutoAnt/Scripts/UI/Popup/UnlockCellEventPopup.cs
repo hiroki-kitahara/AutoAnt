@@ -1,5 +1,6 @@
 ﻿using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Extensions;
+using HK.AutoAnt.Systems;
 using HK.Framework.Text;
 using TMPro;
 using UniRx;
@@ -27,7 +28,8 @@ namespace HK.AutoAnt.UI
 
         public void Initialize(CellEvent cellEvent)
         {
-            this.message.text = this.format.Format(cellEvent.EventName);
+            var color = GameSystem.Instance.Constants.Color.CellEvent.Get(cellEvent.Category);
+            this.message.text = this.format.Format(ColorUtility.ToHtmlStringRGBA(color), ">", cellEvent.EventName);
             var gimmick = Instantiate(cellEvent.GimmickPrefab, this.gimmickViewParent, false).transform;
             gimmick.localPosition = Vector3.zero;
             gimmick.localRotation = Quaternion.identity;
