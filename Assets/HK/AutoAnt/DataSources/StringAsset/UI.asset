@@ -62,7 +62,7 @@ MonoBehaviour:
       en: 
     guid: 251b88ff-6b21-4ea1-bea7-5e0eb1ff9559
   - value:
-      ja: "{0}\u3092\u5EFA\u8A2D\u51FA\u6765\u308B\u3088\u3046\u306B\u306A\u308A\u307E\u3057\u305F\uFF01"
+      ja: "<color=#ff7744><size=70>{0}</size></color>\u3092\u5EFA\u8A2D\u51FA\u6765\u308B\u3088\u3046\u306B\u306A\u308A\u307E\u3057\u305F\uFF01"
       en: 
     guid: 41e37f7f-f15c-4f7c-9782-39d0332a1806
   - value:
