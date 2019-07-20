@@ -2,6 +2,8 @@
 using UnityEngine.Assertions;
 using UnityEngine.UI;
 using UniRx;
+using HK.Framework.EventSystems;
+using HK.AutoAnt.Events;
 
 namespace HK.AutoAnt.UI
 {
@@ -18,7 +20,7 @@ namespace HK.AutoAnt.UI
             this.slider.OnValueChangedAsObservable()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    Debug.Log(x);
+                    Broker.Global.Publish(RequestCameraZoom.Get(x));
                 })
                 .AddTo(this);
         }

@@ -16,6 +16,12 @@ namespace HK.AutoAnt.CameraControllers
         [SerializeField]
         private float offsetCellEventDetailsPopupFocus = 0.0f;
 
+        [SerializeField]
+        private float zoomMin;
+
+        [SerializeField]
+        private float zoomMax;
+
         void Awake()
         {
             // CellEventDetailsPopupが開いた時に指定されたセルイベントにカメラをフォーカスさせる
@@ -33,6 +39,13 @@ namespace HK.AutoAnt.CameraControllers
                     cameraman.Position = new Vector3(position.x, 0.0f, position.z) + offset;
                 })
                 .AddTo(this);
+
+            Broker.Global.Receive<RequestCameraZoom>()
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    _this.Zoom(x.Value);
+                })
+                .AddTo(this);
         }
         public void Move(Vector2 deltaPosition)
         {
@@ -44,15 +57,11 @@ namespace HK.AutoAnt.CameraControllers
             cameraman.Position -= cameraman.ToFirstPersonVector(deltaPosition.y * ratioY, deltaPosition.x * ratioX);
         }
 
-        public void Zoom(float velocity)
+        public void Zoom(float value)
         {
+            value = 1.0f - value;
             var cameraman = GameSystem.Instance.Cameraman;
-            // ズームの限界以上は動かさない
-            if(cameraman.Size <= velocity && velocity > 0f)
-            {
-                return;
-            }
-            cameraman.Size -= velocity;
+            cameraman.Size = ((this.zoomMax - this.zoomMin) * value) + this.zoomMin;
         }
     }
 }
