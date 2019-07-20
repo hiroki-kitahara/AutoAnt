@@ -2,7 +2,9 @@
 using HK.AutoAnt.Extensions;
 using HK.Framework.Text;
 using TMPro;
+using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HK.AutoAnt.UI
 {
@@ -18,6 +20,9 @@ namespace HK.AutoAnt.UI
         private Transform gimmickViewParent = null;
 
         [SerializeField]
+        private Button decideButton = null;
+
+        [SerializeField]
         private StringAsset.Finder format = null;
 
         public void Initialize(CellEvent cellEvent)
@@ -27,6 +32,13 @@ namespace HK.AutoAnt.UI
             gimmick.localPosition = Vector3.zero;
             gimmick.localRotation = Quaternion.identity;
             gimmick.gameObject.SetLayerRecursive(Layers.Id.UI);
+
+            this.decideButton.OnClickAsObservable()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.Close();
+                })
+                .AddTo(this);
         }
     }
 }

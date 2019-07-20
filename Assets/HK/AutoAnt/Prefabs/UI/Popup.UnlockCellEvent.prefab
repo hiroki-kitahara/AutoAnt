@@ -784,6 +784,7 @@ MonoBehaviour:
   tweenAnimationHolder: {fileID: 2104112531458021771}
   message: {fileID: 84592492691104824}
   gimmickViewParent: {fileID: 9209144743676769347}
+  decideButton: {fileID: 5140998989209310958}
   format:
     target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
     value: "<color=#ff7744><size=70>\u30CA\u30F3\u30C8\u30AB\u5DE5\u5834</size></color>\u3092\u5EFA\u8A2D\u51FA\u6765\u308B\u3088\u3046\u306B\u306A\u308A\u307E\u3057\u305F\uFF01"
