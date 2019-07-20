@@ -21,5 +21,12 @@ namespace HK.AutoAnt
         {
             this.target.color = GameSystem.Instance.Constants.Color.CellEvent.Get(this.category);
         }
+
+#if UNITY_EDITOR
+        void Reset()
+        {
+            this.target = this.GetComponent<Image>();
+        }
+#endif
     }
 }
