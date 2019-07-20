@@ -59,9 +59,18 @@ namespace HK.AutoAnt.CameraControllers
 
         public void Zoom(float value)
         {
+            value = Mathf.Clamp01(value);
             value = 1.0f - value;
             var cameraman = GameSystem.Instance.Cameraman;
             cameraman.Size = ((this.zoomMax - this.zoomMin) * value) + this.zoomMin;
+        }
+
+        public void ZoomOnVelocity(float velocity)
+        {
+            var currentSize = GameSystem.Instance.Cameraman.Size;
+            var normalizedSize = (currentSize - this.zoomMin) / (this.zoomMax - this.zoomMin);
+            var result = 1.0f - (normalizedSize - velocity);
+            this.Zoom(result);
         }
     }
 }
