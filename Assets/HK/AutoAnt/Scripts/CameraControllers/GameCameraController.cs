@@ -18,6 +18,7 @@ namespace HK.AutoAnt.CameraControllers
 
         void Awake()
         {
+            // CellEventDetailsPopupが開いた時に指定されたセルイベントにカメラをフォーカスさせる
             Broker.Global.Receive<PopupEvents.StartOpen>()
                 .Select(x => x.Popup as CellEventDetailsPopup)
                 .Where(x => x != null)
