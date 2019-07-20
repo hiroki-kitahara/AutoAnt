@@ -17,10 +17,10 @@ namespace HK.AutoAnt.CameraControllers
         private float offsetCellEventDetailsPopupFocus = 0.0f;
 
         [SerializeField]
-        private float zoomMin;
+        private float zoomMin = 1.0f;
 
         [SerializeField]
-        private float zoomMax;
+        private float zoomMax = 5.0f;
 
         void Awake()
         {
