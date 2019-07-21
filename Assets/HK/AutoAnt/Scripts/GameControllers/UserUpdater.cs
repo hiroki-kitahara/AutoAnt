@@ -41,7 +41,7 @@ namespace HK.AutoAnt.GameControllers
                     _this.RegisterIntervalUpdate(x.GameSystem);
                     _this.RegisterUpdate(x.GameSystem);
                     _this.StartObserveUnlockCellEvents(x.GameSystem);
-                    _this.OnLeftAlone(x.GameSystem);
+                    _this.OnLeftAlone();
                 })
                 .AddTo(this);
 
@@ -49,6 +49,20 @@ namespace HK.AutoAnt.GameControllers
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     x.GameSystem.User.History.Game.LastDateTime = DateTime.Now;
+                })
+                .AddTo(this);
+
+            Broker.Global.Receive<GamePause>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    GameSystem.Instance.User.History.Game.LastDateTime = DateTime.Now;
+                })
+                .AddTo(this);
+
+            Broker.Global.Receive<GameResume>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.OnLeftAlone();
                 })
                 .AddTo(this);
 
@@ -98,8 +112,9 @@ namespace HK.AutoAnt.GameControllers
         /// <summary>
         /// 放置されていた時間分の処理を行う
         /// </summary>
-        private void OnLeftAlone(GameSystem gameSystem)
+        private void OnLeftAlone()
         {
+            var gameSystem = GameSystem.Instance;
             var lastDateTime = gameSystem.User.History.Game.LastDateTime;
             if(DateTime.MinValue == lastDateTime)
             {
