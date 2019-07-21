@@ -184,6 +184,7 @@ MonoBehaviour:
     type: 3}
   updateInterval: 5
   leftAloneProcessSeconds: 172800
+  adsAcquireRate: 3
   leftAloneLocalNotificationTitle:
     target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
     value: AutoAnt

@@ -38,7 +38,7 @@ namespace HK.AutoAnt.GameControllers
         /// 広告を見た際のリソース獲得量の倍率
         /// </summary>
         [SerializeField]
-        private double adsAcquireRate = 1.0f;
+        private int adsAcquireRate = 1;
 
         [SerializeField]
         private StringAsset.Finder leftAloneLocalNotificationTitle = null;
