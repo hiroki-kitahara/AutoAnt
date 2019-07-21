@@ -180,6 +180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userUpdater: {fileID: 1619589008271743420}
+  popupPrefab: {fileID: 7416317256958595511, guid: dd90a186cdce4468e8d75fa509cdd89a,
+    type: 3}
   updateInterval: 5
   leftAloneProcessSeconds: 172800
   leftAloneLocalNotificationTitle:

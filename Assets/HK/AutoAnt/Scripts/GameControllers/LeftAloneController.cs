@@ -1,6 +1,7 @@
 ﻿using System;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Systems;
+using HK.AutoAnt.UI;
 using HK.Framework.EventSystems;
 using HK.Framework.Text;
 using UniRx;
@@ -16,6 +17,9 @@ namespace HK.AutoAnt.GameControllers
     {
         [SerializeField]
         private UserUpdater userUpdater = null;
+
+        [SerializeField]
+        private LeftAloneResultPopup popupPrefab = null;
 
         /// <summary>
         /// 放置時間を更新する間隔（秒）
@@ -76,6 +80,8 @@ namespace HK.AutoAnt.GameControllers
 
             var newMoney = user.Wallet.Money;
             var newPopulation = user.Town.Population.Value;
+
+            this.CreateLeftAloneResultPopup(newMoney - oldMoney, newPopulation - oldPopulation);
         }
 
         /// <summary>
@@ -88,6 +94,25 @@ namespace HK.AutoAnt.GameControllers
                 this.leftAloneLocalNotificationMessage.Get,
                 (int)this.leftAloneProcessSeconds
             );
+        }
+
+        private void CreateLeftAloneResultPopup(double money, double population)
+        {
+            var popup = PopupManager.Request(this.popupPrefab);
+            popup.Initialize(money, population);
+            popup.DecideButton.OnClickAsObservable()
+                .SubscribeWithState(popup, (_, _popup) =>
+                {
+                    _popup.Close();
+                })
+                .AddTo(this);
+            popup.AdsButton.OnClickAsObservable()
+                .SubscribeWithState2(this, popup, (_, _this, _popup) =>
+                {
+
+                })
+                .AddTo(this);
+            popup.Open();
         }
     }
 }
