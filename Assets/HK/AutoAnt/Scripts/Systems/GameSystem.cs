@@ -68,6 +68,18 @@ namespace HK.AutoAnt.Systems
             instance = null;
         }
 
+        void OnApplicationPause(bool status)
+        {
+            if(status)
+            {
+                Broker.Global.Publish(GamePause.Get());
+            }
+            else
+            {
+                Broker.Global.Publish(GameResume.Get());
+            }
+        }
+
         void OnApplicationQuit()
         {
             Broker.Global.Publish(GameEnd.Get(this));
