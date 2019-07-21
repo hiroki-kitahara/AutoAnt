@@ -82,7 +82,7 @@ namespace HK.AutoAnt.GameControllers
             var updatableCount = Math.Floor(span / this.updateInterval);
             for (var i = 0; i < updatableCount; i++)
             {
-                this.userUpdater.UpdateParameter(GameSystem.Instance);
+                this.userUpdater.UpdateParameter(this.updateInterval);
             }
 
             var newMoney = user.Wallet.Money;
