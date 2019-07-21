@@ -426,7 +426,6 @@ GameObject:
   - component: {fileID: 401739088737372038}
   - component: {fileID: 7257091508530955431}
   - component: {fileID: 7200560267959043109}
-  - component: {fileID: 217059451694070391}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -481,7 +480,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "\u5E83\u544A\u3092\u898B\u308B(3\u500D)"
+  m_text: "\u5E83\u544A\u3092\u898B\u308B({0}\u500D)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3000f372b7ba5a9419c51c28a99ca55a, type: 2}
   m_sharedMaterial: {fileID: 21076451342146514, guid: 3000f372b7ba5a9419c51c28a99ca55a,
@@ -551,10 +550,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 7200560267959043109}
-    characterCount: 9
+    characterCount: 11
     spriteCount: 0
     spaceCount: 0
-    wordCount: 2
+    wordCount: 3
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -564,7 +563,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 0
+  m_inputSource: 3
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -577,23 +576,6 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &217059451694070391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2043649905036772642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd4a7391298c0457691a4ca9c4662f85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 7200560267959043109}
-  message:
-    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
-    value: "\u5E83\u544A\u3092\u898B\u308B(3\u500D)"
-    guid: caf0c421-22c4-4733-963a-07daa4247a81
 --- !u!1 &2466385038908055041
 GameObject:
   m_ObjectHideFlags: 0
@@ -2116,6 +2098,11 @@ MonoBehaviour:
   adsButton: {fileID: 1581885800044651048}
   money: {fileID: 506673429658629974}
   population: {fileID: 6382451115912512213}
+  adsButtonText: {fileID: 7200560267959043109}
+  adsButtonFormat:
+    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
+    value: "\u5E83\u544A\u3092\u898B\u308B({0}\u500D)"
+    guid: caf0c421-22c4-4733-963a-07daa4247a81
 --- !u!1 &7669613310056793024
 GameObject:
   m_ObjectHideFlags: 0
@@ -2229,8 +2216,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 432.21527, y: 0}
+  m_SizeDelta: {x: 864.43054, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1265847716995173575
 CanvasRenderer:

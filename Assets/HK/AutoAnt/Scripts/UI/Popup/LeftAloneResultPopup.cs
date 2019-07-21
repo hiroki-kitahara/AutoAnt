@@ -2,6 +2,7 @@
 using DG.Tweening;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
+using HK.Framework.Text;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -29,10 +30,17 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private TextMeshProUGUI population = null;
 
-        public void Initialize(double money, double population)
+        [SerializeField]
+        private TextMeshProUGUI adsButtonText = null;
+
+        [SerializeField]
+        private StringAsset.Finder adsButtonFormat = null;
+
+        public void Initialize(double money, double population, int adsAcqureRate)
         {
             this.money.text = money.ToReadableString("###.00");
             this.population.text = population.ToReadableString("###.00");
+            this.adsButtonText.text = this.adsButtonFormat.Format(adsAcqureRate);
         }
     }
 }

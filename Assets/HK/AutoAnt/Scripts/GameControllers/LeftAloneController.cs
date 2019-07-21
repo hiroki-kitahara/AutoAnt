@@ -106,7 +106,7 @@ namespace HK.AutoAnt.GameControllers
         private void CreateLeftAloneResultPopup(double money, double population)
         {
             var popup = PopupManager.Request(this.popupPrefab);
-            popup.Initialize(money, population);
+            popup.Initialize(money, population, this.adsAcquireRate);
             popup.DecideButton.OnClickAsObservable()
                 .SubscribeWithState(popup, (_, _popup) =>
                 {
@@ -152,8 +152,12 @@ namespace HK.AutoAnt.GameControllers
                     if (x == ShowResult.Finished)
                     {
                         var user = GameSystem.Instance.User;
-                        user.Wallet.AddMoney(_money * _this.adsAcquireRate);
-                        user.Town.AddPopulation(_population * _this.adsAcquireRate);
+
+                        // 既に放置分のリソースは加算しているので倍率を補正する
+                        var rate = _this.adsAcquireRate - 1;
+                        
+                        user.Wallet.AddMoney(_money * rate);
+                        user.Town.AddPopulation(_population * rate);
                         _popup.Close();
                     }
                 })

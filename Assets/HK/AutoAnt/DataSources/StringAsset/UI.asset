@@ -90,7 +90,7 @@ MonoBehaviour:
       en: 
     guid: 9c52c5c2-30f8-4f86-a909-778929bab537
   - value:
-      ja: "\u5E83\u544A\u3092\u898B\u308B(3\u500D)"
+      ja: "\u5E83\u544A\u3092\u898B\u308B({0}\u500D)"
       en: 
     guid: caf0c421-22c4-4733-963a-07daa4247a81
   - value:
