@@ -2,6 +2,7 @@
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Systems;
 using HK.Framework.EventSystems;
+using HK.Framework.Text;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -28,12 +29,25 @@ namespace HK.AutoAnt.GameControllers
         [SerializeField]
         private double leftAloneProcessSeconds = 100.0f;
 
+        [SerializeField]
+        private StringAsset.Finder leftAloneLocalNotificationTitle = null;
+
+        [SerializeField]
+        private StringAsset.Finder leftAloneLocalNotificationMessage = null;
+
         void Awake()
         {
             Broker.Global.Receive<GameStart>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     _this.OnLeftAlone();
+                })
+                .AddTo(this);
+
+            Broker.Global.Receive<GameEnd>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.RegisterLeftAloneLocalNotification();
                 })
                 .AddTo(this);
         }
@@ -64,6 +78,18 @@ namespace HK.AutoAnt.GameControllers
             var newPopulation = user.Town.Population.Value;
 
             Broker.Global.Publish(ProcessedLeftAlone.Get(newMoney - oldMoney, newPopulation - oldPopulation));
+        }
+
+        /// <summary>
+        /// 放置可能な時間後にローカル通知を登録する
+        /// </summary>
+        private void RegisterLeftAloneLocalNotification()
+        {
+            AutoAntSystem.LocalNotification.Register(
+                this.leftAloneLocalNotificationTitle.Get,
+                this.leftAloneLocalNotificationMessage.Get,
+                (int)this.leftAloneProcessSeconds
+            );
         }
     }
 }

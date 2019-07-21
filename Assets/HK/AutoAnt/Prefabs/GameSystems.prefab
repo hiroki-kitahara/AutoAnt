@@ -76,14 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf28c7d3935b4fdb81813efd8758226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftAloneLocalNotificationTitle:
-    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
-    value: AutoAnt
-    guid: 3d7faeff-b87a-499c-ae14-8cf49c995e16
-  leftAloneLocalNotificationMessage:
-    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
-    value: "\u7A0E\u91D1\u304C\u8CAF\u307E\u308A\u307E\u3057\u305F\uFF01"
-    guid: 46e68196-a566-4df0-b917-ae2f15535d41
 --- !u!114 &7500671137712836563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +182,14 @@ MonoBehaviour:
   userUpdater: {fileID: 1619589008271743420}
   updateInterval: 5
   leftAloneProcessSeconds: 172800
+  leftAloneLocalNotificationTitle:
+    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
+    value: AutoAnt
+    guid: 3d7faeff-b87a-499c-ae14-8cf49c995e16
+  leftAloneLocalNotificationMessage:
+    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
+    value: "\u7A0E\u91D1\u304C\u8CAF\u307E\u308A\u307E\u3057\u305F\uFF01"
+    guid: 46e68196-a566-4df0-b917-ae2f15535d41
 --- !u!1 &7658445820341224520
 GameObject:
   m_ObjectHideFlags: 0
