@@ -88,5 +88,17 @@ namespace HK.AutoAnt.Systems
             });
 #endif
         }
+
+        /// <summary>
+        /// バッジをクリアする
+        /// </summary>
+        public void ClearBadge()
+        {
+#if UNITY_ANDROID && !UNITY_EDITOR
+            // Androidにバッジ処理が無いっぽい？
+#elif UNITY_IOS && !UNITY_EDITOR
+            iOSNotificationCenter.ApplicationBadge = 0;
+#endif
+        }
     }
 }
