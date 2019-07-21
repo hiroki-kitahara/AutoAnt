@@ -12,7 +12,9 @@ namespace HK.AutoAnt.Systems
         [SerializeField]
         private AudioSystem audioSystem = null;
         public static AudioSystem Audio { get; private set; }
-        
+
+        public static readonly LocalNotifiaction LocalNotification = new LocalNotifiaction();
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Setup()
         {
