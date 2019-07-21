@@ -6,6 +6,7 @@ using HK.Framework.EventSystems;
 using HK.Framework.Text;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.Assertions;
 
 namespace HK.AutoAnt.GameControllers
@@ -32,6 +33,12 @@ namespace HK.AutoAnt.GameControllers
         /// </summary>
         [SerializeField]
         private double leftAloneProcessSeconds = 100.0f;
+
+        /// <summary>
+        /// 広告を見た際のリソース獲得量の倍率
+        /// </summary>
+        [SerializeField]
+        private double adsAcquireRate = 1.0f;
 
         [SerializeField]
         private StringAsset.Finder leftAloneLocalNotificationTitle = null;
@@ -106,13 +113,51 @@ namespace HK.AutoAnt.GameControllers
                     _popup.Close();
                 })
                 .AddTo(this);
-            popup.AdsButton.OnClickAsObservable()
-                .SubscribeWithState2(this, popup, (_, _this, _popup) =>
-                {
 
+            var tuple = new Tuple<LeftAloneController, LeftAloneResultPopup, double, double>(
+                this,
+                popup,
+                money,
+                population
+            );
+            popup.AdsButton.OnClickAsObservable()
+                .SubscribeWithState(tuple, (_, t) =>
+                {
+                    var _this = t.Item1;
+                    var _popup = t.Item2;
+                    var _money = t.Item3;
+                    var _population = t.Item4;
+                    _this.ShowAds(_popup, _money, _population);
                 })
                 .AddTo(this);
             popup.Open();
+        }
+
+        private void ShowAds(LeftAloneResultPopup popup, double money, double population)
+        {
+            var tuple = new Tuple<LeftAloneController, LeftAloneResultPopup, double, double>(
+                this,
+                popup,
+                money,
+                population
+            );
+            AutoAntSystem.Advertisement.Show()
+                .SubscribeWithState(tuple, (x, t) =>
+                {
+                    var _this = t.Item1;
+                    var _popup = t.Item2;
+                    var _money = t.Item3;
+                    var _population = t.Item4;
+
+                    if (x == ShowResult.Finished)
+                    {
+                        var user = GameSystem.Instance.User;
+                        user.Wallet.AddMoney(_money * _this.adsAcquireRate);
+                        user.Town.AddPopulation(_population * _this.adsAcquireRate);
+                        _popup.Close();
+                    }
+                })
+                .AddTo(this);
         }
     }
 }
