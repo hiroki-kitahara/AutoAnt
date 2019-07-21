@@ -18,7 +18,7 @@ namespace HK.AutoAnt.GameControllers
         private UserUpdater userUpdater = null;
 
         /// <summary>
-        /// 各パラメータの更新を行う間隔（秒）
+        /// 放置時間を更新する間隔（秒）
         /// </summary>
         [SerializeField]
         private float updateInterval = 1.0f;
@@ -76,8 +76,6 @@ namespace HK.AutoAnt.GameControllers
 
             var newMoney = user.Wallet.Money;
             var newPopulation = user.Town.Population.Value;
-
-            Broker.Global.Publish(ProcessedLeftAlone.Get(newMoney - oldMoney, newPopulation - oldPopulation));
         }
 
         /// <summary>
