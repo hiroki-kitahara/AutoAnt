@@ -17,18 +17,6 @@ namespace HK.AutoAnt.GameControllers
     public sealed class UserUpdater : MonoBehaviour
     {
         /// <summary>
-        /// 各パラメータの更新を行う間隔（秒）
-        /// </summary>
-        [SerializeField]
-        private float parameterUpdateInterval = 1.0f;
-
-        /// <summary>
-        /// 放置した時間の制限値
-        /// </summary>
-        [SerializeField]
-        private double leftAloneProcessSeconds = 100.0f;
-
-        /// <summary>
         /// 街の人口を加算する要素リスト
         /// </summary>
         private readonly List<IAddTownPopulation> addTownPopulations = new List<IAddTownPopulation>();
@@ -38,10 +26,8 @@ namespace HK.AutoAnt.GameControllers
             Broker.Global.Receive<GameStart>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.RegisterIntervalUpdate(x.GameSystem);
                     _this.RegisterUpdate(x.GameSystem);
                     _this.StartObserveUnlockCellEvents(x.GameSystem);
-                    _this.OnLeftAlone(x.GameSystem);
                 })
                 .AddTo(this);
 
@@ -70,18 +56,6 @@ namespace HK.AutoAnt.GameControllers
         }
 
         /// <summary>
-        /// パラメータ更新処理
-        /// </summary>
-        private void RegisterIntervalUpdate(GameSystem gameSystem)
-        {
-            Observable.Interval(TimeSpan.FromSeconds(this.parameterUpdateInterval))
-                .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
-                {
-                })
-                .AddTo(this);
-        }
-
-        /// <summary>
         /// 毎フレーム実行される更新処理
         /// </summary>
         private void RegisterUpdate(GameSystem gameSystem)
@@ -96,37 +70,9 @@ namespace HK.AutoAnt.GameControllers
         }
 
         /// <summary>
-        /// 放置されていた時間分の処理を行う
-        /// </summary>
-        private void OnLeftAlone(GameSystem gameSystem)
-        {
-            var user = gameSystem.User;
-            var lastDateTime = user.History.Game.LastDateTime;
-            if(DateTime.MinValue == lastDateTime)
-            {
-                return;
-            }
-
-            var oldMoney = user.Wallet.Money;
-            var oldPopulation = user.Town.Population.Value;
-
-            var span = Math.Min((DateTime.Now - lastDateTime).TotalSeconds, this.leftAloneProcessSeconds);
-            var updatableCount = Math.Floor(span / this.parameterUpdateInterval);
-            for (var i = 0; i < updatableCount; i++)
-            {
-                this.UpdateParameter(gameSystem);
-            }
-
-            var newMoney = user.Wallet.Money;
-            var newPopulation = user.Town.Population.Value;
-
-            Broker.Global.Publish(ProcessedLeftAlone.Get(newMoney - oldMoney, newPopulation - oldPopulation));
-        }
-
-        /// <summary>
         /// パラメータを更新する
         /// </summary>
-        private void UpdateParameter(GameSystem gameSystem)
+        public void UpdateParameter(GameSystem gameSystem)
         {
             // 税金徴収
             gameSystem.User.Wallet.AddMoney(Calculator.Tax(gameSystem.User.Town.Population.Value, Time.deltaTime));

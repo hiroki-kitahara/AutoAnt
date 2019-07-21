@@ -76,8 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf28c7d3935b4fdb81813efd8758226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parameterUpdateInterval: 5
-  leftAloneProcessSeconds: 172800
 --- !u!114 &7500671137712836563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +179,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a21326576cc5467abd61f28bb56e201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userUpdater: {fileID: 1619589008271743420}
+  updateInterval: 5
+  leftAloneProcessSeconds: 172800
 --- !u!1 &7658445820341224520
 GameObject:
   m_ObjectHideFlags: 0
