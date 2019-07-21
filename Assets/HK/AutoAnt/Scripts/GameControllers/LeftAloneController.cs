@@ -61,6 +61,13 @@ namespace HK.AutoAnt.GameControllers
                     _this.RegisterLeftAloneLocalNotification();
                 })
                 .AddTo(this);
+
+            Broker.Global.Receive<GameResume>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.OnLeftAlone();
+                })
+                .AddTo(this);
         }
 
         /// <summary>
@@ -155,7 +162,7 @@ namespace HK.AutoAnt.GameControllers
 
                         // 既に放置分のリソースは加算しているので倍率を補正する
                         var rate = _this.adsAcquireRate - 1;
-                        
+
                         user.Wallet.AddMoney(_money * rate);
                         user.Town.AddPopulation(_population * rate);
                         _popup.Close();
