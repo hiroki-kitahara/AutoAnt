@@ -100,11 +100,15 @@ namespace HK.AutoAnt.GameControllers
         /// </summary>
         private void OnLeftAlone(GameSystem gameSystem)
         {
-            var lastDateTime = gameSystem.User.History.Game.LastDateTime;
+            var user = gameSystem.User;
+            var lastDateTime = user.History.Game.LastDateTime;
             if(DateTime.MinValue == lastDateTime)
             {
                 return;
             }
+
+            var oldMoney = user.Wallet.Money;
+            var oldPopulation = user.Town.Population.Value;
 
             var span = Math.Min((DateTime.Now - lastDateTime).TotalSeconds, this.leftAloneProcessSeconds);
             var updatableCount = Math.Floor(span / this.parameterUpdateInterval);
@@ -112,6 +116,11 @@ namespace HK.AutoAnt.GameControllers
             {
                 this.UpdateParameter(gameSystem);
             }
+
+            var newMoney = user.Wallet.Money;
+            var newPopulation = user.Town.Population.Value;
+
+            Broker.Global.Publish(ProcessedLeftAlone.Get(newMoney - oldMoney, newPopulation - oldPopulation));
         }
 
         /// <summary>
