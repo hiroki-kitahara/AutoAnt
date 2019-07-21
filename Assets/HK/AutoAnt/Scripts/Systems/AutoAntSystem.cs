@@ -28,6 +28,13 @@ namespace HK.AutoAnt.Systems
             Assert.IsNotNull(system);
 
             Audio = system.audioSystem;
+
+            AutoAntSystem.LocalNotification.ClearBadge();
+        }
+
+        void OnApplicationFocus(bool status)
+        {
+            AutoAntSystem.LocalNotification.ClearBadge();
         }
     }
 }
