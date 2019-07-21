@@ -12,7 +12,9 @@ namespace HK.AutoAnt.Systems
         [SerializeField]
         private AudioSystem audioSystem = null;
         public static AudioSystem Audio { get; private set; }
-        
+
+        public static readonly LocalNotifiaction LocalNotification = new LocalNotifiaction();
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Setup()
         {
@@ -26,6 +28,13 @@ namespace HK.AutoAnt.Systems
             Assert.IsNotNull(system);
 
             Audio = system.audioSystem;
+
+            AutoAntSystem.LocalNotification.ClearBadge();
+        }
+
+        void OnApplicationFocus(bool status)
+        {
+            AutoAntSystem.LocalNotification.ClearBadge();
         }
     }
 }

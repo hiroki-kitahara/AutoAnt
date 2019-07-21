@@ -4,6 +4,7 @@ using HK.AutoAnt.Events;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.UserControllers;
 using HK.Framework.EventSystems;
+using HK.Framework.Text;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -16,6 +17,12 @@ namespace HK.AutoAnt.GameControllers
     /// </summary>
     public sealed class UserUpdater : MonoBehaviour
     {
+        [SerializeField]
+        private StringAsset.Finder leftAloneLocalNotificationTitle = null;
+
+        [SerializeField]
+        private StringAsset.Finder leftAloneLocalNotificationMessage = null;
+
         /// <summary>
         /// 街の人口を加算する要素リスト
         /// </summary>
@@ -35,6 +42,7 @@ namespace HK.AutoAnt.GameControllers
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     x.GameSystem.User.History.Game.LastDateTime = DateTime.Now;
+                    // _this.RegisterLeftAloneLocalNotification();
                 })
                 .AddTo(this);
 
@@ -107,5 +115,17 @@ namespace HK.AutoAnt.GameControllers
                 })
                 .AddTo(gameSystem);
         }
+
+        /// <summary>
+        /// 放置可能な時間後にローカル通知を登録する
+        /// </summary>
+        // private void RegisterLeftAloneLocalNotification()
+        // {
+        //     AutoAntSystem.LocalNotification.Register(
+        //         this.leftAloneLocalNotificationTitle.Get,
+        //         this.leftAloneLocalNotificationMessage.Get,
+        //         (int)this.leftAloneProcessSeconds
+        //     );
+        // }
     }
 }

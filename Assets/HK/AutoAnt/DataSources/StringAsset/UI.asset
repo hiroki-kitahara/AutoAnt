@@ -97,3 +97,11 @@ MonoBehaviour:
       ja: CANCEL
       en: 
     guid: 5b8c7b3b-361f-4571-b5be-c833dc152631
+  - value:
+      ja: AutoAnt
+      en: 
+    guid: 3d7faeff-b87a-499c-ae14-8cf49c995e16
+  - value:
+      ja: "\u7A0E\u91D1\u304C\u8CAF\u307E\u308A\u307E\u3057\u305F\uFF01"
+      en: 
+    guid: 46e68196-a566-4df0-b917-ae2f15535d41
