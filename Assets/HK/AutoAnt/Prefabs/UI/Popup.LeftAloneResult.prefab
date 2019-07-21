@@ -564,7 +564,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 3
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -2099,7 +2099,7 @@ MonoBehaviour:
     target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
     value: OK
     guid: 1beb83dc-5df1-49bc-9ae8-8270ab59a33b
---- !u!114 &857513669064895084
+--- !u!114 &7416317256958595511
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2108,17 +2108,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8363413672677297710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76e2385bda6de45b5a0f2fd234da7e68, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b52fff17f63b44829c8582bb7167f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tweenAnimationHolder: {fileID: 2104112531458021771}
-  message: {fileID: 84592492691104824}
-  decide:
-    Button: {fileID: 5140998989209310958}
-    Text: {fileID: 2502768542609792050}
-  cancel:
-    Button: {fileID: 1581885800044651048}
-    Text: {fileID: 7200560267959043109}
+  decideButton: {fileID: 5140998989209310958}
+  adsButton: {fileID: 1581885800044651048}
+  money: {fileID: 506673429658629974}
+  population: {fileID: 6382451115912512213}
 --- !u!1 &7669613310056793024
 GameObject:
   m_ObjectHideFlags: 0

@@ -85,3 +85,15 @@ MonoBehaviour:
       ja: "\u3053\u3053\u306B\u5EFA\u7269\u3092\u5EFA\u3066\u3089\u308C\u307E\u305B\u3093\uFF01"
       en: 
     guid: c596e9ae-402c-4e86-a4f7-0a65f2b30fdd
+  - value:
+      ja: "\u4EE5\u4E0B\u3092\u7372\u5F97\u3057\u307E\u3057\u305F\uFF01"
+      en: 
+    guid: 9c52c5c2-30f8-4f86-a909-778929bab537
+  - value:
+      ja: "\u5E83\u544A\u3092\u898B\u308B(3\u500D)"
+      en: 
+    guid: caf0c421-22c4-4733-963a-07daa4247a81
+  - value:
+      ja: CANCEL
+      en: 
+    guid: 5b8c7b3b-361f-4571-b5be-c833dc152631
