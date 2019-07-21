@@ -90,7 +90,7 @@ namespace HK.AutoAnt.GameControllers
                 .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
                 {
                     _gameSystem.User.History.Game.Time += Time.deltaTime;
-                    _this.UpdateParameter(_gameSystem);
+                    _this.UpdateParameter(Time.deltaTime);
                 })
                 .AddTo(this);
         }
@@ -110,22 +110,24 @@ namespace HK.AutoAnt.GameControllers
             var updatableCount = Math.Floor(span / this.parameterUpdateInterval);
             for (var i = 0; i < updatableCount; i++)
             {
-                this.UpdateParameter(gameSystem);
+                this.UpdateParameter(this.parameterUpdateInterval);
             }
         }
 
         /// <summary>
         /// パラメータを更新する
         /// </summary>
-        private void UpdateParameter(GameSystem gameSystem)
+        private void UpdateParameter(float deltaTime)
         {
+            var gameSystem = GameSystem.Instance;
+
             // 税金徴収
-            gameSystem.User.Wallet.AddMoney(Calculator.Tax(gameSystem.User.Town.Population.Value, Time.deltaTime));
+            gameSystem.User.Wallet.AddMoney(Calculator.Tax(gameSystem.User.Town.Population.Value, deltaTime));
 
             // 街の人口の増加
             foreach (var a in this.addTownPopulations)
             {
-                a.Add(gameSystem, Time.deltaTime);
+                a.Add(gameSystem, deltaTime);
             }
         }
 
