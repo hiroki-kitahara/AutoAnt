@@ -17,9 +17,6 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private TextMeshProUGUI value = null;
 
-        [SerializeField]
-        private StringAsset.Finder format = null;
-
         private double cachedPopulation;
 
         void Start()
@@ -34,7 +31,7 @@ namespace HK.AutoAnt.UI
                     }
 
                     _this.cachedPopulation = population;
-                    _this.value.text = _this.format.Format(population.ToReadableString("###.00"));
+                    _this.value.text = population.ToReadableString("###.00");
                 })
                 .AddTo(this);
         }
