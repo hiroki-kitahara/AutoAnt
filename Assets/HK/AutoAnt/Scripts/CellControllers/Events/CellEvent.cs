@@ -114,7 +114,7 @@ namespace HK.AutoAnt.CellControllers.Events
             if(!isInitializingGame)
             {
                 Assert.IsNotNull(this.cachedRecord.EventData.constructionSE, $"Id = {this.Id}の建設時のSE再生に失敗しました");
-                AutoAntSystem.Audio.SE.Play(this.cachedRecord.EventData.constructionSE);
+                GameSystem.Instance.SEController.Play(this.cachedRecord.EventData.constructionSE);
 
                 Assert.IsNotNull(this.cachedRecord.EventData.constructionEffect, $"Id = {this.Id}の建設時のエフェクト生成に失敗しました");
                 var effect = this.cachedRecord.EventData.constructionEffect.Rent();
@@ -142,7 +142,7 @@ namespace HK.AutoAnt.CellControllers.Events
             }
 
             Assert.IsNotNull(record.EventData.destructionSE, $"Id = {this.Id}の破壊時のSE再生に失敗しました");
-            AutoAntSystem.Audio.SE.Play(record.EventData.destructionSE);
+            GameSystem.Instance.SEController.Play(record.EventData.destructionSE);
 
             Assert.IsNotNull(record.EventData.destructionEffect, $"Id = {this.Id}の破壊時のエフェクト生成に失敗しました");
             var effect = record.EventData.destructionEffect.Rent();
