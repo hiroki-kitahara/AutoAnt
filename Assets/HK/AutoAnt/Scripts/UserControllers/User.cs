@@ -42,6 +42,10 @@ namespace HK.AutoAnt.UserControllers
         private UnlockCellEvent unlockCellEvent = null;
         public UnlockCellEvent UnlockCellEvent => this.unlockCellEvent;
 
+        [SerializeField]
+        private Option option = null;
+        public Option Option => this.option;
+
         public SerializableUser GetSerializable()
         {
             return new SerializableUser()
