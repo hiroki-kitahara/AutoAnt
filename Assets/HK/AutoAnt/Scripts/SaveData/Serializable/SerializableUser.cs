@@ -16,5 +16,7 @@ namespace HK.AutoAnt.SaveData.Serializables
         public History History { get; set; }
 
         public UnlockCellEvent UnlockCellEvent { get; set; }
+
+        public Option Option { get; set; }
     }
 }
