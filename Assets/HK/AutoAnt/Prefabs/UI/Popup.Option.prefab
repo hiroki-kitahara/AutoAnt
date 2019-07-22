@@ -1014,7 +1014,7 @@ GameObject:
   - component: {fileID: 5140998989209310958}
   - component: {fileID: 5839513129576573696}
   m_Layer: 5
-  m_Name: Decide
+  m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1856,6 +1856,23 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2998425486284249799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8363413672677297710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 916be7b906fd845b9be5a293b61acab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenAnimationHolder: {fileID: 2104112531458021771}
+  bgmSlider: {fileID: 6116471708868617020}
+  seSlider: {fileID: 6493702722903770800}
+  deleteSaveDataButton: {fileID: 7763758901000408596}
+  closeButton: {fileID: 5140998989209310958}
 --- !u!1 &7650858227796241559
 GameObject:
   m_ObjectHideFlags: 0
@@ -2395,6 +2412,18 @@ CanvasGroup:
 --- !u!224 &77950724905861830 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7394942715256369016, guid: 73ef3f381a00445bd91f13e16f37b58d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7472864851745336766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2104112531458021771 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8829234288483939381, guid: 73ef3f381a00445bd91f13e16f37b58d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7472864851745336766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8363413672677297710 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1415294192612746128, guid: 73ef3f381a00445bd91f13e16f37b58d,
     type: 3}
   m_PrefabInstance: {fileID: 7472864851745336766}
   m_PrefabAsset: {fileID: 0}
