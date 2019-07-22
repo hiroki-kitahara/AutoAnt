@@ -1,11 +1,4 @@
-﻿using System;
-using DG.Tweening;
-using HK.AutoAnt.Events;
-using HK.AutoAnt.Extensions;
-using TMPro;
-using UniRx;
-using UnityEngine;
-using UnityEngine.Assertions;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace HK.AutoAnt.UI
