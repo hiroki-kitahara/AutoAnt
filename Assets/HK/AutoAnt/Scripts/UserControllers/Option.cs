@@ -1,4 +1,6 @@
 ﻿using System;
+using HK.AutoAnt.SaveData.Serializables;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -10,8 +12,27 @@ namespace HK.AutoAnt.UserControllers
     [Serializable]
     public sealed class Option
     {
-        public float BGMVolume = 0.5f;
+        [SerializeField]
+        private FloatReactiveProperty bgmVolume = null;
+        public FloatReactiveProperty BGMVolume => this.bgmVolume;
 
-        public float SEVolume = 0.5f;
+        [SerializeField]
+        private FloatReactiveProperty seVolume = null;
+        public FloatReactiveProperty SEVolume => this.seVolume;
+
+        public SerializableOption GetSerializable()
+        {
+            return new SerializableOption()
+            {
+                BGMVolume = this.bgmVolume.Value,
+                SEVolume = this.seVolume.Value
+            };
+        }
+
+        public void Deserialize(SerializableOption data)
+        {
+            this.bgmVolume.Value = data.BGMVolume;
+            this.seVolume.Value = data.SEVolume;
+        }
     }
 }

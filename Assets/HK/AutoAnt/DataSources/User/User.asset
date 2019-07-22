@@ -22,3 +22,8 @@ MonoBehaviour:
       value: 1000
   unlockCellEvent:
     elements: a0860100
+  option:
+    bgmVolume:
+      value: 0.5
+    seVolume:
+      value: 0.5

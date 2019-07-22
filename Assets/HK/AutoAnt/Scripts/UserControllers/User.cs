@@ -54,7 +54,7 @@ namespace HK.AutoAnt.UserControllers
                 Inventory = this.Inventory,
                 History = this.History,
                 UnlockCellEvent = this.UnlockCellEvent,
-                Option = this.Option
+                Option = this.Option.GetSerializable()
         };
         }
 
@@ -68,7 +68,7 @@ namespace HK.AutoAnt.UserControllers
                 this.inventory = serializableData.Inventory;
                 this.history = serializableData.History;
                 this.unlockCellEvent = serializableData.UnlockCellEvent;
-                this.option = serializableData.Option;
+                this.option.Deserialize(serializableData.Option);
             }
         }
 

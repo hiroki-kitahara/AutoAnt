@@ -18,7 +18,7 @@ namespace ES3Types
 			writer.WriteProperty("Inventory", instance.Inventory, ES3Type_Inventory.Instance);
 			writer.WriteProperty("History", instance.History, ES3Type_History.Instance);
 			writer.WriteProperty("UnlockCellEvent", instance.UnlockCellEvent, ES3Type_UnlockCellEvent.Instance);
-			writer.WriteProperty("Option", instance.Option, ES3Type_Option.Instance);
+			writer.WriteProperty("Option", instance.Option);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -42,7 +42,7 @@ namespace ES3Types
 						instance.UnlockCellEvent = reader.Read<HK.AutoAnt.UserControllers.UnlockCellEvent>(ES3Type_UnlockCellEvent.Instance);
 						break;
 					case "Option":
-						instance.Option = reader.Read<HK.AutoAnt.UserControllers.Option>(ES3Type_Option.Instance);
+						instance.Option = reader.Read<HK.AutoAnt.SaveData.Serializables.SerializableOption>();
 						break;
 					default:
 						reader.Skip();
