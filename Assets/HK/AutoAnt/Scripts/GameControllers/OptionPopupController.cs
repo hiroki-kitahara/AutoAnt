@@ -50,6 +50,9 @@ namespace HK.AutoAnt.GameControllers
         {
             var popup = PopupManager.Request(this.optionPopupPrefab);
 
+            popup.BGMSlider.value = GameSystem.Instance.User.Option.BGMVolume;
+            popup.SESlider.value = GameSystem.Instance.User.Option.SEVolume;
+
             popup.BGMSlider.OnValueChangedAsObservable()
                 .Subscribe(x =>
                 {
