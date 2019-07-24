@@ -42,6 +42,14 @@ public partial class SROptions
 
     [Sort(1000)]
     [Category("Game")]
+    [DisplayName("3秒後にローカル通知")]
+    public void LocalNotificationTest()
+    {
+        AutoAntSystem.LocalNotification.Register("AutoAnt", "ローカル通知テスト", 3);
+    }
+
+    [Sort(1000)]
+    [Category("Game")]
     [DisplayName("生成する建設物のID")]
     public int ChangeCellEventGenerator
     {

@@ -14,6 +14,8 @@ namespace HK.AutoAnt.Systems
         private AudioSystem audioSystem = null;
         public static AudioSystem Audio { get; private set; }
 
+        public static readonly LocalNotifiaction LocalNotification = new LocalNotifiaction();
+
         [SerializeField]
         private AutoAntAdvertisement advertisement = null;
         public static AutoAntAdvertisement Advertisement { get; private set; }
@@ -32,6 +34,13 @@ namespace HK.AutoAnt.Systems
 
             Audio = system.audioSystem;
             Advertisement = system.advertisement;
+
+            AutoAntSystem.LocalNotification.ClearBadge();
+        }
+
+        void OnApplicationFocus(bool status)
+        {
+            AutoAntSystem.LocalNotification.ClearBadge();
         }
     }
 }
