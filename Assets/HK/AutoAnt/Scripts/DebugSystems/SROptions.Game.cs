@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UniRx;
 using HK.AutoAnt;
+using UnityEngine.Advertisements;
 
 // #if AA_DEBUG
 /// <summary>
@@ -118,6 +119,16 @@ public partial class SROptions
         });
     }
 
-
+    [Sort(1003)]
+    [Category("Game/Ads")]
+    [DisplayName("広告表示")]
+    public void ShowAds()
+    {
+        AutoAntSystem.Advertisement.Show()
+            .Subscribe(x =>
+            {
+                Debug.Log(x);
+            });
+    }
 }
 // #endif
