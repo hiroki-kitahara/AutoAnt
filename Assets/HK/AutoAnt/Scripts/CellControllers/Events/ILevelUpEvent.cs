@@ -6,7 +6,7 @@ namespace HK.AutoAnt.CellControllers.Events
     /// <summary>
     /// レベルアップ可能なセルイベントのインターフェイス
     /// </summary>
-    public interface ILevelUpEvent
+    public interface ILevelUpEvent : ICellEvent
     {
         int Id { get; }
 
