@@ -60,7 +60,7 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             base.Initialize(position, gameSystem, isInitializingGame);
             this.gameSystem = gameSystem;
-            this.LevelParameter = this.gameSystem.MasterData.FacilityLevelParameter.Records.Get(this.Id, this.Level);
+            this.UpdateLevelParameter();
             gameSystem.User.Town.AddPopularity(this.Popularity);
             this.gameSystem.UpdateAsObservable()
                 .Where(_ => this.CanProduce)
@@ -110,11 +110,18 @@ namespace HK.AutoAnt.CellControllers.Events
 
             this.LevelUp(this.gameSystem);
 
-            this.LevelParameter = this.gameSystem.MasterData.FacilityLevelParameter.Records.Get(this.Id, this.Level);
+            this.UpdateLevelParameter();
 
             // レベルアップ後の人気度を加算する
             var newPopularity = this.Popularity;
             this.gameSystem.User.Town.AddPopularity(newPopularity);
+        }
+
+        private void UpdateLevelParameter()
+        {
+            var levelParameter = this.gameSystem.MasterData.FacilityLevelParameter.Records.Get(this.Id, this.Level);
+            Assert.IsNotNull(levelParameter, $"Id = {this.Id}, Level = {this.Level} の {typeof(MasterDataFacilityLevelParameter)}がありませんでした");
+            this.LevelParameter = levelParameter;
         }
 
         /// <summary>
