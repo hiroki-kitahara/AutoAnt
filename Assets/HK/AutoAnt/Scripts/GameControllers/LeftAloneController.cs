@@ -92,10 +92,13 @@ namespace HK.AutoAnt.GameControllers
                 this.userUpdater.UpdateParameter(this.updateInterval);
             }
 
-            var newMoney = user.Wallet.Money;
-            var newPopulation = user.Town.Population.Value;
+            var diffMoney = user.Wallet.Money - oldMoney;
+            var diffPopulation = user.Town.Population.Value - oldPopulation;
 
-            this.CreateLeftAloneResultPopup(newMoney - oldMoney, newPopulation - oldPopulation);
+            if(diffMoney > 0 || diffPopulation > 0)
+            {
+                this.CreateLeftAloneResultPopup(diffMoney, diffPopulation);
+            }
         }
 
         /// <summary>
