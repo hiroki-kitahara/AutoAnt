@@ -85,11 +85,11 @@ namespace HK.AutoAnt.Extensions
                     popup.AddLevelUpCost(property =>
                     {
                         var inventoryItem = gameSystem.User.Inventory.Items;
-                        var itemRecord = gameSystem.MasterData.Item.Records.Get(n.ItemName);
+                        var itemRecord = gameSystem.MasterData.Item.Records.Get(n.ItemId);
                         var possessionItemAmount = inventoryItem.ContainsKey(itemRecord.Id) ? inventoryItem[itemRecord.Id] : 0;
                         var stringBuilder = new StringBuilder();
                         var color = (possessionItemAmount >= n.Amount) ? popup.EnoughLevelUpCostColor : popup.NotEnoughLevelUpCostColor;
-                        property.Prefix.text = n.ItemName;
+                        property.Prefix.text = itemRecord.Name;
                         property.Value.text = stringBuilder.AppendColorCode(color, popup.NeedItemValue.Format(possessionItemAmount, n.Amount)).ToString();
                     })
                 );
@@ -125,11 +125,11 @@ namespace HK.AutoAnt.Extensions
                     controller.AddProperty(property =>
                     {
                         var inventoryItem = gameSystem.User.Inventory.Items;
-                        var itemRecord = gameSystem.MasterData.Item.Records.Get(n.ItemName);
+                        var itemRecord = gameSystem.MasterData.Item.Records.Get(n.ItemId);
                         var possessionItemAmount = inventoryItem.ContainsKey(itemRecord.Id) ? inventoryItem[itemRecord.Id] : 0;
                         stringBuilder.Clear();
                         var color = controller.GetConditionColor(possessionItemAmount >= n.Amount);
-                        property.Prefix.text = n.ItemName;
+                        property.Prefix.text = itemRecord.Name;
                         property.Value.text = stringBuilder.AppendColorCode(color, controller.NeedItemFormat.Format(possessionItemAmount, n.Amount)).ToString();
                     })
                 );
