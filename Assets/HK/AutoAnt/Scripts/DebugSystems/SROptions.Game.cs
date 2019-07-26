@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UniRx;
 using HK.AutoAnt;
+using HK.AutoAnt.SaveData.Internal;
+using UnityEngine.SceneManagement;
 using UnityEngine.Advertisements;
 
 // #if AA_DEBUG
@@ -15,6 +17,29 @@ using UnityEngine.Advertisements;
 /// </summary>
 public partial class SROptions
 {
+    [Sort(1000)]
+    [Category("Game/System")]
+    [DisplayName("セーブデータ削除")]
+    public void DeleteSaveData()
+    {
+        SRDebug.Instance.HideDebugPanel();
+        var popup = PopupManager.RequestSimplePopup().Initialize("本当に削除しますか？", "OK", "Cancel");
+        popup.DecideButton.OnClickAsObservable()
+            .Subscribe(_ =>
+            {
+                ES3.DeleteFile();
+                SceneManager.LoadScene("Game");
+            })
+            .AddTo(popup);
+        popup.CancelButton.OnClickAsObservable()
+            .Subscribe(_ =>
+            {
+                popup.Close();
+            })
+            .AddTo(popup);
+        popup.Open();
+    }
+
     [Sort(1000)]
     [Category("Game")]
     [DisplayName("3秒後にローカル通知")]

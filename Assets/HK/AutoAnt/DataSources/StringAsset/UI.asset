@@ -18,7 +18,7 @@ MonoBehaviour:
       en: 
     guid: 65d51f7d-b2d2-4668-848e-3b79864930c3
   - value:
-      ja: "{0}\u5186"
+      ja: '{0}<size=15>G</size>'
       en: 
     guid: f7054202-e708-4110-bbbd-d225828c3cd9
   - value:
@@ -69,6 +69,14 @@ MonoBehaviour:
       ja: OK
       en: 
     guid: 1beb83dc-5df1-49bc-9ae8-8270ab59a33b
+  - value:
+      ja: "{0}\xD7{0}"
+      en: 
+    guid: c8d4dd2e-7ca3-4e10-9cb7-b50bb0784086
+  - value:
+      ja: <sprite="AutoAntEmoji" name="money">{0}
+      en: 
+    guid: d869bf9e-515d-492f-a78e-8b9c7952e653
   - value:
       ja: "\u571F\u5730\u304C\u3042\u308A\u307E\u305B\u3093\uFF01"
       en: 
