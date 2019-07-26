@@ -17,9 +17,6 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private TextMeshProUGUI value = null;
 
-        [SerializeField]
-        private StringAsset.Finder format = null;
-
         private double cachedMoney;
 
         void Awake()
@@ -34,7 +31,7 @@ namespace HK.AutoAnt.UI
                     }
 
                     _this.cachedMoney = money;
-                    _this.value.text = _this.format.Format(money.ToReadableString("###.00"));
+                    _this.value.text = money.ToReadableString("###.00");
                 })
                 .AddTo(this);
         }

@@ -18,7 +18,7 @@ MonoBehaviour:
       en: 
     guid: 65d51f7d-b2d2-4668-848e-3b79864930c3
   - value:
-      ja: "{0}\u5186"
+      ja: '{0}<size=15>G</size>'
       en: 
     guid: f7054202-e708-4110-bbbd-d225828c3cd9
   - value:

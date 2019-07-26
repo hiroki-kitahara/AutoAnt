@@ -17,9 +17,6 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private TextMeshProUGUI value = null;
 
-        [SerializeField]
-        private StringAsset.Finder format = null;
-
         private double cachedPopulation;
 
         void Start()
@@ -43,7 +40,7 @@ namespace HK.AutoAnt.UI
 
         private void UpdateValue(double value)
         {
-            this.value.text = this.format.Format(value.ToReadableString("###.00"));
+            this.value.text = value.ToReadableString("###.00");
         }
     }
 }
