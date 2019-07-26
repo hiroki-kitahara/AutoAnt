@@ -18,24 +18,6 @@ namespace HK.AutoAnt.GameControllers
     public sealed class UserUpdater : MonoBehaviour
     {
         /// <summary>
-        /// 各パラメータの更新を行う間隔（秒）
-        /// </summary>
-        [SerializeField]
-        private float parameterUpdateInterval = 1.0f;
-
-        /// <summary>
-        /// 放置した時間の制限値
-        /// </summary>
-        [SerializeField]
-        private double leftAloneProcessSeconds = 100.0f;
-
-        [SerializeField]
-        private StringAsset.Finder leftAloneLocalNotificationTitle = null;
-
-        [SerializeField]
-        private StringAsset.Finder leftAloneLocalNotificationMessage = null;
-
-        /// <summary>
         /// 街の人口を加算する要素リスト
         /// </summary>
         private readonly List<IAddTownPopulation> addTownPopulations = new List<IAddTownPopulation>();
@@ -45,10 +27,8 @@ namespace HK.AutoAnt.GameControllers
             Broker.Global.Receive<GameStart>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.RegisterIntervalUpdate(x.GameSystem);
                     _this.RegisterUpdate(x.GameSystem);
                     _this.StartObserveUnlockCellEvents(x.GameSystem);
-                    _this.OnLeftAlone();
                 })
                 .AddTo(this);
 
@@ -56,21 +36,13 @@ namespace HK.AutoAnt.GameControllers
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     x.GameSystem.User.History.Game.LastDateTime = DateTime.Now;
-                    _this.RegisterLeftAloneLocalNotification();
                 })
                 .AddTo(this);
-
+                
             Broker.Global.Receive<GamePause>()
                 .SubscribeWithState(this, (_, _this) =>
                 {
                     GameSystem.Instance.User.History.Game.LastDateTime = DateTime.Now;
-                })
-                .AddTo(this);
-
-            Broker.Global.Receive<GameResume>()
-                .SubscribeWithState(this, (_, _this) =>
-                {
-                    _this.OnLeftAlone();
                 })
                 .AddTo(this);
 
@@ -92,18 +64,6 @@ namespace HK.AutoAnt.GameControllers
         }
 
         /// <summary>
-        /// パラメータ更新処理
-        /// </summary>
-        private void RegisterIntervalUpdate(GameSystem gameSystem)
-        {
-            Observable.Interval(TimeSpan.FromSeconds(this.parameterUpdateInterval))
-                .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
-                {
-                })
-                .AddTo(this);
-        }
-
-        /// <summary>
         /// 毎フレーム実行される更新処理
         /// </summary>
         private void RegisterUpdate(GameSystem gameSystem)
@@ -118,29 +78,9 @@ namespace HK.AutoAnt.GameControllers
         }
 
         /// <summary>
-        /// 放置されていた時間分の処理を行う
-        /// </summary>
-        private void OnLeftAlone()
-        {
-            var gameSystem = GameSystem.Instance;
-            var lastDateTime = gameSystem.User.History.Game.LastDateTime;
-            if(DateTime.MinValue == lastDateTime)
-            {
-                return;
-            }
-
-            var span = Math.Min((DateTime.Now - lastDateTime).TotalSeconds, this.leftAloneProcessSeconds);
-            var updatableCount = Math.Floor(span / this.parameterUpdateInterval);
-            for (var i = 0; i < updatableCount; i++)
-            {
-                this.UpdateParameter(this.parameterUpdateInterval);
-            }
-        }
-
-        /// <summary>
         /// パラメータを更新する
         /// </summary>
-        private void UpdateParameter(float deltaTime)
+        public void UpdateParameter(float deltaTime)
         {
             var gameSystem = GameSystem.Instance;
 
@@ -176,18 +116,6 @@ namespace HK.AutoAnt.GameControllers
                     }
                 })
                 .AddTo(gameSystem);
-        }
-
-        /// <summary>
-        /// 放置可能な時間後にローカル通知を登録する
-        /// </summary>
-        private void RegisterLeftAloneLocalNotification()
-        {
-            AutoAntSystem.LocalNotification.Register(
-                this.leftAloneLocalNotificationTitle.Get,
-                this.leftAloneLocalNotificationMessage.Get,
-                (int)this.leftAloneProcessSeconds
-            );
         }
     }
 }
