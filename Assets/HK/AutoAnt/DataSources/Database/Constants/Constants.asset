@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cell: {fileID: 11400000, guid: 75633341360b04393b48138924d58603, type: 2}
   housing: {fileID: 11400000, guid: 12e383f3bdd864ddca2eef6913338912, type: 2}
+  color: {fileID: 11400000, guid: 80f1899d826ae4e37b530c45bde0a514, type: 2}
