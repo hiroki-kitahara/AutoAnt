@@ -24,8 +24,21 @@ namespace HK.AutoAnt.CellControllers.Events
     public abstract class CellEvent : ScriptableObject, ICellEvent
     {
         [SerializeField]
-        private StringAsset.Finder eventName = null;
-        public string EventName => this.cachedRecord.EventData.eventName.Get;
+        protected StringAsset.Finder eventName = null;
+        public string EventName
+        {
+            get
+            {
+                if(this.cachedRecord == null || this.cachedRecord.EventData == null)
+                {
+                    return this.eventName.Get;
+                }
+                else
+                {
+                    return this.cachedRecord.EventData.eventName.Get;
+                }
+            }
+        }
 
         [SerializeField]
         protected Constants.CellEventCategory category;
@@ -52,6 +65,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
         [SerializeField]
         protected GameObject gimmickPrefab = null;
+        public GameObject GimmickPrefab => this.gimmickPrefab;
 
         [SerializeField]
         protected TweenAnimationAttacher visibleAnimation = null;
@@ -89,6 +103,10 @@ namespace HK.AutoAnt.CellControllers.Events
         public abstract void AttachDetailsPopup(CellEventDetailsPopup popup);
 
         public abstract void UpdateDetailsPopup(CellEventDetailsPopup popup);
+
+        public abstract void AttachFooterSelectCellEvent(FooterSelectBuildingController controller);
+
+        public abstract void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller);
 
 #if UNITY_EDITOR
         protected virtual void OnValidate()

@@ -70,6 +70,14 @@ MonoBehaviour:
       en: 
     guid: 1beb83dc-5df1-49bc-9ae8-8270ab59a33b
   - value:
+      ja: "{0}\xD7{0}"
+      en: 
+    guid: c8d4dd2e-7ca3-4e10-9cb7-b50bb0784086
+  - value:
+      ja: <sprite="AutoAntEmoji" name="money">{0}
+      en: 
+    guid: d869bf9e-515d-492f-a78e-8b9c7952e653
+  - value:
       ja: "\u571F\u5730\u304C\u3042\u308A\u307E\u305B\u3093\uFF01"
       en: 
     guid: 9e8a0fcc-a657-40b7-b662-6065b22009c1
@@ -97,3 +105,23 @@ MonoBehaviour:
       ja: CANCEL
       en: 
     guid: a954cf32-a2a1-4520-8794-a7265cbb159f
+  - value:
+      ja: "\u4EE5\u4E0B\u3092\u7372\u5F97\u3057\u307E\u3057\u305F\uFF01"
+      en: 
+    guid: 9c52c5c2-30f8-4f86-a909-778929bab537
+  - value:
+      ja: "\u5E83\u544A\u3092\u898B\u308B({0}\u500D)"
+      en: 
+    guid: caf0c421-22c4-4733-963a-07daa4247a81
+  - value:
+      ja: CANCEL
+      en: 
+    guid: 5b8c7b3b-361f-4571-b5be-c833dc152631
+  - value:
+      ja: AutoAnt
+      en: 
+    guid: 3d7faeff-b87a-499c-ae14-8cf49c995e16
+  - value:
+      ja: "\u7A0E\u91D1\u304C\u8CAF\u307E\u308A\u307E\u3057\u305F\uFF01"
+      en: 
+    guid: 46e68196-a566-4df0-b917-ae2f15535d41

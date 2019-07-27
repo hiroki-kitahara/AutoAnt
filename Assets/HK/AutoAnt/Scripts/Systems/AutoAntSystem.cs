@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.AudioSystems;
+﻿using HK.AutoAnt.Advertisements;
+using HK.AutoAnt.AudioSystems;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -12,7 +13,13 @@ namespace HK.AutoAnt.Systems
         [SerializeField]
         private AudioSystem audioSystem = null;
         public static AudioSystem Audio { get; private set; }
-        
+
+        public static readonly LocalNotifiaction LocalNotification = new LocalNotifiaction();
+
+        [SerializeField]
+        private AutoAntAdvertisement advertisement = null;
+        public static AutoAntAdvertisement Advertisement { get; private set; }
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Setup()
         {
@@ -26,6 +33,14 @@ namespace HK.AutoAnt.Systems
             Assert.IsNotNull(system);
 
             Audio = system.audioSystem;
+            Advertisement = system.advertisement;
+
+            AutoAntSystem.LocalNotification.ClearBadge();
+        }
+
+        void OnApplicationFocus(bool status)
+        {
+            AutoAntSystem.LocalNotification.ClearBadge();
         }
     }
 }

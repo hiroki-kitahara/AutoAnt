@@ -20,6 +20,11 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
         [SerializeField]
         private Renderer productRenderer = null;
 
+        void Awake()
+        {
+            this.Hidden();
+        }
+
         public void Attach(CellEvent cellEvent)
         {
             var productHolder = cellEvent as IProductHolder;
