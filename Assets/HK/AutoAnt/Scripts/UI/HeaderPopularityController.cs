@@ -17,9 +17,6 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private TextMeshProUGUI value = null;
 
-        [SerializeField]
-        private StringAsset.Finder format = null;
-
         private double cachedPopularity;
 
         void Start()
@@ -34,7 +31,7 @@ namespace HK.AutoAnt.UI
                     }
 
                     _this.cachedPopularity = popularity;
-                    _this.value.text = _this.format.Format(popularity.ToReadableString("###.00"));
+                    _this.value.text = popularity.ToReadableString("###.00");
                 })
                 .AddTo(this);
         }

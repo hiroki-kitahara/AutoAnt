@@ -42,6 +42,10 @@ namespace HK.AutoAnt.UserControllers
         private UnlockCellEvent unlockCellEvent = null;
         public UnlockCellEvent UnlockCellEvent => this.unlockCellEvent;
 
+        [SerializeField]
+        private Option option = null;
+        public Option Option => this.option;
+
         public SerializableUser GetSerializable()
         {
             return new SerializableUser()
@@ -49,8 +53,9 @@ namespace HK.AutoAnt.UserControllers
                 Wallet = this.Wallet.GetSerializable(),
                 Inventory = this.Inventory,
                 History = this.History,
-                UnlockCellEvent = this.UnlockCellEvent
-            };
+                UnlockCellEvent = this.UnlockCellEvent,
+                Option = this.Option.GetSerializable()
+        };
         }
 
         void ISavable.Initialize()
@@ -63,6 +68,7 @@ namespace HK.AutoAnt.UserControllers
                 this.inventory = serializableData.Inventory;
                 this.history = serializableData.History;
                 this.unlockCellEvent = serializableData.UnlockCellEvent;
+                this.option.Deserialize(serializableData.Option);
             }
         }
 

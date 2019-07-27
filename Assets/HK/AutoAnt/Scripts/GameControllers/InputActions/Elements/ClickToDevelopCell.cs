@@ -74,7 +74,7 @@ namespace HK.AutoAnt.GameControllers
 
             var se = this.gameSystem.Constants.Cell.DevelopSE;
             Assert.IsNotNull(se);
-            AutoAntSystem.Audio.SE.Play(se);
+            GameSystem.Instance.SEController.Play(se);
         }
     }
 }

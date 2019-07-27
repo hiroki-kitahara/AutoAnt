@@ -23,40 +23,28 @@ MonoBehaviour:
     cost:
       money: 1500
       needItems:
-      - itemName:
-          target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-          value: "\u85AA"
-          guid: 456e6773-1a7f-4c8c-92c0-08bd73b674ba
+      - itemId: 100000
         amount: 2
   - id: 100000
     level: 2
     cost:
       money: 2000
       needItems:
-      - itemName:
-          target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-          value: "\u85AA"
-          guid: 456e6773-1a7f-4c8c-92c0-08bd73b674ba
+      - itemId: 100000
         amount: 4
   - id: 100000
     level: 3
     cost:
       money: 2500
       needItems:
-      - itemName:
-          target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-          value: "\u85AA"
-          guid: 456e6773-1a7f-4c8c-92c0-08bd73b674ba
+      - itemId: 100000
         amount: 8
   - id: 100000
     level: 4
     cost:
       money: 3000
       needItems:
-      - itemName:
-          target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-          value: "\u85AA"
-          guid: 456e6773-1a7f-4c8c-92c0-08bd73b674ba
+      - itemId: 100000
         amount: 12
   - id: 101000
     level: 0
@@ -143,38 +131,26 @@ MonoBehaviour:
     cost:
       money: 15000
       needItems:
-      - itemName:
-          target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-          value: "\u85AA"
-          guid: 456e6773-1a7f-4c8c-92c0-08bd73b674ba
+      - itemId: 100000
         amount: 4
   - id: 100001
     level: 2
     cost:
       money: 20000
       needItems:
-      - itemName:
-          target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-          value: "\u85AA"
-          guid: 456e6773-1a7f-4c8c-92c0-08bd73b674ba
+      - itemId: 100000
         amount: 8
   - id: 100001
     level: 3
     cost:
       money: 25000
       needItems:
-      - itemName:
-          target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-          value: "\u85AA"
-          guid: 456e6773-1a7f-4c8c-92c0-08bd73b674ba
+      - itemId: 100000
         amount: 16
   - id: 100001
     level: 4
     cost:
       money: 30000
       needItems:
-      - itemName:
-          target: {fileID: 11400000, guid: 1c726c3b488184fe7841f2d762b122d3, type: 2}
-          value: "\u85AA"
-          guid: 456e6773-1a7f-4c8c-92c0-08bd73b674ba
+      - itemId: 100000
         amount: 24

@@ -40,6 +40,10 @@ namespace HK.AutoAnt.Systems
         private Cameraman cameraman = null;
         public Cameraman Cameraman => this.cameraman;
 
+        [SerializeField]
+        private GameSEController seController = null;
+        public GameSEController SEController => this.seController;
+
         private ISavable[] Savables => new ISavable[]
         {
             this.User,
@@ -66,6 +70,18 @@ namespace HK.AutoAnt.Systems
         {
             Assert.IsNotNull(instance);
             instance = null;
+        }
+
+        void OnApplicationPause(bool status)
+        {
+            if(status)
+            {
+                Broker.Global.Publish(GamePause.Get());
+            }
+            else
+            {
+                Broker.Global.Publish(GameResume.Get());
+            }
         }
 
         void OnApplicationQuit()

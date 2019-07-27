@@ -48,7 +48,7 @@ namespace HK.AutoAnt.CellControllers
                 var json = JsonUtility.FromJson<NeedItem.RawData.Json>(data.Items);
                 this.needItems = json
                     .NeedItems
-                    .Select(x => new NeedItem(x.ItemName, x.Amount)).ToArray();
+                    .Select(x => new NeedItem(x.ItemId, x.Amount)).ToArray();
             }
         }
 #endif
@@ -90,8 +90,8 @@ namespace HK.AutoAnt.CellControllers
             /// アイテムの名前
             /// </summary>
             [SerializeField]
-            private StringAsset.Finder itemName = null;
-            public string ItemName => this.itemName.Get;
+            private int itemId = 0;
+            public int ItemId => this.itemId;
 
             /// <summary>
             /// 必要な量
@@ -101,10 +101,9 @@ namespace HK.AutoAnt.CellControllers
             public int Amount => this.amount;
 
 #if UNITY_EDITOR
-            public NeedItem(string itemName, int amount)
+            public NeedItem(int itemId, int amount)
             {
-                var stringAsset = AssetDatabase.LoadAssetAtPath<StringAsset>("Assets/HK/AutoAnt/DataSources/StringAsset/Item.asset");
-                this.itemName = stringAsset.CreateFinder(itemName);
+                this.itemId = itemId;
                 this.amount = amount;
             }
 #endif
@@ -114,7 +113,7 @@ namespace HK.AutoAnt.CellControllers
             /// </summary>
             public bool IsEnough(Inventory inventory, MasterDataItem masterData)
             {
-                var record = masterData.Records.Get(this.itemName.Get);
+                var record = masterData.Records.Get(this.itemId);
                 if(!inventory.Items.ContainsKey(record.Id))
                 {
                     return false;
@@ -129,7 +128,7 @@ namespace HK.AutoAnt.CellControllers
             public void Consume(Inventory inventory, MasterDataItem masterData)
             {
                 Assert.IsTrue(this.IsEnough(inventory, masterData));
-                var record = masterData.Records.Get(this.itemName.Get);
+                var record = masterData.Records.Get(this.itemId);
 
                 inventory.AddItem(record, -this.amount);
             }
@@ -137,7 +136,7 @@ namespace HK.AutoAnt.CellControllers
             [Serializable]
             public class RawData
             {
-                public string ItemName;
+                public int ItemId;
                 public int Amount;
 
                 public class Json
