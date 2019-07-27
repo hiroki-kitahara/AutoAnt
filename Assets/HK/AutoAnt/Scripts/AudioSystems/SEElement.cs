@@ -11,6 +11,7 @@ namespace HK.AutoAnt.AudioSystems
     {
         [SerializeField]
         private AudioSource audioSource = null;
+        public AudioSource AudioSource => this.audioSource;
 
         private static readonly ObjectPoolBundle<SEElement> pools = new ObjectPoolBundle<SEElement>();
 

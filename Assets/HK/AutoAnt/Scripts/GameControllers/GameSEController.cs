@@ -8,26 +8,23 @@ using UnityEngine.Assertions;
 namespace HK.AutoAnt.GameControllers
 {
     /// <summary>
-    /// ゲームで利用するBGMを制御するクラス
+    /// ゲームで利用するSEを制御するクラス
     /// </summary>
-    public sealed class GameBGMController : MonoBehaviour
+    public sealed class GameSEController : MonoBehaviour
     {
-        [SerializeField]
-        private BGMController.ClipBundle clipBundle = null;
-
         void Awake()
         {
-            GameSystem.Instance.User.Option.BGMVolume
+            GameSystem.Instance.User.Option.SEVolume
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    AutoAntSystem.Audio.BGM.AudioSource.volume = x;
+                    AutoAntSystem.Audio.SE.SetVolume(x);
                 })
                 .AddTo(this);
         }
 
-        void Start()
+        public void Play(AudioClip clip)
         {
-            AutoAntSystem.Audio.BGM.Play(this.clipBundle);
+            AutoAntSystem.Audio.SE.Play(clip, GameSystem.Instance.User.Option.SEVolume.Value);
         }
     }
 }
