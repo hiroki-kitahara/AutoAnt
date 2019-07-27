@@ -16,8 +16,15 @@ namespace HK.AutoAnt.CameraControllers
         [SerializeField]
         private float offsetCellEventDetailsPopupFocus = 0.0f;
 
+        [SerializeField]
+        private float zoomMin = 1.0f;
+
+        [SerializeField]
+        private float zoomMax = 5.0f;
+
         void Awake()
         {
+            // CellEventDetailsPopupが開いた時に指定されたセルイベントにカメラをフォーカスさせる
             Broker.Global.Receive<PopupEvents.StartOpen>()
                 .Select(x => x.Popup as CellEventDetailsPopup)
                 .Where(x => x != null)
@@ -32,6 +39,13 @@ namespace HK.AutoAnt.CameraControllers
                     cameraman.Position = new Vector3(position.x, 0.0f, position.z) + offset;
                 })
                 .AddTo(this);
+
+            Broker.Global.Receive<RequestCameraZoom>()
+                .SubscribeWithState(this, (x, _this) =>
+                {
+                    _this.Zoom(x.Value);
+                })
+                .AddTo(this);
         }
         public void Move(Vector2 deltaPosition)
         {
@@ -43,15 +57,20 @@ namespace HK.AutoAnt.CameraControllers
             cameraman.Position -= cameraman.ToFirstPersonVector(deltaPosition.y * ratioY, deltaPosition.x * ratioX);
         }
 
-        public void Zoom(float velocity)
+        public void Zoom(float value)
         {
+            value = Mathf.Clamp01(value);
+            value = 1.0f - value;
             var cameraman = GameSystem.Instance.Cameraman;
-            // ズームの限界以上は動かさない
-            if(cameraman.Size <= velocity && velocity > 0f)
-            {
-                return;
-            }
-            cameraman.Size -= velocity;
+            cameraman.Size = ((this.zoomMax - this.zoomMin) * value) + this.zoomMin;
+        }
+
+        public void ZoomOnVelocity(float velocity)
+        {
+            var currentSize = GameSystem.Instance.Cameraman.Size;
+            var normalizedSize = (currentSize - this.zoomMin) / (this.zoomMax - this.zoomMin);
+            var result = 1.0f - (normalizedSize - velocity);
+            this.Zoom(result);
         }
     }
 }
