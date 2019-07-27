@@ -17,13 +17,12 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private TextMeshProUGUI value = null;
 
-        [SerializeField]
-        private StringAsset.Finder format = null;
-
         private double cachedPopulation;
 
         void Start()
         {
+            this.UpdateValue(GameSystem.Instance.User.Town.Population.Value);
+
             GameSystem.Instance.UpdateAsObservable()
                 .SubscribeWithState(this, (_, _this) =>
                 {
@@ -34,9 +33,14 @@ namespace HK.AutoAnt.UI
                     }
 
                     _this.cachedPopulation = population;
-                    _this.value.text = _this.format.Format(population.ToReadableString("###.00"));
+                    _this.UpdateValue(population);
                 })
                 .AddTo(this);
+        }
+
+        private void UpdateValue(double value)
+        {
+            this.value.text = value.ToReadableString("###.00");
         }
     }
 }

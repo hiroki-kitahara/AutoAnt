@@ -32,10 +32,29 @@ public partial class SROptions
     public void AcquireItemAll()
     {
         var masterData = GameSystem.Instance.MasterData.Item;
-        foreach(var record in masterData.Records)
+        foreach (var record in masterData.Records)
         {
             GameSystem.Instance.User.Inventory.AddItem(record, 10);
         }
+    }
+
+    [Category(UserCategory)]
+    [DisplayName("全部アンロック")]
+    public void UnlockAll()
+    {
+        var unlockCellEvent = GameSystem.Instance.User.UnlockCellEvent;
+        var masterData = GameSystem.Instance.MasterData.CellEvent;
+        foreach(var record in masterData.Records)
+        {
+            if(unlockCellEvent.Elements.Contains(record.EventData.Id))
+            {
+                continue;
+            }
+
+            unlockCellEvent.Elements.Add(record.EventData.Id);
+        }
+
+        Debug.Log("全てのセルイベントをアンロックしました");
     }
 
     [Category(UserCategory)]

@@ -36,12 +36,12 @@ namespace HK.AutoAnt.UI
                 {
                     Assert.IsNotNull(_this.record);
 
-                    Broker.Global.Publish(RequestBuildingMode.Get(_this.record.Id));
+                    Broker.Global.Publish(RequestBuildingMode.Get(_this.record));
                 })
                 .AddTo(this);
         }
 
-        public FooterSelectBuildingElement Clone(MasterDataCellEvent.Record record)
+        public FooterSelectBuildingElement Rent(MasterDataCellEvent.Record record)
         {
             var pool = pools.Get(this);
             var clone = pool.Rent();
