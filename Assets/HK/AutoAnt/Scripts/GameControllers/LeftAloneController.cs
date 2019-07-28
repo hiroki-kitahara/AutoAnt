@@ -85,7 +85,7 @@ namespace HK.AutoAnt.GameControllers
         private void OnGameLeft()
         {
             var gameHistory = GameSystem.Instance.User.History.Game;
-            if (UnityEngine.Advertisements.Advertisement.isShowing)
+            if (AutoAntSystem.Advertisement.IsShow)
             {
                 gameHistory.GameLeftCase = Constants.GameLeftCase.ByAdvertisement;
             }
