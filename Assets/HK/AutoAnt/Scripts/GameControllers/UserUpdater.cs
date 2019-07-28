@@ -32,20 +32,6 @@ namespace HK.AutoAnt.GameControllers
                 })
                 .AddTo(this);
 
-            Broker.Global.Receive<GameEnd>()
-                .SubscribeWithState(this, (x, _this) =>
-                {
-                    _this.OnGameLeft();
-                })
-                .AddTo(this);
-                
-            Broker.Global.Receive<GamePause>()
-                .SubscribeWithState(this, (_, _this) =>
-                {
-                    _this.OnGameLeft();
-                })
-                .AddTo(this);
-
             Broker.Global.Receive<AddedCellEvent>()
                 .Where(x => x.CellEvent is IAddTownPopulation)
                 .SubscribeWithState(this, (x, _this) =>
@@ -116,24 +102,6 @@ namespace HK.AutoAnt.GameControllers
                     }
                 })
                 .AddTo(gameSystem);
-        }
-
-        /// <summary>
-        /// ゲームを離れた際の処理
-        /// </summary>
-        private void OnGameLeft()
-        {
-            var gameHistory = GameSystem.Instance .User.History.Game;
-            if(UnityEngine.Advertisements.Advertisement.isShowing)
-            {
-                gameHistory.GameLeftCase = Constants.GameLeftCase.ByAdvertisement;
-            }
-            else
-            {
-                gameHistory.GameLeftCase = Constants.GameLeftCase.Normal;
-            }
-
-            gameHistory.LastDateTime = DateTime.Now;
         }
     }
 }

@@ -58,6 +58,15 @@ namespace HK.AutoAnt.GameControllers
             Broker.Global.Receive<GameEnd>()
                 .SubscribeWithState(this, (_, _this) =>
                 {
+                    _this.OnGameLeft();
+                    _this.RegisterLeftAloneLocalNotification();
+                })
+                .AddTo(this);
+
+            Broker.Global.Receive<GamePause>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.OnGameLeft();
                     _this.RegisterLeftAloneLocalNotification();
                 })
                 .AddTo(this);
@@ -68,6 +77,24 @@ namespace HK.AutoAnt.GameControllers
                     _this.OnLeftAlone();
                 })
                 .AddTo(this);
+        }
+
+        /// <summary>
+        /// ゲームを離れた際の処理
+        /// </summary>
+        private void OnGameLeft()
+        {
+            var gameHistory = GameSystem.Instance.User.History.Game;
+            if (UnityEngine.Advertisements.Advertisement.isShowing)
+            {
+                gameHistory.GameLeftCase = Constants.GameLeftCase.ByAdvertisement;
+            }
+            else
+            {
+                gameHistory.GameLeftCase = Constants.GameLeftCase.Normal;
+            }
+
+            gameHistory.LastDateTime = DateTime.Now;
         }
 
         /// <summary>
