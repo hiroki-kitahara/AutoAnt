@@ -35,14 +35,14 @@ namespace HK.AutoAnt.GameControllers
             Broker.Global.Receive<GameEnd>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    x.GameSystem.User.History.Game.LastDateTime = DateTime.Now;
+                    _this.OnGameLeft();
                 })
                 .AddTo(this);
                 
             Broker.Global.Receive<GamePause>()
                 .SubscribeWithState(this, (_, _this) =>
                 {
-                    GameSystem.Instance.User.History.Game.LastDateTime = DateTime.Now;
+                    _this.OnGameLeft();
                 })
                 .AddTo(this);
 
@@ -116,6 +116,24 @@ namespace HK.AutoAnt.GameControllers
                     }
                 })
                 .AddTo(gameSystem);
+        }
+
+        /// <summary>
+        /// ゲームを離れた際の処理
+        /// </summary>
+        private void OnGameLeft()
+        {
+            var gameHistory = GameSystem.Instance .User.History.Game;
+            if(UnityEngine.Advertisements.Advertisement.isShowing)
+            {
+                gameHistory.GameLeftCase = Constants.GameLeftCase.ByAdvertisement;
+            }
+            else
+            {
+                gameHistory.GameLeftCase = Constants.GameLeftCase.Normal;
+            }
+
+            gameHistory.LastDateTime = DateTime.Now;
         }
     }
 }
