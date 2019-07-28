@@ -76,6 +76,13 @@ namespace HK.AutoAnt.GameControllers
         private void OnLeftAlone()
         {
             var user = GameSystem.Instance.User;
+
+            // 広告閲覧によりゲームから離れていたら何もしない
+            if(user.History.Game.GameLeftCase == Constants.GameLeftCase.ByAdvertisement)
+            {
+                return;
+            }
+
             var lastDateTime = user.History.Game.LastDateTime;
             if (DateTime.MinValue == lastDateTime)
             {
