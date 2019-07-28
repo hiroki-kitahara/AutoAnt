@@ -15,7 +15,7 @@ MonoBehaviour:
   templatePath: HK/AutoAnt/Editor/QuickSheetTemplates/Id
   scriptFilePath: HK/AutoAnt/Scripts/Database/Runtime
   editorScriptFilePath: HK/AutoAnt/Scripts/Database/Editor
-  sheetName: AutoAnt
+  sheetName: AutoAntFactory
   workSheetName: RoadLevelParameter
   scriptableObjectName: MasterDataRoadLevelParameter
   columnHeaderList:
