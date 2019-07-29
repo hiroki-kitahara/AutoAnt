@@ -102,14 +102,6 @@ namespace HK.AutoAnt.CellControllers.Events
             }
         }
 
-        public override void AttachDetailsPopup(CellEventDetailsPopup popup)
-        {
-        }
-
-        public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
-        {
-        }
-
         public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
         {
             this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
