@@ -22,7 +22,12 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - 人口を増やす
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Housing")]
-    public sealed class Housing : CellEvent, IAddTownPopulation, ILevelUpEvent, IHousing, IReceiveBuff
+    public sealed class Housing : CellEvent,
+        IAddTownPopulation,
+        ILevelUpEvent,
+        IHousing,
+        IReceiveBuff,
+        IOpenCellEventDetailsPopup
     {
         /// <summary>
         /// 保持している人口
@@ -99,6 +104,23 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public override void AttachDetailsPopup(CellEventDetailsPopup popup)
         {
+        }
+
+        public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
+        {
+        }
+
+        public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
+        {
+            this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
+        }
+
+        public override void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller)
+        {
+        }
+
+        void IOpenCellEventDetailsPopup.Attach(CellEventDetailsPopup popup)
+        {
             var population = popup.AddProperty(property =>
             {
                 property.Prefix.text = popup.Population.Get;
@@ -121,21 +143,12 @@ namespace HK.AutoAnt.CellControllers.Events
             this.AttachDetailsPopup(popup, this.gameSystem);
         }
 
-        public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
+        void IOpenCellEventDetailsPopup.Update(CellEventDetailsPopup popup)
         {
             popup.ApplyTitle(this.EventName, this.Level);
             popup.UpdateProperties();
             popup.ClearLevelUpCosts();
             this.AttachDetailsPopup(popup, this.gameSystem);
-        }
-
-        public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
-        {
-            this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
-        }
-
-        public override void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller)
-        {
         }
     }
 }
