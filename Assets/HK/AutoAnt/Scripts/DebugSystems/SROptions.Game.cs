@@ -122,7 +122,7 @@ public partial class SROptions
             var cell = cellManager.Mapper.Cell.Map[id];
             if (cellManager.Mapper.CellEvent.Map.ContainsKey(id))
             {
-                cellManager.EventGenerator.Erase(cell);
+                cellManager.EventGenerator.Remove(cell);
             }
 
             cellManager.EventGenerator.Generate(cell, housingId, false);
@@ -143,7 +143,7 @@ public partial class SROptions
             var cell = cellManager.Mapper.Cell.Map[id];
             if (cellManager.Mapper.CellEvent.Map.ContainsKey(id))
             {
-                cellManager.EventGenerator.Erase(cell);
+                cellManager.EventGenerator.Remove(cell);
             }
 
             cellManager.EventGenerator.Generate(cell, facilityId, false);
