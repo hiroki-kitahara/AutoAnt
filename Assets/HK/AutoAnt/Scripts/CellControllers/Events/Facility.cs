@@ -167,14 +167,6 @@ namespace HK.AutoAnt.CellControllers.Events
 
             this.Broker.Publish(AcquiredFacilityProduct.Get(this));
         }
-
-        public override void AttachDetailsPopup(CellEventDetailsPopup popup)
-        {
-        }
-
-        public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
-        {
-        }
         
         void IReceiveBuff.AddBuff(float value)
         {
