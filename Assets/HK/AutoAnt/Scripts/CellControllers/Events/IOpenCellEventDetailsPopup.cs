@@ -7,7 +7,7 @@ namespace HK.AutoAnt.CellControllers.Events
     /// <summary>
     /// <see cref="CellEventDetailsPopup"/>を開くことが出来るセルイベントのインターフェイス
     /// </summary>
-    public interface IOpenCellEventDetailsPopup
+    public interface IOpenCellEventDetailsPopup : ICellEvent
     {
         /// <summary>
         /// アタッチする
