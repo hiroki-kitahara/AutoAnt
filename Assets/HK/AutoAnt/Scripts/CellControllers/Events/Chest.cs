@@ -24,21 +24,7 @@ namespace HK.AutoAnt.CellControllers.Events
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Chest")]
     public sealed class Chest : CellEvent
     {
-        public override void AttachDetailsPopup(CellEventDetailsPopup popup)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnClick(Cell owner)
-        {
-        }
-
-        public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
         {
             throw new System.NotImplementedException();
         }
@@ -46,6 +32,10 @@ namespace HK.AutoAnt.CellControllers.Events
         public override void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller)
         {
             throw new System.NotImplementedException();
+        }
+
+        public override void OnClick(Cell owner)
+        {
         }
     }
 }
