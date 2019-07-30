@@ -1,16 +1,6 @@
-﻿using HK.AutoAnt.Database;
-using HK.AutoAnt.Extensions;
-using HK.AutoAnt.GameControllers;
-using HK.AutoAnt.Systems;
-using HK.AutoAnt.UserControllers;
-using UnityEngine;
-using UnityEngine.Assertions;
-using HK.AutoAnt.EffectSystems;
-using HK.Framework.EventSystems;
-using HK.AutoAnt.Events;
+﻿using UnityEngine;
 using HK.AutoAnt.UI;
-using UniRx.Triggers;
-using UniRx;
+using System.Collections.Generic;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -24,6 +14,8 @@ namespace HK.AutoAnt.CellControllers.Events
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Chest")]
     public sealed class Chest : CellEvent
     {
+        public List<int> items { get; private set; } = new List<int>();
+        
         public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
         {
             throw new System.NotImplementedException();
