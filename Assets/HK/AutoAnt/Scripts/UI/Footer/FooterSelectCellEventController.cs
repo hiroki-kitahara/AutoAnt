@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
@@ -92,6 +93,7 @@ namespace HK.AutoAnt.UI
         {
             Broker.Global.Receive<RequestBuildingMode>()
                 .Where(_ => this.gameObject.activeInHierarchy)
+                .Where(x => x.BuildingCellEventRecord.EventData is IFooterSelectCellEvent)
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     this.selectedBuildingRoot.SetActive(true);
@@ -100,7 +102,9 @@ namespace HK.AutoAnt.UI
                         Destroy(p.gameObject);
                     }
                     this.properties.Clear();
-                    x.BuildingCellEventRecord.EventData.AttachFooterSelectCellEvent(_this);
+                    
+                    var footerSelectCellEvent = (IFooterSelectCellEvent)x.BuildingCellEventRecord.EventData;
+                    footerSelectCellEvent.Attach(_this);
                 })
                 .AddTo(this);
         }
