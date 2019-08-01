@@ -117,7 +117,7 @@ namespace HK.AutoAnt.Extensions
             controller.SetMoney(stringBuilder, gameSystem.User.Wallet.Money, levelUpCostRecord.Cost.Money);
             controller.CreateGimmick(self.GimmickPrefab);
 
-            var properties = new List<FooterSelectedBuildingProperty>();
+            var properties = new List<Property>();
 
             // アイテムを表示
             foreach (var n in levelUpCostRecord.Cost.NeedItems)
