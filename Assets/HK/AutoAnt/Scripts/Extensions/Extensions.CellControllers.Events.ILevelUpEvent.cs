@@ -7,6 +7,7 @@ using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.UI;
+using HK.AutoAnt.UI.Elements;
 using HK.AutoAnt.UserControllers;
 using HK.Framework.EventSystems;
 using UniRx;
@@ -65,7 +66,7 @@ namespace HK.AutoAnt.Extensions
                 return;
             }
 
-            var properties = new List<CellEventDetailsPopupProperty>();
+            var properties = new List<Property>();
 
             // お金を表示
             properties.Add(

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Extensions;
+using HK.AutoAnt.UI.Elements;
 using HK.Framework.Text;
 using TMPro;
 using UnityEngine;
@@ -39,7 +40,7 @@ namespace HK.AutoAnt.UI
         private Transform levelUpCostParent = null;
 
         [SerializeField]
-        private CellEventDetailsPopupProperty propertyPrefab = null;
+        private Property propertyPrefab = null;
 
         [SerializeField]
         private StringAsset.Finder cellEventNameAndLevelFormat = null;
@@ -81,9 +82,9 @@ namespace HK.AutoAnt.UI
         private Color notEnoughLevelUpCostColor = Color.white;
         public Color NotEnoughLevelUpCostColor => notEnoughLevelUpCostColor;
 
-        private readonly List<CellEventDetailsPopupProperty> properties = new List<CellEventDetailsPopupProperty>();
+        private readonly List<Property> properties = new List<Property>();
 
-        private readonly List<CellEventDetailsPopupProperty> levelUpCosts = new List<CellEventDetailsPopupProperty>();
+        private readonly List<Property> levelUpCosts = new List<Property>();
 
         public CellEvent SelectCellEvent { get; private set; }
 
@@ -131,7 +132,7 @@ namespace HK.AutoAnt.UI
             this.title.text = name;
         }
 
-        public CellEventDetailsPopupProperty AddProperty(Action<CellEventDetailsPopupProperty> updateAction)
+        public Property AddProperty(Action<Property> updateAction)
         {
             var property = Instantiate(this.propertyPrefab, this.propertyParent);
             property.Initialize(updateAction);
@@ -140,7 +141,7 @@ namespace HK.AutoAnt.UI
             return property;
         }
 
-        public CellEventDetailsPopupProperty AddLevelUpCost(Action<CellEventDetailsPopupProperty> updateAction)
+        public Property AddLevelUpCost(Action<Property> updateAction)
         {
             var property = Instantiate(this.propertyPrefab, this.levelUpCostParent);
             property.Initialize(updateAction);
