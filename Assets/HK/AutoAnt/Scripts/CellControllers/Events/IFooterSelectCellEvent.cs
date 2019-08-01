@@ -10,7 +10,5 @@ namespace HK.AutoAnt.CellControllers.Events
     public interface IFooterSelectCellEvent : ICellEvent
     {
         void Attach(FooterSelectCellEventController controller);
-
-        void Update(FooterSelectCellEventController controller);
     }
 }
