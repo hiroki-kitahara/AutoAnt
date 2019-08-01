@@ -27,7 +27,7 @@ namespace HK.AutoAnt.GameControllers
                 .AddTo(this);
         }
 
-        private void CreatePopup(CellEvent cellEvent)
+        private void CreatePopup(IOpenCellEventDetailsPopup cellEvent)
         {
             var popup = PopupManager.Request(this.popup);
             popup.Initialize(cellEvent);
@@ -53,7 +53,7 @@ namespace HK.AutoAnt.GameControllers
                 .SubscribeWithState2(popup, cellEvent, (_, p, _cellEvent) =>
                 {
                     var cellManager = GameSystem.Instance.CellManager;
-                    cellManager.EventGenerator.Erase(_cellEvent);
+                    cellManager.EventGenerator.Remove(_cellEvent);
                     p.Close();
                 })
                 .AddTo(popup);

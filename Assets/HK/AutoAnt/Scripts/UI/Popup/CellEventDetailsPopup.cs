@@ -85,18 +85,18 @@ namespace HK.AutoAnt.UI
 
         private readonly List<CellEventDetailsPopupProperty> levelUpCosts = new List<CellEventDetailsPopupProperty>();
 
-        public CellEvent SelectCellEvent { get; private set; }
+        public IOpenCellEventDetailsPopup SelectCellEvent { get; private set; }
 
-        public void Initialize(CellEvent cellEvent)
+        public void Initialize(IOpenCellEventDetailsPopup cellEvent)
         {
             this.SelectCellEvent = cellEvent;
-            this.SelectCellEvent.AttachDetailsPopup(this);
+            this.SelectCellEvent.Attach(this);
             this.UpdateElement();
         }
 
         public void UpdateElement()
         {
-            this.SelectCellEvent.UpdateDetailsPopup(this);
+            this.SelectCellEvent.Update(this);
         }
 
         public void UpdateProperties()
