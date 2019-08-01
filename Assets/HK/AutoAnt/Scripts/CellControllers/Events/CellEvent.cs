@@ -104,9 +104,9 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public abstract void UpdateDetailsPopup(CellEventDetailsPopup popup);
 
-        public abstract void AttachFooterSelectCellEvent(FooterSelectBuildingController controller);
+        public abstract void AttachFooterSelectCellEvent(FooterSelectCellEventController controller);
 
-        public abstract void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller);
+        public abstract void UpdateFooterSelectCellEvent(FooterSelectCellEventController controller);
 
 #if UNITY_EDITOR
         protected virtual void OnValidate()

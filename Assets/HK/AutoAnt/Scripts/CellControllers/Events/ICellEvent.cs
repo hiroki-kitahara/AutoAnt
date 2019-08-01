@@ -71,14 +71,14 @@ namespace HK.AutoAnt.CellControllers.Events
         void UpdateDetailsPopup(CellEventDetailsPopup popup);
 
         /// <summary>
-        /// <see cref="FooterSelectBuildingController"/>に自分自身の情報をアタッチする
+        /// <see cref="FooterSelectCellEventController"/>に自分自身の情報をアタッチする
         /// </summary>
-        void AttachFooterSelectCellEvent(FooterSelectBuildingController controller);
+        void AttachFooterSelectCellEvent(FooterSelectCellEventController controller);
 
         /// <summary>
-        /// <see cref="FooterSelectBuildingController"/>に自分自身の情報を更新する
+        /// <see cref="FooterSelectCellEventController"/>に自分自身の情報を更新する
         /// </summary>
-        void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller);
+        void UpdateFooterSelectCellEvent(FooterSelectCellEventController controller);
 
         /// <summary>
         /// 作成可能か返す

@@ -176,12 +176,12 @@ namespace HK.AutoAnt.CellControllers.Events
             throw new System.NotImplementedException();
         }
 
-        public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
+        public override void AttachFooterSelectCellEvent(FooterSelectCellEventController controller)
         {
             throw new System.NotImplementedException();
         }
 
-        public override void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller)
+        public override void UpdateFooterSelectCellEvent(FooterSelectCellEventController controller)
         {
             throw new System.NotImplementedException();
         }

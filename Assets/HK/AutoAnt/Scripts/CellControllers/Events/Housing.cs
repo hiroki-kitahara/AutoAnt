@@ -129,12 +129,12 @@ namespace HK.AutoAnt.CellControllers.Events
             this.AttachDetailsPopup(popup, this.gameSystem);
         }
 
-        public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
+        public override void AttachFooterSelectCellEvent(FooterSelectCellEventController controller)
         {
             this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
         }
 
-        public override void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller)
+        public override void UpdateFooterSelectCellEvent(FooterSelectCellEventController controller)
         {
         }
     }

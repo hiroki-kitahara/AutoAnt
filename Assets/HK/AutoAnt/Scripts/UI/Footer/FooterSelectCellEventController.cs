@@ -18,13 +18,13 @@ namespace HK.AutoAnt.UI
     /// <summary>
     /// フッターメニューの建設メニューを制御するクラス
     /// </summary>
-    public sealed class FooterSelectBuildingController : FooterElement
+    public sealed class FooterSelectCellEventController : FooterElement
     {
         [SerializeField]
         private RectTransform listRoot = null;
 
         [SerializeField]
-        private FooterSelectBuildingElement elementPrefab = null;
+        private FooterSelectCellEventElement elementPrefab = null;
 
         [SerializeField]
         private GameObject selectedBuildingRoot = null;
@@ -36,7 +36,7 @@ namespace HK.AutoAnt.UI
         private Transform needItemParent = null;
 
         [SerializeField]
-        private FooterSelectedBuildingProperty propertyPrefab = null;
+        private FooterSelectedCellEventProperty propertyPrefab = null;
 
         [SerializeField]
         private TextMeshProUGUI cellEventName = null;
@@ -72,9 +72,9 @@ namespace HK.AutoAnt.UI
 
         private GameObject currentGimmick = null;
 
-        private readonly List<FooterSelectBuildingElement> elements = new List<FooterSelectBuildingElement>();
+        private readonly List<FooterSelectCellEventElement> elements = new List<FooterSelectCellEventElement>();
 
-        private readonly List<FooterSelectedBuildingProperty> properties = new List<FooterSelectedBuildingProperty>();
+        private readonly List<FooterSelectedCellEventProperty> properties = new List<FooterSelectedCellEventProperty>();
 
         public override void Open()
         {
@@ -161,7 +161,7 @@ namespace HK.AutoAnt.UI
             this.currentGimmick.SetLayerRecursive(Layers.Id.UI);
         }
 
-        public FooterSelectedBuildingProperty AddProperty(Action<FooterSelectedBuildingProperty> updateAction)
+        public FooterSelectedCellEventProperty AddProperty(Action<FooterSelectedCellEventProperty> updateAction)
         {
             var property = Instantiate(this.propertyPrefab, this.needItemParent, false);
             property.Initialize(updateAction);
