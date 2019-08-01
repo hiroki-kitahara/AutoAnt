@@ -65,16 +65,6 @@ namespace HK.AutoAnt.CellControllers.Events
         GameObject CreateGimmickController(Vector2Int origin);
 
         /// <summary>
-        /// <see cref="FooterSelectCellEventController"/>に自分自身の情報をアタッチする
-        /// </summary>
-        void AttachFooterSelectCellEvent(FooterSelectCellEventController controller);
-
-        /// <summary>
-        /// <see cref="FooterSelectCellEventController"/>に自分自身の情報を更新する
-        /// </summary>
-        void UpdateFooterSelectCellEvent(FooterSelectCellEventController controller);
-
-        /// <summary>
         /// 作成可能か返す
         /// </summary>
         Constants.CellEventGenerateEvalute CanGenerate(Cell owner, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper);

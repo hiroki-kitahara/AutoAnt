@@ -27,7 +27,8 @@ namespace HK.AutoAnt.CellControllers.Events
         ILevelUpEvent,
         IHousing,
         IReceiveBuff,
-        IOpenCellEventDetailsPopup
+        IOpenCellEventDetailsPopup,
+        IFooterSelectCellEvent
     {
         /// <summary>
         /// 保持している人口
@@ -134,13 +135,9 @@ namespace HK.AutoAnt.CellControllers.Events
             this.AttachDetailsPopup(popup, this.gameSystem);
         }
 
-        public override void AttachFooterSelectCellEvent(FooterSelectCellEventController controller)
+        void IFooterSelectCellEvent.Attach(FooterSelectCellEventController controller)
         {
             this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
-        }
-
-        public override void UpdateFooterSelectCellEvent(FooterSelectCellEventController controller)
-        {
         }
     }
 }

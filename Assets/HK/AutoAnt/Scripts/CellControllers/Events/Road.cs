@@ -165,15 +165,5 @@ namespace HK.AutoAnt.CellControllers.Events
 
             return false;
         }
-
-        public override void AttachFooterSelectCellEvent(FooterSelectCellEventController controller)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void UpdateFooterSelectCellEvent(FooterSelectCellEventController controller)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
