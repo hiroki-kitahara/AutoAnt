@@ -90,7 +90,7 @@ namespace HK.AutoAnt.GameControllers
             // 街の人口の増加
             foreach (var a in this.addTownPopulations)
             {
-                a.Add(gameSystem, deltaTime);
+                a.Add(deltaTime);
             }
         }
 
