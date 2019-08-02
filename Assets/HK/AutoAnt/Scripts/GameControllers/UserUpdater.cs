@@ -35,7 +35,7 @@ namespace HK.AutoAnt.GameControllers
             Broker.Global.Receive<GameEnd>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    x.GameSystem.User.History.Game.LastDateTime = DateTime.Now;
+                    GameSystem.Instance.User.History.Game.LastDateTime = DateTime.Now;
                 })
                 .AddTo(this);
                 
