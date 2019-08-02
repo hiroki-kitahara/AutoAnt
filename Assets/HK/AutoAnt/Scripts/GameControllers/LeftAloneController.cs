@@ -59,7 +59,6 @@ namespace HK.AutoAnt.GameControllers
                 .SubscribeWithState(this, (_, _this) =>
                 {
                     _this.OnGameLeft();
-                    _this.RegisterLeftAloneLocalNotification();
                 })
                 .AddTo(this);
 
