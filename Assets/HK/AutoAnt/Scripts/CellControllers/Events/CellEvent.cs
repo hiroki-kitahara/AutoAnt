@@ -107,13 +107,13 @@ namespace HK.AutoAnt.CellControllers.Events
         }
 #endif
 
-        public virtual void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
+        public virtual void Initialize(Vector2Int position, bool isInitializingGame)
         {
             this.Origin = position;
 
             // 自分自身のマスターデータを取得してデータを参照している
             // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
-            this.cachedRecord = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
+            this.cachedRecord = GameSystem.Instance.MasterData.CellEvent.Records.Get(this.Id);
             this.Gimmick = this.cachedRecord.EventData.CreateGimmickController(this.Origin);
 
             foreach(var g in this.Gimmick.GetComponentsInChildren<ICellEventGimmick>())

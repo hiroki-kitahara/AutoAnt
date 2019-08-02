@@ -50,8 +50,6 @@ namespace HK.AutoAnt.CellControllers.Events
         
         public float Buff { get; private set; } = 0.0f;
 
-        private GameSystem gameSystem;
-
         private MasterDataHousingLevelParameter.Record levelParameter;
 
         void IAddTownPopulation.Add(GameSystem gameSystem, float deltaTime)
@@ -64,12 +62,12 @@ namespace HK.AutoAnt.CellControllers.Events
             town.AddPopulation(result);
         }
 
-        public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
+        public override void Initialize(Vector2Int position, bool isInitializingGame)
         {
-            base.Initialize(position, gameSystem, isInitializingGame);
-            this.gameSystem = gameSystem;
-            this.gameSystem.User.Town.AddPopulation(this.CurrentPopulation);
-            this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
+            var gameSystem = GameSystem.Instance;
+            base.Initialize(position, isInitializingGame);
+            gameSystem.User.Town.AddPopulation(this.CurrentPopulation);
+            this.levelParameter = gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
         }
 
         public override void Remove(GameSystem gameSystem)
@@ -85,13 +83,14 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public bool CanLevelUp()
         {
-            return this.CanLevelUp(this.gameSystem);
+            return this.CanLevelUp(GameSystem.Instance);
         }
 
         public void LevelUp()
         {
-            this.LevelUp(this.gameSystem);
-            this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
+            var gameSystem = GameSystem.Instance;
+            this.LevelUp(gameSystem);
+            this.levelParameter = gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
         }
 
         void IReceiveBuff.AddBuff(float value)
@@ -124,7 +123,7 @@ namespace HK.AutoAnt.CellControllers.Events
                 })
                 .AddTo(popup);
 
-            this.AttachDetailsPopup(popup, this.gameSystem);
+            this.AttachDetailsPopup(popup, GameSystem.Instance);
         }
 
         void IOpenCellEventDetailsPopup.Update(CellEventDetailsPopup popup)
@@ -132,7 +131,7 @@ namespace HK.AutoAnt.CellControllers.Events
             popup.ApplyTitle(this.EventName, this.Level);
             popup.UpdateProperties();
             popup.ClearLevelUpCosts();
-            this.AttachDetailsPopup(popup, this.gameSystem);
+            this.AttachDetailsPopup(popup, GameSystem.Instance);
         }
 
         void IFooterSelectCellEvent.Attach(FooterSelectCellEventController controller)
