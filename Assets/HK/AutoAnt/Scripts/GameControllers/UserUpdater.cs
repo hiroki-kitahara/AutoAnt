@@ -27,8 +27,9 @@ namespace HK.AutoAnt.GameControllers
             Broker.Global.Receive<GameStart>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.RegisterUpdate(x.GameSystem);
-                    _this.StartObserveUnlockCellEvents(x.GameSystem);
+                    var gameSystem = GameSystem.Instance;
+                    _this.RegisterUpdate(gameSystem);
+                    _this.StartObserveUnlockCellEvents(gameSystem);
                 })
                 .AddTo(this);
 

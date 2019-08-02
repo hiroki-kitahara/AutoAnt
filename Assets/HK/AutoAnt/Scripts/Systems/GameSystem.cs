@@ -63,7 +63,7 @@ namespace HK.AutoAnt.Systems
                 savable.Initialize();
             }
             
-            Broker.Global.Publish(GameStart.Get(this));
+            Broker.Global.Publish(GameStart.Get());
         }
 
         void OnDestroy()

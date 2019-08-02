@@ -8,8 +8,7 @@ namespace HK.AutoAnt.Events
     /// <summary>
     /// ゲームが開始された際のイベント
     /// </summary>
-    public sealed class GameStart : Message<GameStart, GameSystem>
+    public sealed class GameStart : Message<GameStart>
     {
-        public GameSystem GameSystem => this.param1;
     }
 }
