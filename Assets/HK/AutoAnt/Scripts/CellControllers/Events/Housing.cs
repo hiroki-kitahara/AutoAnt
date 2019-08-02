@@ -85,14 +85,13 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public bool CanLevelUp()
         {
-            return this.CanLevelUp(GameSystem.Instance);
+            return Extensions.Extensions.CanLevelUp(this);
         }
 
         public void LevelUp()
         {
-            var gameSystem = GameSystem.Instance;
-            this.LevelUp(gameSystem);
-            this.levelParameter = gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
+            Extensions.Extensions.LevelUp(this);
+            this.levelParameter = GameSystem.Instance.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
         }
 
         void IReceiveBuff.AddBuff(float value)
@@ -125,7 +124,7 @@ namespace HK.AutoAnt.CellControllers.Events
                 })
                 .AddTo(popup);
 
-            this.AttachDetailsPopup(popup, GameSystem.Instance);
+            this.AttachDetailsPopup(popup);
         }
 
         void IOpenCellEventDetailsPopup.Update(CellEventDetailsPopup popup)
@@ -133,12 +132,12 @@ namespace HK.AutoAnt.CellControllers.Events
             popup.ApplyTitle(this.EventName, this.Level);
             popup.UpdateProperties();
             popup.ClearLevelUpCosts();
-            this.AttachDetailsPopup(popup, GameSystem.Instance);
+            this.AttachDetailsPopup(popup);
         }
 
         void IFooterSelectCellEvent.Attach(FooterSelectCellEventController controller)
         {
-            this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
+            this.AttachFooterSelectCellEvent(controller);
         }
     }
 }

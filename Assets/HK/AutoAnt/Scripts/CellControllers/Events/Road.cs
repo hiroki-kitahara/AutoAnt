@@ -57,13 +57,14 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public bool CanLevelUp()
         {
-            return this.CanLevelUp(GameSystem.Instance);
+            return Extensions.Extensions.CanLevelUp(this);
         }
 
         public void LevelUp()
         {
+            Extensions.Extensions.LevelUp(this);
+
             var gameSystem = GameSystem.Instance;
-            this.LevelUp(gameSystem);
 
             // 範囲が広がることを考慮して一旦バフを解除する
             var oldBuffValue = this.levelParameter.AddBuff;

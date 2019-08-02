@@ -102,7 +102,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public bool CanLevelUp()
         {
-            return this.CanLevelUp(GameSystem.Instance);
+            return Extensions.Extensions.CanLevelUp(this);
         }
 
         public void LevelUp()
@@ -113,7 +113,7 @@ namespace HK.AutoAnt.CellControllers.Events
             var oldPopularity = this.Popularity;
             gameSystem.User.Town.AddPopularity(-oldPopularity);
 
-            this.LevelUp(gameSystem);
+            Extensions.Extensions.LevelUp(this);
 
             this.UpdateLevelParameter();
 
@@ -200,7 +200,7 @@ namespace HK.AutoAnt.CellControllers.Events
                 property.Value.text = popup.ProductValue.Format(this.LevelParameter.ProductRecord.Name, this.LevelParameter.NeedProductTime);
             });
 
-            this.AttachDetailsPopup(popup, GameSystem.Instance);
+            this.AttachDetailsPopup(popup);
         }
 
         void IOpenCellEventDetailsPopup.Update(CellEventDetailsPopup popup)
@@ -208,12 +208,12 @@ namespace HK.AutoAnt.CellControllers.Events
             popup.ApplyTitle(this.EventName, this.Level);
             popup.UpdateProperties();
             popup.ClearLevelUpCosts();
-            this.AttachDetailsPopup(popup, GameSystem.Instance);
+            this.AttachDetailsPopup(popup);
         }
 
         void IFooterSelectCellEvent.Attach(FooterSelectCellEventController controller)
         {
-            this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
+            this.AttachFooterSelectCellEvent(controller);
         }
     }
 }
