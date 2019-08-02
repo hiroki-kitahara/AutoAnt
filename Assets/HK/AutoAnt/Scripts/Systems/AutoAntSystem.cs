@@ -38,9 +38,12 @@ namespace HK.AutoAnt.Systems
             AutoAntSystem.LocalNotification.Clear();
         }
 
-        void OnApplicationFocus(bool status)
+        void OnApplicationPause(bool status)
         {
-            AutoAntSystem.LocalNotification.Clear();
+            if(!status)
+            {
+                AutoAntSystem.LocalNotification.Clear();
+            }
         }
     }
 }
