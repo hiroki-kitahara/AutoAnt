@@ -6,6 +6,7 @@ using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
+using HK.AutoAnt.UI.Elements;
 using HK.Framework.EventSystems;
 using HK.Framework.Text;
 using TMPro;
@@ -37,7 +38,7 @@ namespace HK.AutoAnt.UI
         private Transform needItemParent = null;
 
         [SerializeField]
-        private FooterSelectedCellEventProperty propertyPrefab = null;
+        private Property propertyPrefab = null;
 
         [SerializeField]
         private TextMeshProUGUI cellEventName = null;
@@ -75,7 +76,7 @@ namespace HK.AutoAnt.UI
 
         private readonly List<FooterSelectCellEventElement> elements = new List<FooterSelectCellEventElement>();
 
-        private readonly List<FooterSelectedCellEventProperty> properties = new List<FooterSelectedCellEventProperty>();
+        private readonly List<Property> properties = new List<Property>();
 
         public override void Open()
         {
@@ -165,7 +166,7 @@ namespace HK.AutoAnt.UI
             this.currentGimmick.SetLayerRecursive(Layers.Id.UI);
         }
 
-        public FooterSelectedCellEventProperty AddProperty(Action<FooterSelectedCellEventProperty> updateAction)
+        public Property AddProperty(Action<Property> updateAction)
         {
             var property = Instantiate(this.propertyPrefab, this.needItemParent, false);
             property.Initialize(updateAction);

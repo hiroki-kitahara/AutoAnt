@@ -1,17 +1,13 @@
 ﻿using System;
-using HK.AutoAnt.CellControllers.Events;
-using HK.Framework.Text;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.UI;
 
-namespace HK.AutoAnt.UI
+namespace HK.AutoAnt.UI.Elements
 {
     /// <summary>
-    /// セルイベントの詳細のプロパティ部分を表示するポップアップ
+    /// PrefixとValueを表示するUIElement
     /// </summary>
-    public sealed class CellEventDetailsPopupProperty : MonoBehaviour
+    public sealed class Property : MonoBehaviour
     {
         [SerializeField]
         private TextMeshProUGUI prefix = null;
@@ -21,9 +17,9 @@ namespace HK.AutoAnt.UI
         private TextMeshProUGUI value = null;
         public TextMeshProUGUI Value => this.value;
 
-        private Action<CellEventDetailsPopupProperty> updateAction = null;
+        private Action<Property> updateAction = null;
 
-        public void Initialize(Action<CellEventDetailsPopupProperty> updateAction)
+        public void Initialize(Action<Property> updateAction)
         {
             this.updateAction = updateAction;
             this.updateAction(this);

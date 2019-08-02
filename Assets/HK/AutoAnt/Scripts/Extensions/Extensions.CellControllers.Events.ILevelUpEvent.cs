@@ -7,6 +7,7 @@ using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.UI;
+using HK.AutoAnt.UI.Elements;
 using HK.AutoAnt.UserControllers;
 using HK.Framework.EventSystems;
 using UniRx;
@@ -68,7 +69,7 @@ namespace HK.AutoAnt.Extensions
                 return;
             }
 
-            var properties = new List<CellEventDetailsPopupProperty>();
+            var properties = new List<Property>();
 
             // お金を表示
             properties.Add(
@@ -119,7 +120,7 @@ namespace HK.AutoAnt.Extensions
             controller.SetMoney(stringBuilder, gameSystem.User.Wallet.Money, levelUpCostRecord.Cost.Money);
             controller.CreateGimmick(self.GimmickPrefab);
 
-            var properties = new List<FooterSelectedCellEventProperty>();
+            var properties = new List<Property>();
 
             // アイテムを表示
             foreach (var n in levelUpCostRecord.Cost.NeedItems)
