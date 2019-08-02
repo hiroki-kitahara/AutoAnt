@@ -69,14 +69,14 @@ namespace HK.AutoAnt.CellControllers
             Broker.Global.Publish(AddedCellEvent.Get(instance));
         }
 
-        public void Erase(Cell cell)
+        public void Remove(Cell cell)
         {
             Assert.IsTrue(this.cellMapper.HasEvent(cell));
             var cellEvent = this.cellMapper.CellEvent.Map[cell.Position];
-            this.Erase(cellEvent);
+            this.Remove(cellEvent);
         }
 
-        public void Erase(ICellEvent cellEvent)
+        public void Remove(ICellEvent cellEvent)
         {
             this.cellMapper.Remove(cellEvent);
             cellEvent.Remove(this.gameSystem);

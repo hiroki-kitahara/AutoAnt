@@ -11,7 +11,7 @@ namespace HK.AutoAnt.UI
     /// <summary>
     /// フッターの建設メニューの選択中の建設物のプロパティを制御するクラス
     /// </summary>
-    public sealed class FooterSelectedBuildingProperty : MonoBehaviour
+    public sealed class FooterSelectedCellEventProperty : MonoBehaviour
     {
         [SerializeField]
         private TextMeshProUGUI prefix = null;
@@ -21,9 +21,9 @@ namespace HK.AutoAnt.UI
         private TextMeshProUGUI value = null;
         public TextMeshProUGUI Value => this.value;
 
-        private Action<FooterSelectedBuildingProperty> updateAction = null;
+        private Action<FooterSelectedCellEventProperty> updateAction = null;
 
-        public void Initialize(Action<FooterSelectedBuildingProperty> updateAction)
+        public void Initialize(Action<FooterSelectedCellEventProperty> updateAction)
         {
             this.updateAction = updateAction;
             this.updateAction(this);

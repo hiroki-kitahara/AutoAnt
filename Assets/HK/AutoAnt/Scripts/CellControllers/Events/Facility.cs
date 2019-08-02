@@ -21,7 +21,12 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - アイテムの生産
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Facility")]
-    public sealed class Facility : CellEvent, ILevelUpEvent, IReceiveBuff, IProductHolder
+    public sealed class Facility : CellEvent,
+        ILevelUpEvent,
+        IReceiveBuff,
+        IProductHolder,
+        IOpenCellEventDetailsPopup,
+        IFooterSelectCellEvent
     {
         /// <summary>
         /// レベル
@@ -163,31 +168,6 @@ namespace HK.AutoAnt.CellControllers.Events
 
             this.Broker.Publish(AcquiredFacilityProduct.Get(this));
         }
-
-        public override void AttachDetailsPopup(CellEventDetailsPopup popup)
-        {
-            popup.AddProperty(property =>
-            {
-                property.Prefix.text = popup.Popularity.Get;
-                property.Value.text = this.LevelParameter.Popularity.ToReadableString("###");
-            });
-
-            popup.AddProperty(property =>
-            {
-                property.Prefix.text = popup.Product.Get;
-                property.Value.text = popup.ProductValue.Format(this.LevelParameter.ProductRecord.Name, this.LevelParameter.NeedProductTime);
-            });
-
-            this.AttachDetailsPopup(popup, this.gameSystem);
-        }
-
-        public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
-        {
-            popup.ApplyTitle(this.EventName, this.Level);
-            popup.UpdateProperties();
-            popup.ClearLevelUpCosts();
-            this.AttachDetailsPopup(popup, this.gameSystem);
-        }
         
         void IReceiveBuff.AddBuff(float value)
         {
@@ -204,13 +184,34 @@ namespace HK.AutoAnt.CellControllers.Events
             this.gameSystem.User.Town.AddPopularity(newPopularity);
         }
 
-        public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
+        void IOpenCellEventDetailsPopup.Attach(CellEventDetailsPopup popup)
         {
-            this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
+            popup.AddProperty(property =>
+            {
+                property.Prefix.text = popup.Popularity.Get;
+                property.Value.text = this.LevelParameter.Popularity.ToReadableString("###");
+            });
+
+            popup.AddProperty(property =>
+            {
+                property.Prefix.text = popup.Product.Get;
+                property.Value.text = popup.ProductValue.Format(this.LevelParameter.ProductRecord.Name, this.LevelParameter.NeedProductTime);
+            });
+
+            this.AttachDetailsPopup(popup, this.gameSystem);
         }
 
-        public override void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller)
+        void IOpenCellEventDetailsPopup.Update(CellEventDetailsPopup popup)
         {
+            popup.ApplyTitle(this.EventName, this.Level);
+            popup.UpdateProperties();
+            popup.ClearLevelUpCosts();
+            this.AttachDetailsPopup(popup, this.gameSystem);
+        }
+
+        void IFooterSelectCellEvent.Attach(FooterSelectCellEventController controller)
+        {
+            this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
         }
     }
 }

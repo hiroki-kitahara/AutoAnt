@@ -57,6 +57,9 @@ namespace HK.AutoAnt.Extensions
             Broker.Global.Publish(RequestNotification.Get($"レベルアップ！ {self.Level - 1} -> {self.Level}", NotificationUIElement.MessageType.Information));
         }
 
+        /// <summary>
+        /// <see cref="ILevelUpEvent"/>で共通して<see cref="CellEventDetailsPopup"/>にアタッチする処理
+        /// </summary>
         public static void AttachDetailsPopup(this ILevelUpEvent self, CellEventDetailsPopup popup, GameSystem gameSystem)
         {
             var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(self.Id, self.Level);
@@ -106,7 +109,7 @@ namespace HK.AutoAnt.Extensions
                 });
         }
 
-        public static void AttachFooterSelectCellEvent(this ILevelUpEvent self, FooterSelectBuildingController controller, GameSystem gameSystem)
+        public static void AttachFooterSelectCellEvent(this ILevelUpEvent self, FooterSelectCellEventController controller, GameSystem gameSystem)
         {
             var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(self.Id, 0);
             controller.CellEventName.text = self.EventName;
@@ -116,7 +119,7 @@ namespace HK.AutoAnt.Extensions
             controller.SetMoney(stringBuilder, gameSystem.User.Wallet.Money, levelUpCostRecord.Cost.Money);
             controller.CreateGimmick(self.GimmickPrefab);
 
-            var properties = new List<FooterSelectedBuildingProperty>();
+            var properties = new List<FooterSelectedCellEventProperty>();
 
             // アイテムを表示
             foreach (var n in levelUpCostRecord.Cost.NeedItems)
@@ -136,7 +139,7 @@ namespace HK.AutoAnt.Extensions
             }
 
             // お金を毎フレーム更新する
-            var t = new Tuple<StringBuilder, GameSystem, FooterSelectBuildingController, MasterDataLevelUpCost.Record>(
+            var t = new Tuple<StringBuilder, GameSystem, FooterSelectCellEventController, MasterDataLevelUpCost.Record>(
                 stringBuilder,
                 gameSystem,
                 controller,

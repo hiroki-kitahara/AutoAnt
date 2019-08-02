@@ -41,6 +41,11 @@ namespace HK.AutoAnt.CellControllers.Events
         GameObject GimmickPrefab { get; }
 
         /// <summary>
+        /// ギミックのインスタンス
+        /// </summary>
+        GameObject Gimmick { get; }
+
+        /// <summary>
         /// 初期化
         /// </summary>
         /// <remarks>
@@ -58,27 +63,6 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <see cref="CellGimmickController"/>を生成する
         /// </summary>
         GameObject CreateGimmickController(Vector2Int origin);
-
-        /// <summary>
-        /// <see cref="CellEventDetailsPopup"/>に自分自身をアタッチする
-        /// </summary>
-        /// <param name="popup"></param>
-        void AttachDetailsPopup(CellEventDetailsPopup popup);
-
-        /// <summary>
-        /// <see cref="CellEventDetailsPopup"/>に自分自身の情報を更新する
-        /// </summary>
-        void UpdateDetailsPopup(CellEventDetailsPopup popup);
-
-        /// <summary>
-        /// <see cref="FooterSelectBuildingController"/>に自分自身の情報をアタッチする
-        /// </summary>
-        void AttachFooterSelectCellEvent(FooterSelectBuildingController controller);
-
-        /// <summary>
-        /// <see cref="FooterSelectBuildingController"/>に自分自身の情報を更新する
-        /// </summary>
-        void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller);
 
         /// <summary>
         /// 作成可能か返す
