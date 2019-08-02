@@ -27,9 +27,8 @@ namespace HK.AutoAnt.GameControllers
             Broker.Global.Receive<GameStart>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    var gameSystem = GameSystem.Instance;
-                    _this.RegisterUpdate(gameSystem);
-                    _this.StartObserveUnlockCellEvents(gameSystem);
+                    _this.RegisterUpdate();
+                    _this.StartObserveUnlockCellEvents();
                 })
                 .AddTo(this);
 
@@ -67,12 +66,12 @@ namespace HK.AutoAnt.GameControllers
         /// <summary>
         /// 毎フレーム実行される更新処理
         /// </summary>
-        private void RegisterUpdate(GameSystem gameSystem)
+        private void RegisterUpdate()
         {
             this.UpdateAsObservable()
-                .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
+                .SubscribeWithState(this, (_, _this) =>
                 {
-                    _gameSystem.User.History.Game.Time += Time.deltaTime;
+                    GameSystem.Instance.User.History.Game.Time += Time.deltaTime;
                     _this.UpdateParameter(Time.deltaTime);
                 })
                 .AddTo(this);
@@ -95,20 +94,21 @@ namespace HK.AutoAnt.GameControllers
             }
         }
 
-        private void StartObserveUnlockCellEvents(GameSystem gameSystem)
+        private void StartObserveUnlockCellEvents()
         {
             Broker.Global.Receive<AddedGenerateCellEventHistory>()
-                .SubscribeWithState2(this, gameSystem, (_, _this, _gameSystem) =>
+                .SubscribeWithState(this, (_, _this) =>
                 {
-                    var elements = _gameSystem.User.UnlockCellEvent.Elements;
-                    foreach (var i in _gameSystem.MasterData.UnlockCellEvent.Records)
+                    var gameSystem = GameSystem.Instance;
+                    var elements = gameSystem.User.UnlockCellEvent.Elements;
+                    foreach (var i in gameSystem.MasterData.UnlockCellEvent.Records)
                     {
                         // 既にアンロック済みならなにもしない
                         if (elements.Contains(i.UnlockCellEventRecordId))
                         {
                             continue;
                         }
-                        var histories = _gameSystem.User.History.GenerateCellEvent;
+                        var histories = gameSystem.User.History.GenerateCellEvent;
                         if (histories.IsEnough(i.NeedCellEvents))
                         {
                             elements.Add(i.UnlockCellEventRecordId);
@@ -116,7 +116,7 @@ namespace HK.AutoAnt.GameControllers
                         }
                     }
                 })
-                .AddTo(gameSystem);
+                .AddTo(GameSystem.Instance);
         }
     }
 }
