@@ -57,7 +57,7 @@ namespace HK.AutoAnt.GameControllers
                 return;
             }
 
-            var needMoney = Calculator.DevelopCost(this.gameSystem, cell.Position);
+            var needMoney = Calculator.DevelopCost(this.gameSystem.Constants.Cell.DevelopCost, cell.Position);
             if(!this.gameSystem.User.Wallet.IsEnoughMoney(needMoney))
             {
                 return;

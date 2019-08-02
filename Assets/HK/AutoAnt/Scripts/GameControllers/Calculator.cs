@@ -12,9 +12,9 @@ namespace HK.AutoAnt.GameControllers
         /// <summary>
         /// セルを開拓するために必要なお金を返す
         /// </summary>
-        public static double DevelopCost(GameSystem gameSystem, Vector2Int position)
+        public static double DevelopCost(double cost, Vector2Int position)
         {
-            return gameSystem.Constants.Cell.DevelopCost * position.sqrMagnitude;
+            return cost * position.sqrMagnitude;
         }
 
         /// <summary>
