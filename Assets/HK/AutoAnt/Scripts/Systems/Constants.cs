@@ -72,4 +72,23 @@ namespace HK.AutoAnt.Constants
         /// </summary>
         NotEnoughCondition,
     }
+
+    /// <summary>
+    /// ゲームを離れた理由
+    /// </summary>
+    public enum GameLeftCase
+    {
+        /// <summary>
+        /// 正常に離れた
+        /// </summary>
+        /// <remarks>
+        /// 普通にアプリを終了した場合などはこれになります
+        /// </remarks>
+        Normal,
+
+        /// <summary>
+        /// 広告によって離れた
+        /// </summary>
+        ByAdvertisement,
+    }
 }

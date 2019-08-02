@@ -58,6 +58,15 @@ namespace HK.AutoAnt.GameControllers
             Broker.Global.Receive<GameEnd>()
                 .SubscribeWithState(this, (_, _this) =>
                 {
+                    _this.OnGameLeft();
+                    _this.RegisterLeftAloneLocalNotification();
+                })
+                .AddTo(this);
+
+            Broker.Global.Receive<GamePause>()
+                .SubscribeWithState(this, (_, _this) =>
+                {
+                    _this.OnGameLeft();
                     _this.RegisterLeftAloneLocalNotification();
                 })
                 .AddTo(this);
@@ -71,11 +80,36 @@ namespace HK.AutoAnt.GameControllers
         }
 
         /// <summary>
+        /// ゲームを離れた際の処理
+        /// </summary>
+        private void OnGameLeft()
+        {
+            var gameHistory = GameSystem.Instance.User.History.Game;
+            if (AutoAntSystem.Advertisement.IsShow)
+            {
+                gameHistory.GameLeftCase = Constants.GameLeftCase.ByAdvertisement;
+            }
+            else
+            {
+                gameHistory.GameLeftCase = Constants.GameLeftCase.Normal;
+            }
+
+            gameHistory.LastDateTime = DateTime.Now;
+        }
+
+        /// <summary>
         /// 放置されていた時間分の処理を行う
         /// </summary>
         private void OnLeftAlone()
         {
             var user = GameSystem.Instance.User;
+
+            // 広告閲覧によりゲームから離れていたら何もしない
+            if(user.History.Game.GameLeftCase == Constants.GameLeftCase.ByAdvertisement)
+            {
+                return;
+            }
+
             var lastDateTime = user.History.Game.LastDateTime;
             if (DateTime.MinValue == lastDateTime)
             {
