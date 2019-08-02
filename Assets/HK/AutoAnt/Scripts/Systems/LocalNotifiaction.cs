@@ -90,14 +90,16 @@ namespace HK.AutoAnt.Systems
         }
 
         /// <summary>
-        /// バッジをクリアする
+        /// バッジと登録しているローカル通知を削除する
         /// </summary>
-        public void ClearBadge()
+        public void Clear()
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
             // Androidにバッジ処理が無いっぽい？
+            AndroidNotificationCenter.CancelAllNotifications();
 #elif UNITY_IOS && !UNITY_EDITOR
             iOSNotificationCenter.ApplicationBadge = 0;
+            iOSNotificationCenter.RemoveAllScheduledNotifications();
 #endif
         }
     }

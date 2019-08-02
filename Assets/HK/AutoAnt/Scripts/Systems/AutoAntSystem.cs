@@ -35,12 +35,12 @@ namespace HK.AutoAnt.Systems
             Audio = system.audioSystem;
             Advertisement = system.advertisement;
 
-            AutoAntSystem.LocalNotification.ClearBadge();
+            AutoAntSystem.LocalNotification.Clear();
         }
 
         void OnApplicationFocus(bool status)
         {
-            AutoAntSystem.LocalNotification.ClearBadge();
+            AutoAntSystem.LocalNotification.Clear();
         }
     }
 }
