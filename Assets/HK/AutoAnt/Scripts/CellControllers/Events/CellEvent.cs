@@ -163,7 +163,7 @@ namespace HK.AutoAnt.CellControllers.Events
             Destroy(this.Gimmick.gameObject);
         }
 
-        public Constants.CellEventGenerateEvalute CanGenerate(Cell origin, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper)
+        public Constants.CellEventGenerateEvalute CanGenerate(Cell origin, int cellEventRecordId, CellMapper cellMapper)
         {
             Assert.IsNotNull(this.condition);
 
@@ -183,6 +183,7 @@ namespace HK.AutoAnt.CellControllers.Events
             }
 
             // コストが満たしていない場合は生成できない
+            var gameSystem = GameSystem.Instance;
             var masterData = gameSystem.MasterData.LevelUpCost.Records.Get(cellEventRecordId, 0);
             Assert.IsNotNull(masterData, $"CellEventRecordId = {cellEventRecordId}の{typeof(MasterDataLevelUpCost.Record)}がありませんでした");
             if(!masterData.Cost.IsEnough(gameSystem.User, gameSystem.MasterData.Item))
