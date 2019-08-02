@@ -70,10 +70,10 @@ namespace HK.AutoAnt.CellControllers.Events
             this.levelParameter = gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
         }
 
-        public override void Remove(GameSystem gameSystem)
+        public override void Remove()
         {
-            base.Remove(gameSystem);
-            gameSystem.User.Town.AddPopulation(-this.CurrentPopulation);
+            base.Remove();
+            GameSystem.Instance.User.Town.AddPopulation(-this.CurrentPopulation);
         }
 
         public override void OnClick(Cell owner)

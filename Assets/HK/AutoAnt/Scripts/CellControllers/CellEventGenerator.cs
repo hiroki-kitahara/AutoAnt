@@ -77,7 +77,7 @@ namespace HK.AutoAnt.CellControllers
         public void Remove(ICellEvent cellEvent)
         {
             this.cellMapper.Remove(cellEvent);
-            cellEvent.Remove(GameSystem.Instance);
+            cellEvent.Remove();
 
             Broker.Global.Publish(RemovedCellEvent.Get(cellEvent));
         }

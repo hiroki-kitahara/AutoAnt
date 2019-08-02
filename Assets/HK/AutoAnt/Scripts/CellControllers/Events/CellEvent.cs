@@ -138,8 +138,9 @@ namespace HK.AutoAnt.CellControllers.Events
             }
         }
 
-        public virtual void Remove(GameSystem gameSystem)
+        public virtual void Remove()
         {
+            var gameSystem = GameSystem.Instance;
             this.instanceEvents.Clear();
 
             // 自分自身のマスターデータを取得してデータを参照している
@@ -152,7 +153,7 @@ namespace HK.AutoAnt.CellControllers.Events
             }
 
             Assert.IsNotNull(record.EventData.destructionSE, $"Id = {this.Id}の破壊時のSE再生に失敗しました");
-            GameSystem.Instance.SEController.Play(record.EventData.destructionSE);
+            gameSystem.SEController.Play(record.EventData.destructionSE);
 
             Assert.IsNotNull(record.EventData.destructionEffect, $"Id = {this.Id}の破壊時のエフェクト生成に失敗しました");
             var effect = record.EventData.destructionEffect.Rent();

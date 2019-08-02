@@ -82,10 +82,10 @@ namespace HK.AutoAnt.CellControllers.Events
                 .AddTo(this.instanceEvents);
         }
 
-        public override void Remove(GameSystem gameSystem)
+        public override void Remove()
         {
-            base.Remove(gameSystem);
-            gameSystem.User.Town.AddPopularity(-this.Popularity);
+            base.Remove();
+            GameSystem.Instance.User.Town.AddPopularity(-this.Popularity);
         }
 
         public override void OnClick(Cell owner)

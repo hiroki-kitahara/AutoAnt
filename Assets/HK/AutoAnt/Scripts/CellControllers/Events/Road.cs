@@ -41,9 +41,9 @@ namespace HK.AutoAnt.CellControllers.Events
             this.ObserveAddReceiveBuff();
         }
 
-        public override void Remove(GameSystem gameSystem)
+        public override void Remove()
         {
-            base.Remove(gameSystem);
+            base.Remove();
             this.ApplyBuff(-this.levelParameter.AddBuff);
         }
 
