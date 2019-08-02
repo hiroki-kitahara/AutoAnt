@@ -12,7 +12,6 @@ namespace HK.AutoAnt.GameControllers
     public sealed class DevelopCellActions : InputActions
     {
         public DevelopCellActions(
-            GameSystem gameSystem,
             CellGenerator cellGenerator,
             CellMapper cellMapper,
             int replaceCellRecordId,
@@ -24,7 +23,6 @@ namespace HK.AutoAnt.GameControllers
                 null,
                 null,
                 new ClickToDevelopCell(
-                    gameSystem,
                     cellGenerator,
                     cellMapper,
                     replaceCellRecordId,

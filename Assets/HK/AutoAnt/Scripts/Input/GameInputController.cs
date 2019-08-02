@@ -102,7 +102,6 @@ namespace HK.AutoAnt.InputControllers
             this.cachedGenerateCellEventActions = new GenerateCellEventActions(this.cellManager.EventGenerator, this.gameCameraController);
             this.cachedEraseCellEventActions = new EraseCellEventActions(this.cellManager.EventGenerator, this.cellManager.Mapper, this.gameCameraController);
             this.cachedDevelopCellActions = new DevelopCellActions(
-                GameSystem.Instance,
                 this.cellManager.CellGenerator,
                 this.cellManager.Mapper,
                 100100,

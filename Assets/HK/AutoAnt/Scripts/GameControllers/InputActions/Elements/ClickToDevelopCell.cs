@@ -14,8 +14,6 @@ namespace HK.AutoAnt.GameControllers
     /// </remarks>
     public sealed class ClickToDevelopCell : IInputAction<InputControllers.Events.ClickData>
     {
-        private readonly GameSystem gameSystem;
-
         private readonly CellGenerator cellGenerator;
 
         private readonly CellMapper cellMapper;
@@ -28,7 +26,6 @@ namespace HK.AutoAnt.GameControllers
         private int generateBlankRange;
 
         public ClickToDevelopCell(
-            GameSystem gameSystem,
             CellGenerator cellGenerator,
             CellMapper cellMapper,
             int replaceCellRecordId,
@@ -36,7 +33,6 @@ namespace HK.AutoAnt.GameControllers
             int generateBlankRange
             )
         {
-            this.gameSystem = gameSystem;
             this.cellGenerator = cellGenerator;
             this.cellMapper = cellMapper;
             this.replaceCellRecordId = replaceCellRecordId;
@@ -46,7 +42,8 @@ namespace HK.AutoAnt.GameControllers
 
         public void Do(InputControllers.Events.ClickData data)
         {
-            var cell = CellManager.GetCell(GameSystem.Instance.Cameraman.Camera.ScreenPointToRay(data.Position));
+            var gameSystem = GameSystem.Instance;
+            var cell = CellManager.GetCell(gameSystem.Cameraman.Camera.ScreenPointToRay(data.Position));
             if(cell == null)
             {
                 return;
@@ -57,13 +54,13 @@ namespace HK.AutoAnt.GameControllers
                 return;
             }
 
-            var needMoney = Calculator.DevelopCost(this.gameSystem.Constants.Cell.DevelopCost, cell.Position);
-            if(!this.gameSystem.User.Wallet.IsEnoughMoney(needMoney))
+            var needMoney = Calculator.DevelopCost(gameSystem.Constants.Cell.DevelopCost, cell.Position);
+            if(!gameSystem.User.Wallet.IsEnoughMoney(needMoney))
             {
                 return;
             }
 
-            this.gameSystem.User.Wallet.AddMoney(-needMoney);
+            gameSystem.User.Wallet.AddMoney(-needMoney);
             this.cellGenerator.Replace(this.replaceCellRecordId, cell.Position);
 
             // 周りのセルのない座標にBlankセルを作成する　
@@ -72,9 +69,9 @@ namespace HK.AutoAnt.GameControllers
                 this.cellGenerator.Generate(this.blankCellRecordId, position);
             }
 
-            var se = this.gameSystem.Constants.Cell.DevelopSE;
+            var se = gameSystem.Constants.Cell.DevelopSE;
             Assert.IsNotNull(se);
-            GameSystem.Instance.SEController.Play(se);
+            gameSystem.SEController.Play(se);
         }
     }
 }
