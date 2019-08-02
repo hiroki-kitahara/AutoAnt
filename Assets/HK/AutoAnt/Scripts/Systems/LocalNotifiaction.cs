@@ -87,6 +87,10 @@ namespace HK.AutoAnt.Systems
                 }
             });
 #endif
+
+#if AA_DEBUG
+            Debug.Log($"LocalNotification.Register title = {title}, message = {message}, afterSeconds = {afterSeconds}, smallIcon = {smallIcon}, largeIcon = {largeIcon}");
+#endif
         }
 
         /// <summary>
@@ -100,6 +104,10 @@ namespace HK.AutoAnt.Systems
 #elif UNITY_IOS && !UNITY_EDITOR
             iOSNotificationCenter.ApplicationBadge = 0;
             iOSNotificationCenter.RemoveAllScheduledNotifications();
+#endif
+
+#if AA_DEBUG
+            Debug.Log("LocalNotification.Clear");
 #endif
         }
     }
