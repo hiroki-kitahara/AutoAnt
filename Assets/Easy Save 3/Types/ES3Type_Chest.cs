@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("size", "Items")]
+	[ES3PropertiesAttribute("size", "Items", "Origin", "name")]
 	public class ES3Type_Chest : ES3ScriptableObjectType
 	{
 		public static ES3Type Instance = null;
@@ -16,6 +16,8 @@ namespace ES3Types
 			
 			writer.WritePrivateField("size", instance);
 			writer.WritePrivateProperty("Items", instance);
+			writer.WritePrivateProperty("Origin", instance);
+			writer.WriteProperty("name", instance.name, ES3Type_string.Instance);
 		}
 
 		protected override void ReadScriptableObject<T>(ES3Reader reader, object obj)
@@ -32,6 +34,12 @@ namespace ES3Types
 					case "Items":
 					reader.SetPrivateProperty("Items", reader.Read<System.Collections.Generic.List<System.Int32>>(), instance);
 					break;
+					case "Origin":
+					reader.SetPrivateProperty("Origin", reader.Read<UnityEngine.Vector2Int>(), instance);
+					break;
+					case "name":
+						instance.name = reader.Read<System.String>(ES3Type_string.Instance);
+						break;
 					default:
 						reader.Skip();
 						break;
