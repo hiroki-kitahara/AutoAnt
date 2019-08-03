@@ -40,6 +40,11 @@ namespace HK.AutoAnt.Constants
         /// 道路
         /// </summary>
         Road,
+
+        /// <summary>
+        /// 貯蔵
+        /// </summary>
+        Chest,
     }
 
     /// <summary>
