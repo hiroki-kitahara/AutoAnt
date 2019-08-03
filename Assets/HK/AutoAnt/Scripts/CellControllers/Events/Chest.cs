@@ -14,7 +14,7 @@ namespace HK.AutoAnt.CellControllers.Events
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Chest")]
     public sealed class Chest : CellEvent
     {
-        public List<int> items { get; private set; } = new List<int>();
+        public List<int> Items { get; private set; } = new List<int>();
         
         public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
         {
