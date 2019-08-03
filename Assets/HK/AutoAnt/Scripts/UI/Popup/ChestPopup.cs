@@ -8,7 +8,7 @@ namespace HK.AutoAnt.UI
     /// <summary>
     /// 貯蔵ポップアップを制御するクラス
     /// </summary>
-    public sealed class ChestPopup : MonoBehaviour
+    public sealed class ChestPopup : Popup
     {
         [SerializeField]
         private TextMeshProUGUI title = null;
