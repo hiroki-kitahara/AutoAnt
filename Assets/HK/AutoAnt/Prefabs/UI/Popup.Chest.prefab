@@ -171,7 +171,6 @@ GameObject:
   - component: {fileID: 6770451695016610497}
   - component: {fileID: 5284041671837349334}
   - component: {fileID: 6241012480221795839}
-  - component: {fileID: 6375864948511919967}
   m_Layer: 5
   m_Name: Body
   m_TagString: Untagged
@@ -255,7 +254,7 @@ MonoBehaviour:
     m_Top: 20
     m_Bottom: 20
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 20
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -276,26 +275,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
---- !u!114 &6375864948511919967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3500666421622749462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: 800
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!114 &857513669064895084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +302,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1933528326858120783}
     m_Modifications:
+    - target: {fileID: 9179797974378608589, guid: 9e66997d451204523aec4ddd796f0d91,
+        type: 3}
+      propertyPath: m_ChildAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8289686571042617993, guid: 9e66997d451204523aec4ddd796f0d91,
         type: 3}
       propertyPath: m_Name
