@@ -18,12 +18,10 @@ namespace HK.AutoAnt.CellControllers.Events
         
         public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
         {
-            throw new System.NotImplementedException();
         }
 
         public override void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller)
         {
-            throw new System.NotImplementedException();
         }
 
         public override void OnClick(Cell owner)
