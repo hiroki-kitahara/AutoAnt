@@ -18,6 +18,10 @@ namespace HK.AutoAnt.UI.Elements
         private Image value = null;
         public Image Value => this.value;
 
+        [SerializeField]
+        private Button button = null;
+        public Button Button => this.button;
+
         private static readonly ObjectPoolBundle<GridListElement> pools = new ObjectPoolBundle<GridListElement>();
 
         private ObjectPool<GridListElement> pool;
