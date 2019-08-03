@@ -31,8 +31,4 @@ MonoBehaviour:
     name: PrefabName
     isEnable: 0
     isArray: 0
-  - type: 0
-    name: Test
-    isEnable: 0
-    isArray: 0
   AccessCode: 
