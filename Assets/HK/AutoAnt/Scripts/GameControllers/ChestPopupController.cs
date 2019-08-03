@@ -21,7 +21,7 @@ namespace HK.AutoAnt.GameControllers
             Broker.Global.Receive<RequestOpenChestPopup>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-
+                    _this.OpenPopup(x.Chest);
                 })
                 .AddTo(this);
         }
