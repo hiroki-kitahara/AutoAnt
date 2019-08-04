@@ -32,6 +32,8 @@ namespace HK.AutoAnt.GameControllers
             popup.Title.text = chest.EventName;
             popup.GridList.SetData(chest.Items, (i, stackedItem, element) =>
             {
+                element.transform.localScale = Vector3.one;
+
                 if(stackedItem == null)
                 {
                     element.Value.enabled = false;
@@ -40,7 +42,6 @@ namespace HK.AutoAnt.GameControllers
 
                 element.Value.enabled = true;
                 element.Value.sprite = stackedItem.ItemRecord.IconToSprite;
-                element.transform.localScale = Vector3.one;
             });
             popup.CloseButton.OnClickAsObservable()
                 .SubscribeWithState(popup, (_, _popup) =>
