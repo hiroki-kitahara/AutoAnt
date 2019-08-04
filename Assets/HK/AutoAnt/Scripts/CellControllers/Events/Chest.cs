@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using HK.AutoAnt.UI;
 using System.Collections.Generic;
+using HK.AutoAnt.Events;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -26,6 +27,7 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public override void OnClick(Cell owner)
         {
+            Framework.EventSystems.Broker.Global.Publish(RequestOpenChestPopup.Get(this));
         }
     }
 }

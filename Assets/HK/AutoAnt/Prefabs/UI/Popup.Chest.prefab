@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecb32a1371924bbba5d9262069d8a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tweenAnimationHolder: {fileID: 2104112531458021771}
   title: {fileID: 84592492691104824}
   gridList: {fileID: 6550818124641577879}
 --- !u!1001 &6919545176095626768
@@ -615,6 +616,12 @@ RectTransform:
 --- !u!225 &3020477356348606745 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 5646976109863855271, guid: 73ef3f381a00445bd91f13e16f37b58d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7472864851745336766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2104112531458021771 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8829234288483939381, guid: 73ef3f381a00445bd91f13e16f37b58d,
     type: 3}
   m_PrefabInstance: {fileID: 7472864851745336766}
   m_PrefabAsset: {fileID: 0}
