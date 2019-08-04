@@ -100,10 +100,6 @@ namespace HK.AutoAnt.CellControllers.Events
             return gimmick;
         }
 
-        public abstract void AttachFooterSelectCellEvent(FooterSelectBuildingController controller);
-
-        public abstract void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller);
-
 #if UNITY_EDITOR
         protected virtual void OnValidate()
         {
