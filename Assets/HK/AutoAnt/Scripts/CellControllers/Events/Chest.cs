@@ -5,6 +5,7 @@ using HK.AutoAnt.Events;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.Extensions;
+using HK.AutoAnt.GameControllers;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -16,9 +17,9 @@ namespace HK.AutoAnt.CellControllers.Events
     ///     - アイテムを貯蔵出来る
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Chest")]
-    public sealed class Chest : CellEvent
+    public sealed class Chest : CellEvent, IChest
     {
-        public List<int> Items { get; private set; } = new List<int>();
+        public StackedItem[] Items { get; private set; }
 
         private MasterDataChestParameter.Record parameter = null;
 
@@ -26,6 +27,15 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             base.Initialize(position, gameSystem, isInitializingGame);
             this.parameter = GameSystem.Instance.MasterData.ChestParameter.Records.Get(this.Id);
+
+            if(!isInitializingGame)
+            {
+                this.Items = new StackedItem[this.parameter.Capacity];
+                for (var i = 0; i < this.parameter.Capacity; i++)
+                {
+                    this.Items[i] = null;
+                }
+            }
         }
 
         public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
@@ -39,6 +49,16 @@ namespace HK.AutoAnt.CellControllers.Events
         public override void OnClick(Cell owner)
         {
             Framework.EventSystems.Broker.Global.Publish(RequestOpenChestPopup.Get(this));
+        }
+
+        void IChest.Add(StackedItem stackedItem)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IChest.PickOut(int listId)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

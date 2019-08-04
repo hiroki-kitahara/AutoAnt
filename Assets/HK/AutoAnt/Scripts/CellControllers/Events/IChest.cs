@@ -11,15 +11,12 @@ namespace HK.AutoAnt.CellControllers.Events
         /// <summary>
         /// 貯蔵しているアイテム
         /// </summary>
-        List<StackedItem> Items { get; }
+        StackedItem[] Items { get; }
         
         /// <summary>
-        /// <paramref name="itemId"/>を追加する
+        /// アイテムを追加
         /// </summary>
-        /// <remarks>
-        /// 既に<paramref name="itemId"/>を持っている場合はスタックされます
-        /// </remarks>
-        void Add(int itemId);
+        void Add(StackedItem stackedItem);
 
         /// <summary>
         /// <paramref name="listId"/>に紐づくアイテムを取り出す

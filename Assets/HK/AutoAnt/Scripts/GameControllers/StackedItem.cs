@@ -17,5 +17,17 @@ namespace HK.AutoAnt.GameControllers
         /// アイテムの量
         /// </summary>
         public int Amount { get; private set; }
+
+        public StackedItem()
+        {
+            this.ItemId = 0;
+            this.Amount = 0;
+        }
+        
+        public StackedItem(int itemId, int amount)
+        {
+            this.ItemId = itemId;
+            this.Amount = amount;
+        }
     }
 }
