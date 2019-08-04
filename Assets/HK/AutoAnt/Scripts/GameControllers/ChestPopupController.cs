@@ -40,6 +40,7 @@ namespace HK.AutoAnt.GameControllers
                 }
 
                 element.SetValue(stackedItem.ItemRecord.IconToSprite);
+                element.Amount.text = stackedItem.Amount.ToString();
             });
             popup.CloseButton.OnClickAsObservable()
                 .SubscribeWithState(popup, (_, _popup) =>
