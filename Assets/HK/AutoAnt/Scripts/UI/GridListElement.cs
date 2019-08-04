@@ -1,4 +1,5 @@
 ﻿using HK.Framework;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
@@ -17,6 +18,10 @@ namespace HK.AutoAnt.UI.Elements
         [SerializeField]
         private Image value = null;
         public Image Value => this.value;
+
+        [SerializeField]
+        private TextMeshProUGUI amount = null;
+        public TextMeshProUGUI Amount => this.amount;
 
         [SerializeField]
         private Button button = null;
