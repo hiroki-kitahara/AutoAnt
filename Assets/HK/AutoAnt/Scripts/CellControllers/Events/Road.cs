@@ -166,16 +166,6 @@ namespace HK.AutoAnt.CellControllers.Events
             return false;
         }
 
-        public override void AttachDetailsPopup(CellEventDetailsPopup popup)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void UpdateDetailsPopup(CellEventDetailsPopup popup)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
         {
             throw new System.NotImplementedException();

@@ -57,6 +57,9 @@ namespace HK.AutoAnt.Extensions
             Broker.Global.Publish(RequestNotification.Get($"レベルアップ！ {self.Level - 1} -> {self.Level}", NotificationUIElement.MessageType.Information));
         }
 
+        /// <summary>
+        /// <see cref="ILevelUpEvent"/>で共通して<see cref="CellEventDetailsPopup"/>にアタッチする処理
+        /// </summary>
         public static void AttachDetailsPopup(this ILevelUpEvent self, CellEventDetailsPopup popup, GameSystem gameSystem)
         {
             var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(self.Id, self.Level);
