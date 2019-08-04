@@ -49,6 +49,28 @@ namespace HK.AutoAnt.UI.Elements
             this.pool.Return(this);
         }
 
+        /// <summary>
+        /// 各種プロパティの状態をリセットする
+        /// </summary>
+        public void Clear()
+        {
+            this.SetValue(null);
+            this.amount.text = "";
+            this.transform.localScale = Vector3.one;
+        }
+
+        public void SetValue(Sprite sprite)
+        {
+            this.SetValue(sprite, Color.white);
+        }
+
+        public void SetValue(Sprite sprite, Color color)
+        {
+            this.value.enabled = sprite != null;
+            this.value.sprite = sprite;
+            this.value.color = color;
+        }
+
         private static void Initialize()
         {
             if(pooledParent != null)

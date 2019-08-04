@@ -32,16 +32,14 @@ namespace HK.AutoAnt.GameControllers
             popup.Title.text = chest.EventName;
             popup.GridList.SetData(chest.Items, (i, stackedItem, element) =>
             {
-                element.transform.localScale = Vector3.one;
+                element.Clear();
 
                 if(stackedItem == null)
                 {
-                    element.Value.enabled = false;
                     return;
                 }
 
-                element.Value.enabled = true;
-                element.Value.sprite = stackedItem.ItemRecord.IconToSprite;
+                element.SetValue(stackedItem.ItemRecord.IconToSprite);
             });
             popup.CloseButton.OnClickAsObservable()
                 .SubscribeWithState(popup, (_, _popup) =>
