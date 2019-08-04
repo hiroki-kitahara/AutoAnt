@@ -32,6 +32,13 @@ namespace HK.AutoAnt.Database
             public Texture2D Icon => this.icon;
 
             /// <summary>
+            /// スタック出来る数
+            /// </summary>
+            [SerializeField]
+            private int stackNumber = 0;
+            public int StackNumber => this.stackNumber;
+
+            /// <summary>
             /// <see cref="Icon"/>を<see cref="Sprite"/>に変換して返す
             /// </summary>
             public Sprite IconToSprite
@@ -55,6 +62,7 @@ namespace HK.AutoAnt.Database
                 var stringAsset = AssetDatabase.LoadAssetAtPath<StringAsset>("Assets/HK/AutoAnt/DataSources/StringAsset/Item.asset");
                 this.name = stringAsset.CreateFinderSafe(data.Name);
                 this.icon = AssetDatabase.LoadAssetAtPath<Texture2D>($"Assets/HK/AutoAnt/Textures/Icon/{data.Icon}.png");
+                this.stackNumber = data.Stacknumber;
             }
 #endif
         }

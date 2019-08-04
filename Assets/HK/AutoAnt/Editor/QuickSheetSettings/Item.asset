@@ -31,4 +31,8 @@ MonoBehaviour:
     name: Icon
     isEnable: 0
     isArray: 0
+  - type: 3
+    name: StackNumber
+    isEnable: 0
+    isArray: 0
   AccessCode: 

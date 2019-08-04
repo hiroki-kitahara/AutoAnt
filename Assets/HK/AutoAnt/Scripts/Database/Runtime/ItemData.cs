@@ -23,5 +23,9 @@ public string Name { get {return name; } set { name = value;} }
 string icon;
 public string Icon { get {return icon; } set { icon = value;} }
 
+[SerializeField]
+int stacknumber;
+public int Stacknumber { get {return stacknumber; } set { stacknumber = value;} }
+
     }
 }
