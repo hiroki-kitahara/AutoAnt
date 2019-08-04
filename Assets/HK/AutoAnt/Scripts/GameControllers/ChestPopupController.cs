@@ -30,9 +30,14 @@ namespace HK.AutoAnt.GameControllers
         {
             var popup = PopupManager.Request(this.popupPrefab);
             popup.Title.text = chest.EventName;
+            popup.CloseButton.OnClickAsObservable()
+                .SubscribeWithState(popup, (_, _popup) =>
+                {
+                    _popup.Close();
+                })
+                .AddTo(popup);
 
             popup.Open();
-            Debug.Log("?");
         }
     }
 }
