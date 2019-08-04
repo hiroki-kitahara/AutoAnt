@@ -1,4 +1,7 @@
 ﻿using System;
+using HK.AutoAnt.Database;
+using HK.AutoAnt.Extensions;
+using HK.AutoAnt.Systems;
 
 namespace HK.AutoAnt.GameControllers
 {
@@ -12,6 +15,23 @@ namespace HK.AutoAnt.GameControllers
         /// アイテムのID
         /// </summary>
         public int ItemId { get; private set; }
+
+        /// <summary>
+        /// アイテムのレコード
+        /// </summary>
+        public MasterDataItem.Record ItemRecord
+        {
+            get
+            {
+                if(this.cachedItemRecord == null)
+                {
+                    this.cachedItemRecord = GameSystem.Instance.MasterData.Item.Records.Get(this.ItemId);
+                }
+
+                return this.cachedItemRecord;
+            }
+        }
+        private MasterDataItem.Record cachedItemRecord = null;
 
         /// <summary>
         /// アイテムの量
