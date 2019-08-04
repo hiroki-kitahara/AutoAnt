@@ -36,7 +36,7 @@ namespace HK.AutoAnt.GameControllers
         /// <summary>
         /// アイテムの量
         /// </summary>
-        public int Amount { get; private set; }
+        public int Amount { get; set; }
 
         public StackedItem()
         {
@@ -48,6 +48,22 @@ namespace HK.AutoAnt.GameControllers
         {
             this.ItemId = itemId;
             this.Amount = amount;
+        }
+
+        /// <summary>
+        /// スタック数よりも多く貯蔵しているか返す
+        /// </summary>
+        public bool IsOverflow()
+        {
+            return this.Amount > this.ItemRecord.StackNumber;
+        }
+
+        /// <summary>
+        /// 最大値までスタックしているか返す
+        /// </summary>
+        public bool IsFull()
+        {
+            return this.Amount == this.ItemRecord.StackNumber;
         }
     }
 }
