@@ -6,7 +6,7 @@ namespace HK.AutoAnt.CellControllers.Events
     /// <summary>
     /// 貯蔵可能なセルイベントのインターフェイス
     /// </summary>
-    public interface IChest
+    public interface IChest : ICellEvent
     {
         /// <summary>
         /// 貯蔵しているアイテム
