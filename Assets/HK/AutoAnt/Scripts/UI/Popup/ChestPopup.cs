@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 
 namespace HK.AutoAnt.UI
 {
@@ -17,5 +18,9 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private GridList gridList = null;
         public GridList GridList => this.gridList;
+
+        [SerializeField]
+        private Button closeButton = null;
+        public Button CloseButton => this.closeButton;
     }
 }
