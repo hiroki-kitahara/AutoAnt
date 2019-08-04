@@ -21,4 +21,5 @@ MonoBehaviour:
   facilityLevelParameter: {fileID: 11400000, guid: 5e64f02039ca648e88608647a4d8176f,
     type: 2}
   roadLevelParameter: {fileID: 11400000, guid: 2262987fa9cad4b4ea2e0ff404bd16e4, type: 2}
+  chestParameter: {fileID: 11400000, guid: e11eba0ab0eaa44638fa75251d74db0c, type: 2}
   unlockCellEvent: {fileID: 11400000, guid: 205009221d8ff40df9aba6922d9ba38c, type: 2}
