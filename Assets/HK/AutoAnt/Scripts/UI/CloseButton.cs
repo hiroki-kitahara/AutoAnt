@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace HK.AutoAnt.UI
+namespace HK.AutoAnt.UI.Elements
 {
     /// <summary>
-    /// 閉じるポップアップを制御するクラス
+    /// 閉じるボタンを制御するクラス
     /// </summary>
-    public sealed class ClosePopup : TweenPopup
+    public sealed class CloseButton : MonoBehaviour
     {
         [SerializeField]
         private Button button = null;
