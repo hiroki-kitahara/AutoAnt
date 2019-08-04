@@ -2,6 +2,7 @@
 using UnityEngine;
 
 #if UNITY_EDITOR
+using HK.AutoAnt.Database.SpreadSheetData;
 #endif
 
 namespace HK.AutoAnt.Database
@@ -27,6 +28,11 @@ namespace HK.AutoAnt.Database
             public int Capacity => this.capacity;
 
 #if UNITY_EDITOR
+            public Record(ChestParameterData data)
+            {
+                this.id = data.Id;
+                this.capacity = data.Capacity;
+            }
 #endif
         }
     }
