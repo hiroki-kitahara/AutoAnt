@@ -35,6 +35,7 @@ namespace HK.AutoAnt.UI.Elements
 
         public GridListElement Rent()
         {
+            Initialize();
             var pool = pools.Get(this);
             var clone = pool.Rent();
             clone.pool = pool;
