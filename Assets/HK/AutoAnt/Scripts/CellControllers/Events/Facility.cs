@@ -25,7 +25,8 @@ namespace HK.AutoAnt.CellControllers.Events
         ILevelUpEvent,
         IReceiveBuff,
         IProductHolder,
-        IOpenCellEventDetailsPopup
+        IOpenCellEventDetailsPopup,
+        IFooterSelectCellEvent
     {
         /// <summary>
         /// レベル
@@ -183,13 +184,9 @@ namespace HK.AutoAnt.CellControllers.Events
             this.gameSystem.User.Town.AddPopularity(newPopularity);
         }
 
-        public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
+        void IFooterSelectCellEvent.Attach(FooterSelectCellEventController controller)
         {
             this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
-        }
-
-        public override void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller)
-        {
         }
 
         void IOpenCellEventDetailsPopup.Attach(CellEventDetailsPopup popup)
