@@ -48,35 +48,6 @@ namespace HK.AutoAnt.CellControllers.Events
         public override void OnClick(Cell owner)
         {
             Framework.EventSystems.Broker.Global.Publish(RequestOpenChestPopup.Get(this));
-
-            owner.UpdateAsObservable()
-                .SubscribeWithState(this, (_, _this) =>
-                {
-                    if (Input.GetKeyDown(KeyCode.T))
-                    {
-                        var ichest = _this as IChest;
-                        var stackedItem = new StackedItem(100000, 88);
-                        if(ichest.CanAdd(stackedItem))
-                        {
-                            var restItem = ichest.Add(stackedItem);
-                            if(restItem == null)
-                            {
-                                Debug.Log(string.Join(",", _this.Items.Select(i =>
-                                {
-                                    return i == null ? "[]" : $"[ItemId = {i.ItemId}, Amount = {i.Amount}]";
-                                })));
-                            }
-                            else
-                            {
-                                Debug.Log($"restItem ItemId = {restItem.ItemId}, Amount = {restItem.Amount}");
-                            }
-                        }
-                        else
-                        {
-                            Debug.Log("Full!!!");
-                        }
-                    }
-                });
         }
 
         bool IChest.CanAdd(StackedItem newItem)
