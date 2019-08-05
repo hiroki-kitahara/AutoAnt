@@ -184,6 +184,11 @@ namespace HK.AutoAnt.CellControllers.Events
             this.gameSystem.User.Town.AddPopularity(newPopularity);
         }
 
+        void IFooterSelectCellEvent.Attach(FooterSelectCellEventController controller)
+        {
+            this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
+        }
+
         void IOpenCellEventDetailsPopup.Attach(CellEventDetailsPopup popup)
         {
             popup.AddProperty(property =>
@@ -207,11 +212,6 @@ namespace HK.AutoAnt.CellControllers.Events
             popup.UpdateProperties();
             popup.ClearLevelUpCosts();
             this.AttachDetailsPopup(popup, this.gameSystem);
-        }
-
-        void IFooterSelectCellEvent.Attach(FooterSelectCellEventController controller)
-        {
-            this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
         }
     }
 }

@@ -9,23 +9,15 @@ namespace HK.AutoAnt.Database.SpreadSheetData
     /// !!! DO NOT CHANGE Tabs to Spaces !!!
     ///
     [System.Serializable]
-    public class ItemData : IRecord
+    public class ChestParameterData : IRecord
     {
 [SerializeField]
 int id;
 public int Id { get {return id; } set { id = value;} }
 
 [SerializeField]
-string name;
-public string Name { get {return name; } set { name = value;} }
-
-[SerializeField]
-string icon;
-public string Icon { get {return icon; } set { icon = value;} }
-
-[SerializeField]
-int stacknumber;
-public int Stacknumber { get {return stacknumber; } set { stacknumber = value;} }
+int capacity;
+public int Capacity { get {return capacity; } set { capacity = value;} }
 
     }
 }
