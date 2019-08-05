@@ -26,7 +26,7 @@ namespace HK.AutoAnt.CellControllers.Events
     {
         public StackedItem[] Items { get; private set; }
 
-        StackedItem[] IChest.Items => throw new System.NotImplementedException();
+        StackedItem[] IChest.Items => this.Items;
 
         private MasterDataChestParameter.Record parameter = null;
 
@@ -96,10 +96,9 @@ namespace HK.AutoAnt.CellControllers.Events
         StackedItem IChest.Add(StackedItem newItem)
         {
             var alreadyItemIndex = Array.FindIndex(this.Items, i => i != null && i.ItemId == newItem.ItemId && !i.IsFull());
-            var alreadyItem = this.Items[alreadyItemIndex];
 
             // 同じアイテムIDがない場合は新規で追加
-            if(alreadyItem == null)
+            if(alreadyItemIndex == -1)
             {
                 var emptyIndex = Array.FindIndex(this.Items, i => i == null);
                 Assert.AreNotEqual(-1, emptyIndex);
@@ -108,35 +107,33 @@ namespace HK.AutoAnt.CellControllers.Events
 
                 return null;
             }
-            else
+
+            var alreadyItem = this.Items[alreadyItemIndex];
+            alreadyItem.Amount += newItem.Amount;
+
+            // もしスタック数を超えた場合は超過分を空に追加する
+            if (alreadyItem.IsOverflow())
             {
-                alreadyItem.Amount += newItem.Amount;
+                newItem.Amount = alreadyItem.Amount - newItem.ItemRecord.StackNumber;
+                alreadyItem.Amount = alreadyItem.ItemRecord.StackNumber;
+                this.Broker.Publish(UpdatedStackedItemInChest.Get(this, alreadyItemIndex));
+                var emptyIndex = Array.FindIndex(this.Items, i => i == null);
 
-                // もしスタック数を超えた場合は超過分を空に追加する
-                if(alreadyItem.IsOverflow())
+                // 空きがない場合は超過分を返す
+                if (emptyIndex == -1)
                 {
-                    newItem.Amount = alreadyItem.Amount - newItem.ItemRecord.StackNumber;
-                    alreadyItem.Amount = alreadyItem.ItemRecord.StackNumber;
-                    this.Broker.Publish(UpdatedStackedItemInChest.Get(this, alreadyItemIndex));
-                    var emptyIndex = Array.FindIndex(this.Items, i => i == null);
-
-                    // 空きがない場合は超過分を返す
-                    if(emptyIndex == -1)
-                    {
-                        return newItem;
-                    }
-                    else
-                    {
-                        this.Items[emptyIndex] = newItem;
-                        this.Broker.Publish(UpdatedStackedItemInChest.Get(this, emptyIndex));
-                        return null;
-                    }
+                    return newItem;
                 }
                 else
                 {
-                    this.Broker.Publish(UpdatedStackedItemInChest.Get(this, alreadyItemIndex));
+                    this.Items[emptyIndex] = newItem;
+                    this.Broker.Publish(UpdatedStackedItemInChest.Get(this, emptyIndex));
+                    return null;
                 }
-
+            }
+            else
+            {
+                this.Broker.Publish(UpdatedStackedItemInChest.Get(this, alreadyItemIndex));
                 return null;
             }
         }

@@ -1,6 +1,7 @@
 ﻿using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.UI;
+using HK.AutoAnt.UI.Elements;
 using HK.Framework.EventSystems;
 using UniRx;
 using UnityEngine;
@@ -30,18 +31,7 @@ namespace HK.AutoAnt.GameControllers
         {
             var popup = PopupManager.Request(this.popupPrefab);
             popup.Title.text = chest.EventName;
-            popup.GridList.SetData(chest.Items, (i, stackedItem, element) =>
-            {
-                element.Clear();
-
-                if(stackedItem == null)
-                {
-                    return;
-                }
-
-                element.SetValue(stackedItem.ItemRecord.IconToSprite);
-                element.Amount.text = stackedItem.Amount.ToString();
-            });
+            popup.GridList.SetData(chest.Items, this.ApplyGridListElement);
             popup.CloseButton.OnClickAsObservable()
                 .SubscribeWithState(popup, (_, _popup) =>
                 {
@@ -49,7 +39,27 @@ namespace HK.AutoAnt.GameControllers
                 })
                 .AddTo(popup);
 
+            chest.Broker.Receive<UpdatedStackedItemInChest>()
+                .SubscribeWithState2(this, popup, (x, _this ,p) =>
+                {
+                    p.GridList.UpdateData(x.Chest.Items, x.ItemsIndex, _this.ApplyGridListElement);
+                })
+                .AddTo(popup);
+
             popup.Open();
+        }
+
+        private void ApplyGridListElement(int itemsIndex, StackedItem stackedItem, GridListElement element)
+        {
+            element.Clear();
+
+            if (stackedItem == null)
+            {
+                return;
+            }
+
+            element.SetValue(stackedItem.ItemRecord.IconToSprite);
+            element.Amount.text = stackedItem.Amount.ToString();
         }
     }
 }
