@@ -45,14 +45,6 @@ namespace HK.AutoAnt.CellControllers.Events
             }
         }
 
-        public override void AttachFooterSelectCellEvent(FooterSelectBuildingController controller)
-        {
-        }
-
-        public override void UpdateFooterSelectCellEvent(FooterSelectBuildingController controller)
-        {
-        }
-
         public override void OnClick(Cell owner)
         {
             Framework.EventSystems.Broker.Global.Publish(RequestOpenChestPopup.Get(this));
