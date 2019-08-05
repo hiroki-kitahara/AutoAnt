@@ -96,6 +96,8 @@ namespace HK.AutoAnt.CellControllers.Events
         StackedItem IChest.Add(StackedItem newItem)
         {
             var alreadyItem = Array.Find(this.Items, i => i != null && i.ItemId == newItem.ItemId && !i.IsFull());
+
+            // 同じアイテムIDがない場合は新規で追加
             if(alreadyItem == null)
             {
                 var emptyIndex = Array.FindIndex(this.Items, i => i == null);
@@ -107,11 +109,15 @@ namespace HK.AutoAnt.CellControllers.Events
             else
             {
                 alreadyItem.Amount += newItem.Amount;
+
+                // もしスタック数を超えた場合は超過分を空に追加する
                 if(alreadyItem.IsOverflow())
                 {
                     newItem.Amount = alreadyItem.Amount - newItem.ItemRecord.StackNumber;
                     alreadyItem.Amount = alreadyItem.ItemRecord.StackNumber;
                     var emptyIndex = Array.FindIndex(this.Items, i => i == null);
+
+                    // 空きがない場合は超過分を返す
                     if(emptyIndex == -1)
                     {
                         return newItem;
