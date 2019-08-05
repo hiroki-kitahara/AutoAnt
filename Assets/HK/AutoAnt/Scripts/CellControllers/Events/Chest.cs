@@ -95,7 +95,8 @@ namespace HK.AutoAnt.CellControllers.Events
 
         StackedItem IChest.Add(StackedItem newItem)
         {
-            var alreadyItem = Array.Find(this.Items, i => i != null && i.ItemId == newItem.ItemId && !i.IsFull());
+            var alreadyItemIndex = Array.FindIndex(this.Items, i => i != null && i.ItemId == newItem.ItemId && !i.IsFull());
+            var alreadyItem = this.Items[alreadyItemIndex];
 
             // 同じアイテムIDがない場合は新規で追加
             if(alreadyItem == null)
@@ -103,6 +104,7 @@ namespace HK.AutoAnt.CellControllers.Events
                 var emptyIndex = Array.FindIndex(this.Items, i => i == null);
                 Assert.AreNotEqual(-1, emptyIndex);
                 this.Items[emptyIndex] = newItem;
+                this.Broker.Publish(UpdatedStackedItemInChest.Get(this, emptyIndex));
 
                 return null;
             }
@@ -115,6 +117,7 @@ namespace HK.AutoAnt.CellControllers.Events
                 {
                     newItem.Amount = alreadyItem.Amount - newItem.ItemRecord.StackNumber;
                     alreadyItem.Amount = alreadyItem.ItemRecord.StackNumber;
+                    this.Broker.Publish(UpdatedStackedItemInChest.Get(this, alreadyItemIndex));
                     var emptyIndex = Array.FindIndex(this.Items, i => i == null);
 
                     // 空きがない場合は超過分を返す
@@ -125,8 +128,13 @@ namespace HK.AutoAnt.CellControllers.Events
                     else
                     {
                         this.Items[emptyIndex] = newItem;
+                        this.Broker.Publish(UpdatedStackedItemInChest.Get(this, emptyIndex));
                         return null;
                     }
+                }
+                else
+                {
+                    this.Broker.Publish(UpdatedStackedItemInChest.Get(this, alreadyItemIndex));
                 }
 
                 return null;
