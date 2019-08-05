@@ -13,7 +13,7 @@ namespace HK.AutoAnt.UI
     /// <summary>
     /// フッターメニューの建設メニューの要素を制御するクラス
     /// </summary>
-    public sealed class FooterSelectBuildingElement : MonoBehaviour
+    public sealed class FooterSelectCellEventElement : MonoBehaviour
     {
         [SerializeField]
         private TextMeshProUGUI text = null;
@@ -21,9 +21,9 @@ namespace HK.AutoAnt.UI
         [SerializeField]
         private Button button = null;
 
-        private readonly ObjectPoolBundle<FooterSelectBuildingElement> pools = new ObjectPoolBundle<FooterSelectBuildingElement>();
+        private readonly ObjectPoolBundle<FooterSelectCellEventElement> pools = new ObjectPoolBundle<FooterSelectCellEventElement>();
 
-        private ObjectPool<FooterSelectBuildingElement> pool;
+        private ObjectPool<FooterSelectCellEventElement> pool;
 
         private MasterDataCellEvent.Record record;
 
@@ -41,7 +41,7 @@ namespace HK.AutoAnt.UI
                 .AddTo(this);
         }
 
-        public FooterSelectBuildingElement Rent(MasterDataCellEvent.Record record)
+        public FooterSelectCellEventElement Rent(MasterDataCellEvent.Record record)
         {
             var pool = pools.Get(this);
             var clone = pool.Rent();
