@@ -21,15 +21,14 @@ namespace HK.AutoAnt.Extensions
         {
             Broker.Global.Publish(PopupEvents.StartOpen.Get(self));
 
-            var onCompleteStreams = new List<IObservable<Unit>>();
+            var maxDuration = float.MinValue;
             foreach(var t in self.TweenAnimations)
             {
                 t.DOPlayForward();
-                onCompleteStreams.Add(t.onComplete.AsObservable());
+                maxDuration = Math.Max(maxDuration, t.duration);
             }
 
-            Observable.Zip(onCompleteStreams)
-                .Take(1)
+            Observable.Timer(TimeSpan.FromSeconds(maxDuration))
                 .SubscribeWithState(self, (_, _self) =>
                 {
                     Broker.Global.Publish(PopupEvents.CompleteOpen.Get(_self));
@@ -43,15 +42,14 @@ namespace HK.AutoAnt.Extensions
         {
             Broker.Global.Publish(PopupEvents.StartClose.Get(self));
 
-            var onCompleteStreams = new List<IObservable<Unit>>();
+            var maxDuration = float.MinValue;
             foreach (var t in self.TweenAnimations)
             {
                 t.DOPlayBackwards();
-                onCompleteStreams.Add(t.onComplete.AsObservable());
+                maxDuration = Math.Max(maxDuration, t.duration);
             }
 
-            Observable.Zip(onCompleteStreams)
-                .Take(1)
+            Observable.Timer(TimeSpan.FromSeconds(maxDuration))
                 .SubscribeWithState(self, (_, _self) =>
                 {
                     Broker.Global.Publish(PopupEvents.CompleteClose.Get(_self));
