@@ -91,7 +91,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32a9e39d6b1a4883b98a904a8a2dd89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSystem: {fileID: 1507591049520222701}
   parent: {fileID: 2040718279388478634}
   fieldInitializer: {fileID: 11400000, guid: 76ec690736641484397c596d778da882, type: 2}
 --- !u!114 &6158404924586126944

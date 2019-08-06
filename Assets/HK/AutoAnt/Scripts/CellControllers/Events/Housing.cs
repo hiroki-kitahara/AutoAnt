@@ -50,13 +50,13 @@ namespace HK.AutoAnt.CellControllers.Events
         
         public float Buff { get; private set; } = 0.0f;
 
-        private GameSystem gameSystem;
-
         private MasterDataHousingLevelParameter.Record levelParameter;
 
-        void IAddTownPopulation.Add(GameSystem gameSystem, float deltaTime)
+        void IAddTownPopulation.Add(float deltaTime)
         {
             Assert.IsNotNull(this.levelParameter);
+
+            var gameSystem = GameSystem.Instance;
             var popularityRate = gameSystem.Constants.Housing.PopularityRate;
             var town = gameSystem.User.Town;
             var result = Calculator.AddPopulation(this.levelParameter.Population, town.Popularity.Value, popularityRate, 1.0f + this.Buff, deltaTime);
@@ -64,18 +64,18 @@ namespace HK.AutoAnt.CellControllers.Events
             town.AddPopulation(result);
         }
 
-        public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
+        public override void Initialize(Vector2Int position, bool isInitializingGame)
         {
-            base.Initialize(position, gameSystem, isInitializingGame);
-            this.gameSystem = gameSystem;
-            this.gameSystem.User.Town.AddPopulation(this.CurrentPopulation);
-            this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
+            var gameSystem = GameSystem.Instance;
+            base.Initialize(position, isInitializingGame);
+            gameSystem.User.Town.AddPopulation(this.CurrentPopulation);
+            this.levelParameter = gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
         }
 
-        public override void Remove(GameSystem gameSystem)
+        public override void Remove()
         {
-            base.Remove(gameSystem);
-            gameSystem.User.Town.AddPopulation(-this.CurrentPopulation);
+            base.Remove();
+            GameSystem.Instance.User.Town.AddPopulation(-this.CurrentPopulation);
         }
 
         public override void OnClick(Cell owner)
@@ -85,13 +85,13 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public bool CanLevelUp()
         {
-            return this.CanLevelUp(this.gameSystem);
+            return Extensions.Extensions.CanLevelUp(this);
         }
 
         public void LevelUp()
         {
-            this.LevelUp(this.gameSystem);
-            this.levelParameter = this.gameSystem.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
+            Extensions.Extensions.LevelUp(this);
+            this.levelParameter = GameSystem.Instance.MasterData.HousingLevelParameter.Records.Get(this.Id, this.Level);
         }
 
         void IReceiveBuff.AddBuff(float value)
@@ -124,7 +124,7 @@ namespace HK.AutoAnt.CellControllers.Events
                 })
                 .AddTo(popup);
 
-            this.AttachDetailsPopup(popup, this.gameSystem);
+            this.AttachDetailsPopup(popup);
         }
 
         void IOpenCellEventDetailsPopup.Update(CellEventDetailsPopup popup)
@@ -132,12 +132,12 @@ namespace HK.AutoAnt.CellControllers.Events
             popup.ApplyTitle(this.EventName, this.Level);
             popup.UpdateProperties();
             popup.ClearLevelUpCosts();
-            this.AttachDetailsPopup(popup, this.gameSystem);
+            this.AttachDetailsPopup(popup);
         }
 
         void IFooterSelectCellEvent.Attach(FooterSelectCellEventController controller)
         {
-            this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
+            this.AttachFooterSelectCellEvent(controller);
         }
     }
 }

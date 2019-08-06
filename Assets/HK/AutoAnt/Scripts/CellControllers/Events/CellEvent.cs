@@ -107,13 +107,13 @@ namespace HK.AutoAnt.CellControllers.Events
         }
 #endif
 
-        public virtual void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
+        public virtual void Initialize(Vector2Int position, bool isInitializingGame)
         {
             this.Origin = position;
 
             // 自分自身のマスターデータを取得してデータを参照している
             // セーブデータから読み込む時にアセットの参照はセーブしていないのでちょっとややこしい作りになっている
-            this.cachedRecord = gameSystem.MasterData.CellEvent.Records.Get(this.Id);
+            this.cachedRecord = GameSystem.Instance.MasterData.CellEvent.Records.Get(this.Id);
             this.Gimmick = this.cachedRecord.EventData.CreateGimmickController(this.Origin);
 
             foreach(var g in this.Gimmick.GetComponentsInChildren<ICellEventGimmick>())
@@ -138,8 +138,9 @@ namespace HK.AutoAnt.CellControllers.Events
             }
         }
 
-        public virtual void Remove(GameSystem gameSystem)
+        public virtual void Remove()
         {
+            var gameSystem = GameSystem.Instance;
             this.instanceEvents.Clear();
 
             // 自分自身のマスターデータを取得してデータを参照している
@@ -152,7 +153,7 @@ namespace HK.AutoAnt.CellControllers.Events
             }
 
             Assert.IsNotNull(record.EventData.destructionSE, $"Id = {this.Id}の破壊時のSE再生に失敗しました");
-            GameSystem.Instance.SEController.Play(record.EventData.destructionSE);
+            gameSystem.SEController.Play(record.EventData.destructionSE);
 
             Assert.IsNotNull(record.EventData.destructionEffect, $"Id = {this.Id}の破壊時のエフェクト生成に失敗しました");
             var effect = record.EventData.destructionEffect.Rent();
@@ -162,7 +163,7 @@ namespace HK.AutoAnt.CellControllers.Events
             Destroy(this.Gimmick.gameObject);
         }
 
-        public Constants.CellEventGenerateEvalute CanGenerate(Cell origin, int cellEventRecordId, GameSystem gameSystem, CellMapper cellMapper)
+        public Constants.CellEventGenerateEvalute CanGenerate(Cell origin, int cellEventRecordId, CellMapper cellMapper)
         {
             Assert.IsNotNull(this.condition);
 
@@ -182,6 +183,7 @@ namespace HK.AutoAnt.CellControllers.Events
             }
 
             // コストが満たしていない場合は生成できない
+            var gameSystem = GameSystem.Instance;
             var masterData = gameSystem.MasterData.LevelUpCost.Records.Get(cellEventRecordId, 0);
             Assert.IsNotNull(masterData, $"CellEventRecordId = {cellEventRecordId}の{typeof(MasterDataLevelUpCost.Record)}がありませんでした");
             if(!masterData.Cost.IsEnough(gameSystem.User, gameSystem.MasterData.Item))

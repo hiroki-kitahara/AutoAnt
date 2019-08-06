@@ -33,8 +33,6 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </summary>
         public int Level { get; set; } = 1;
 
-        private GameSystem gameSystem;
-
         public MasterDataFacilityLevelParameter.Record LevelParameter { get; private set; }
 
         /// <summary>
@@ -61,13 +59,13 @@ namespace HK.AutoAnt.CellControllers.Events
 
         private double Popularity => this.LevelParameter.Popularity * (1.0f + this.Buff);
 
-        public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
+        public override void Initialize(Vector2Int position, bool isInitializingGame)
         {
-            base.Initialize(position, gameSystem, isInitializingGame);
-            this.gameSystem = gameSystem;
+            var gameSystem = GameSystem.Instance;
+            base.Initialize(position, isInitializingGame);
             this.UpdateLevelParameter();
             gameSystem.User.Town.AddPopularity(this.Popularity);
-            this.gameSystem.UpdateAsObservable()
+            gameSystem.UpdateAsObservable()
                 .Where(_ => this.CanProduce)
                 .SubscribeWithState(this, (_, _this) =>
                 {
@@ -76,7 +74,7 @@ namespace HK.AutoAnt.CellControllers.Events
                     {
                         var productId = _this.LevelParameter.ProductId;
                         _this.Products.Add(productId);
-                        var product = _this.gameSystem.MasterData.Item.Records.Get(productId);
+                        var product = GameSystem.Instance.MasterData.Item.Records.Get(productId);
                         _this.Broker.Publish(AddedFacilityProduct.Get(_this, product));
                         _this.ProductTimer = 0.0f;
                     }
@@ -84,10 +82,10 @@ namespace HK.AutoAnt.CellControllers.Events
                 .AddTo(this.instanceEvents);
         }
 
-        public override void Remove(GameSystem gameSystem)
+        public override void Remove()
         {
-            base.Remove(gameSystem);
-            gameSystem.User.Town.AddPopularity(-this.Popularity);
+            base.Remove();
+            GameSystem.Instance.User.Town.AddPopularity(-this.Popularity);
         }
 
         public override void OnClick(Cell owner)
@@ -104,27 +102,29 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public bool CanLevelUp()
         {
-            return this.CanLevelUp(this.gameSystem);
+            return Extensions.Extensions.CanLevelUp(this);
         }
 
         public void LevelUp()
         {
+            var gameSystem = GameSystem.Instance;
+
             // レベルアップ前の人気度を減算する
             var oldPopularity = this.Popularity;
-            this.gameSystem.User.Town.AddPopularity(-oldPopularity);
+            gameSystem.User.Town.AddPopularity(-oldPopularity);
 
-            this.LevelUp(this.gameSystem);
+            Extensions.Extensions.LevelUp(this);
 
             this.UpdateLevelParameter();
 
             // レベルアップ後の人気度を加算する
             var newPopularity = this.Popularity;
-            this.gameSystem.User.Town.AddPopularity(newPopularity);
+            gameSystem.User.Town.AddPopularity(newPopularity);
         }
 
         private void UpdateLevelParameter()
         {
-            var levelParameter = this.gameSystem.MasterData.FacilityLevelParameter.Records.Get(this.Id, this.Level);
+            var levelParameter = GameSystem.Instance.MasterData.FacilityLevelParameter.Records.Get(this.Id, this.Level);
             Assert.IsNotNull(levelParameter, $"Id = {this.Id}, Level = {this.Level} の {typeof(MasterDataFacilityLevelParameter)}がありませんでした");
             this.LevelParameter = levelParameter;
         }
@@ -146,10 +146,11 @@ namespace HK.AutoAnt.CellControllers.Events
         {
             Assert.IsTrue(this.CanCollectionProducts);
 
+            var gameSystem = GameSystem.Instance;
             var itemRecords = new Dictionary<MasterDataItem.Record, int>();
             foreach (var p in this.Products)
             {
-                var itemRecord = this.gameSystem.MasterData.Item.Records.Get(p);
+                var itemRecord = gameSystem.MasterData.Item.Records.Get(p);
                 if(itemRecords.ContainsKey(itemRecord))
                 {
                     itemRecords[itemRecord]++;
@@ -161,7 +162,7 @@ namespace HK.AutoAnt.CellControllers.Events
             }
             foreach(var i in itemRecords)
             {
-                this.gameSystem.User.Inventory.AddItem(i.Key, i.Value);
+                gameSystem.User.Inventory.AddItem(i.Key, i.Value);
             }
 
             this.Products.Clear();
@@ -171,8 +172,9 @@ namespace HK.AutoAnt.CellControllers.Events
         
         void IReceiveBuff.AddBuff(float value)
         {
+            var gameSystem = GameSystem.Instance;
             var oldPopularity = this.Popularity;
-            this.gameSystem.User.Town.AddPopularity(-oldPopularity);
+            gameSystem.User.Town.AddPopularity(-oldPopularity);
 
             this.Buff += value;
             if (this.Buff < 0.0f)
@@ -181,7 +183,7 @@ namespace HK.AutoAnt.CellControllers.Events
             }
 
             var newPopularity = this.Popularity;
-            this.gameSystem.User.Town.AddPopularity(newPopularity);
+            gameSystem.User.Town.AddPopularity(newPopularity);
         }
 
         void IOpenCellEventDetailsPopup.Attach(CellEventDetailsPopup popup)
@@ -198,7 +200,7 @@ namespace HK.AutoAnt.CellControllers.Events
                 property.Value.text = popup.ProductValue.Format(this.LevelParameter.ProductRecord.Name, this.LevelParameter.NeedProductTime);
             });
 
-            this.AttachDetailsPopup(popup, this.gameSystem);
+            this.AttachDetailsPopup(popup);
         }
 
         void IOpenCellEventDetailsPopup.Update(CellEventDetailsPopup popup)
@@ -206,12 +208,12 @@ namespace HK.AutoAnt.CellControllers.Events
             popup.ApplyTitle(this.EventName, this.Level);
             popup.UpdateProperties();
             popup.ClearLevelUpCosts();
-            this.AttachDetailsPopup(popup, this.gameSystem);
+            this.AttachDetailsPopup(popup);
         }
 
         void IFooterSelectCellEvent.Attach(FooterSelectCellEventController controller)
         {
-            this.AttachFooterSelectCellEvent(controller, GameSystem.Instance);
+            this.AttachFooterSelectCellEvent(controller);
         }
     }
 }
