@@ -32,20 +32,6 @@ namespace HK.AutoAnt.GameControllers
                 })
                 .AddTo(this);
 
-            Broker.Global.Receive<GameEnd>()
-                .SubscribeWithState(this, (x, _this) =>
-                {
-                    x.GameSystem.User.History.Game.LastDateTime = DateTime.Now;
-                })
-                .AddTo(this);
-                
-            Broker.Global.Receive<GamePause>()
-                .SubscribeWithState(this, (_, _this) =>
-                {
-                    GameSystem.Instance.User.History.Game.LastDateTime = DateTime.Now;
-                })
-                .AddTo(this);
-
             Broker.Global.Receive<AddedCellEvent>()
                 .Where(x => x.CellEvent is IAddTownPopulation)
                 .SubscribeWithState(this, (x, _this) =>
