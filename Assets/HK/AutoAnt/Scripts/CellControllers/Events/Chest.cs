@@ -30,9 +30,9 @@ namespace HK.AutoAnt.CellControllers.Events
 
         private MasterDataChestParameter.Record parameter = null;
 
-        public override void Initialize(Vector2Int position, Systems.GameSystem gameSystem, bool isInitializingGame)
+        public override void Initialize(Vector2Int position, bool isInitializingGame)
         {
-            base.Initialize(position, gameSystem, isInitializingGame);
+            base.Initialize(position, isInitializingGame);
             this.parameter = GameSystem.Instance.MasterData.ChestParameter.Records.Get(this.Id);
 
             if(!isInitializingGame)
