@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("Time", "LastDateTime")]
+	[ES3PropertiesAttribute("Time", "LastDateTime", "GameLeftCase")]
 	public class ES3Type_GameHistory : ES3ObjectType
 	{
 		public static ES3Type Instance = null;
@@ -16,6 +16,7 @@ namespace ES3Types
 			
 			writer.WriteProperty("Time", instance.Time, ES3Type_double.Instance);
 			writer.WriteProperty("LastDateTime", instance.LastDateTime, ES3Type_DateTime.Instance);
+			writer.WriteProperty("GameLeftCase", instance.GameLeftCase);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -31,6 +32,9 @@ namespace ES3Types
 						break;
 					case "LastDateTime":
 						instance.LastDateTime = reader.Read<System.DateTime>(ES3Type_DateTime.Instance);
+						break;
+					case "GameLeftCase":
+						instance.GameLeftCase = reader.Read<HK.AutoAnt.Constants.GameLeftCase>();
 						break;
 					default:
 						reader.Skip();

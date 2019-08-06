@@ -13,7 +13,7 @@ namespace HK.AutoAnt.UI
         private FooterRootController root = null;
 
         [SerializeField]
-        private FooterSelectBuildingController selectBuilding = null;
+        private FooterSelectCellEventController selectBuilding = null;
 
         [SerializeField]
         private FooterCancelController cancel = null;

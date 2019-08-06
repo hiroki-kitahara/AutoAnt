@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
@@ -19,13 +20,13 @@ namespace HK.AutoAnt.UI
     /// <summary>
     /// フッターメニューの建設メニューを制御するクラス
     /// </summary>
-    public sealed class FooterSelectBuildingController : FooterElement
+    public sealed class FooterSelectCellEventController : FooterElement
     {
         [SerializeField]
         private RectTransform listRoot = null;
 
         [SerializeField]
-        private FooterSelectBuildingElement elementPrefab = null;
+        private FooterSelectCellEventElement elementPrefab = null;
 
         [SerializeField]
         private GameObject selectedBuildingRoot = null;
@@ -73,7 +74,7 @@ namespace HK.AutoAnt.UI
 
         private GameObject currentGimmick = null;
 
-        private readonly List<FooterSelectBuildingElement> elements = new List<FooterSelectBuildingElement>();
+        private readonly List<FooterSelectCellEventElement> elements = new List<FooterSelectCellEventElement>();
 
         private readonly List<Property> properties = new List<Property>();
 
@@ -93,6 +94,7 @@ namespace HK.AutoAnt.UI
         {
             Broker.Global.Receive<RequestBuildingMode>()
                 .Where(_ => this.gameObject.activeInHierarchy)
+                .Where(x => x.BuildingCellEventRecord.EventData is IFooterSelectCellEvent)
                 .SubscribeWithState(this, (x, _this) =>
                 {
                     this.selectedBuildingRoot.SetActive(true);
@@ -101,7 +103,9 @@ namespace HK.AutoAnt.UI
                         Destroy(p.gameObject);
                     }
                     this.properties.Clear();
-                    x.BuildingCellEventRecord.EventData.AttachFooterSelectCellEvent(_this);
+                    
+                    var footerSelectCellEvent = (IFooterSelectCellEvent)x.BuildingCellEventRecord.EventData;
+                    footerSelectCellEvent.Attach(_this);
                 })
                 .AddTo(this);
         }

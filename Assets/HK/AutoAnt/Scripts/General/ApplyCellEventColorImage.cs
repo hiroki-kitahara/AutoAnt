@@ -12,10 +12,10 @@ namespace HK.AutoAnt
     public sealed class ApplyCellEventColorImage : MonoBehaviour
     {
         [SerializeField]
-        private Image target;
+        private Image target = null;
 
         [SerializeField]
-        private CellEventCategory category;
+        private CellEventCategory category = CellEventCategory.Housing;
 
         void Start()
         {
