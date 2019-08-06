@@ -8,8 +8,7 @@ namespace HK.AutoAnt.Events
     /// <summary>
     /// ゲームが終了した際のイベント
     /// </summary>
-    public sealed class GameEnd : Message<GameEnd, GameSystem>
+    public sealed class GameEnd : Message<GameEnd>
     {
-        public GameSystem GameSystem => this.param1;
     }
 }

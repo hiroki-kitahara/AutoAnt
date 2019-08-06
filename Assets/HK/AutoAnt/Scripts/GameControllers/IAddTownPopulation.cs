@@ -10,6 +10,6 @@ namespace HK.AutoAnt.GameControllers
         /// <summary>
         /// 人口を加算する
         /// </summary>
-        void Add(GameSystem gameSystem, float deltaTime);
+        void Add(float deltaTime);
     }
 }

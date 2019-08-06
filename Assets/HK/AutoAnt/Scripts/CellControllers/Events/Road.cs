@@ -31,22 +31,19 @@ namespace HK.AutoAnt.CellControllers.Events
         /// </remarks>
         public int Level { get; set; } = 1;
 
-        private GameSystem gameSystem;
-
         private MasterDataRoadLevelParameter.Record levelParameter;
 
-        public override void Initialize(Vector2Int position, GameSystem gameSystem, bool isInitializingGame)
+        public override void Initialize(Vector2Int position, bool isInitializingGame)
         {
-            base.Initialize(position, gameSystem, isInitializingGame);
-            this.gameSystem = gameSystem;
-            this.levelParameter = this.gameSystem.MasterData.RoadLevelParameter.Records.Get(this.Id, this.Level);
+            base.Initialize(position, isInitializingGame);
+            this.levelParameter = GameSystem.Instance.MasterData.RoadLevelParameter.Records.Get(this.Id, this.Level);
             this.ApplyBuff(this.levelParameter.AddBuff);
             this.ObserveAddReceiveBuff();
         }
 
-        public override void Remove(GameSystem gameSystem)
+        public override void Remove()
         {
-            base.Remove(gameSystem);
+            base.Remove();
             this.ApplyBuff(-this.levelParameter.AddBuff);
         }
 
@@ -60,18 +57,20 @@ namespace HK.AutoAnt.CellControllers.Events
 
         public bool CanLevelUp()
         {
-            return this.CanLevelUp(this.gameSystem);
+            return Extensions.Extensions.CanLevelUp(this);
         }
 
         public void LevelUp()
         {
-            this.LevelUp(this.gameSystem);
+            Extensions.Extensions.LevelUp(this);
+
+            var gameSystem = GameSystem.Instance;
 
             // 範囲が広がることを考慮して一旦バフを解除する
             var oldBuffValue = this.levelParameter.AddBuff;
             this.ApplyBuff(-this.levelParameter.AddBuff);
 
-            this.levelParameter = this.gameSystem.MasterData.RoadLevelParameter.Records.Get(this.Id, this.Level);
+            this.levelParameter = gameSystem.MasterData.RoadLevelParameter.Records.Get(this.Id, this.Level);
 
             // 新しいパラメータでバフを付与する
             this.ApplyBuff(this.levelParameter.AddBuff);
@@ -85,7 +84,7 @@ namespace HK.AutoAnt.CellControllers.Events
             var receiveBuffs = new List<IReceiveBuff>();
             Vector2IntUtility.GetRange(this.Origin, this.levelParameter.ImpactRange, (pos) =>
             {
-                var cellEventMap = this.gameSystem.CellManager.Mapper.CellEvent.Map;
+                var cellEventMap = GameSystem.Instance.CellManager.Mapper.CellEvent.Map;
                 if (!cellEventMap.ContainsKey(pos))
                 {
                     return false;

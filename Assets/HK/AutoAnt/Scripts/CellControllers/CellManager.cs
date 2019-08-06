@@ -17,9 +17,6 @@ namespace HK.AutoAnt.CellControllers
     public sealed class CellManager : MonoBehaviour, ISavable
     {
         [SerializeField]
-        private GameSystem gameSystem = null;
-        
-        [SerializeField]
         private Transform parent = null;
 
         [SerializeField]
@@ -58,7 +55,7 @@ namespace HK.AutoAnt.CellControllers
             var saveData = LocalSaveData.Game;
             this.Mapper = new CellMapper();
             this.CellGenerator = new CellGenerator(this.Mapper, this.parent);
-            this.EventGenerator = new CellEventGenerator(this.gameSystem, this.Mapper);
+            this.EventGenerator = new CellEventGenerator(this.Mapper);
 
             if(saveData.Mapper.Exists())
             {

@@ -7,6 +7,7 @@ using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.UI;
+using HK.AutoAnt.UI.Elements;
 using HK.AutoAnt.UserControllers;
 using HK.Framework.EventSystems;
 using UniRx;
@@ -24,8 +25,9 @@ namespace HK.AutoAnt.Extensions
         /// <summary>
         /// レベルアップ可能か返す
         /// </summary>
-        public static bool CanLevelUp(this ILevelUpEvent self, GameSystem gameSystem)
+        public static bool CanLevelUp(this ILevelUpEvent self)
         {
+            var gameSystem = GameSystem.Instance;
             var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(self.Id, self.Level);
             if (levelUpCostRecord == null)
             {
@@ -44,8 +46,9 @@ namespace HK.AutoAnt.Extensions
             return true;
         }
 
-        public static void LevelUp(this ILevelUpEvent self, GameSystem gameSystem)
+        public static void LevelUp(this ILevelUpEvent self)
         {
+            var gameSystem = GameSystem.Instance;
             var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(self.Id, self.Level);
 
             levelUpCostRecord.Cost.Consume(gameSystem.User, gameSystem.MasterData.Item);
@@ -60,15 +63,16 @@ namespace HK.AutoAnt.Extensions
         /// <summary>
         /// <see cref="ILevelUpEvent"/>で共通して<see cref="CellEventDetailsPopup"/>にアタッチする処理
         /// </summary>
-        public static void AttachDetailsPopup(this ILevelUpEvent self, CellEventDetailsPopup popup, GameSystem gameSystem)
+        public static void AttachDetailsPopup(this ILevelUpEvent self, CellEventDetailsPopup popup)
         {
+            var gameSystem = GameSystem.Instance;
             var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(self.Id, self.Level);
             if (levelUpCostRecord == null)
             {
                 return;
             }
 
-            var properties = new List<CellEventDetailsPopupProperty>();
+            var properties = new List<Property>();
 
             // お金を表示
             properties.Add(
@@ -109,8 +113,9 @@ namespace HK.AutoAnt.Extensions
                 });
         }
 
-        public static void AttachFooterSelectCellEvent(this ILevelUpEvent self, FooterSelectCellEventController controller, GameSystem gameSystem)
+        public static void AttachFooterSelectCellEvent(this ILevelUpEvent self, FooterSelectCellEventController controller)
         {
+            var gameSystem = GameSystem.Instance;
             var levelUpCostRecord = gameSystem.MasterData.LevelUpCost.Records.Get(self.Id, 0);
             controller.CellEventName.text = self.EventName;
             controller.Size.text = controller.SizeFormat.Format(self.Size);
@@ -119,7 +124,7 @@ namespace HK.AutoAnt.Extensions
             controller.SetMoney(stringBuilder, gameSystem.User.Wallet.Money, levelUpCostRecord.Cost.Money);
             controller.CreateGimmick(self.GimmickPrefab);
 
-            var properties = new List<FooterSelectedCellEventProperty>();
+            var properties = new List<Property>();
 
             // アイテムを表示
             foreach (var n in levelUpCostRecord.Cost.NeedItems)
