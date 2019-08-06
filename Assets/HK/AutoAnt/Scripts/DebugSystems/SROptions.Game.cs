@@ -163,5 +163,15 @@ public partial class SROptions
                 Debug.Log(x);
             });
     }
+
+    [Sort(1004)]
+    [Category("Game")]
+    [DisplayName("全てのセルイベントを建設")]
+    public void ShowFooterSelectCellEventAll()
+    {
+        var footerController = GameObject.FindObjectOfType<FooterController>();
+        footerController.ShowSelectBuilding(GameSystem.Instance.MasterData.CellEvent.Records);
+        SRDebug.Instance.HideDebugPanel();
+    }
 }
 // #endif
