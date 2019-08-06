@@ -171,6 +171,7 @@ public partial class SROptions
     {
         var footerController = GameObject.FindObjectOfType<FooterController>();
         footerController.ShowSelectBuilding(GameSystem.Instance.MasterData.CellEvent.Records);
+        SRDebug.Instance.HideDebugPanel();
     }
 }
 // #endif
