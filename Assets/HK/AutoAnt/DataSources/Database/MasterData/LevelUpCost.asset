@@ -21,55 +21,55 @@ MonoBehaviour:
   - id: 100000
     level: 1
     cost:
-      money: 1500
+      money: 30000
       needItems:
       - itemId: 100000
         amount: 2
   - id: 100000
     level: 2
     cost:
-      money: 2000
-      needItems:
-      - itemId: 100000
-        amount: 4
-  - id: 100000
-    level: 3
-    cost:
-      money: 2500
+      money: 300000
       needItems:
       - itemId: 100000
         amount: 8
   - id: 100000
-    level: 4
+    level: 3
     cost:
-      money: 3000
+      money: 2000000
       needItems:
       - itemId: 100000
-        amount: 12
+        amount: 20
+  - id: 100000
+    level: 4
+    cost:
+      money: 4000000
+      needItems:
+      - itemId: 100000
+        amount: 35
   - id: 101000
     level: 0
     cost:
-      money: 10000
+      money: 5000
       needItems: []
   - id: 101000
     level: 1
     cost:
-      money: 15000
+      money: 200000
       needItems: []
   - id: 101000
     level: 2
     cost:
-      money: 20000
+      money: 600000
       needItems: []
   - id: 101000
     level: 3
     cost:
-      money: 25000
+      money: 1000000
       needItems: []
   - id: 101000
     level: 4
     cost:
-      money: 30000
+      money: 2000000
       needItems: []
   - id: 102000
     level: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
       money: 200
       needItems: []
   - id: 103000
-    level: 3
+    level: 0
     cost:
       money: 250
       needItems: []
@@ -124,33 +124,33 @@ MonoBehaviour:
   - id: 100001
     level: 0
     cost:
-      money: 8000
+      money: 200000
       needItems: []
   - id: 100001
     level: 1
     cost:
-      money: 15000
+      money: 400000
       needItems:
       - itemId: 100000
         amount: 4
   - id: 100001
     level: 2
     cost:
-      money: 20000
-      needItems:
-      - itemId: 100000
-        amount: 8
-  - id: 100001
-    level: 3
-    cost:
-      money: 25000
-      needItems:
-      - itemId: 100000
-        amount: 16
-  - id: 100001
-    level: 4
-    cost:
-      money: 30000
+      money: 800000
       needItems:
       - itemId: 100000
         amount: 24
+  - id: 100001
+    level: 3
+    cost:
+      money: 3200000
+      needItems:
+      - itemId: 100000
+        amount: 40
+  - id: 100001
+    level: 4
+    cost:
+      money: 6000000
+      needItems:
+      - itemId: 100000
+        amount: 80

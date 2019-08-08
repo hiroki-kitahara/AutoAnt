@@ -17,29 +17,29 @@ MonoBehaviour:
     level: 1
     productSlot: 3
     productId: 100000
-    needProductTime: 15
+    needProductTime: 5
     popularity: -10
   - id: 101000
     level: 2
     productSlot: 5
     productId: 100000
-    needProductTime: 15
-    popularity: -20
+    needProductTime: 5
+    popularity: -50
   - id: 101000
     level: 3
     productSlot: 7
     productId: 100000
-    needProductTime: 15
-    popularity: -40
+    needProductTime: 5
+    popularity: -120
   - id: 101000
     level: 4
     productSlot: 9
     productId: 100000
-    needProductTime: 15
-    popularity: -80
+    needProductTime: 5
+    popularity: -200
   - id: 101000
     level: 5
     productSlot: 11
     productId: 100000
-    needProductTime: 15
-    popularity: -120
+    needProductTime: 5
+    popularity: -400

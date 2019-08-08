@@ -29,3 +29,11 @@ MonoBehaviour:
       ja: "\u5BB62"
       en: 
     guid: e91dc6ce-25ab-4dcc-b01d-aca1b61f80f0
+  - value:
+      ja: "\u3061\u3044\u3055\u3044\u5BB6"
+      en: 
+    guid: 2b111e09-62b5-4b65-a2e5-925cd85dc66e
+  - value:
+      ja: "\u3075\u3064\u3046\u306E\u5BB6"
+      en: 
+    guid: d137437a-9452-43d0-8297-d41a8d7db7f2
