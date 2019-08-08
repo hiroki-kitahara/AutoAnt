@@ -23,8 +23,20 @@ MonoBehaviour:
     name: Id
     isEnable: 0
     isArray: 0
+  - type: 9
+    name: Name
+    isEnable: 0
+    isArray: 0
   - type: 3
     name: Level
+    isEnable: 0
+    isArray: 0
+  - type: 9
+    name: FormattedMoney
+    isEnable: 0
+    isArray: 0
+  - type: 9
+    name: Unit
     isEnable: 0
     isArray: 0
   - type: 6
