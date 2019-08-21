@@ -118,6 +118,7 @@ namespace HK.AutoAnt.UI
             {
                 var element = this.elementPrefab.Rent(r);
                 element.transform.SetParent(this.listRoot, false);
+                element.transform.SetAsLastSibling();
                 this.elements.Add(element);
             }
         }
