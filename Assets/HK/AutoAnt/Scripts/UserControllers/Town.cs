@@ -30,9 +30,7 @@ namespace HK.AutoAnt.UserControllers
         /// </summary>
         public void AddPopulation(double value)
         {
-            this.population.Value += value;
-
-            Assert.IsTrue(this.Population.Value >= 0);
+            this.population.Value = Math.Max(this.population.Value + value, 0.0f);
         }
 
         /// <summary>

@@ -11,6 +11,7 @@ using HK.AutoAnt.Events;
 using HK.AutoAnt.UI;
 using UniRx.Triggers;
 using UniRx;
+using System;
 
 namespace HK.AutoAnt.CellControllers.Events
 {
@@ -60,7 +61,7 @@ namespace HK.AutoAnt.CellControllers.Events
             var popularityRate = gameSystem.Constants.Housing.PopularityRate;
             var town = gameSystem.User.Town;
             var result = Calculator.AddPopulation(this.levelParameter.Population, town.Popularity.Value, popularityRate, 1.0f + this.Buff, deltaTime);
-            this.CurrentPopulation += result;
+            this.CurrentPopulation = Math.Max(this.CurrentPopulation + result, 0.0f);
             town.AddPopulation(result);
         }
 
