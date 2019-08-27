@@ -45,7 +45,7 @@ namespace HK.AutoAnt.CameraControllers
             Broker.Global.Receive<RequestCameraZoom>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.Zoom(x.Value);
+                    _this.SetZoom(x.Value);
                 })
                 .AddTo(this);
         }
@@ -66,7 +66,7 @@ namespace HK.AutoAnt.CameraControllers
         /// <summary>
         /// ズーム値を設定する
         /// </summary>
-        public void Zoom(float value)
+        public void SetZoom(float value)
         {
             value = Mathf.Clamp01(value);
             value = 1.0f - value;
@@ -77,12 +77,12 @@ namespace HK.AutoAnt.CameraControllers
         /// <summary>
         /// ズーム値を加算する
         /// </summary>
-        public void ZoomOnVelocity(float velocity)
+        public void AddZoom(float velocity)
         {
             var currentSize = GameSystem.Instance.Cameraman.Size;
             var normalizedSize = (currentSize - this.zoomMin) / (this.zoomMax - this.zoomMin);
             var result = 1.0f - (normalizedSize - velocity);
-            this.Zoom(result);
+            this.SetZoom(result);
         }
     }
 }
