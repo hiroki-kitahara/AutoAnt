@@ -22,7 +22,14 @@ namespace HK.AutoAnt.CameraControllers
 
         [SerializeField]
         private Camera controlledCamera = null;
-        public Camera Camera => this.controlledCamera;
+        public Camera Camera
+        {
+            get
+            {
+                Assert.IsNotNull(this.controlledCamera);
+                return this.controlledCamera;
+            }
+        }
 
         public Vector3 Position
         {
@@ -102,7 +109,7 @@ namespace HK.AutoAnt.CameraControllers
         public Vector3 ToFirstPersonVector(float forwardVelocity, float rightVelocity)
         {
             Assert.IsNotNull(this.Camera);
-            
+
             var t = this.Camera.transform;
             var forward = Vector3.Scale(t.forward, new Vector3(1.0f, 0.0f, 1.0f)).normalized;
             var right = t.right;

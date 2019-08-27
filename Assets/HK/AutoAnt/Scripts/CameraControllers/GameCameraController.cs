@@ -30,6 +30,8 @@ namespace HK.AutoAnt.CameraControllers
                 .Where(x => x != null)
                 .SubscribeWithState(this, (x, _this) =>
                 {
+                    Assert.IsNotNull(x.SelectCellEvent);
+                    
                     var position = x.SelectCellEvent.Gimmick.transform.position;
                     var cameraman = GameSystem.Instance.Cameraman;
                     var camera = cameraman.Camera;
