@@ -15,9 +15,13 @@ namespace HK.AutoAnt.AudioSystems
         public AudioSource AudioSource => this.audioSource;
 
         private readonly CompositeDisposable compositeDisposable = new CompositeDisposable();
-
+        
         public void Play(ClipBundle clipBundle)
         {
+            Assert.IsNotNull(clipBundle);
+            Assert.IsNotNull(this.audioSource);
+            Assert.IsNotNull(this.compositeDisposable);
+
             this.compositeDisposable.Clear();
             this.audioSource.clip = clipBundle.Intro;
             this.audioSource.Play();
