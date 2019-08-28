@@ -71,5 +71,19 @@ namespace HK.AutoAnt.CellControllers
 
             this.cellMapper.CellEvent.Map[this.Position].OnClick(this);
         }
+
+        /// <summary>
+        /// フィールドに存在するセルを返す
+        /// </summary>
+        public static Cell GetCell(Ray ray)
+        {
+            var hitInfo = default(RaycastHit);
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                return hitInfo.collider.GetComponent<Cell>();
+            }
+
+            return null;
+        }
     }
 }
