@@ -25,8 +25,9 @@ namespace HK.AutoAnt.CellControllers
         public Cell Generate(int recordId, Vector2Int position)
         {
             var record = GameSystem.Instance.MasterData.Cell.Records.Get(recordId);
-            var cell = Object.Instantiate(record.Prefab)
-                .Initialize(recordId, position, record.CellType, this.cellMapper);
+            var cell = Object.Instantiate(record.Prefab);
+            
+            cell.Initialize(recordId, position, record.CellType, this.cellMapper);
             cell.CachedTransform.SetParent(this.cellParent);
 
             return cell;
