@@ -19,11 +19,15 @@ namespace HK.AutoAnt.CellControllers
 
         public void Add(Cell cell)
         {
+            Assert.IsNotNull(cell);
+
             this.cell.Add(cell.Position, cell);
         }
 
         public void Add(ICellEvent cellEvent, Vector2Int position)
         {
+            Assert.IsNotNull(cellEvent);
+
             this.cellEvent.AddListOnly(cellEvent);
 
             Assert.IsTrue(this.cell.Map.ContainsKey(position), $"position = {position}にセルが無いのにイベントが登録されました");
@@ -40,6 +44,8 @@ namespace HK.AutoAnt.CellControllers
 
         public void Remove(Cell cell)
         {
+            Assert.IsNotNull(cell);
+
             this.cell.Remove(cell.Position);
         }
 
@@ -61,6 +67,8 @@ namespace HK.AutoAnt.CellControllers
 
         public bool HasEvent(Cell cell)
         {
+            Assert.IsNotNull(cell);
+
             return this.cellEvent.Map.ContainsKey(cell.Position);
         }
 
@@ -69,6 +77,8 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public Cell[] GetCells(List<Vector2Int> positions)
         {
+            Assert.IsNotNull(positions);
+
             var result = new Cell[positions.Count];
             for (var i = 0; i < positions.Count; i++)
             {
@@ -105,6 +115,10 @@ namespace HK.AutoAnt.CellControllers
 
         public void Deserialize(SerializableCellMapper serializableData, CellGenerator cellGenerator, CellEventGenerator cellEventGenerator)
         {
+            Assert.IsNotNull(serializableData);
+            Assert.IsNotNull(cellGenerator);
+            Assert.IsNotNull(cellEventGenerator);
+            
             foreach(var c in serializableData.Cells)
             {
                 cellGenerator.Generate(c.RecordId, c.Position);
