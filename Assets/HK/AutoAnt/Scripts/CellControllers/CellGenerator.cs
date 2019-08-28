@@ -1,7 +1,4 @@
-﻿using HK.AutoAnt.CellControllers.Events;
-using HK.AutoAnt.Constants;
-using HK.AutoAnt.Database;
-using HK.AutoAnt.Extensions;
+﻿using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -21,7 +18,7 @@ namespace HK.AutoAnt.CellControllers
         {
             Assert.IsNotNull(cellMapper);
             Assert.IsNotNull(cellParent);
-            
+
             this.cellMapper = cellMapper;
             this.cellParent = cellParent;
         }
