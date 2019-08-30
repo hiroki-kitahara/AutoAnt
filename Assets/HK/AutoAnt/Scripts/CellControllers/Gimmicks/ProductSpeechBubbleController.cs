@@ -20,6 +20,9 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
         [SerializeField]
         private Renderer productRenderer = null;
 
+        [SerializeField]
+        private AudioClip collectSE = null;
+
         void Awake()
         {
             this.Hidden();
@@ -52,6 +55,7 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
             cellEvent.Broker.Receive<AcquiredFacilityProduct>()
                 .SubscribeWithState(this, (_, _this) =>
                 {
+                    GameSystem.Instance.SEController.Play(collectSE);
                     _this.Hidden();
                 })
                 .AddTo(this);

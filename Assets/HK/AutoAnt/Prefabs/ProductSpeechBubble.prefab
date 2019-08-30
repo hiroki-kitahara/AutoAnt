@@ -137,6 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 7785452186133925915}
   productRenderer: {fileID: 2935609817227289098}
+  collectSE: {fileID: 8300000, guid: a569b0fa1aadee6479ae5cc49f9cdb2f, type: 3}
 --- !u!1 &5567632416223919428
 GameObject:
   m_ObjectHideFlags: 0
