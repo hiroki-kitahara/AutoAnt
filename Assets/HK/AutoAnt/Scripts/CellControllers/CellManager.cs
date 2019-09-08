@@ -19,9 +19,6 @@ namespace HK.AutoAnt.CellControllers
         [SerializeField]
         private Transform parent = null;
 
-        [SerializeField]
-        private FieldInitializer fieldInitializer = null;
-
         public CellMapper Mapper { get; private set; }
 
         public CellGenerator CellGenerator { get; private set; }
