@@ -63,7 +63,7 @@ namespace HK.AutoAnt.CellControllers
             }
             else
             {
-                this.fieldInitializer.Generate(this);
+                this.CellGenerator.GenerateFromCellBundle(0);
             }
         }
     }
