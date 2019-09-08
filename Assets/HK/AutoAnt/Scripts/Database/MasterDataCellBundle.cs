@@ -19,7 +19,7 @@ namespace HK.AutoAnt.Database
     public sealed class MasterDataCellBundle : MasterDataBase<MasterDataCellBundle.Record>
     {
         [Serializable]
-        public class Record : IRecord
+        public class Record : IRecord, IRecordGroup
         {
             [SerializeField]
             private int id = 0;
