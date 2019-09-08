@@ -34,5 +34,13 @@ namespace HK.AutoAnt.Extensions
 
             return result;
         }
+
+        /// <summary>
+        /// グループに一致する全てのレコードを返す
+        /// </summary>
+        public static List<T> GetFromGroup<T>(this IEnumerable<T> self, int group) where T : class, IRecord, IRecordGroup
+        {
+            return self.Where(x => x.Group == group).ToList();
+        }
     }
 }
