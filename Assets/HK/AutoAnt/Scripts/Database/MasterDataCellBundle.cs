@@ -53,15 +53,9 @@ namespace HK.AutoAnt.Database
         /// </summary>
         public class Cell
         {
-            public int Id { get; private set; }
+            public int Id { get; set; }
 
-            public Vector2Int Position { get; private set; }
-
-            public Cell(int id, Vector2Int position)
-            {
-                this.Id = id;
-                this.Position = position;
-            }
+            public Vector2Int Position { get; set; }
         }
     }
 }
