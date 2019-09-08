@@ -30,6 +30,10 @@ namespace HK.AutoAnt.Database
             public int Group => this.group;
 
             [SerializeField]
+            private int cellRecordId = 0;
+            public int CellRecordId => this.cellRecordId;
+
+            [SerializeField]
             private Rect rect = Rect.zero;
             public Rect Rect => this.rect;
 
@@ -38,9 +42,26 @@ namespace HK.AutoAnt.Database
             {
                 this.id = data.Id;
                 this.group = data.Group;
+                this.cellRecordId = data.Cellrecordid;
                 this.rect = new Rect(data.X, data.Y, data.Width, data.Height);
             }
 #endif
+        }
+
+        /// <summary>
+        /// レコードIDと座標のみを持つセル
+        /// </summary>
+        public class Cell
+        {
+            public int Id { get; private set; }
+
+            public Vector2Int Position { get; private set; }
+
+            public Cell(int id, Vector2Int position)
+            {
+                this.Id = id;
+                this.Position = position;
+            }
         }
     }
 }
