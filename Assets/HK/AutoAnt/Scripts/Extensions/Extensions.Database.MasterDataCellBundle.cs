@@ -25,9 +25,9 @@ namespace HK.AutoAnt.Extensions
             foreach(var g in groups)
             {
                 var r = g.Rect;
-                for (var y = r.y; y < r.height; y++)
+                for (var y = r.y; y < r.y + r.height; y++)
                 {
-                    for (var x = r.x; x < r.width; x++)
+                    for (var x = r.x; x < r.x + r.width; x++)
                     {
                         var position = new Vector2Int((int)x, (int)y);
 
