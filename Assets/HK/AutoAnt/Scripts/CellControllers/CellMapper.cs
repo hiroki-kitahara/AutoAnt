@@ -113,7 +113,7 @@ namespace HK.AutoAnt.CellControllers
             var result = new SerializableCellMapper();
             foreach(var c in this.Cell.List)
             {
-                result.Cells.Add(new SerializableCell() { RecordId = c.RecordId, Position = c.Position });
+                result.Cells.Add(new SerializableCell() { RecordId = c.RecordId, Position = c.Position, Group = c.Group });
             }
             foreach(var e in this.CellEvent.List)
             {
