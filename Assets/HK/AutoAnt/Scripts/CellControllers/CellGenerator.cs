@@ -1,4 +1,5 @@
-﻿using HK.AutoAnt.CellControllers.Events;
+﻿using System.Collections.Generic;
+using HK.AutoAnt.CellControllers.Events;
 using HK.AutoAnt.Constants;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
@@ -30,6 +31,18 @@ namespace HK.AutoAnt.CellControllers
             cell.CachedTransform.SetParent(this.cellParent);
 
             return cell;
+        }
+
+        public List<Cell> GenerateFromCellBundle(int group)
+        {
+            var result = new List<Cell>();
+            var targets = GameSystem.Instance.MasterData.CellBundle.Get(group);
+            foreach(var t in targets)
+            {
+                result.Add(this.Generate(t.Id, t.Position));
+            }
+
+            return result;
         }
 
         public Cell Replace(int recordId, Vector2Int position)
