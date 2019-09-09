@@ -108,7 +108,7 @@ namespace HK.AutoAnt.CellControllers
         {
             foreach(var c in serializableData.Cells)
             {
-                cellGenerator.Generate(c.RecordId, c.Position);
+                cellGenerator.Generate(c.RecordId, c.Position, c.Group);
             }
             foreach(var e in serializableData.CellEvents)
             {
