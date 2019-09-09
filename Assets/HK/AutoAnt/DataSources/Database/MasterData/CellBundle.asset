@@ -22,3 +22,12 @@ MonoBehaviour:
       y: -2
       width: 5
       height: 5
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    rect:
+      serializedVersion: 2
+      x: 3
+      y: -2
+      width: 5
+      height: 5
