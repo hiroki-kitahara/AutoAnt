@@ -89,6 +89,25 @@ namespace HK.AutoAnt.CellControllers
             return Vector2IntUtility.GetRange(origin, range, (p) => !this.cell.Map.ContainsKey(p)).ToArray();
         }
 
+        /// <summary>
+        /// <paramref name="group"/>に一致する全てのセルを返す
+        /// </summary>
+        public List<Cell> GetCellFromGroup(int group)
+        {
+            var result = new List<Cell>();
+            foreach(var c in this.cell.List)
+            {
+                if(c.Group != group)
+                {
+                    continue;
+                }
+
+                result.Add(c);
+            }
+
+            return result;
+        }
+
         public SerializableCellMapper GetSerializable()
         {
             var result = new SerializableCellMapper();

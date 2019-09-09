@@ -61,7 +61,12 @@ namespace HK.AutoAnt.GameControllers
             }
 
             gameSystem.User.Wallet.AddMoney(-needMoney);
-            this.cellGenerator.Replace(this.replaceCellRecordId, cell.Position);
+
+            var targets = this.cellMapper.GetCellFromGroup(cell.Group);
+            foreach(var c in targets)
+            {
+                this.cellGenerator.Replace(this.replaceCellRecordId, c.Position);
+            }
 
             var se = gameSystem.Constants.Cell.DevelopSE;
             Assert.IsNotNull(se);
