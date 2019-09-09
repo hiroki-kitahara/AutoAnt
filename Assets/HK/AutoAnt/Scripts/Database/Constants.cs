@@ -10,6 +10,10 @@ namespace HK.AutoAnt.Database
     public sealed class Constants : ScriptableObject
     {
         [SerializeField]
+        private ConstantsGameSystem gameSystem = null;
+        public ConstantsGameSystem GameSystem => this.gameSystem;
+        
+        [SerializeField]
         private ConstantsCell cell = null;
         public ConstantsCell Cell => this.cell;
 
