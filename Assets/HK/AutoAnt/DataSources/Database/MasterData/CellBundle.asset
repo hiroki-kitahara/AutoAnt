@@ -17,7 +17,6 @@ MonoBehaviour:
     group: 0
     cellRecordId: 100100
     rect:
-      serializedVersion: 2
       x: -2
       y: -2
       width: 5
@@ -26,7 +25,6 @@ MonoBehaviour:
     group: 1
     cellRecordId: 100000
     rect:
-      serializedVersion: 2
       x: 3
       y: -2
       width: 5
@@ -35,7 +33,6 @@ MonoBehaviour:
     group: 2
     cellRecordId: 100000
     rect:
-      serializedVersion: 2
       x: -2
       y: 3
       width: 5
@@ -44,7 +41,6 @@ MonoBehaviour:
     group: 3
     cellRecordId: 100000
     rect:
-      serializedVersion: 2
       x: -7
       y: -2
       width: 5
@@ -53,7 +49,6 @@ MonoBehaviour:
     group: 4
     cellRecordId: 100000
     rect:
-      serializedVersion: 2
       x: -2
       y: -7
       width: 5

@@ -29,7 +29,7 @@ namespace HK.AutoAnt.Extensions
                 {
                     for (var x = r.x; x < r.x + r.width; x++)
                     {
-                        var position = new Vector2Int((int)x, (int)y);
+                        var position = new Vector2Int(x, y);
 
                         // 既に存在する場合は上書きする
                         if(result.ContainsKey(position))
