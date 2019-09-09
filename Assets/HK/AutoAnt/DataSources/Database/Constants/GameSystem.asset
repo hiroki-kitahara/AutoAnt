@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7136262e8d7d41bd8d82ea08a774d60, type: 3}
   m_Name: GameSystem
   m_EditorClassIdentifier: 
-  initialCellBundleGroups: 00000000
+  initialCellBundleGroups: 0000000001000000020000000300000004000000

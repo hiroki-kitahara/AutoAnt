@@ -31,3 +31,30 @@ MonoBehaviour:
       y: -2
       width: 5
       height: 5
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    rect:
+      serializedVersion: 2
+      x: -2
+      y: 3
+      width: 5
+      height: 5
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    rect:
+      serializedVersion: 2
+      x: -7
+      y: -2
+      width: 5
+      height: 5
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    rect:
+      serializedVersion: 2
+      x: -2
+      y: -7
+      width: 5
+      height: 5
