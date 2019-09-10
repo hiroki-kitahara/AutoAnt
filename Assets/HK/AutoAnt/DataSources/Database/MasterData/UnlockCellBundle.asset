@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   records:
   - id: 1
-    unlockCellBundleGroup: 0
+    unlockCellBundleGroup: 5
     needPopulation: 1000
