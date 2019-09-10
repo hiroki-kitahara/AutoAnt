@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("Wallet", "Inventory", "History", "UnlockCellEvent", "Option")]
+	[ES3PropertiesAttribute("Wallet", "Inventory", "History", "UnlockCellEvent", "UnlockCellBundle", "Option")]
 	public class ES3Type_SerializableUser : ES3ObjectType
 	{
 		public static ES3Type Instance = null;
@@ -18,7 +18,8 @@ namespace ES3Types
 			writer.WriteProperty("Inventory", instance.Inventory, ES3Type_Inventory.Instance);
 			writer.WriteProperty("History", instance.History, ES3Type_History.Instance);
 			writer.WriteProperty("UnlockCellEvent", instance.UnlockCellEvent, ES3Type_UnlockCellEvent.Instance);
-			writer.WriteProperty("Option", instance.Option);
+			writer.WriteProperty("UnlockCellBundle", instance.UnlockCellBundle);
+			writer.WriteProperty("Option", instance.Option, ES3Type_SerializableOption.Instance);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -41,8 +42,11 @@ namespace ES3Types
 					case "UnlockCellEvent":
 						instance.UnlockCellEvent = reader.Read<HK.AutoAnt.UserControllers.UnlockCellEvent>(ES3Type_UnlockCellEvent.Instance);
 						break;
+					case "UnlockCellBundle":
+						instance.UnlockCellBundle = reader.Read<HK.AutoAnt.UserControllers.UnlockCellBundle>();
+						break;
 					case "Option":
-						instance.Option = reader.Read<HK.AutoAnt.SaveData.Serializables.SerializableOption>();
+						instance.Option = reader.Read<HK.AutoAnt.SaveData.Serializables.SerializableOption>(ES3Type_SerializableOption.Instance);
 						break;
 					default:
 						reader.Skip();

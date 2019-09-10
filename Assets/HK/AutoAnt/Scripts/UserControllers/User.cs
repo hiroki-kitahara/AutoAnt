@@ -43,6 +43,10 @@ namespace HK.AutoAnt.UserControllers
         public UnlockCellEvent UnlockCellEvent => this.unlockCellEvent;
 
         [SerializeField]
+        private UnlockCellBundle unlockCellBundle = null;
+        public UnlockCellBundle UnlockCellBundle => this.unlockCellBundle;
+
+        [SerializeField]
         private Option option = null;
         public Option Option => this.option;
 
@@ -68,7 +72,12 @@ namespace HK.AutoAnt.UserControllers
                 this.inventory = serializableData.Inventory;
                 this.history = serializableData.History;
                 this.unlockCellEvent = serializableData.UnlockCellEvent;
+                this.unlockCellBundle = serializableData.UnlockCellBundle;
                 this.option.Deserialize(serializableData.Option);
+            }
+            else
+            {
+                this.unlockCellBundle.SetNextPopulation(GameSystem.Instance.MasterData.UnlockCellBundle);
             }
         }
 
