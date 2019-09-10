@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("nextPopulation")]
+	[ES3PropertiesAttribute("nextPopulation", "targetRecordIds")]
 	public class ES3Type_UnlockCellBundle : ES3ObjectType
 	{
 		public static ES3Type Instance = null;
@@ -15,6 +15,7 @@ namespace ES3Types
 			var instance = (HK.AutoAnt.UserControllers.UnlockCellBundle)obj;
 			
 			writer.WritePrivateField("nextPopulation", instance);
+			writer.WritePrivateField("targetRecordIds", instance);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -27,6 +28,9 @@ namespace ES3Types
 					
 					case "nextPopulation":
 					reader.SetPrivateField("nextPopulation", reader.Read<System.Double>(), instance);
+					break;
+					case "targetRecordIds":
+					reader.SetPrivateField("targetRecordIds", reader.Read<System.Collections.Generic.List<System.Int32>>(), instance);
 					break;
 					default:
 						reader.Skip();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HK.AutoAnt.CellControllers;
 using HK.AutoAnt.Events;
+using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.UserControllers;
 using HK.Framework.EventSystems;
@@ -120,12 +121,16 @@ namespace HK.AutoAnt.GameControllers
         private void CheckUnlockCellBundle()
         {
             var user = GameSystem.Instance.User;
+            if(!user.UnlockCellBundle.CanUnlock)
+            {
+                return;
+            }
+            
             if(user.UnlockCellBundle.NextPopulation <= user.Town.Population.Value)
             {
                 var masterData = GameSystem.Instance.MasterData.UnlockCellBundle;
-                var unlockCellBundles = masterData.Records
-                    .Where(x => x.NeedPopulation == user.UnlockCellBundle.NextPopulation)
-                    .ToList();
+                var unlockCellBundles = user.UnlockCellBundle.TargetRecordIds
+                    .Select(id => masterData.Records.Get(id));
 
                 foreach(var r in unlockCellBundles)
                 {

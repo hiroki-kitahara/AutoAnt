@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HK.AutoAnt.Database;
 using UnityEngine;
@@ -19,17 +20,29 @@ namespace HK.AutoAnt.UserControllers
         private double nextPopulation = int.MinValue;
 
         /// <summary>
+        /// 次に開放される<see cref="MasterDataUnlockCellBundle"/>のIDリスト
+        /// </summary>
+        public List<int> TargetRecordIds => this.targetRecordIds;
+        private List<int> targetRecordIds = new List<int>();
+
+        /// <summary>
+        /// アンロック処理を行えるか返す
+        /// </summary>
+        public bool CanUnlock => this.targetRecordIds.Count > 0;
+
+        /// <summary>
         /// 次にアンロックする人口数を設定する
         /// </summary>
         public void SetNextPopulation(MasterDataUnlockCellBundle masterData)
         {
+            this.targetRecordIds.Clear();
+
             // 現状の次の人口数より大きい値のレコードを取得する
             var targets = masterData.Records.Where(x => this.nextPopulation < x.NeedPopulation).ToList();
 
             // レコードが無い場合は最大値に設定する
             if(targets.Count <= 0)
             {
-                this.nextPopulation = double.MaxValue;
                 return;
             }
 
@@ -46,6 +59,16 @@ namespace HK.AutoAnt.UserControllers
             }
 
             this.nextPopulation = targets[id].NeedPopulation;
+
+            foreach(var r in targets)
+            {
+                if(r.NeedPopulation != this.nextPopulation)
+                {
+                    continue;
+                }
+
+                this.targetRecordIds.Add(r.Id);
+            }
         }
     }
 }
