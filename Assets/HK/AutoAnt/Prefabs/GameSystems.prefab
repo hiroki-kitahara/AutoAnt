@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf28c7d3935b4fdb81813efd8758226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cellManager: {fileID: 7500671137712836563}
 --- !u!114 &7500671137712836563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,7 +93,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 2040718279388478634}
-  fieldInitializer: {fileID: 11400000, guid: 76ec690736641484397c596d778da882, type: 2}
 --- !u!114 &6158404924586126944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,7 +691,7 @@ MonoBehaviour:
     - {fileID: 5138232443284177900, guid: fbc270a4fca37450692f3c0470b64450, type: 3}
     - {fileID: 2100000, guid: c4ca4c1fa6824408e9af78a8e62da892, type: 2}
     - {fileID: 11400000, guid: cfc42a290af704639ab53da3a4bd51ca, type: 2}
-    - {fileID: 11400000, guid: 76ec690736641484397c596d778da882, type: 2}
+    - {fileID: 0}
     - {fileID: 11400000, guid: e716878cc8f4b49e8bb8c2d426359025, type: 2}
     - {fileID: 11400000, guid: 8151ac8e4f13a4602acf637185ec1e0b, type: 2}
     - {fileID: 11400000, guid: 72f706db958f641d1a0b03ad87f7c0c9, type: 2}
