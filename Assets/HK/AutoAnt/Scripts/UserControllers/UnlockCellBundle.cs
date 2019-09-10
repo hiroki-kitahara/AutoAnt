@@ -38,7 +38,16 @@ namespace HK.AutoAnt.UserControllers
                 }
             }
 
-            this.nextPopulation = targets[id].NeedPopulation;
+            // 同じ値だった場合は最大値にしちゃう
+            var tempNextPopulation = targets[id].NeedPopulation;
+            if(this.nextPopulation == tempNextPopulation)
+            {
+                this.nextPopulation = int.MaxValue;
+            }
+            else
+            {
+                this.nextPopulation = tempNextPopulation;
+            }
         }
     }
 }
