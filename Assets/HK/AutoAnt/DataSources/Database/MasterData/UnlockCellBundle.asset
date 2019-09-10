@@ -15,4 +15,4 @@ MonoBehaviour:
   records:
   - id: 1
     unlockCellBundleGroup: 5
-    needPopulation: 1000
+    needPopulation: 3
