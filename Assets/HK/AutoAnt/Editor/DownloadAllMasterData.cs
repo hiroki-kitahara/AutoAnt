@@ -93,7 +93,7 @@ namespace HK.AutoAnt.Editor
             Download(typeof(MasterDataCellBundle), 1.0f, m => CellBundleEditor.Load(m.CellBundle));
         }
 
-        [MenuItem("AutoAnt/MasterData/Download UnlockCellBundle", false, 20)]
+        [MenuItem("AutoAnt/MasterData/Download UnlockCellBundle", false, 21)]
         private static void DownloadUnlockCellBundle()
         {
             Download(typeof(MasterDataUnlockCellBundle), 1.0f, m => UnlockCellBundleEditor.Load(m.UnlockCellBundle));
