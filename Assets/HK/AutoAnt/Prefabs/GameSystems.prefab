@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 566712933367632740}
   - component: {fileID: 405471995790130141}
   - component: {fileID: 3364287868324745657}
+  - component: {fileID: 3484926069568001748}
   m_Layer: 0
   m_Name: GameSystems
   m_TagString: Untagged
@@ -233,6 +234,26 @@ MonoBehaviour:
     target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
     value: CANCEL
     guid: a954cf32-a2a1-4520-8794-a7265cbb159f
+--- !u!114 &3484926069568001748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500671137712836562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e641cf94247824ba68f7b0e8b0b0ac7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message:
+    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
+    value: "\u65B0\u3057\u3044\u571F\u5730\u304C\u958B\u653E\u3055\u308C\u307E\u3057\u305F\uFF01"
+    guid: 7d95a523-bda8-465e-ad61-73fed2c59718
+  okMessage:
+    target: {fileID: 11400000, guid: f40968edcf2934099bc01ae4e04e0b31, type: 2}
+    value: OK
+    guid: 1beb83dc-5df1-49bc-9ae8-8270ab59a33b
 --- !u!1 &7658445820341224520
 GameObject:
   m_ObjectHideFlags: 0
