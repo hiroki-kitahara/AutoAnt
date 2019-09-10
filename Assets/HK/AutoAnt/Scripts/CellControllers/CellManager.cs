@@ -19,9 +19,6 @@ namespace HK.AutoAnt.CellControllers
         [SerializeField]
         private Transform parent = null;
 
-        [SerializeField]
-        private FieldInitializer fieldInitializer = null;
-
         public CellMapper Mapper { get; private set; }
 
         public CellGenerator CellGenerator { get; private set; }
@@ -63,7 +60,10 @@ namespace HK.AutoAnt.CellControllers
             }
             else
             {
-                this.fieldInitializer.Generate(this);
+                foreach(var group in GameSystem.Instance.Constants.GameSystem.InitialCellBundleGroups)
+                {
+                    this.CellGenerator.GenerateFromCellBundle(group);
+                }
             }
         }
     }

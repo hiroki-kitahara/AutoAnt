@@ -11,5 +11,7 @@ namespace HK.AutoAnt.SaveData.Serializables
         public int RecordId { get; set; }
         
         public Vector2Int Position { get; set; }
+
+        public int Group { get; set; }
     }
 }

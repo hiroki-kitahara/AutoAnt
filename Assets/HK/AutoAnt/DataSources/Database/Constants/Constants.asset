@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e798f2a609e814cf08c29fa9b5fab578, type: 3}
   m_Name: Constants
   m_EditorClassIdentifier: 
+  gameSystem: {fileID: 11400000, guid: d42d2c0d4cb544ffd9ac9da7b0b493e4, type: 2}
   cell: {fileID: 11400000, guid: 75633341360b04393b48138924d58603, type: 2}
   housing: {fileID: 11400000, guid: 12e383f3bdd864ddca2eef6913338912, type: 2}
   color: {fileID: 11400000, guid: 80f1899d826ae4e37b530c45bde0a514, type: 2}
