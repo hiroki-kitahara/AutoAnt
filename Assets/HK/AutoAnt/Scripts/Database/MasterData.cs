@@ -45,5 +45,9 @@ namespace HK.AutoAnt.Database
         [SerializeField]
         private MasterDataCellBundle cellBundle = null;
         public MasterDataCellBundle CellBundle => this.cellBundle;
+
+        [SerializeField]
+        private MasterDataUnlockCellBundle unlockCellBundle = null;
+        public MasterDataUnlockCellBundle UnlockCellBundle => this.unlockCellBundle;
     }
 }
