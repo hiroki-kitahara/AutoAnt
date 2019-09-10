@@ -58,6 +58,7 @@ namespace HK.AutoAnt.UserControllers
                 Inventory = this.Inventory,
                 History = this.History,
                 UnlockCellEvent = this.UnlockCellEvent,
+                UnlockCellBundle = this.UnlockCellBundle,
                 Option = this.Option.GetSerializable()
         };
         }
