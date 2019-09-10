@@ -26,6 +26,13 @@ namespace HK.AutoAnt.UserControllers
             // 現状の次の人口数より大きい値のレコードを取得する
             var targets = masterData.Records.Where(x => this.nextPopulation < x.NeedPopulation).ToList();
 
+            // レコードが無い場合は最大値に設定する
+            if(targets.Count <= 0)
+            {
+                this.nextPopulation = double.MaxValue;
+                return;
+            }
+
             // 取得したレコードから最小値のレコードを対象とする
             var id = -1;
             var min = double.MaxValue;
@@ -38,16 +45,7 @@ namespace HK.AutoAnt.UserControllers
                 }
             }
 
-            // 同じ値だった場合は最大値にしちゃう
-            var tempNextPopulation = targets[id].NeedPopulation;
-            if(this.nextPopulation == tempNextPopulation)
-            {
-                this.nextPopulation = double.MaxValue;
-            }
-            else
-            {
-                this.nextPopulation = tempNextPopulation;
-            }
+            this.nextPopulation = targets[id].NeedPopulation;
         }
     }
 }
