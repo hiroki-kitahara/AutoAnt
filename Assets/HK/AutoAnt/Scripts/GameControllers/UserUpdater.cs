@@ -125,7 +125,7 @@ namespace HK.AutoAnt.GameControllers
             {
                 return;
             }
-            
+
             if(user.UnlockCellBundle.NextPopulation <= user.Town.Population.Value)
             {
                 var masterData = GameSystem.Instance.MasterData.UnlockCellBundle;
@@ -137,7 +137,7 @@ namespace HK.AutoAnt.GameControllers
                     this.cellManager.CellGenerator.GenerateFromCellBundle(r.UnlockCellBundleGroup);
                 }
 
-                user.UnlockCellBundle.SetNextPopulation(masterData);
+                user.UnlockCellBundle.SetNextUnlocks(masterData);
             }
         }
     }

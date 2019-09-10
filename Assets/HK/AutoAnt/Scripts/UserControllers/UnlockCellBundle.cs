@@ -31,9 +31,9 @@ namespace HK.AutoAnt.UserControllers
         public bool CanUnlock => this.targetRecordIds.Count > 0;
 
         /// <summary>
-        /// 次にアンロックする人口数を設定する
+        /// 次にアンロックする要素を設定する
         /// </summary>
-        public void SetNextPopulation(MasterDataUnlockCellBundle masterData)
+        public void SetNextUnlocks(MasterDataUnlockCellBundle masterData)
         {
             this.targetRecordIds.Clear();
 

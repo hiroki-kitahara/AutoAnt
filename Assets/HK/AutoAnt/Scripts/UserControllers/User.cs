@@ -78,7 +78,7 @@ namespace HK.AutoAnt.UserControllers
             }
             else
             {
-                this.unlockCellBundle.SetNextPopulation(GameSystem.Instance.MasterData.UnlockCellBundle);
+                this.unlockCellBundle.SetNextUnlocks(GameSystem.Instance.MasterData.UnlockCellBundle);
             }
         }
 
