@@ -129,8 +129,10 @@ namespace HK.AutoAnt.GameControllers
             if(user.UnlockCellBundle.NextPopulation <= user.Town.Population.Value)
             {
                 var masterData = GameSystem.Instance.MasterData.UnlockCellBundle;
+                var population = user.UnlockCellBundle.NextPopulation;
                 var unlockCellBundles = user.UnlockCellBundle.TargetRecordIds
-                    .Select(id => masterData.Records.Get(id));
+                    .Select(id => masterData.Records.Get(id))
+                    .ToList();
 
                 foreach(var r in unlockCellBundles)
                 {
@@ -138,6 +140,7 @@ namespace HK.AutoAnt.GameControllers
                 }
 
                 user.UnlockCellBundle.SetNextUnlocks(masterData);
+                Broker.Global.Publish(UnlockedCellBundle.Get(population, unlockCellBundles));
             }
         }
     }
