@@ -15,8 +15,8 @@ namespace HK.AutoAnt.UserControllers
         /// <summary>
         /// 次にアンロックする人口数
         /// </summary>
-        public int NextPopulation => this.nextPopulation;
-        private int nextPopulation = int.MinValue;
+        public double NextPopulation => this.nextPopulation;
+        private double nextPopulation = int.MinValue;
 
         /// <summary>
         /// 次にアンロックする人口数を設定する
@@ -28,7 +28,7 @@ namespace HK.AutoAnt.UserControllers
 
             // 取得したレコードから最小値のレコードを対象とする
             var id = -1;
-            var min = int.MaxValue;
+            var min = double.MaxValue;
             for (var i = 0; i < targets.Count; i++)
             {
                 if(min > targets[i].NeedPopulation)
@@ -42,7 +42,7 @@ namespace HK.AutoAnt.UserControllers
             var tempNextPopulation = targets[id].NeedPopulation;
             if(this.nextPopulation == tempNextPopulation)
             {
-                this.nextPopulation = int.MaxValue;
+                this.nextPopulation = double.MaxValue;
             }
             else
             {

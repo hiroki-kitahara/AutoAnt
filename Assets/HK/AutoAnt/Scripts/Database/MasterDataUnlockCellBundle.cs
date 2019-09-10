@@ -28,8 +28,8 @@ namespace HK.AutoAnt.Database
             public int UnlockCellBundleGroup => this.unlockCellBundleGroup;
 
             [SerializeField]
-            private int needPopulation = 0;
-            public int NeedPopulation => this.needPopulation;
+            private double needPopulation = 0;
+            public double NeedPopulation => this.needPopulation;
 
 #if UNITY_EDITOR
             public Record(SpreadSheetData.UnlockCellBundleData data)
