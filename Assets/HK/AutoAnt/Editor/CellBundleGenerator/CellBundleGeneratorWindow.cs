@@ -20,6 +20,8 @@ namespace HK.AutoAnt.Editor
 
         private float cellSize = 20.0f;
 
+        private static GUIContent cellGUIContent = new GUIContent();
+
         [MenuItem("AutoAnt/Tool/CellBundleGenerator")]
         private static void CreateWindow()
         {
@@ -95,20 +97,24 @@ namespace HK.AutoAnt.Editor
             var tempColor = GUI.color;
             this.cellBundleScrollPosition = EditorGUILayout.BeginScrollView(this.cellBundleScrollPosition);
 
+            var width = GUILayout.Width(this.cellSize);
+            var height = GUILayout.Height(this.cellSize);
+
             EditorGUILayout.BeginHorizontal();
-            GUILayout.Label("", GUILayout.Width(this.cellSize));
+            GUILayout.Label("Cell", width);
+            GUI.skin.label.alignment = TextAnchor.MiddleCenter;
             for (var x = this.range.x; x <= this.range.width; x++)
             {
-                GUILayout.Label(x.ToString(), GUILayout.Width(this.cellSize));
+                GUILayout.Label(x.ToString(), width);
             }
             EditorGUILayout.EndHorizontal();
             for (var y = this.range.y; y <= this.range.height; y++)
             {
                 EditorGUILayout.BeginHorizontal();
-                GUILayout.Label(y.ToString(), GUILayout.Width(this.cellSize));
+                GUILayout.Label(y.ToString(), width, height);
                 for (var x = this.range.x; x <= this.range.width; x++)
                 {
-                    GUILayout.Button(new GUIContent(), GUILayout.Width(this.cellSize), GUILayout.Height(this.cellSize));
+                    GUILayout.Button(cellGUIContent, width, height);
                 }
                 EditorGUILayout.EndHorizontal();
             }
