@@ -61,12 +61,11 @@ namespace HK.AutoAnt.GameControllers
             }
 
             gameSystem.User.Wallet.AddMoney(-needMoney);
-            this.cellGenerator.Replace(this.replaceCellRecordId, cell.Position);
 
-            // 周りのセルのない座標にBlankセルを作成する　
-            foreach(var position in this.cellMapper.GetEmptyPositions(cell.Position, this.generateBlankRange))
+            var targets = this.cellMapper.GetCellFromGroup(cell.Group);
+            foreach(var c in targets)
             {
-                this.cellGenerator.Generate(this.blankCellRecordId, position);
+                this.cellGenerator.Replace(this.replaceCellRecordId, c.Position);
             }
 
             var se = gameSystem.Constants.Cell.DevelopSE;

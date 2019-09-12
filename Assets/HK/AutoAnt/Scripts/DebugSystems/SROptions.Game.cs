@@ -103,7 +103,7 @@ public partial class SROptions
             }
             else
             {
-                cellManager.CellGenerator.Generate(grasslandId, id);
+                cellManager.CellGenerator.Generate(grasslandId, id, 99999);
             }
 
             return true;
