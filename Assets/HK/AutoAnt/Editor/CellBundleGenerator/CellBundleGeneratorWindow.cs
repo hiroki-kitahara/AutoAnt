@@ -1,7 +1,10 @@
-﻿using HK.AutoAnt.Database;
+﻿using System.Linq;
+using HK.AutoAnt.Database;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
+using HK.AutoAnt.Extensions;
+using System.Collections.Generic;
 
 namespace HK.AutoAnt.Editor
 {
@@ -15,6 +18,14 @@ namespace HK.AutoAnt.Editor
 
         [SerializeField]
         private RectInt range = new RectInt();
+
+        private int currentGroup;
+
+        private List<MasterDataCellBundle.Record> currentRecords;
+
+        private string[] groupsString;
+
+        private int[] groupsInt;
 
         private Vector2 cellBundleScrollPosition;
 
@@ -47,17 +58,29 @@ namespace HK.AutoAnt.Editor
                 {
                     this.range.y = r.Rect.y;
                 }
-                var width = r.Rect.x + r.Rect.width;
+                var width = r.Rect.x + r.Rect.width - 1;
                 if (this.range.width < width)
                 {
                     this.range.width = width;
                 }
-                var height = r.Rect.y + r.Rect.height;
+                var height = r.Rect.y + r.Rect.height - 1;
                 if (this.range.height < height)
                 {
                     this.range.height = height;
                 }
             }
+
+            this.groupsInt = this.target.Records
+                .Select(x => x.Group)
+                .Distinct()
+                .ToArray();
+
+            this.groupsString = this.groupsInt
+                .Select(x => x.ToString())
+                .ToArray();
+
+            this.currentGroup = this.groupsInt[0];
+            this.currentRecords = this.target.Records.GetFromGroup(this.currentGroup);
 
             if(EditorPrefs.HasKey(EditorPrefsKey.CellSize))
             {
@@ -78,6 +101,13 @@ namespace HK.AutoAnt.Editor
             EditorGUI.indentLevel++;
             EditorGUILayout.ObjectField("Target", this.target, typeof(MasterDataCellBundle), false);
             EditorGUILayout.RectIntField("Range", this.range);
+
+            EditorGUI.BeginChangeCheck();
+            this.currentGroup = EditorGUILayout.IntPopup("Group", this.currentGroup, this.groupsString, this.groupsInt);
+            if(EditorGUI.EndChangeCheck())
+            {
+                this.currentRecords = this.target.Records.GetFromGroup(this.currentGroup);
+            }
 
             EditorGUI.BeginChangeCheck();
             this.cellSize = EditorGUILayout.FloatField("CellSize", this.cellSize);
@@ -102,6 +132,10 @@ namespace HK.AutoAnt.Editor
 
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Cell", width);
+
+            var tempLabelAlignment = GUI.skin.label.alignment;
+            var tempGUIColor = GUI.color;
+
             GUI.skin.label.alignment = TextAnchor.MiddleCenter;
             for (var x = this.range.x; x <= this.range.width; x++)
             {
@@ -114,16 +148,40 @@ namespace HK.AutoAnt.Editor
                 GUILayout.Label(y.ToString(), width, height);
                 for (var x = this.range.x; x <= this.range.width; x++)
                 {
+                    if(this.ContainsGroup(new Vector2Int(x, y)))
+                    {
+                        GUI.color = Color.green;
+                    }
+                    else
+                    {
+                        GUI.color = tempGUIColor;
+                    }
                     GUILayout.Button(cellGUIContent, width, height);
                 }
                 EditorGUILayout.EndHorizontal();
             }
             EditorGUILayout.EndScrollView();
+
+            GUI.skin.label.alignment = tempLabelAlignment;
+            GUI.color = tempGUIColor;
         }
 
         private static class EditorPrefsKey
         {
             public const string CellSize = "CellBundleGeneratorWindow.CellSize";
+        }
+
+        private bool ContainsGroup(Vector2Int position)
+        {
+            foreach(var r in this.currentRecords)
+            {
+                if(r.Rect.Contains(position))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
