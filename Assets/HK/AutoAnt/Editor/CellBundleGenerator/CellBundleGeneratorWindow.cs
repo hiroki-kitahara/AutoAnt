@@ -16,6 +16,10 @@ namespace HK.AutoAnt.Editor
         [SerializeField]
         private RectInt range = new RectInt();
 
+        private Vector2 cellBundleScrollPosition;
+
+        private float cellSize = 20.0f;
+
         [MenuItem("AutoAnt/Tool/CellBundleGenerator")]
         private static void CreateWindow()
         {
@@ -52,6 +56,11 @@ namespace HK.AutoAnt.Editor
                     this.range.height = height;
                 }
             }
+
+            if(EditorPrefs.HasKey(EditorPrefsKey.CellSize))
+            {
+                this.cellSize = EditorPrefs.GetFloat(EditorPrefsKey.CellSize);
+            }
         }
 
         void OnGUI()
@@ -67,6 +76,13 @@ namespace HK.AutoAnt.Editor
             EditorGUI.indentLevel++;
             EditorGUILayout.ObjectField("Target", this.target, typeof(MasterDataCellBundle), false);
             EditorGUILayout.RectIntField("Range", this.range);
+
+            EditorGUI.BeginChangeCheck();
+            this.cellSize = EditorGUILayout.FloatField("CellSize", this.cellSize);
+            if(EditorGUI.EndChangeCheck())
+            {
+                EditorPrefs.SetFloat(EditorPrefsKey.CellSize, this.cellSize);
+            }
         }
 
         private void DrawLine()
@@ -77,16 +93,31 @@ namespace HK.AutoAnt.Editor
         private void DrawCellBundle()
         {
             var tempColor = GUI.color;
-            var buttonSize = 12.0f;
+            this.cellBundleScrollPosition = EditorGUILayout.BeginScrollView(this.cellBundleScrollPosition);
+
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("", GUILayout.Width(this.cellSize));
+            for (var x = this.range.x; x <= this.range.width; x++)
+            {
+                GUILayout.Label(x.ToString(), GUILayout.Width(this.cellSize));
+            }
+            EditorGUILayout.EndHorizontal();
             for (var y = this.range.y; y <= this.range.height; y++)
             {
                 EditorGUILayout.BeginHorizontal();
+                GUILayout.Label(y.ToString(), GUILayout.Width(this.cellSize));
                 for (var x = this.range.x; x <= this.range.width; x++)
                 {
-                    GUILayout.Button(new GUIContent(), GUILayout.Width(buttonSize), GUILayout.Height(buttonSize));
+                    GUILayout.Button(new GUIContent(), GUILayout.Width(this.cellSize), GUILayout.Height(this.cellSize));
                 }
                 EditorGUILayout.EndHorizontal();
             }
+            EditorGUILayout.EndScrollView();
+        }
+
+        private static class EditorPrefsKey
+        {
+            public const string CellSize = "CellBundleGeneratorWindow.CellSize";
         }
     }
 }
