@@ -21,8 +21,6 @@ namespace HK.AutoAnt.Editor
 
         private int currentGroup;
 
-        private List<MasterDataCellBundle.Record> currentRecords;
-
         private string[] groupsString;
 
         private int[] groupsInt;
@@ -95,7 +93,6 @@ namespace HK.AutoAnt.Editor
             }
 
             this.currentGroup = this.groupsInt[0];
-            this.currentRecords = this.target.Records.GetFromGroup(this.currentGroup);
 
             if(EditorPrefs.HasKey(EditorPrefsKey.CellSize))
             {
@@ -119,10 +116,6 @@ namespace HK.AutoAnt.Editor
 
             EditorGUI.BeginChangeCheck();
             this.currentGroup = EditorGUILayout.IntPopup("Group", this.currentGroup, this.groupsString, this.groupsInt);
-            if(EditorGUI.EndChangeCheck())
-            {
-                this.currentRecords = this.target.Records.GetFromGroup(this.currentGroup);
-            }
 
             EditorGUI.BeginChangeCheck();
             this.cellSize = EditorGUILayout.FloatField("CellSize", this.cellSize);
