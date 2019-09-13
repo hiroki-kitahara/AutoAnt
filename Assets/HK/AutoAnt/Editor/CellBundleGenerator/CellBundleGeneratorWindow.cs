@@ -21,6 +21,8 @@ namespace HK.AutoAnt.Editor
 
         private int registerCellRecordId;
 
+        private Color registerCellColor;
+
         private int currentGroup;
 
         private string[] groupsString;
@@ -113,6 +115,17 @@ namespace HK.AutoAnt.Editor
             {
                 this.cellSize = EditorPrefs.GetFloat(EditorPrefsKey.CellSize);
             }
+
+            if(EditorPrefs.HasKey(EditorPrefsKey.GetCellColorKey(100000)))
+            {
+                EditorPrefsKey.SetCellColor(100000, Color.white);
+            }
+            if (EditorPrefs.HasKey(EditorPrefsKey.GetCellColorKey(100100)))
+            {
+                EditorPrefsKey.SetCellColor(100100, Color.green);
+            }
+
+            this.registerCellColor = EditorPrefsKey.GetCellColor(this.registerCellRecordId);
         }
 
         void OnGUI()
@@ -131,7 +144,21 @@ namespace HK.AutoAnt.Editor
 
             this.currentGroup = EditorGUILayout.IntPopup("Group", this.currentGroup, this.groupsString, this.groupsInt);
 
+            EditorGUILayout.BeginHorizontal();
+            EditorGUI.BeginChangeCheck();
             this.registerCellRecordId = EditorGUILayout.IntPopup("CellRecordId", this.registerCellRecordId, this.cellRecordIdString, this.cellRecordIdInt);
+            if(EditorGUI.EndChangeCheck())
+            {
+                this.registerCellColor = EditorPrefsKey.GetCellColor(this.registerCellRecordId);
+            }
+            EditorGUI.BeginChangeCheck();
+            var cellColor = EditorGUILayout.ColorField(this.registerCellColor);
+            if(EditorGUI.EndChangeCheck())
+            {
+                this.registerCellColor = cellColor;
+                EditorPrefsKey.SetCellColor(this.registerCellRecordId, this.registerCellColor);
+            }
+            EditorGUILayout.EndHorizontal();
 
             EditorGUI.BeginChangeCheck();
             this.cellSize = EditorGUILayout.FloatField("CellSize", this.cellSize);
@@ -198,6 +225,27 @@ namespace HK.AutoAnt.Editor
         private static class EditorPrefsKey
         {
             public const string CellSize = "CellBundleGeneratorWindow.CellSize";
+
+            public static string GetCellColorKey(int cellRecordId)
+            {
+                return $"CellBundleGeneratorWindow.CellColor.{cellRecordId}";
+            }
+
+            public static void SetCellColor(int cellRecordId, Color color)
+            {
+                EditorPrefs.SetString(GetCellColorKey(cellRecordId), $"#{ColorUtility.ToHtmlStringRGB(color)}");
+            }
+
+            public static Color GetCellColor(int cellRecordId)
+            {
+                var result = default(Color);
+                if(!ColorUtility.TryParseHtmlString(EditorPrefs.GetString(GetCellColorKey(cellRecordId)), out result))
+                {
+                    Assert.IsTrue(false);
+                }
+
+                return result;
+            }
         }
     }
 }
