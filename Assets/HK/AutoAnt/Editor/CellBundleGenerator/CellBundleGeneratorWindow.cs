@@ -19,11 +19,17 @@ namespace HK.AutoAnt.Editor
         [SerializeField]
         private RectInt range = new RectInt();
 
+        private int registerCellRecordId;
+
         private int currentGroup;
 
         private string[] groupsString;
 
         private int[] groupsInt;
+
+        private string[] cellRecordIdString;
+
+        private int[] cellRecordIdInt;
 
         private Dictionary<Vector2Int, MasterDataCellBundle.Cell> cells = new Dictionary<Vector2Int, MasterDataCellBundle.Cell>();
 
@@ -79,6 +85,15 @@ namespace HK.AutoAnt.Editor
                 .Select(x => x.ToString())
                 .ToArray();
 
+            var masterDataCell = masterData.Cell;
+            this.registerCellRecordId = masterDataCell.Records[0].Id;
+            this.cellRecordIdInt = masterDataCell.Records
+                .Select(x => x.Id)
+                .ToArray();
+            this.cellRecordIdString = this.cellRecordIdInt
+                .Select(x => x.ToString())
+                .ToArray();
+
             this.cells.Clear();
             foreach(var r in this.target.Records)
             {
@@ -114,8 +129,9 @@ namespace HK.AutoAnt.Editor
             EditorGUILayout.ObjectField("Target", this.target, typeof(MasterDataCellBundle), false);
             EditorGUILayout.RectIntField("Range", this.range);
 
-            EditorGUI.BeginChangeCheck();
             this.currentGroup = EditorGUILayout.IntPopup("Group", this.currentGroup, this.groupsString, this.groupsInt);
+
+            this.registerCellRecordId = EditorGUILayout.IntPopup("CellRecordId", this.registerCellRecordId, this.cellRecordIdString, this.cellRecordIdInt);
 
             EditorGUI.BeginChangeCheck();
             this.cellSize = EditorGUILayout.FloatField("CellSize", this.cellSize);
