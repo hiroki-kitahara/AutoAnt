@@ -53,9 +53,23 @@ namespace HK.AutoAnt.Database
         /// </summary>
         public class Cell
         {
-            public int Id { get; set; }
+            public int Id { get; private set; }
 
-            public Vector2Int Position { get; set; }
+            public int Group { get; private set; }
+
+            public Vector2Int Position { get; private set; }
+
+            public Cell(int id, int group, Vector2Int position)
+            {
+                this.Set(id, group, position);
+            }
+
+            public void Set(int id, int group, Vector2Int position)
+            {
+                this.Id = id;
+                this.Group = group;
+                this.Position = position;
+            }
         }
     }
 }

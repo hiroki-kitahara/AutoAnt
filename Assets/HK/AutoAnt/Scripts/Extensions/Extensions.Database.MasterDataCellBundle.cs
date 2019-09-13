@@ -35,12 +35,11 @@ namespace HK.AutoAnt.Extensions
                         if(result.ContainsKey(position))
                         {
                             var cell = result[position];
-                            cell.Id = g.CellRecordId;
-                            cell.Position = position;
+                            cell.Set(g.CellRecordId, g.Group, position);
                         }
                         else
                         {
-                            result.Add(position, new MasterDataCellBundle.Cell { Id = g.CellRecordId, Position = position });
+                            result.Add(position, new MasterDataCellBundle.Cell(g.CellRecordId, g.Group, position));
                         }
                     }
                 }
