@@ -154,7 +154,7 @@ namespace HK.AutoAnt.Editor
                     }
                     else
                     {
-                        GUI.color = tempGUIColor;
+                        GUI.color = Color.gray;
                     }
                     GUILayout.Button(cellGUIContent, width, height);
                 }
