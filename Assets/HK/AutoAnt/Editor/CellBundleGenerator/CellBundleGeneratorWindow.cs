@@ -37,6 +37,8 @@ namespace HK.AutoAnt.Editor
 
         private Vector2 cellBundleScrollPosition;
 
+        private bool isVisibleSettings;
+
         private float cellSize = 20.0f;
 
         private Color otherGroupCellColor = Color.red;
@@ -120,7 +122,7 @@ namespace HK.AutoAnt.Editor
             if(EditorPrefs.HasKey(EditorPrefsKey.OtherGroupCellColor))
             {
                 var otherGroupCellColor = default(Color);
-                if(!ColorUtility.TryParseHtmlString(EditorPrefsKey.OtherGroupCellColor, out otherGroupCellColor))
+                if(!ColorUtility.TryParseHtmlString(EditorPrefs.GetString(EditorPrefsKey.OtherGroupCellColor), out otherGroupCellColor))
                 {
                     Assert.IsTrue(false);
                 }
@@ -142,6 +144,7 @@ namespace HK.AutoAnt.Editor
         void OnGUI()
         {
             this.DrawSystem();
+            this.DrawSettings();
             this.DrawLine();
             this.DrawCellBundle();
         }
@@ -170,17 +173,27 @@ namespace HK.AutoAnt.Editor
                 EditorPrefsKey.SetCellColor(this.registerCellRecordId, this.registerCellColor);
             }
             EditorGUILayout.EndHorizontal();
+        }
 
+        private void DrawSettings()
+        {
+            this.isVisibleSettings = EditorGUILayout.Foldout(this.isVisibleSettings, "Settings");
+            if(!this.isVisibleSettings)
+            {
+                return;
+            }
+
+            EditorGUI.indentLevel++;
             EditorGUI.BeginChangeCheck();
             this.cellSize = EditorGUILayout.FloatField("CellSize", this.cellSize);
-            if(EditorGUI.EndChangeCheck())
+            if (EditorGUI.EndChangeCheck())
             {
                 EditorPrefs.SetFloat(EditorPrefsKey.CellSize, this.cellSize);
             }
 
             EditorGUI.BeginChangeCheck();
             this.otherGroupCellColor = EditorGUILayout.ColorField("OtherGroupCellColor", this.otherGroupCellColor);
-            if(EditorGUI.EndChangeCheck())
+            if (EditorGUI.EndChangeCheck())
             {
                 EditorPrefs.SetString(EditorPrefsKey.OtherGroupCellColor, $"#{ColorUtility.ToHtmlStringRGB(this.otherGroupCellColor)}");
             }
