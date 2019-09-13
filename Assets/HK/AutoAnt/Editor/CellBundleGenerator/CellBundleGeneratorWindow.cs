@@ -47,6 +47,13 @@ namespace HK.AutoAnt.Editor
 
         private static GUIContent cellGUIContent = new GUIContent();
 
+        public enum CellState
+        {
+            Chooseable,
+            OtherGroup,
+            CurrentGroup,
+        }
+
         [MenuItem("AutoAnt/Tool/CellBundleGenerator")]
         private static void CreateWindow()
         {
@@ -255,19 +262,26 @@ namespace HK.AutoAnt.Editor
                 for (var x = this.range.x; x <= this.range.width; x++)
                 {
                     var position = new Vector2Int(x, y);
-                    if(!this.cells.ContainsKey(position))
+                    var cellState = this.GetCellState(position);
+                    switch(cellState)
                     {
-                        GUI.color = this.chooseableCellColor;
+                        case CellState.Chooseable:
+                            GUI.color = this.chooseableCellColor;
+                            break;
+                        case CellState.CurrentGroup:
+                            GUI.color = EditorPrefsKey.GetCellColor(this.cells[position].Id);
+                            break;
+                        case CellState.OtherGroup:
+                            GUI.color = this.otherGroupCellColor;
+                            break;
+                        default:
+                            Assert.IsTrue(false);
+                            break;
                     }
-                    else if(this.cells[position].Group == this.currentGroup)
+                    if(GUILayout.Button(cellGUIContent, width, height))
                     {
-                        GUI.color = EditorPrefsKey.GetCellColor(this.cells[position].Id);
+
                     }
-                    else
-                    {
-                        GUI.color = this.otherGroupCellColor;
-                    }
-                    GUILayout.Button(cellGUIContent, width, height);
                 }
                 EditorGUILayout.EndHorizontal();
             }
@@ -275,6 +289,26 @@ namespace HK.AutoAnt.Editor
 
             GUI.skin.label.alignment = tempLabelAlignment;
             GUI.color = tempGUIColor;
+        }
+
+        private CellState GetCellState(Vector2Int position)
+        {
+            if(!this.cells.ContainsKey(position))
+            {
+                return CellState.Chooseable;
+            }
+
+            var cell = this.cells[position];
+            if(cell.Group == this.currentGroup)
+            {
+                return CellState.CurrentGroup;
+            }
+            if(cell.Group == -1)
+            {
+                return CellState.Chooseable;
+            }
+
+            return CellState.OtherGroup;
         }
 
         private static class EditorPrefsKey
