@@ -27,6 +27,8 @@ namespace HK.AutoAnt.Editor
 
         private int[] groupsInt;
 
+        private Dictionary<Vector2Int, MasterDataCellBundle.Cell> cells = new Dictionary<Vector2Int, MasterDataCellBundle.Cell>();
+
         private Vector2 cellBundleScrollPosition;
 
         private float cellSize = 20.0f;
@@ -78,6 +80,19 @@ namespace HK.AutoAnt.Editor
             this.groupsString = this.groupsInt
                 .Select(x => x.ToString())
                 .ToArray();
+
+            this.cells.Clear();
+            foreach(var r in this.target.Records)
+            {
+                for (var y = r.Rect.y; y < r.Rect.y + r.Rect.height; y++)
+                {
+                    for (var x = r.Rect.x; x < r.Rect.x + r.Rect.width; x++)
+                    {
+                        var position = new Vector2Int(x, y);
+                        this.cells.Add(position, new MasterDataCellBundle.Cell(r.CellRecordId, r.Group, position));
+                    }
+                }
+            }
 
             this.currentGroup = this.groupsInt[0];
             this.currentRecords = this.target.Records.GetFromGroup(this.currentGroup);
@@ -148,13 +163,18 @@ namespace HK.AutoAnt.Editor
                 GUILayout.Label(y.ToString(), width, height);
                 for (var x = this.range.x; x <= this.range.width; x++)
                 {
-                    if(this.ContainsGroup(new Vector2Int(x, y)))
+                    var position = new Vector2Int(x, y);
+                    if(!this.cells.ContainsKey(position))
+                    {
+                        GUI.color = Color.gray;
+                    }
+                    else if(this.cells[position].Group == this.currentGroup)
                     {
                         GUI.color = Color.green;
                     }
                     else
                     {
-                        GUI.color = Color.gray;
+                        GUI.color = Color.red;
                     }
                     GUILayout.Button(cellGUIContent, width, height);
                 }
@@ -169,19 +189,6 @@ namespace HK.AutoAnt.Editor
         private static class EditorPrefsKey
         {
             public const string CellSize = "CellBundleGeneratorWindow.CellSize";
-        }
-
-        private bool ContainsGroup(Vector2Int position)
-        {
-            foreach(var r in this.currentRecords)
-            {
-                if(r.Rect.Contains(position))
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
     }
 }
