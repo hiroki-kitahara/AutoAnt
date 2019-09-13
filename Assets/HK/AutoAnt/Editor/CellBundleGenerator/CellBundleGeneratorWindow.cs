@@ -43,6 +43,8 @@ namespace HK.AutoAnt.Editor
 
         private Color otherGroupCellColor = Color.red;
 
+        private Color chooseableCellColor = Color.gray;
+
         private static GUIContent cellGUIContent = new GUIContent();
 
         [MenuItem("AutoAnt/Tool/CellBundleGenerator")]
@@ -128,6 +130,15 @@ namespace HK.AutoAnt.Editor
                 }
                 this.otherGroupCellColor = otherGroupCellColor;
             }
+            if(EditorPrefs.HasKey(EditorPrefsKey.ChooseableCellColor))
+            {
+                var chooseableCellColor = default(Color);
+                if (!ColorUtility.TryParseHtmlString(EditorPrefs.GetString(EditorPrefsKey.ChooseableCellColor), out chooseableCellColor))
+                {
+                    Assert.IsTrue(false);
+                }
+                this.chooseableCellColor = chooseableCellColor;
+            }
 
             if(EditorPrefs.HasKey(EditorPrefsKey.GetCellColorKey(100000)))
             {
@@ -201,6 +212,13 @@ namespace HK.AutoAnt.Editor
             {
                 EditorPrefs.SetString(EditorPrefsKey.OtherGroupCellColor, $"#{ColorUtility.ToHtmlStringRGB(this.otherGroupCellColor)}");
             }
+
+            EditorGUI.BeginChangeCheck();
+            this.chooseableCellColor = EditorGUILayout.ColorField("ChooseableCellColor", this.chooseableCellColor);
+            if (EditorGUI.EndChangeCheck())
+            {
+                EditorPrefs.SetString(EditorPrefsKey.ChooseableCellColor, $"#{ColorUtility.ToHtmlStringRGB(this.chooseableCellColor)}");
+            }
         }
 
         private void DrawLine()
@@ -239,7 +257,7 @@ namespace HK.AutoAnt.Editor
                     var position = new Vector2Int(x, y);
                     if(!this.cells.ContainsKey(position))
                     {
-                        GUI.color = Color.gray;
+                        GUI.color = this.chooseableCellColor;
                     }
                     else if(this.cells[position].Group == this.currentGroup)
                     {
@@ -264,6 +282,8 @@ namespace HK.AutoAnt.Editor
             public const string CellSize = "CellBundleGeneratorWindow.CellSize";
 
             public const string OtherGroupCellColor = "CellBundleGeneratorWindow.OtherGroupCellColor";
+
+            public const string ChooseableCellColor = "CellBundleGeneratorWindow.ChooseableCellColor";
 
             public static string GetCellColorKey(int cellRecordId)
             {
