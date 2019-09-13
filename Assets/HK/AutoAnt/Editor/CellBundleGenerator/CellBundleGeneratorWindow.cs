@@ -39,6 +39,8 @@ namespace HK.AutoAnt.Editor
 
         private float cellSize = 20.0f;
 
+        private Color otherGroupCellColor = Color.red;
+
         private static GUIContent cellGUIContent = new GUIContent();
 
         [MenuItem("AutoAnt/Tool/CellBundleGenerator")]
@@ -115,6 +117,15 @@ namespace HK.AutoAnt.Editor
             {
                 this.cellSize = EditorPrefs.GetFloat(EditorPrefsKey.CellSize);
             }
+            if(EditorPrefs.HasKey(EditorPrefsKey.OtherGroupCellColor))
+            {
+                var otherGroupCellColor = default(Color);
+                if(!ColorUtility.TryParseHtmlString(EditorPrefsKey.OtherGroupCellColor, out otherGroupCellColor))
+                {
+                    Assert.IsTrue(false);
+                }
+                this.otherGroupCellColor = otherGroupCellColor;
+            }
 
             if(EditorPrefs.HasKey(EditorPrefsKey.GetCellColorKey(100000)))
             {
@@ -166,6 +177,13 @@ namespace HK.AutoAnt.Editor
             {
                 EditorPrefs.SetFloat(EditorPrefsKey.CellSize, this.cellSize);
             }
+
+            EditorGUI.BeginChangeCheck();
+            this.otherGroupCellColor = EditorGUILayout.ColorField("OtherGroupCellColor", this.otherGroupCellColor);
+            if(EditorGUI.EndChangeCheck())
+            {
+                EditorPrefs.SetString(EditorPrefsKey.OtherGroupCellColor, $"#{ColorUtility.ToHtmlStringRGB(this.otherGroupCellColor)}");
+            }
         }
 
         private void DrawLine()
@@ -210,7 +228,7 @@ namespace HK.AutoAnt.Editor
                     }
                     else
                     {
-                        GUI.color = Color.red;
+                        GUI.color = this.otherGroupCellColor;
                     }
                     GUILayout.Button(cellGUIContent, width, height);
                 }
@@ -225,6 +243,8 @@ namespace HK.AutoAnt.Editor
         private static class EditorPrefsKey
         {
             public const string CellSize = "CellBundleGeneratorWindow.CellSize";
+
+            public const string OtherGroupCellColor = "CellBundleGeneratorWindow.OtherGroupCellColor";
 
             public static string GetCellColorKey(int cellRecordId)
             {
