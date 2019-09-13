@@ -206,7 +206,7 @@ namespace HK.AutoAnt.Editor
                     }
                     else if(this.cells[position].Group == this.currentGroup)
                     {
-                        GUI.color = Color.green;
+                        GUI.color = EditorPrefsKey.GetCellColor(this.cells[position].Id);
                     }
                     else
                     {
