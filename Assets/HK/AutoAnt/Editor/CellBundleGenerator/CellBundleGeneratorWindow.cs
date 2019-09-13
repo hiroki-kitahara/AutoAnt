@@ -151,6 +151,8 @@ namespace HK.AutoAnt.Editor
 
         private void DrawSystem()
         {
+            EditorGUI.indentLevel = 0;
+            
             GUILayout.Label("System");
             EditorGUI.indentLevel++;
             EditorGUILayout.ObjectField("Target", this.target, typeof(MasterDataCellBundle), false);
@@ -177,6 +179,8 @@ namespace HK.AutoAnt.Editor
 
         private void DrawSettings()
         {
+            EditorGUI.indentLevel = 0;
+
             this.isVisibleSettings = EditorGUILayout.Foldout(this.isVisibleSettings, "Settings");
             if(!this.isVisibleSettings)
             {
@@ -206,6 +210,8 @@ namespace HK.AutoAnt.Editor
 
         private void DrawCellBundle()
         {
+            EditorGUI.indentLevel = 0;
+
             var tempColor = GUI.color;
             this.cellBundleScrollPosition = EditorGUILayout.BeginScrollView(this.cellBundleScrollPosition);
 
