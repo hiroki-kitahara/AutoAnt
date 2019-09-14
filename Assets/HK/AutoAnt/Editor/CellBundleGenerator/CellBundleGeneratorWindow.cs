@@ -175,7 +175,6 @@ namespace HK.AutoAnt.Editor
             GUILayout.Label("System");
             EditorGUI.indentLevel++;
             EditorGUILayout.ObjectField("Target", this.target, typeof(MasterDataCellBundle), false);
-            EditorGUILayout.RectIntField("Range", this.range);
 
             this.currentGroup = EditorGUILayout.IntPopup("Group", this.currentGroup, this.groupsString, this.groupsInt);
 
