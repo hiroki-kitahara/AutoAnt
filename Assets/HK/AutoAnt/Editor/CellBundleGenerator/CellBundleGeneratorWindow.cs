@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using HK.AutoAnt.Extensions;
 using System.Collections.Generic;
+using System;
 
 namespace HK.AutoAnt.Editor
 {
@@ -193,6 +194,66 @@ namespace HK.AutoAnt.Editor
                 EditorPrefsKey.SetCellColor(this.registerCellRecordId, this.registerCellColor);
             }
             EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("範囲を広げる");
+            if (GUILayout.Button("X"))
+            {
+                this.range.x--;
+            }
+            if (GUILayout.Button("Y"))
+            {
+                this.range.y--;
+            }
+            if (GUILayout.Button("W"))
+            {
+                this.range.width++;
+            }
+            if (GUILayout.Button("H"))
+            {
+                this.range.height++;
+            }
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("範囲を狭める");
+            if (GUILayout.Button("X"))
+            {
+                this.NarrowRange(
+                    this.range.y,
+                    this.range.height,
+                    i => new Vector2Int(this.range.x, i),
+                    () => this.range.x++
+                    );
+            }
+            if (GUILayout.Button("Y"))
+            {
+                this.NarrowRange(
+                    this.range.x,
+                    this.range.width,
+                    i => new Vector2Int(i, this.range.y),
+                    () => this.range.y++
+                    );
+            }
+            if (GUILayout.Button("W"))
+            {
+                this.NarrowRange(
+                    this.range.y,
+                    this.range.height,
+                    i => new Vector2Int(this.range.width, i),
+                    () => this.range.width--
+                    );
+            }
+            if (GUILayout.Button("H"))
+            {
+                this.NarrowRange(
+                    this.range.x,
+                    this.range.width,
+                    i => new Vector2Int(i, this.range.height),
+                    () => this.range.height--
+                    );
+            }
+            EditorGUILayout.EndHorizontal();
         }
 
         private void DrawSettings()
@@ -291,6 +352,29 @@ namespace HK.AutoAnt.Editor
             GUI.color = tempGUIColor;
         }
 
+        private void NarrowRange(int checkMin, int checkMax, Func<int, Vector2Int> positionSelector, Action rangeNarrowAction)
+        {
+            var confirmed = false;
+            for (var i = checkMin; i <= checkMax; i++)
+            {
+                var position = positionSelector(i);
+                if (this.cells.ContainsKey(position) && this.cells[position].Group != -1)
+                {
+                    if (confirmed || EditorUtility.DisplayDialog("確認", $"{position}には既にデータがありますが本当によろしいですか？", "OK", "CANCEL"))
+                    {
+                        confirmed = true;
+                        this.cells.Remove(position);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+
+            rangeNarrowAction();
+        }
+
         private CellState GetCellState(Vector2Int position)
         {
             if(!this.cells.ContainsKey(position))
@@ -335,6 +419,11 @@ namespace HK.AutoAnt.Editor
             {
                 Assert.IsTrue(false, "未定義の挙動です");
             }
+        }
+
+        private void NarrowRange(Rect newRange)
+        {
+
         }
 
         private static class EditorPrefsKey
