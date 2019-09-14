@@ -280,7 +280,7 @@ namespace HK.AutoAnt.Editor
                     }
                     if(GUILayout.Button(cellGUIContent, width, height))
                     {
-
+                        this.SetCellData(position, this.registerCellRecordId, this.currentGroup);
                     }
                 }
                 EditorGUILayout.EndHorizontal();
@@ -309,6 +309,32 @@ namespace HK.AutoAnt.Editor
             }
 
             return CellState.OtherGroup;
+        }
+
+        private void SetCellData(Vector2Int position, int cellRecordId, int group)
+        {
+            if(!this.cells.ContainsKey(position))
+            {
+                this.cells.Add(position, new MasterDataCellBundle.Cell(cellRecordId, group, position));
+                return;
+            }
+            var cell = this.cells[position];
+            if(cell.Group == group)
+            {
+                cell.Set(-1, -1, cell.Position);
+            }
+            else if(cell.Group == -1)
+            {
+                cell.Set(cellRecordId, group, position);
+            }
+            else if(cell.Group != group)
+            {
+                Debug.Log($"{position}は他のグループに属しています");
+            }
+            else
+            {
+                Assert.IsTrue(false, "未定義の挙動です");
+            }
         }
 
         private static class EditorPrefsKey
