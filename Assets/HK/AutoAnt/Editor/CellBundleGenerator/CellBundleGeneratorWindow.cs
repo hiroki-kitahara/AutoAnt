@@ -6,6 +6,7 @@ using UnityEngine.Assertions;
 using HK.AutoAnt.Extensions;
 using System.Collections.Generic;
 using System;
+using System.Text;
 
 namespace HK.AutoAnt.Editor
 {
@@ -166,6 +167,9 @@ namespace HK.AutoAnt.Editor
             this.DrawSettings();
             this.DrawLine();
             this.DrawCellBundle();
+            GUILayout.FlexibleSpace();
+            this.DrawLine();
+            this.DrawFooter();
         }
 
         private void DrawSystem()
@@ -351,6 +355,17 @@ namespace HK.AutoAnt.Editor
             GUI.color = tempGUIColor;
         }
 
+        private void DrawFooter()
+        {
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            if(GUILayout.Button("書き出し"))
+            {
+                this.Output();
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+        
         private void NarrowRange(int checkMin, int checkMax, Func<int, Vector2Int> positionSelector, Action rangeNarrowAction)
         {
             var confirmed = false;
@@ -372,6 +387,28 @@ namespace HK.AutoAnt.Editor
             }
 
             rangeNarrowAction();
+        }
+
+        private void Output()
+        {
+            var result = new StringBuilder();
+            result.AppendLine("Id,Group,CellRecordId,X,Y");
+            var cells = this.cells.Select(x => x.Value).ToList();
+            var primaryKey = 1;
+            cells.Sort((left, right) => this.GetCellSortId(left) - this.GetCellSortId(right));
+            foreach(var group in this.groupsInt)
+            {
+                var targets = cells.Where(x => x.Group == group).ToList();
+                foreach(var t in targets)
+                {
+                    result.AppendLine($"{primaryKey},{group},{t.Id},{t.Position.x},{t.Position.y}");
+                }
+            }
+
+            if(EditorUtility.DisplayDialog("確認", result.ToString(), "クリップボードにコピー"))
+            {
+                GUIUtility.systemCopyBuffer = result.ToString();
+            }
         }
 
         private CellState GetCellState(Vector2Int position)
@@ -420,9 +457,11 @@ namespace HK.AutoAnt.Editor
             }
         }
 
-        private void NarrowRange(Rect newRange)
+        private int GetCellSortId(MasterDataCellBundle.Cell cell)
         {
-
+            var x = cell.Position.x;
+            var y = cell.Position.y * (this.range.height - this.range.y);
+            return x + y;
         }
 
         private static class EditorPrefsKey
