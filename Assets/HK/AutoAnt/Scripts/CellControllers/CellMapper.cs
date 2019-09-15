@@ -89,12 +89,31 @@ namespace HK.AutoAnt.CellControllers
             return Vector2IntUtility.GetRange(origin, range, (p) => !this.cell.Map.ContainsKey(p)).ToArray();
         }
 
+        /// <summary>
+        /// <paramref name="group"/>に一致する全てのセルを返す
+        /// </summary>
+        public List<Cell> GetCellFromGroup(int group)
+        {
+            var result = new List<Cell>();
+            foreach(var c in this.cell.List)
+            {
+                if(c.Group != group)
+                {
+                    continue;
+                }
+
+                result.Add(c);
+            }
+
+            return result;
+        }
+
         public SerializableCellMapper GetSerializable()
         {
             var result = new SerializableCellMapper();
             foreach(var c in this.Cell.List)
             {
-                result.Cells.Add(new SerializableCell() { RecordId = c.RecordId, Position = c.Position });
+                result.Cells.Add(new SerializableCell() { RecordId = c.RecordId, Position = c.Position, Group = c.Group });
             }
             foreach(var e in this.CellEvent.List)
             {
@@ -108,7 +127,7 @@ namespace HK.AutoAnt.CellControllers
         {
             foreach(var c in serializableData.Cells)
             {
-                cellGenerator.Generate(c.RecordId, c.Position);
+                cellGenerator.Generate(c.RecordId, c.Position, c.Group);
             }
             foreach(var e in serializableData.CellEvents)
             {

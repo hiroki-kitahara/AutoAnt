@@ -26,6 +26,8 @@ namespace HK.AutoAnt.Editor
                 (p) => Download(typeof(MasterDataFacilityLevelParameter), p, m => FacilityLevelParameterEditor.Load(m.FacilityLevelParameter), false),
                 (p) => Download(typeof(MasterDataRoadLevelParameter), p, m => RoadLevelParameterEditor.Load(m.RoadLevelParameter), false),
                 (p) => Download(typeof(MasterDataUnlockCellEvent), p, m => UnlockCellEventEditor.Load(m.UnlockCellEvent), false),
+                (p) => Download(typeof(MasterDataCellBundle), p, m => CellBundleEditor.Load(m.CellBundle), false),
+                (p) => Download(typeof(MasterDataUnlockCellBundle), p, m => UnlockCellBundleEditor.Load(m.UnlockCellBundle), false),
             };
 
             for (var i = 0; i < downloader.Length; i++)
@@ -83,6 +85,18 @@ namespace HK.AutoAnt.Editor
         private static void DownloadUnlockCellEvent()
         {
             Download(typeof(MasterDataUnlockCellEvent), 1.0f, m => UnlockCellEventEditor.Load(m.UnlockCellEvent));
+        }
+
+        [MenuItem("AutoAnt/MasterData/Download CellBundle", false, 20)]
+        private static void DownloadCellBundle()
+        {
+            Download(typeof(MasterDataCellBundle), 1.0f, m => CellBundleEditor.Load(m.CellBundle));
+        }
+
+        [MenuItem("AutoAnt/MasterData/Download UnlockCellBundle", false, 21)]
+        private static void DownloadUnlockCellBundle()
+        {
+            Download(typeof(MasterDataUnlockCellBundle), 1.0f, m => UnlockCellBundleEditor.Load(m.UnlockCellBundle));
         }
 
         private static void Download(Type masterDataType, float progress, Func<MasterData, bool> selector, bool clearProgressBar = true)

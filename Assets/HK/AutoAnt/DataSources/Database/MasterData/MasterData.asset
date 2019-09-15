@@ -22,3 +22,5 @@ MonoBehaviour:
     type: 2}
   roadLevelParameter: {fileID: 11400000, guid: 2262987fa9cad4b4ea2e0ff404bd16e4, type: 2}
   unlockCellEvent: {fileID: 11400000, guid: 205009221d8ff40df9aba6922d9ba38c, type: 2}
+  cellBundle: {fileID: 11400000, guid: 7fc52c85154004bd6a658f4536af0f78, type: 2}
+  unlockCellBundle: {fileID: 11400000, guid: 72973973cd024453b989b5f422c04234, type: 2}

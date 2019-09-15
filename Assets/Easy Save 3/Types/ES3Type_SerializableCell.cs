@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ES3Types
 {
-	[ES3PropertiesAttribute("RecordId", "Position")]
+	[ES3PropertiesAttribute("RecordId", "Position", "Group")]
 	public class ES3Type_SerializableCell : ES3ObjectType
 	{
 		public static ES3Type Instance = null;
@@ -16,6 +16,7 @@ namespace ES3Types
 			
 			writer.WriteProperty("RecordId", instance.RecordId, ES3Type_int.Instance);
 			writer.WriteProperty("Position", instance.Position, ES3Type_Vector2Int.Instance);
+			writer.WriteProperty("Group", instance.Group, ES3Type_int.Instance);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -31,6 +32,9 @@ namespace ES3Types
 						break;
 					case "Position":
 						instance.Position = reader.Read<UnityEngine.Vector2Int>(ES3Type_Vector2Int.Instance);
+						break;
+					case "Group":
+						instance.Group = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
 					default:
 						reader.Skip();
