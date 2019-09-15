@@ -34,8 +34,8 @@ namespace HK.AutoAnt.Database
             public int CellRecordId => this.cellRecordId;
 
             [SerializeField]
-            private RectInt rect = new RectInt();
-            public RectInt Rect => this.rect;
+            private Vector2Int position = new Vector2Int();
+            public Vector2Int Position => this.position;
 
 #if UNITY_EDITOR
             public Record(SpreadSheetData.CellBundleData data)
@@ -43,7 +43,7 @@ namespace HK.AutoAnt.Database
                 this.id = data.Id;
                 this.group = data.Group;
                 this.cellRecordId = data.Cellrecordid;
-                this.rect = new RectInt(data.X, data.Y, data.Width, data.Height);
+                this.position = new Vector2Int(data.X, data.Y);
             }
 #endif
         }

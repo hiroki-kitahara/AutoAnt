@@ -39,12 +39,4 @@ MonoBehaviour:
     name: Y
     isEnable: 0
     isArray: 0
-  - type: 3
-    name: Width
-    isEnable: 0
-    isArray: 0
-  - type: 3
-    name: Height
-    isEnable: 0
-    isArray: 0
   AccessCode: 
