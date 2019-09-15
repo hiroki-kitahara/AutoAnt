@@ -36,12 +36,12 @@ namespace HK.AutoAnt.CellControllers
         public List<Cell> GenerateFromCellBundle(int group)
         {
             var result = new List<Cell>();
-            var targets = GameSystem.Instance.MasterData.CellBundle.Get(group);
+            var targets = GameSystem.Instance.MasterData.CellBundle.Records.GetFromGroup(group);
             Assert.AreNotEqual(targets.Count, 0);
 
             foreach(var t in targets)
             {
-                result.Add(this.Generate(t.Id, t.Position, group));
+                result.Add(this.Generate(t.CellRecordId, t.Position, group));
             }
 
             return result;

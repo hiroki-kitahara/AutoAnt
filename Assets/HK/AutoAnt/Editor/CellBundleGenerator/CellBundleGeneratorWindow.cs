@@ -73,23 +73,21 @@ namespace HK.AutoAnt.Editor
             this.range = new RectInt();
             foreach (var r in this.target.Records)
             {
-                if (this.range.x > r.Rect.x)
+                if (this.range.x > r.Position.x)
                 {
-                    this.range.x = r.Rect.x;
+                    this.range.x = r.Position.x;
                 }
-                if (this.range.y > r.Rect.y)
+                if (this.range.y > r.Position.y)
                 {
-                    this.range.y = r.Rect.y;
+                    this.range.y = r.Position.y;
                 }
-                var width = r.Rect.x + r.Rect.width - 1;
-                if (this.range.width < width)
+                if (this.range.width < r.Position.x)
                 {
-                    this.range.width = width;
+                    this.range.width = r.Position.x;
                 }
-                var height = r.Rect.y + r.Rect.height - 1;
-                if (this.range.height < height)
+                if (this.range.height < r.Position.y)
                 {
-                    this.range.height = height;
+                    this.range.height = r.Position.y;
                 }
             }
 
@@ -114,14 +112,7 @@ namespace HK.AutoAnt.Editor
             this.cells.Clear();
             foreach(var r in this.target.Records)
             {
-                for (var y = r.Rect.y; y < r.Rect.y + r.Rect.height; y++)
-                {
-                    for (var x = r.Rect.x; x < r.Rect.x + r.Rect.width; x++)
-                    {
-                        var position = new Vector2Int(x, y);
-                        this.cells.Add(position, new MasterDataCellBundle.Cell(r.CellRecordId, r.Group, position));
-                    }
-                }
+                this.cells.Add(r.Position, new MasterDataCellBundle.Cell(r.CellRecordId, r.Group, r.Position));
             }
 
             this.currentGroup = this.groupsInt[0];
