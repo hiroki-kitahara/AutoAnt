@@ -359,7 +359,7 @@ namespace HK.AutoAnt.Editor
                 var position = positionSelector(i);
                 if (this.cells.ContainsKey(position) && this.cells[position].Group != -1)
                 {
-                    if (confirmed || EditorUtility.DisplayDialog("確認", $"{position}には既にデータがありますが本当によろしいですか？", "OK", "CANCEL"))
+                    if (confirmed || EditorUtility.DisplayDialog("範囲を狭めます", $"{position}には既にデータがありますが本当によろしいですか？", "OK", "CANCEL"))
                     {
                         confirmed = true;
                         this.cells.Remove(position);
@@ -412,7 +412,7 @@ namespace HK.AutoAnt.Editor
             }
             else if(cell.Group != group)
             {
-                Debug.Log($"{position}は他のグループに属しています");
+                EditorUtility.DisplayDialog("設定できません", $"{position}は他のグループに属しています", "OK");
             }
             else
             {
