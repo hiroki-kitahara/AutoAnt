@@ -396,7 +396,11 @@ namespace HK.AutoAnt.Editor
                 }
             }
 
-            if(EditorUtility.DisplayDialog("確認", result.ToString(), "クリップボードにコピー"))
+            this.target.Set(result.ToString());
+            EditorUtility.SetDirty(this.target);
+            AssetDatabase.SaveAssets();
+
+            if(EditorUtility.DisplayDialog("出力完了しました", "マスターデータにペーストしてください。Unityアセットへは反映済みなのでダウンロードする必要ありません。", "クリップボードにコピー"))
             {
                 GUIUtility.systemCopyBuffer = result.ToString();
             }
