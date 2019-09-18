@@ -491,7 +491,8 @@ namespace HK.AutoAnt.Editor
             }
             else if(cell.Group != group)
             {
-                EditorUtility.DisplayDialog("設定できません", $"{position}は他のグループに属しています", "OK");
+                var otherGroup = this.cells[position].Group;
+                EditorUtility.DisplayDialog("設定できません", $"{position}は[{otherGroup}]のグループに属しています", "OK");
             }
             else
             {
