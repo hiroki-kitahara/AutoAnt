@@ -275,7 +275,24 @@ namespace HK.AutoAnt.Editor
             }
             if (GUILayout.Button("削除"))
             {
+                if(!this.groupsInt.Contains(this.editingGroup))
+                {
+                    EditorUtility.DisplayDialog($"[{this.editingGroup}]は既に存在していません", "他のIDを指定してください", "OK");
+                }
+                else if(EditorUtility.DisplayDialog($"[{this.editingGroup}]を削除します", "本当によろしいですか？", "OK", "CANCEL"))
+                {
+                    var targets = this.cells
+                        .Where(x => x.Value.Group == this.editingGroup)
+                        .Select(x => x.Key)
+                        .ToArray();
+                    foreach(var t in targets)
+                    {
+                        this.cells.Remove(t);
+                    }
 
+                    this.groupsInt.Remove(this.editingGroup);
+                    this.groupsString.Remove(this.editingGroup.ToString());
+                }
             }
             EditorGUILayout.EndHorizontal();
         }
