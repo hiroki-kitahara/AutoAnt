@@ -53,13 +53,13 @@ namespace HK.AutoAnt.Editor
 
         private Color otherGroupCellColor = Color.red;
 
-        private Color chooseableCellColor = Color.gray;
+        private Color choosableCellColor = Color.gray;
 
         private static GUIContent cellGUIContent = new GUIContent();
 
         public enum CellState
         {
-            Chooseable,
+            Choosable,
             OtherGroup,
             CurrentGroup,
         }
@@ -138,14 +138,14 @@ namespace HK.AutoAnt.Editor
                 }
                 this.otherGroupCellColor = otherGroupCellColor;
             }
-            if(EditorPrefs.HasKey(EditorPrefsKey.ChooseableCellColor))
+            if(EditorPrefs.HasKey(EditorPrefsKey.ChoosableCellColor))
             {
-                var chooseableCellColor = default(Color);
-                if (!ColorUtility.TryParseHtmlString(EditorPrefs.GetString(EditorPrefsKey.ChooseableCellColor), out chooseableCellColor))
+                var choosableCellColor = default(Color);
+                if (!ColorUtility.TryParseHtmlString(EditorPrefs.GetString(EditorPrefsKey.ChoosableCellColor), out choosableCellColor))
                 {
                     Assert.IsTrue(false);
                 }
-                this.chooseableCellColor = chooseableCellColor;
+                this.choosableCellColor = choosableCellColor;
             }
 
             if(EditorPrefs.HasKey(EditorPrefsKey.GetCellColorKey(100000)))
@@ -323,10 +323,10 @@ namespace HK.AutoAnt.Editor
             }
 
             EditorGUI.BeginChangeCheck();
-            this.chooseableCellColor = EditorGUILayout.ColorField("ChooseableCellColor", this.chooseableCellColor);
+            this.choosableCellColor = EditorGUILayout.ColorField("ChoosableCellColor", this.choosableCellColor);
             if (EditorGUI.EndChangeCheck())
             {
-                EditorPrefs.SetString(EditorPrefsKey.ChooseableCellColor, $"#{ColorUtility.ToHtmlStringRGB(this.chooseableCellColor)}");
+                EditorPrefs.SetString(EditorPrefsKey.ChoosableCellColor, $"#{ColorUtility.ToHtmlStringRGB(this.choosableCellColor)}");
             }
         }
 
@@ -367,8 +367,8 @@ namespace HK.AutoAnt.Editor
                     var cellState = this.GetCellState(position);
                     switch(cellState)
                     {
-                        case CellState.Chooseable:
-                            GUI.color = this.chooseableCellColor;
+                        case CellState.Choosable:
+                            GUI.color = this.choosableCellColor;
                             break;
                         case CellState.CurrentGroup:
                             GUI.color = EditorPrefsKey.GetCellColor(this.cells[position].Id);
@@ -457,7 +457,7 @@ namespace HK.AutoAnt.Editor
         {
             if(!this.cells.ContainsKey(position))
             {
-                return CellState.Chooseable;
+                return CellState.Choosable;
             }
 
             var cell = this.cells[position];
@@ -467,7 +467,7 @@ namespace HK.AutoAnt.Editor
             }
             if(cell.Group == -1)
             {
-                return CellState.Chooseable;
+                return CellState.Choosable;
             }
 
             return CellState.OtherGroup;
@@ -513,7 +513,7 @@ namespace HK.AutoAnt.Editor
 
             public const string OtherGroupCellColor = "CellBundleGeneratorWindow.OtherGroupCellColor";
 
-            public const string ChooseableCellColor = "CellBundleGeneratorWindow.ChooseableCellColor";
+            public const string ChoosableCellColor = "CellBundleGeneratorWindow.ChoosableCellColor";
 
             public static string GetCellColorKey(int cellRecordId)
             {
