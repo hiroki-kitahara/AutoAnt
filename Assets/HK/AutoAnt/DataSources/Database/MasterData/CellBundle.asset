@@ -16,48 +16,600 @@ MonoBehaviour:
   - id: 1
     group: 0
     cellRecordId: 100100
-    rect:
-      x: -2
-      y: -2
-      width: 5
-      height: 5
-  - id: 2
+    position: {x: -2, y: -2}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: -1, y: -2}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 0, y: -2}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 1, y: -2}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 2, y: -2}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: -2, y: -1}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: -1, y: -1}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 0, y: -1}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 1, y: -1}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 2, y: -1}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: -2, y: 0}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: -1, y: 0}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 0, y: 0}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 1, y: 0}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 2, y: 0}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: -2, y: 1}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: -1, y: 1}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 0, y: 1}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 1, y: 1}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 2, y: 1}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: -2, y: 2}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: -1, y: 2}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 0, y: 2}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 1, y: 2}
+  - id: 1
+    group: 0
+    cellRecordId: 100100
+    position: {x: 2, y: 2}
+  - id: 1
     group: 1
     cellRecordId: 100000
-    rect:
-      x: 3
-      y: -2
-      width: 5
-      height: 5
-  - id: 3
+    position: {x: 3, y: -2}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 4, y: -2}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 5, y: -2}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 6, y: -2}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 7, y: -2}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 3, y: -1}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 4, y: -1}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 5, y: -1}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 6, y: -1}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 7, y: -1}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 3, y: 0}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 4, y: 0}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 5, y: 0}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 6, y: 0}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 7, y: 0}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 3, y: 1}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 4, y: 1}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 5, y: 1}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 6, y: 1}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 7, y: 1}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 3, y: 2}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 4, y: 2}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 5, y: 2}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 6, y: 2}
+  - id: 1
+    group: 1
+    cellRecordId: 100000
+    position: {x: 7, y: 2}
+  - id: 1
     group: 2
     cellRecordId: 100000
-    rect:
-      x: -2
-      y: 3
-      width: 5
-      height: 5
-  - id: 4
+    position: {x: -2, y: 3}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: -1, y: 3}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 0, y: 3}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 1, y: 3}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 2, y: 3}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: -2, y: 4}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: -1, y: 4}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 0, y: 4}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 1, y: 4}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 2, y: 4}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: -2, y: 5}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: -1, y: 5}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 0, y: 5}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 1, y: 5}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 2, y: 5}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: -2, y: 6}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: -1, y: 6}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 0, y: 6}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 1, y: 6}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 2, y: 6}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: -2, y: 7}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: -1, y: 7}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 0, y: 7}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 1, y: 7}
+  - id: 1
+    group: 2
+    cellRecordId: 100000
+    position: {x: 2, y: 7}
+  - id: 1
     group: 3
     cellRecordId: 100000
-    rect:
-      x: -7
-      y: -2
-      width: 5
-      height: 5
-  - id: 5
+    position: {x: -7, y: -2}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -6, y: -2}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -5, y: -2}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -4, y: -2}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -3, y: -2}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -7, y: -1}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -6, y: -1}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -5, y: -1}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -4, y: -1}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -3, y: -1}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -7, y: 0}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -6, y: 0}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -5, y: 0}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -4, y: 0}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -3, y: 0}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -7, y: 1}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -6, y: 1}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -5, y: 1}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -4, y: 1}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -3, y: 1}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -7, y: 2}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -6, y: 2}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -5, y: 2}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -4, y: 2}
+  - id: 1
+    group: 3
+    cellRecordId: 100000
+    position: {x: -3, y: 2}
+  - id: 1
     group: 4
     cellRecordId: 100000
-    rect:
-      x: -2
-      y: -7
-      width: 5
-      height: 5
-  - id: 6
+    position: {x: -2, y: -7}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: -1, y: -7}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 0, y: -7}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 1, y: -7}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 2, y: -7}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: -2, y: -6}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: -1, y: -6}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 0, y: -6}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 1, y: -6}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 2, y: -6}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: -2, y: -5}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: -1, y: -5}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 0, y: -5}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 1, y: -5}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 2, y: -5}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: -2, y: -4}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: -1, y: -4}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 0, y: -4}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 1, y: -4}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 2, y: -4}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: -2, y: -3}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: -1, y: -3}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 0, y: -3}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 1, y: -3}
+  - id: 1
+    group: 4
+    cellRecordId: 100000
+    position: {x: 2, y: -3}
+  - id: 1
     group: 5
     cellRecordId: 100000
-    rect:
-      x: 8
-      y: -2
-      width: 5
-      height: 5
+    position: {x: 8, y: -2}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 9, y: -2}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 10, y: -2}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 11, y: -2}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 12, y: -2}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 8, y: -1}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 9, y: -1}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 10, y: -1}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 11, y: -1}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 12, y: -1}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 8, y: 0}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 9, y: 0}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 10, y: 0}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 11, y: 0}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 12, y: 0}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 8, y: 1}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 9, y: 1}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 10, y: 1}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 11, y: 1}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 12, y: 1}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 8, y: 2}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 9, y: 2}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 10, y: 2}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 11, y: 2}
+  - id: 1
+    group: 5
+    cellRecordId: 100000
+    position: {x: 12, y: 2}
