@@ -27,9 +27,9 @@ namespace HK.AutoAnt.Editor
 
         private int currentGroup;
 
-        private string[] groupsString;
+        private List<string> groupsString;
 
-        private int[] groupsInt;
+        private List<int> groupsInt;
 
         private string[] cellRecordIdString;
 
@@ -38,6 +38,14 @@ namespace HK.AutoAnt.Editor
         private Dictionary<Vector2Int, MasterDataCellBundle.Cell> cells = new Dictionary<Vector2Int, MasterDataCellBundle.Cell>();
 
         private Vector2 cellBundleScrollPosition;
+
+        /// <summary>
+        /// グループリストで編集中のグループ
+        /// </summary>
+        /// <remarks>
+        /// グループリスト自体の追加・削除で利用してます
+        /// </remarks>
+        private int editingGroup;
 
         private bool isVisibleSettings;
 
@@ -94,11 +102,11 @@ namespace HK.AutoAnt.Editor
             this.groupsInt = this.target.Records
                 .Select(x => x.Group)
                 .Distinct()
-                .ToArray();
+                .ToList();
 
             this.groupsString = this.groupsInt
                 .Select(x => x.ToString())
-                .ToArray();
+                .ToList();
 
             var masterDataCell = masterData.Cell;
             this.registerCellRecordId = masterDataCell.Records[0].Id;
@@ -171,7 +179,7 @@ namespace HK.AutoAnt.Editor
             EditorGUI.indentLevel++;
             EditorGUILayout.ObjectField("Target", this.target, typeof(MasterDataCellBundle), false);
 
-            this.currentGroup = EditorGUILayout.IntPopup("Group", this.currentGroup, this.groupsString, this.groupsInt);
+            this.currentGroup = EditorGUILayout.IntPopup("Group", this.currentGroup, this.groupsString.ToArray(), this.groupsInt.ToArray());
 
             EditorGUILayout.BeginHorizontal();
             EditorGUI.BeginChangeCheck();
@@ -246,6 +254,28 @@ namespace HK.AutoAnt.Editor
                     i => new Vector2Int(i, this.range.height),
                     () => this.range.height--
                     );
+            }
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            this.editingGroup = EditorGUILayout.IntField("グループリスト編集", this.editingGroup);
+            if (GUILayout.Button("追加"))
+            {
+                if(this.groupsInt.Contains(this.editingGroup))
+                {
+                    EditorUtility.DisplayDialog($"[{this.editingGroup}]は既に存在しています", "他のIDを指定してください", "OK");
+                }
+                else
+                {
+                    this.groupsInt.Add(this.editingGroup);
+                    this.groupsInt.Sort((l, r) => l - r);
+                    this.groupsString.Clear();
+                    this.groupsString.AddRange(this.groupsInt.Select(x => x.ToString()));
+                }
+            }
+            if (GUILayout.Button("削除"))
+            {
+
             }
             EditorGUILayout.EndHorizontal();
         }
