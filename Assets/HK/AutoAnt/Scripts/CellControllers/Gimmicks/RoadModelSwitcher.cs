@@ -59,6 +59,8 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
 
         public void Attach(CellEvent cellEvent)
         {
+            Assert.IsNotNull(cellEvent);
+            
             this.modelMapper = new ModelMapper(
                 this.straight,
                 this.turn,
