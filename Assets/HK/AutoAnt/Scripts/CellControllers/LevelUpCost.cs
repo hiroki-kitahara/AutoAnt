@@ -38,6 +38,8 @@ namespace HK.AutoAnt.CellControllers
 #if UNITY_EDITOR
         public LevelUpCost(Database.SpreadSheetData.LevelUpCostData data)
         {
+            Assert.IsNotNull(data);
+
             this.money = data.Money;
             if(string.IsNullOrEmpty(data.Items))
             {
@@ -58,6 +60,9 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public bool IsEnough(User user, MasterDataItem masterData)
         {
+            Assert.IsNotNull(user);
+            Assert.IsNotNull(masterData);
+
             if (!user.Wallet.IsEnoughMoney(this.money))
             {
                 return false;
@@ -71,6 +76,8 @@ namespace HK.AutoAnt.CellControllers
         /// </summary>
         public void Consume(User user, MasterDataItem masterData)
         {
+            Assert.IsNotNull(user);
+            Assert.IsNotNull(masterData);
             Assert.IsTrue(this.IsEnough(user, masterData));
 
             user.Wallet.AddMoney(-this.money);
@@ -113,6 +120,9 @@ namespace HK.AutoAnt.CellControllers
             /// </summary>
             public bool IsEnough(Inventory inventory, MasterDataItem masterData)
             {
+                Assert.IsNotNull(inventory);
+                Assert.IsNotNull(masterData);
+
                 var record = masterData.Records.Get(this.itemId);
                 if(!inventory.Items.ContainsKey(record.Id))
                 {
@@ -127,6 +137,9 @@ namespace HK.AutoAnt.CellControllers
             /// </summary>
             public void Consume(Inventory inventory, MasterDataItem masterData)
             {
+                Assert.IsNotNull(inventory);
+                Assert.IsNotNull(masterData);
+
                 Assert.IsTrue(this.IsEnough(inventory, masterData));
                 var record = masterData.Records.Get(this.itemId);
 

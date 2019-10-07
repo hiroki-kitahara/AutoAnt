@@ -14,7 +14,7 @@ namespace HK.AutoAnt.GameControllers
         public void Do(InputControllers.Events.ClickData data)
         {
             var ray = GameSystem.Instance.Cameraman.Camera.ScreenPointToRay(data.Position);
-            var clickableObject = CellManager.GetCell(ray);
+            var clickableObject = Cell.GetCell(ray);
             if (clickableObject != null)
             {
                 clickableObject.OnClickUp();

@@ -1,10 +1,5 @@
-﻿using System;
-using HK.AutoAnt.CellControllers.Events;
-using HK.AutoAnt.CellControllers.Gimmicks;
-using HK.AutoAnt.Constants;
-using HK.AutoAnt.Events;
+﻿using HK.AutoAnt.Constants;
 using HK.AutoAnt.Systems;
-using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -75,6 +70,20 @@ namespace HK.AutoAnt.CellControllers
             }
 
             this.cellMapper.CellEvent.Map[this.Position].OnClick(this);
+        }
+
+        /// <summary>
+        /// フィールドに存在するセルを返す
+        /// </summary>
+        public static Cell GetCell(Ray ray)
+        {
+            var hitInfo = default(RaycastHit);
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                return hitInfo.collider.GetComponent<Cell>();
+            }
+
+            return null;
         }
     }
 }
