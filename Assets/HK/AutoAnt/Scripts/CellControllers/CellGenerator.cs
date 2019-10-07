@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using HK.AutoAnt.CellControllers.Events;
-using HK.AutoAnt.Constants;
+using System.Collections.Generic;
 using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
 using UnityEngine;
@@ -19,6 +17,9 @@ namespace HK.AutoAnt.CellControllers
 
         public CellGenerator(CellMapper cellMapper, Transform cellParent)
         {
+            Assert.IsNotNull(cellMapper);
+            Assert.IsNotNull(cellParent);
+
             this.cellMapper = cellMapper;
             this.cellParent = cellParent;
         }
@@ -26,8 +27,10 @@ namespace HK.AutoAnt.CellControllers
         public Cell Generate(int recordId, Vector2Int position, int group)
         {
             var record = GameSystem.Instance.MasterData.Cell.Records.Get(recordId);
+            Assert.IsNotNull(record);
             var cell = Object.Instantiate(record.Prefab)
                 .Initialize(recordId, position, group, record.CellType, this.cellMapper);
+
             cell.CachedTransform.SetParent(this.cellParent);
 
             return cell;

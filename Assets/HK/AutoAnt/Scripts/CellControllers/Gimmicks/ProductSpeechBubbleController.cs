@@ -30,6 +30,8 @@ namespace HK.AutoAnt.CellControllers.Gimmicks
 
         public void Attach(CellEvent cellEvent)
         {
+            Assert.IsNotNull(cellEvent);
+            
             var productHolder = cellEvent as IProductHolder;
             Assert.IsNotNull(productHolder);
 

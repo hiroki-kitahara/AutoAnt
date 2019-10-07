@@ -25,7 +25,7 @@ namespace HK.AutoAnt.GameControllers
         public void Do(InputControllers.Events.ClickData data)
         {
             var gameSystem = GameSystem.Instance;
-            var cell = CellManager.GetCell(gameSystem.Cameraman.Camera.ScreenPointToRay(data.Position));
+            var cell = Cell.GetCell(gameSystem.Cameraman.Camera.ScreenPointToRay(data.Position));
             if(cell == null)
             {
                 return;

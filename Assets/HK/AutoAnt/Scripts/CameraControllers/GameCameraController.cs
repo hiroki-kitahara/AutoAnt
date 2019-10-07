@@ -30,6 +30,8 @@ namespace HK.AutoAnt.CameraControllers
                 .Where(x => x != null)
                 .SubscribeWithState(this, (x, _this) =>
                 {
+                    Assert.IsNotNull(x.SelectCellEvent);
+
                     var position = x.SelectCellEvent.Gimmick.transform.position;
                     var cameraman = GameSystem.Instance.Cameraman;
                     var camera = cameraman.Camera;
@@ -43,10 +45,14 @@ namespace HK.AutoAnt.CameraControllers
             Broker.Global.Receive<RequestCameraZoom>()
                 .SubscribeWithState(this, (x, _this) =>
                 {
-                    _this.Zoom(x.Value);
+                    _this.SetZoom(x.Value);
                 })
                 .AddTo(this);
         }
+
+        /// <summary>
+        /// カメラを移動する
+        /// </summary>
         public void Move(Vector2 deltaPosition)
         {
             var cameraman = GameSystem.Instance.Cameraman;
@@ -57,7 +63,10 @@ namespace HK.AutoAnt.CameraControllers
             cameraman.Position -= cameraman.ToFirstPersonVector(deltaPosition.y * ratioY, deltaPosition.x * ratioX);
         }
 
-        public void Zoom(float value)
+        /// <summary>
+        /// ズーム値を設定する
+        /// </summary>
+        public void SetZoom(float value)
         {
             value = Mathf.Clamp01(value);
             value = 1.0f - value;
@@ -65,12 +74,15 @@ namespace HK.AutoAnt.CameraControllers
             cameraman.Size = ((this.zoomMax - this.zoomMin) * value) + this.zoomMin;
         }
 
-        public void ZoomOnVelocity(float velocity)
+        /// <summary>
+        /// ズーム値を加算する
+        /// </summary>
+        public void AddZoom(float velocity)
         {
             var currentSize = GameSystem.Instance.Cameraman.Size;
             var normalizedSize = (currentSize - this.zoomMin) / (this.zoomMax - this.zoomMin);
             var result = 1.0f - (normalizedSize - velocity);
-            this.Zoom(result);
+            this.SetZoom(result);
         }
     }
 }

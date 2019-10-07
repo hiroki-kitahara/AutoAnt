@@ -19,6 +19,8 @@ namespace HK.AutoAnt.AudioSystems
 
         public SEElement Rent()
         {
+            Assert.IsNotNull(pools);
+
             var pool = pools.Get(this);
             var result = pool.Rent();
             result.pool = pool;
@@ -28,11 +30,16 @@ namespace HK.AutoAnt.AudioSystems
 
         public void Return()
         {
+            Assert.IsNotNull(this.pool);
+
             this.pool.Return(this);
         }
 
         public void Play(AudioClip clip)
         {
+            Assert.IsNotNull(clip);
+            Assert.IsNotNull(this.audioSource);
+            
             this.audioSource.PlayOneShot(clip);
         }
     }
