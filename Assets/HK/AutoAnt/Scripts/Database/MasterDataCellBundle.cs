@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using HK.AutoAnt.CellControllers;
-using HK.AutoAnt.CellControllers.Events;
-using HK.AutoAnt.Constants;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 
 namespace HK.AutoAnt.Database
@@ -45,17 +39,52 @@ namespace HK.AutoAnt.Database
                 this.cellRecordId = data.Cellrecordid;
                 this.position = new Vector2Int(data.X, data.Y);
             }
+
+            public Record(string data)
+            {
+                var split = data.Split(',');
+                this.id = int.Parse(split[0]);
+                this.group = int.Parse(split[1]);
+                this.cellRecordId = int.Parse(split[2]);
+                this.position = new Vector2Int(int.Parse(split[3]), int.Parse(split[4]));
+            }
 #endif
         }
+
+#if UNITY_EDITOR
+        public void Set(string csv)
+        {
+            var split = csv.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            this.records = new Record[split.Length - 1];
+            for (var i = 1; i < split.Length; i++)
+            {
+                this.records[i - 1] = new Record(split[i]);
+            }
+        }
+#endif
 
         /// <summary>
         /// レコードIDと座標のみを持つセル
         /// </summary>
         public class Cell
         {
-            public int Id { get; set; }
+            public int Id { get; private set; }
 
-            public Vector2Int Position { get; set; }
+            public int Group { get; private set; }
+
+            public Vector2Int Position { get; private set; }
+
+            public Cell(int id, int group, Vector2Int position)
+            {
+                this.Set(id, group, position);
+            }
+
+            public void Set(int id, int group, Vector2Int position)
+            {
+                this.Id = id;
+                this.Group = group;
+                this.Position = position;
+            }
         }
     }
 }
