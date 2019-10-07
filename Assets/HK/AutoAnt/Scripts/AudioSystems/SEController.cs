@@ -15,9 +15,13 @@ namespace HK.AutoAnt.AudioSystems
         private SEElement elementPrefab = null;
 
         private readonly List<SEElement> elements = new List<SEElement>();
-
+        
         public void Play(AudioClip clip, float volume)
         {
+            Assert.IsNotNull(clip);
+            Assert.IsNotNull(this.elementPrefab);
+            Assert.IsNotNull(this.elements);
+
             var element = this.elementPrefab.Rent();
             this.elements.Add(element);
             element.transform.SetParent(this.transform);
