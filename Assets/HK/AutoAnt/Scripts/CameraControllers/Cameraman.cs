@@ -22,16 +22,25 @@ namespace HK.AutoAnt.CameraControllers
 
         [SerializeField]
         private Camera controlledCamera = null;
-        public Camera Camera => this.controlledCamera;
+        public Camera Camera
+        {
+            get
+            {
+                Assert.IsNotNull(this.controlledCamera);
+                return this.controlledCamera;
+            }
+        }
 
         public Vector3 Position
         {
             get
             {
+                Assert.IsNotNull(this.root);
                 return this.root.position;
             }
             set
             {
+                Assert.IsNotNull(this.root);
                 this.root.position = value;
             }
         }
@@ -40,10 +49,12 @@ namespace HK.AutoAnt.CameraControllers
         {
             get
             {
+                Assert.IsNotNull(this.pivot);
                 return this.pivot.localEulerAngles;
             }
             set
             {
+                Assert.IsNotNull(this.pivot);
                 this.pivot.localEulerAngles = value;
             }
         }
@@ -52,10 +63,12 @@ namespace HK.AutoAnt.CameraControllers
         {
             get
             {
+                Assert.IsNotNull(this.rig);
                 return this.rig.localEulerAngles;
             }
             set
             {
+                Assert.IsNotNull(this.rig);
                 this.rig.localEulerAngles = value;
             }
         }
@@ -64,10 +77,12 @@ namespace HK.AutoAnt.CameraControllers
         {
             get
             {
+                Assert.IsNotNull(this.controlledCamera);
                 return this.controlledCamera.orthographicSize;
             }
             set
             {
+                Assert.IsNotNull(this.controlledCamera);
                 this.controlledCamera.orthographicSize = value;
             }
         }
@@ -76,10 +91,12 @@ namespace HK.AutoAnt.CameraControllers
         {
             get
             {
+                Assert.IsNotNull(this.distance);
                 return this.distance.localPosition.z;
             }
             set
             {
+                Assert.IsNotNull(this.distance);
                 var position = this.distance.localPosition;
                 position.z = value;
                 this.distance.localPosition = position;
@@ -91,6 +108,8 @@ namespace HK.AutoAnt.CameraControllers
         /// </summary>
         public Vector3 ToFirstPersonVector(float forwardVelocity, float rightVelocity)
         {
+            Assert.IsNotNull(this.Camera);
+
             var t = this.Camera.transform;
             var forward = Vector3.Scale(t.forward, new Vector3(1.0f, 0.0f, 1.0f)).normalized;
             var right = t.right;
