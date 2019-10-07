@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using HK.AutoAnt.CellControllers;
 using HK.AutoAnt.Events;
+using HK.AutoAnt.Extensions;
 using HK.AutoAnt.Systems;
 using HK.AutoAnt.UserControllers;
 using HK.Framework.EventSystems;
@@ -17,6 +20,9 @@ namespace HK.AutoAnt.GameControllers
     /// </summary>
     public sealed class UserUpdater : MonoBehaviour
     {
+        [SerializeField]
+        private CellManager cellManager = null;
+        
         /// <summary>
         /// 街の人口を加算する要素リスト
         /// </summary>
@@ -59,6 +65,7 @@ namespace HK.AutoAnt.GameControllers
                 {
                     GameSystem.Instance.User.History.Game.Time += Time.deltaTime;
                     _this.UpdateParameter(Time.deltaTime);
+                    _this.CheckUnlockCellBundle();
                 })
                 .AddTo(this);
         }
@@ -103,6 +110,38 @@ namespace HK.AutoAnt.GameControllers
                     }
                 })
                 .AddTo(GameSystem.Instance);
+        }
+
+        /// <summary>
+        /// CellBundleのアンロックが行えるかチェックする
+        /// </summary>
+        /// <remarks>
+        /// 人口数によってアンロック出来るか確認するので毎フレーム実行しています
+        /// </remarks>
+        private void CheckUnlockCellBundle()
+        {
+            var user = GameSystem.Instance.User;
+            if(!user.UnlockCellBundle.CanUnlock)
+            {
+                return;
+            }
+
+            if(user.UnlockCellBundle.NextPopulation <= user.Town.Population.Value)
+            {
+                var masterData = GameSystem.Instance.MasterData.UnlockCellBundle;
+                var population = user.UnlockCellBundle.NextPopulation;
+                var unlockCellBundles = user.UnlockCellBundle.TargetRecordIds
+                    .Select(id => masterData.Records.Get(id))
+                    .ToList();
+
+                foreach(var r in unlockCellBundles)
+                {
+                    this.cellManager.CellGenerator.GenerateFromCellBundle(r.UnlockCellBundleGroup);
+                }
+
+                user.UnlockCellBundle.SetNextUnlocks(masterData);
+                Broker.Global.Publish(UnlockedCellBundle.Get(population, unlockCellBundles));
+            }
         }
     }
 }

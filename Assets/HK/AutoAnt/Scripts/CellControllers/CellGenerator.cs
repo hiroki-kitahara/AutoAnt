@@ -40,6 +40,8 @@ namespace HK.AutoAnt.CellControllers
         {
             var result = new List<Cell>();
             var targets = GameSystem.Instance.MasterData.CellBundle.Get(group);
+            Assert.AreNotEqual(targets.Count, 0);
+
             foreach(var t in targets)
             {
                 result.Add(this.Generate(t.Id, t.Position, group));
