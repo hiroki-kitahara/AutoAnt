@@ -1,13 +1,7 @@
-﻿using System.Collections.Generic;
-using HK.AutoAnt.CellControllers.Events;
-using HK.AutoAnt.Constants;
-using HK.AutoAnt.GameControllers;
+﻿using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.SaveData;
 using HK.AutoAnt.Systems;
-using UniRx;
 using UnityEngine;
-using UnityEngine.Assertions;
-using static UnityEngine.Camera;
 
 namespace HK.AutoAnt.CellControllers
 {
@@ -25,23 +19,6 @@ namespace HK.AutoAnt.CellControllers
 
         public CellEventGenerator EventGenerator { get; private set; }
         
-        /// <summary>
-        /// クリック可能なオブジェクトを返す
-        /// </summary>
-        /// <remarks>
-        /// FIXME: ここに記述する必要がない
-        /// </remarks>
-        public static Cell GetCell(Ray ray)
-        {
-            var hitInfo = default(RaycastHit);
-            if (Physics.Raycast(ray, out hitInfo))
-            {
-                return hitInfo.collider.GetComponent<Cell>();
-            }
-
-            return null;
-        }
-
         void ISavable.Save()
         {
             LocalSaveData.Game.Mapper.Save(this.Mapper.GetSerializable());

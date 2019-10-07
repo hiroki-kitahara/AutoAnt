@@ -21,7 +21,7 @@ namespace HK.AutoAnt.GameControllers
         {
             // FIXME: ドラッグ移動量をオプションか何かで編集出来るように
             var delta = data.Amount;
-            this.gameCameraController.ZoomOnVelocity(delta * 0.1f);
+            this.gameCameraController.AddZoom(delta * 0.1f);
         }
     }
 }
