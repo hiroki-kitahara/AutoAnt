@@ -31,13 +31,5 @@ public int X { get {return x; } set { x = value;} }
 int y;
 public int Y { get {return y; } set { y = value;} }
 
-[SerializeField]
-int width;
-public int Width { get {return width; } set { width = value;} }
-
-[SerializeField]
-int height;
-public int Height { get {return height; } set { height = value;} }
-
     }
 }
