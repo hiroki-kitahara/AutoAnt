@@ -1,5 +1,6 @@
 ﻿using HK.AutoAnt.GameControllers;
 using HK.AutoAnt.SaveData;
+using HK.AutoAnt.Systems;
 using UnityEngine;
 
 namespace HK.AutoAnt.CellControllers
@@ -36,7 +37,10 @@ namespace HK.AutoAnt.CellControllers
             }
             else
             {
-                this.CellGenerator.GenerateFromCellBundle(0);
+                foreach(var group in GameSystem.Instance.Constants.GameSystem.InitialCellBundleGroups)
+                {
+                    this.CellGenerator.GenerateFromCellBundle(group);
+                }
             }
         }
     }

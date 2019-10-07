@@ -20,6 +20,8 @@ namespace HK.AutoAnt.CellControllers
 
         public Vector2Int Position { get; private set; }
 
+        public int Group { get; private set; }
+
         public CellType Type { get; private set; }
 
         private CellMapper cellMapper;
@@ -31,10 +33,11 @@ namespace HK.AutoAnt.CellControllers
             this.CachedTransform = this.transform;
         }
 
-        public Cell Initialize(int recordId, Vector2Int position, CellType cellType, CellMapper cellMapper)
+        public Cell Initialize(int recordId, Vector2Int position, int group, CellType cellType, CellMapper cellMapper)
         {
             this.RecordId = recordId;
             this.Position = position;
+            this.Group = group;
             this.Type = cellType;
             this.cellMapper = cellMapper;
 
