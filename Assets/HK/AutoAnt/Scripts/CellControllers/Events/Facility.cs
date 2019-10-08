@@ -19,6 +19,7 @@ namespace HK.AutoAnt.CellControllers.Events
     /// - やっていること
     ///     - 人気度の増減
     ///     - アイテムの生産
+    ///     - 経済指数の増減
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Facility")]
     public sealed class Facility : CellEvent,
