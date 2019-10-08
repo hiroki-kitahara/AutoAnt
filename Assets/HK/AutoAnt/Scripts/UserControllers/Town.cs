@@ -47,5 +47,13 @@ namespace HK.AutoAnt.UserControllers
         {
             this.popularity.Value += value;
         }
+
+        /// <summary>
+        /// 経済指数を加算する
+        /// </summary>
+        public void AddEconomic(double value)
+        {
+            this.economic.Value += value;
+        }
     }
 }
