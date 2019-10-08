@@ -35,6 +35,10 @@ public float Needproducttime { get {return needproducttime; } set { needproductt
 double popularity;
 public double Popularity { get {return popularity; } set { popularity = value;} }
 
+[SerializeField]
+double economic;
+public double Economic { get {return economic; } set { economic = value;} }
+
 
     }
 }
