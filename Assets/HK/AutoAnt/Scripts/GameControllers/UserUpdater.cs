@@ -78,7 +78,7 @@ namespace HK.AutoAnt.GameControllers
             var gameSystem = GameSystem.Instance;
 
             // 税金徴収
-            gameSystem.User.Wallet.AddMoney(Calculator.Tax(gameSystem.User.Town.Population.Value, deltaTime));
+            gameSystem.User.Wallet.AddMoney(Calculator.Tax(gameSystem.User.Town.Economic.Value, deltaTime));
 
             // 街の人口の増加
             foreach (var a in this.addTownPopulations)

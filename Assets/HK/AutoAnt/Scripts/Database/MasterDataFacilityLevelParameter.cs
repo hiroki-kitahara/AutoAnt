@@ -58,6 +58,16 @@ namespace HK.AutoAnt.Database
             public double Popularity => this.popularity;
 
             /// <summary>
+            /// 経済指数
+            /// </summary>
+            /// <remarks>
+            /// 税金の増減に利用します
+            /// </remarks>
+            [SerializeField]
+            private double economic = 0;
+            public double Economic => this.economic;
+
+            /// <summary>
             /// 生産出来るアイテムのレコード
             /// </summary>
             public MasterDataItem.Record ProductRecord => GameSystem.Instance.MasterData.Item.Records.Get(this.ProductId);
@@ -72,6 +82,7 @@ namespace HK.AutoAnt.Database
                 this.productId = data.Productid;
                 this.needProductTime = data.Needproducttime;
                 this.popularity = data.Popularity;
+                this.economic = data.Economic;
             }
 #endif
         }

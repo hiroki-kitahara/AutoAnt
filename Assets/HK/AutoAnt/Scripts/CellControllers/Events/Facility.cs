@@ -19,6 +19,7 @@ namespace HK.AutoAnt.CellControllers.Events
     /// - やっていること
     ///     - 人気度の増減
     ///     - アイテムの生産
+    ///     - 経済指数の増減
     /// </remarks>
     [CreateAssetMenu(menuName = "AutoAnt/Cell/Event/Facility")]
     public sealed class Facility : CellEvent,
@@ -59,12 +60,15 @@ namespace HK.AutoAnt.CellControllers.Events
 
         private double Popularity => this.LevelParameter.Popularity * (1.0f + this.Buff);
 
+        private double Economic => this.LevelParameter.Economic;
+
         public override void Initialize(Vector2Int position, bool isInitializingGame)
         {
             var gameSystem = GameSystem.Instance;
             base.Initialize(position, isInitializingGame);
             this.UpdateLevelParameter();
             gameSystem.User.Town.AddPopularity(this.Popularity);
+            gameSystem.User.Town.AddEconomic(this.Economic);
             gameSystem.UpdateAsObservable()
                 .Where(_ => this.CanProduce)
                 .SubscribeWithState(this, (_, _this) =>
@@ -113,6 +117,10 @@ namespace HK.AutoAnt.CellControllers.Events
             var oldPopularity = this.Popularity;
             gameSystem.User.Town.AddPopularity(-oldPopularity);
 
+            // 経済指数も減算する
+            var oldEconomic = this.Economic;
+            gameSystem.User.Town.AddEconomic(-oldEconomic);
+
             Extensions.Extensions.LevelUp(this);
 
             this.UpdateLevelParameter();
@@ -120,6 +128,10 @@ namespace HK.AutoAnt.CellControllers.Events
             // レベルアップ後の人気度を加算する
             var newPopularity = this.Popularity;
             gameSystem.User.Town.AddPopularity(newPopularity);
+
+            // 経済指数も加算する
+            var newEconomic = this.Economic;
+            gameSystem.User.Town.AddEconomic(newEconomic);
         }
 
         private void UpdateLevelParameter()

@@ -43,6 +43,10 @@ MonoBehaviour:
     name: Popularity
     isEnable: 0
     isArray: 0
+  - type: 6
+    name: Economic
+    isEnable: 0
+    isArray: 0
   - type: 9
     name: "\u751F\u7523\u30A2\u30A4\u30C6\u30E0\u540D"
     isEnable: 0

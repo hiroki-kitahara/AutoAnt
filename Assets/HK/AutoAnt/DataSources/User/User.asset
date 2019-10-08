@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallet:
     money:
-      value: 1000
+      value: 5000
   town:
     population:
       value: 0
     popularity:
       value: 1000
+    economic:
+      value: 0
   unlockCellEvent:
     elements: a0860100
   option:

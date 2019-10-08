@@ -19,27 +19,32 @@ MonoBehaviour:
     productId: 100000
     needProductTime: 5
     popularity: -10
+    economic: 10
   - id: 101000
     level: 2
     productSlot: 5
     productId: 100000
     needProductTime: 5
     popularity: -50
+    economic: 15
   - id: 101000
     level: 3
     productSlot: 7
     productId: 100000
     needProductTime: 5
     popularity: -120
+    economic: 20
   - id: 101000
     level: 4
     productSlot: 9
     productId: 100000
     needProductTime: 5
     popularity: -200
+    economic: 25
   - id: 101000
     level: 5
     productSlot: 11
     productId: 100000
     needProductTime: 5
     popularity: -400
+    economic: 30

@@ -26,6 +26,13 @@ namespace HK.AutoAnt.UserControllers
         private DoubleReactiveProperty popularity = new DoubleReactiveProperty();
 
         /// <summary>
+        /// 経済指数
+        /// </summary>
+        public IReadOnlyReactiveProperty<double> Economic => this.economic;
+        [SerializeField]
+        private DoubleReactiveProperty economic = new DoubleReactiveProperty();
+
+        /// <summary>
         /// 人口を加算する
         /// </summary>
         public void AddPopulation(double value)
@@ -39,6 +46,14 @@ namespace HK.AutoAnt.UserControllers
         public void AddPopularity(double value)
         {
             this.popularity.Value += value;
+        }
+
+        /// <summary>
+        /// 経済指数を加算する
+        /// </summary>
+        public void AddEconomic(double value)
+        {
+            this.economic.Value += value;
         }
     }
 }

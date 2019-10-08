@@ -31,12 +31,12 @@ namespace HK.AutoAnt.GameControllers
         /// <summary>
         /// 加算出来る税金を返す
         /// </summary>
-        public static double Tax(double population, float deltaTime)
+        public static double Tax(double economic, float deltaTime)
         {
             // 人口は小数点以下は切り取り
-            population = System.Math.Floor(population);
+            economic = System.Math.Floor(economic);
             
-            return (population * 10.0d) * deltaTime;
+            return (economic * 10.0d) * deltaTime;
         }
     }
 }
