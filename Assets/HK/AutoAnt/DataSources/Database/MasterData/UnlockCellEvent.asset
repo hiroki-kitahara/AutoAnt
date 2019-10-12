@@ -25,3 +25,15 @@ MonoBehaviour:
     - CellEventRecordId: 101000
       Level: 1
       Number: 3
+  - id: 3
+    unlockCellEventRecordId: 100002
+    needCellEvents:
+    - CellEventRecordId: 100001
+      Level: 1
+      Number: 5
+  - id: 4
+    unlockCellEventRecordId: 100003
+    needCellEvents:
+    - CellEventRecordId: 100002
+      Level: 1
+      Number: 5

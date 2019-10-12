@@ -37,3 +37,15 @@ MonoBehaviour:
       ja: "\u3075\u3064\u3046\u306E\u5BB6"
       en: 
     guid: d137437a-9452-43d0-8297-d41a8d7db7f2
+  - value:
+      ja: "\u308A\u3063\u3071\u306A\u5BB6"
+      en: 
+    guid: 124932cf-918e-43e8-971e-aedab56f9c5f
+  - value:
+      ja: "\u3067\u3063\u3051\u30FC\u5BB6"
+      en: 
+    guid: 6f314e71-54b7-4352-86c8-78ae9e3631e6
+  - value:
+      ja: "\u5DE5\u696D2"
+      en: 
+    guid: 1433a944-819b-48f7-a2b3-ba79eb205963
