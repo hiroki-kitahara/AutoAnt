@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventName:
     target: {fileID: 11400000, guid: 91438a7b93964415fb9a92e97780f6a0, type: 2}
-    value: "\u5DE5\u696D1"
-    guid: ec7bebf0-05a0-4ff3-9917-25d6777fb909
+    value: "\u5DE5\u696D2"
+    guid: 1433a944-819b-48f7-a2b3-ba79eb205963
   category: 2
   condition: {fileID: 11400000, guid: 4c0900e2970f54676923b8814d79aff7, type: 2}
   size: 1
