@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de720865f3a87453b819dddba9f5f72d, type: 3}
-  m_Name: 101000
+  m_Script: {fileID: 11500000, guid: f516f9fbb86244f0fa699dfa4100160a, type: 3}
+  m_Name: 100002
   m_EditorClassIdentifier: 
   eventName:
     target: {fileID: 11400000, guid: 91438a7b93964415fb9a92e97780f6a0, type: 2}
-    value: "\u5DE5\u696D1"
-    guid: ec7bebf0-05a0-4ff3-9917-25d6777fb909
-  category: 2
+    value: "\u308A\u3063\u3071\u306A\u5BB6"
+    guid: 124932cf-918e-43e8-971e-aedab56f9c5f
+  category: 0
   condition: {fileID: 11400000, guid: 4c0900e2970f54676923b8814d79aff7, type: 2}
   size: 1
   constructionSE: {fileID: 8300000, guid: 0468cadb0012c46d2a975df3af8b8038, type: 3}
@@ -25,7 +25,8 @@ MonoBehaviour:
     type: 3}
   destructionEffect: {fileID: 4882643330991784199, guid: 7690216f0d35a464ea35df119652a19d,
     type: 3}
-  gimmickPrefab: {fileID: 1575247392819223494, guid: 32e5ef362c6b7d74daa1dfe336c3e4dc,
+  gimmickPrefab: {fileID: 7421953294265702085, guid: 3f7caa1ef9af4e04ab8fd30ba4ec3ba9,
     type: 3}
   visibleAnimation: {fileID: 1401049183261498999, guid: 2c9200deec9874516bb2ab7b2679328f,
     type: 3}
+  CurrentPopulation: 0
