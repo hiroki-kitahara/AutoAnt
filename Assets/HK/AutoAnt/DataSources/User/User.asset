@@ -26,6 +26,6 @@ MonoBehaviour:
     elements: a0860100
   option:
     bgmVolume:
-      value: 0.5
+      value: 0.05
     seVolume:
-      value: 0.5
+      value: 0.05
