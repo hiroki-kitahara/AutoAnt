@@ -39,6 +39,10 @@ MonoBehaviour:
     name: NeedProductTime
     isEnable: 0
     isArray: 0
+  - type: 3
+    name: productNum
+    isEnable: 0
+    isArray: 0
   - type: 6
     name: Popularity
     isEnable: 0

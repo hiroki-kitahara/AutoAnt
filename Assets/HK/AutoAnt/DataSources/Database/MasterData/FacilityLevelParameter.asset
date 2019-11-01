@@ -18,13 +18,15 @@ MonoBehaviour:
     productSlot: 3
     productId: 100000
     needProductTime: 5
-    popularity: -10
+    productNum: 0
+    popularity: -30
     economic: 10
   - id: 101000
     level: 2
     productSlot: 5
     productId: 100000
     needProductTime: 5
+    productNum: 0
     popularity: -50
     economic: 15
   - id: 101000
@@ -32,6 +34,7 @@ MonoBehaviour:
     productSlot: 7
     productId: 100000
     needProductTime: 5
+    productNum: 0
     popularity: -120
     economic: 20
   - id: 101000
@@ -39,6 +42,7 @@ MonoBehaviour:
     productSlot: 9
     productId: 100000
     needProductTime: 5
+    productNum: 0
     popularity: -200
     economic: 25
   - id: 101000
@@ -46,5 +50,46 @@ MonoBehaviour:
     productSlot: 11
     productId: 100000
     needProductTime: 5
+    productNum: 0
     popularity: -400
     economic: 30
+  - id: 102000
+    level: 1
+    productSlot: 3
+    productId: 100000
+    needProductTime: 3
+    productNum: 0
+    popularity: -50
+    economic: 30
+  - id: 102000
+    level: 2
+    productSlot: 5
+    productId: 100000
+    needProductTime: 3
+    productNum: 0
+    popularity: -80
+    economic: 40
+  - id: 102000
+    level: 3
+    productSlot: 7
+    productId: 100000
+    needProductTime: 3
+    productNum: 0
+    popularity: -200
+    economic: 50
+  - id: 102000
+    level: 4
+    productSlot: 9
+    productId: 100000
+    needProductTime: 3
+    productNum: 0
+    popularity: -330
+    economic: 60
+  - id: 102000
+    level: 5
+    productSlot: 11
+    productId: 100000
+    needProductTime: 3
+    productNum: 0
+    popularity: -660
+    economic: 70
