@@ -32,6 +32,10 @@ float needproducttime;
 public float Needproducttime { get {return needproducttime; } set { needproducttime = value;} }
 
 [SerializeField]
+int productnum;
+public int Productnum { get {return productnum; } set { productnum = value;} }
+
+[SerializeField]
 double popularity;
 public double Popularity { get {return popularity; } set { popularity = value;} }
 

@@ -51,6 +51,13 @@ namespace HK.AutoAnt.Database
             public float NeedProductTime => this.needProductTime;
 
             /// <summary>
+            /// NeedProductTimeごとに生産する量
+            /// </summary>
+            [SerializeField]
+            private int productNum = 0;
+            public int ProductNum => this.productNum;
+
+            /// <summary>
             /// 人気度
             /// </summary>
             [SerializeField]

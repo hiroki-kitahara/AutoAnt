@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HK.AutoAnt.Database;
 using HK.AutoAnt.Events;
 using HK.AutoAnt.Extensions;
@@ -77,7 +78,8 @@ namespace HK.AutoAnt.CellControllers.Events
                     if(_this.ProductTimer >= _this.LevelParameter.NeedProductTime)
                     {
                         var productId = _this.LevelParameter.ProductId;
-                        _this.Products.Add(productId);
+                        var productIds = Enumerable.Repeat<int>(productId, _this.LevelParameter.ProductNum).ToArray();
+                        _this.Products.AddRange(productIds);
                         var product = GameSystem.Instance.MasterData.Item.Records.Get(productId);
                         _this.Broker.Publish(AddedFacilityProduct.Get(_this, product));
                         _this.ProductTimer = 0.0f;
